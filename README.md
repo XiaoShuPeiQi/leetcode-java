@@ -149,6 +149,14 @@ node .work/visual-debug/scripts/serve.mjs
 
 访问 http://127.0.0.1:8787。也可离线直接打开 docs/index.html。
 
+上述前台命令需要保持终端运行；服务停止后，localhost 会显示“拒绝连接”。也可运行以下命令启动独立的隐藏后台预览：
+
+~~~powershell
+& .\.work\visual-debug\scripts\start-preview.ps1
+~~~
+
+跨设备优先使用已经发布的 [在线首页](https://xiaoshupeiqi.github.io/leetcode-java/) 和 [第 131 题](https://xiaoshupeiqi.github.io/leetcode-java/problems/0131-palindrome-partitioning/)。它们不依赖本机预览服务。
+
 只重新采集第 131 题：
 
 ~~~powershell
@@ -175,14 +183,16 @@ node .work/visual-debug/scripts/verify.mjs
 
 ### GitHub 与飞书链接维护
 
-当前本地 Git 分支为 main；尚未建立远程仓库、推送或发布。仓库公开范围需用户确认，GitHub 登录需在官方浏览器完成。真实 Pages 地址必须在部署后读取，不能根据未创建的仓库猜测。
+当前本地 Git 分支为 main，跟踪 origin/main；已发布到用户确认的公开仓库 [XiaoShuPeiQi/leetcode-java](https://github.com/XiaoShuPeiQi/leetcode-java)。完整项目包含原飞书笔记及既有快照。GitHub 登录、API 访问和正常 Git 推送已验证，凭据保存在本机系统凭据库，不写入项目。仓库使用 HTTPS，Git 凭据助手仅配置于本项目。
 
-用户确认完整项目可公开后，可选择 Settings → Pages → Deploy from a branch → main /docs。这会同时托管 docs 下的原始 Markdown 笔记。若要仅发布调试器，选择 GitHub Actions，使用已准备的 .github/workflows/deploy-pages.yml；该工作流只上传 index.html、.nojekyll、assets、problems。此方式也可用于保持完整 Java 项目私有、另建公开静态仓库的方案。
+Pages 已采用 Settings → Pages → Deploy from a branch → main /docs，HTTPS 已启用，发布地址由 GitHub API 实际返回。线上首页的搜索与手机布局，以及 15 个题目的单步、后退、播放、关键操作、进度和结果更新都通过浏览器验证。此发布源也托管 docs 下的原始 Markdown 笔记。
+
+若未来只发布调试器，可切换到 GitHub Actions 并手动运行 .github/workflows/deploy-pages.yml；备用工作流只上传 index.html、.nojekyll、assets、problems，当前不自动触发，避免与分支发布冲突。
 
 工作流依据 GitHub 官方 Pages 文档配置：
 https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
 
-发布后先实际访问首页和题目页，再用真实 HTTPS 域名更新 [飞书链接表](docs/feishu-links.md)。随后通过飞书按题目标题局部插入“交互式调试器”链接，并回读核验；不重写整篇文档。本次尚未获得发布域名，因此未写回飞书。
+已实际访问首页和所有题目页，并用真实 HTTPS 域名更新 [飞书链接表](docs/feishu-links.md)。15 个“交互式调试器”链接已局部插入飞书对应题目标题后，并逐题回读确认；原正文和代码保持不变，写回后文档为 revision 137。原始 revision 90 导入快照及原始本地笔记继续保留，不覆盖历史来源。
 
 后续可直接提出：“把飞书某某章节导入项目，生成交互式调试器并发布到 GitHub。”已确认的仓库、可见性和账号授权应继续复用。
 

@@ -1,0 +1,179 @@
+{
+  "date": "2026-10-09",
+  "account": "XiaoShuPeiQi",
+  "repository": {
+    "name": "XiaoShuPeiQi/leetcode-java",
+    "url": "https://github.com/XiaoShuPeiQi/leetcode-java",
+    "visibility": "PUBLIC",
+    "branch": "main"
+  },
+  "pages": {
+    "url": "https://xiaoshupeiqi.github.io/leetcode-java/",
+    "status": "built",
+    "source": {
+      "branch": "main",
+      "path": "/docs"
+    },
+    "https": true,
+    "browserPagesVerified": 15,
+    "homeVerified": true
+  },
+  "feishu": {
+    "document_url": "https://acn581cm6pdd.feishu.cn/docx/VSYBdzUkuoIxf3xuSfVcsgKkn3g",
+    "revision_id": 137,
+    "count": 15,
+    "status": "written-and-read-back-verified",
+    "links": [
+      {
+        "id": 131,
+        "title": "分割回文串",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0131-palindrome-partitioning/",
+        "headingBlock": "doxcnDunTzRhYLrKIZzqZHNiU9c",
+        "newBlocks": [],
+        "action": "already-present",
+        "revision": 123,
+        "status": "verified"
+      },
+      {
+        "id": 77,
+        "title": "组合",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0077-combinations/",
+        "headingBlock": "doxcnN8Hdt43o9jNRKwp8pjNJJc",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 124,
+        "status": "verified"
+      },
+      {
+        "id": 216,
+        "title": "组合总和 III",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0216-combination-sum-iii/",
+        "headingBlock": "doxcnrugMgMgmBQVpAE4sYmCn7d",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 125,
+        "status": "verified"
+      },
+      {
+        "id": 17,
+        "title": "电话号码的字母组合",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0017-letter-combinations-of-a-phone-number/",
+        "headingBlock": "doxcni2OP2esUKgLAl0Doij4o8c",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 126,
+        "status": "verified"
+      },
+      {
+        "id": 39,
+        "title": "组合总和",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0039-combination-sum/",
+        "headingBlock": "doxcnKRAiCilqsWCm9J1Y2UVYgh",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 127,
+        "status": "verified"
+      },
+      {
+        "id": 40,
+        "title": "组合总和 II",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0040-combination-sum-ii/",
+        "headingBlock": "doxcnVGrj52kkuNoVO2FsqtAa3d",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 128,
+        "status": "verified"
+      },
+      {
+        "id": 93,
+        "title": "复原 IP 地址",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0093-restore-ip-addresses/",
+        "headingBlock": "doxcnQLeWHLszTDmm11vVT2caUg",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 129,
+        "status": "verified"
+      },
+      {
+        "id": 78,
+        "title": "子集",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0078-subsets/",
+        "headingBlock": "doxcnjFUjWMQheqmxPGYI1mLFxb",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 130,
+        "status": "verified"
+      },
+      {
+        "id": 90,
+        "title": "子集 II",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0090-subsets-ii/",
+        "headingBlock": "doxcnzAyJIdMgStxfVIboY1jcCg",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 131,
+        "status": "verified"
+      },
+      {
+        "id": 491,
+        "title": "非递减子序列",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0491-non-decreasing-subsequences/",
+        "headingBlock": "doxcnJ4mjnRsfq2ON5QwkvkVx3d",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 132,
+        "status": "verified"
+      },
+      {
+        "id": 46,
+        "title": "全排列",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0046-permutations/",
+        "headingBlock": "doxcnltwY2JmfdLz7ftiOMdLR9g",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 133,
+        "status": "verified"
+      },
+      {
+        "id": 47,
+        "title": "全排列 II",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0047-permutations-ii/",
+        "headingBlock": "doxcndyCT0b30nKcZb3XcwhZk5b",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 134,
+        "status": "verified"
+      },
+      {
+        "id": 332,
+        "title": "重新安排行程",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0332-reconstruct-itinerary/",
+        "headingBlock": "doxcnUjQnfuF6xrlf5t9p9jfbfc",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 135,
+        "status": "verified"
+      },
+      {
+        "id": 51,
+        "title": "N 皇后",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0051-n-queens/",
+        "headingBlock": "doxcnaGpWZcIaBPeOhZ6QXAwglb",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 136,
+        "status": "verified"
+      },
+      {
+        "id": 37,
+        "title": "解数独",
+        "url": "https://xiaoshupeiqi.github.io/leetcode-java/problems/0037-sudoku-solver/",
+        "headingBlock": "doxcnoUoOp8LQpM7IQAbPRKJxce",
+        "newBlocks": [],
+        "action": "inserted",
+        "revision": 137,
+        "status": "verified"
+      }
+    ]
+  }
+}
