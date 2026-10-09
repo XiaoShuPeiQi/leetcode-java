@@ -18,17 +18,18 @@ for(const p of catalog){
  await page.goto(base+'/'+p.url);
  await page.locator('#progress').waitFor();
  const trace=await page.evaluate(()=>window.TRACE);
+ const playback=await page.evaluate(()=>window.ExecutionSteps.create(window.TREE_TRACE||window.TRACE)),steps=playback.stops.map(i=>trace.steps[i]);
  const vals=ref=>Object.fromEntries(trace.pool[ref].map(([k,v])=>[trace.pool[k],trace.pool[v]]));
  async function seek(index){await page.locator('#progress').evaluate((el,i)=>{el.value=i;el.dispatchEvent(new Event('input',{bubbles:true}));},index);}
  async function snapshot(){return page.evaluate(()=>({line:document.querySelector('.code-line.current')?.dataset.line,vars:document.getElementById('variables').textContent,stack:document.getElementById('stack').textContent,result:document.getElementById('result').textContent,nodes:document.getElementById('node-count').textContent}));}
  assert.match(await page.locator('#progress-label').textContent(),/^1 \/ /);
- await page.getByRole('button',{name:'下一步 →',exact:true}).click();assert.equal((await snapshot()).line,String(trace.steps[1].line));
- await page.getByRole('button',{name:'← 上一步',exact:true}).click();assert.equal((await snapshot()).line,String(trace.steps[0].line));
- const samples=[0,Math.floor(trace.steps.length/2),trace.steps.length-1,...trace.steps.map((s,i)=>['prune','save','undo'].includes(s.kind)?i:-1).filter(x=>x>=0).slice(0,8)];
+ await page.getByRole('button',{name:'下一步 →',exact:true}).click();assert.equal((await snapshot()).line,String(steps[1].line));
+ await page.getByRole('button',{name:'← 上一步',exact:true}).click();assert.equal((await snapshot()).line,String(steps[0].line));
+ const samples=[0,Math.floor(steps.length/2),steps.length-1,...steps.map((s,i)=>['prune','save','undo'].includes(s.kind)?i:-1).filter(x=>x>=0).slice(0,8)];
  for(const i of samples){
-   await seek(i);const s1=await snapshot();assert.equal(s1.line,String(trace.steps[i].line));
+   await seek(i);const s1=await snapshot();assert.equal(s1.line,String(steps[i].line));
    if(i>0){await seek(i-1);await seek(i);assert.deepEqual(await snapshot(),s1);}
-   const result=vals(trace.steps[i].vars)[p.id===37?'board':'result'];
+   const result=vals(steps[i].vars)[p.id===37?'board':'result'];
    if(result!==undefined)assert.ok(s1.result.replace(/\s/g,'').includes(JSON.stringify(result).replace(/\s/g,'')));
  }
  await seek(0);await page.getByRole('button',{name:'关键操作 ⇥',exact:true}).click();assert.ok(Number((await page.locator('#progress').inputValue()))>0);
@@ -38,18 +39,18 @@ for(const p of catalog){
  await page.waitForTimeout(220);assert.equal(await page.locator('#progress').inputValue(),stopped);
  await page.getByRole('button',{name:'↺ 重置',exact:true}).click();assert.equal(await page.locator('#progress').inputValue(),'0');
  if(p.id===131){
-   const paths=trace.steps.map(s=>vals(s.vars).path).filter(x=>x!==undefined);
+   const paths=steps.map(s=>vals(s.vars).path).filter(x=>x!==undefined);
    assert.ok(paths.some(x=>JSON.stringify(x)==='["a","a","b"]'));assert.ok(paths.some(x=>JSON.stringify(x)==='["aa","b"]'));
    assert.deepEqual(trace.finalReturn,[['a','a','b'],['aa','b']]);
    assert.deepEqual(trace.nodes.filter(n=>n.kind==='prune').map(n=>n.label),['ab · 非回文','aab · 非回文']);
-   await seek(trace.steps.findIndex(s=>s.kind==='prune'));
+   await seek(steps.findIndex(s=>s.kind==='prune'));
    await page.screenshot({path:'.work/visual-debug/previews/131-desktop.png',fullPage:true});
    await page.setViewportSize({width:390,height:844});
    await page.screenshot({path:'.work/visual-debug/previews/131-mobile.png',fullPage:true});
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    await page.setViewportSize({width:1440,height:1100});
  }
- results.push({id:p.id,steps:trace.steps.length,status:'PASS'});
+ results.push({id:p.id,steps:steps.length,status:'PASS'});
 }
 assert.deepEqual(errors,[]);
 await browser.close();

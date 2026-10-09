@@ -24,26 +24,27 @@ await page.getByRole('button',{name:'回溯算法',exact:true}).click();assert.e
 for(const p of context.window.CATALOG.filter(p=>p.chapter==='二叉树')){
  await page.goto(base+'/'+p.url);await page.locator('#progress').waitFor();
  const trace=await page.evaluate(()=>window.TREE_TRACE);
+ const playback=await page.evaluate(()=>window.ExecutionSteps.create(window.TREE_TRACE||window.TRACE)),steps=playback.stops.map(i=>trace.steps[i]);
  assert.ok(trace.calls.every(c=>c.returned!==undefined));
  async function seek(i){await page.locator('#progress').evaluate((el,i)=>{el.value=i;el.dispatchEvent(new Event('input',{bubbles:true}));},i);}
  async function snapshot(){return page.evaluate(()=>({line:document.querySelector('.code-line.current')?.dataset.line,vars:document.getElementById('variables').textContent,stack:document.getElementById('stack').textContent,result:document.getElementById('result').textContent,nodes:document.getElementById('node-count').textContent}));}
- const first=await snapshot();await page.locator('#next').click();assert.equal((await snapshot()).line,String(trace.steps[1].line));await page.locator('#prev').click();assert.deepEqual(await snapshot(),first);
- for(const i of [0,Math.floor(trace.steps.length/2),trace.steps.length-1]){
-  await seek(i);const current=await snapshot();assert.equal(current.line,String(trace.steps[i].line));
+ const first=await snapshot();await page.locator('#next').click();assert.equal((await snapshot()).line,String(steps[1].line));await page.locator('#prev').click();assert.deepEqual(await snapshot(),first);
+ for(const i of [0,Math.floor(steps.length/2),steps.length-1]){
+  await seek(i);const current=await snapshot();assert.equal(current.line,String(steps[i].line));
   if(i>0){await seek(i-1);await seek(i);assert.deepEqual(await snapshot(),current);}
   assert.ok(await page.evaluate(()=>window.__segments.every(([parent,child])=>child>=parent)),'实际树连线必须从上到下');
   await page.locator('#calls-tab').click();assert.ok(await page.evaluate(()=>window.__segments.every(([parent,child])=>child>parent)),'调用树连线必须从上到下');
   await page.locator('#structure-tab').click();
  }
  assert.match(await page.locator('#result').textContent(),/PASS/);
- const stacked=trace.steps.findIndex(s=>trace.pool[s.frames].length>1);if(stacked>=0){await seek(stacked);await page.locator('.stack-frame').last().click();const root=trace.pool[trace.steps[stacked].frames][0];assert.equal((await snapshot()).line,String(root.line));}
+ const stacked=steps.findIndex(s=>trace.pool[s.frames].length>1);if(stacked>=0){await seek(stacked);await page.locator('.stack-frame').last().click();const root=trace.pool[steps[stacked].frames][0];assert.equal((await snapshot()).line,String(root.line));}
  await page.locator('#reset').click();await page.locator('#key').click();assert.ok(Number(await page.locator('#progress').inputValue())>0);
  if([104,106,116,669].includes(p.id)){
-  await seek(Math.floor(trace.steps.length/2));await page.screenshot({path:'.work/binarytree/previews/'+p.id+'-desktop.png',fullPage:true});
+  await seek(Math.floor(steps.length/2));await page.screenshot({path:'.work/binarytree/previews/'+p.id+'-desktop.png',fullPage:true});
   await page.setViewportSize({width:390,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.screenshot({path:'.work/binarytree/previews/'+p.id+'-mobile.png',fullPage:true});await page.setViewportSize({width:1440,height:1100});
  }
- report.push({id:p.id,status:'PASS',steps:trace.steps.length});
+ report.push({id:p.id,status:'PASS',steps:steps.length});
 }
 await page.locator('#reset').click();await page.locator('#speed').selectOption('140');await page.locator('#play').click();await page.waitForFunction(()=>Number(document.getElementById('progress').value)>=3);await page.locator('#play').click();
 const stopped=await page.locator('#progress').inputValue();await page.waitForTimeout(220);assert.equal(await page.locator('#progress').inputValue(),stopped);
