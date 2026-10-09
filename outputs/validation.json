@@ -1,0 +1,472 @@
+{
+  "date": "2026-10-09",
+  "java": "PASS",
+  "build": [
+    {
+      "id": 77,
+      "title": "组合",
+      "url": "problems/0077-combinations/",
+      "steps": 100,
+      "nodes": 11,
+      "bytes": 16662,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 10,
+      "exit": 10,
+      "pathAdd": 9,
+      "pathRemove": 9,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 216,
+      "title": "组合总和 III",
+      "url": "problems/0216-combination-sum-iii/",
+      "steps": 258,
+      "nodes": 36,
+      "bytes": 39612,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 19,
+      "exit": 19,
+      "pathAdd": 18,
+      "pathRemove": 18,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 17,
+      "title": "电话号码的字母组合",
+      "url": "problems/0017-letter-combinations-of-a-phone-number/",
+      "steps": 124,
+      "nodes": 14,
+      "bytes": 19580,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 13,
+      "exit": 13,
+      "pathAdd": 12,
+      "pathRemove": 12,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 39,
+      "title": "组合总和",
+      "url": "problems/0039-combination-sum/",
+      "steps": 117,
+      "nodes": 18,
+      "bytes": 17859,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 10,
+      "exit": 10,
+      "pathAdd": 9,
+      "pathRemove": 9,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 40,
+      "title": "组合总和 II",
+      "url": "problems/0040-combination-sum-ii/",
+      "steps": 52,
+      "nodes": 7,
+      "bytes": 9249,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 4,
+      "exit": 4,
+      "pathAdd": 3,
+      "pathRemove": 3,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 131,
+      "title": "分割回文串",
+      "url": "problems/0131-palindrome-partitioning/",
+      "steps": 106,
+      "nodes": 9,
+      "bytes": 15056,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 6,
+      "exit": 6,
+      "pathAdd": 5,
+      "pathRemove": 5,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 93,
+      "title": "复原 IP 地址",
+      "url": "problems/0093-restore-ip-addresses/",
+      "steps": 211,
+      "nodes": 18,
+      "bytes": 34593,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 13,
+      "exit": 13,
+      "pathAdd": 12,
+      "pathRemove": 12,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 78,
+      "title": "子集",
+      "url": "problems/0078-subsets/",
+      "steps": 38,
+      "nodes": 5,
+      "bytes": 6797,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 4,
+      "exit": 4,
+      "pathAdd": 3,
+      "pathRemove": 3,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 90,
+      "title": "子集 II",
+      "url": "problems/0090-subsets-ii/",
+      "steps": 69,
+      "nodes": 9,
+      "bytes": 11062,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 6,
+      "exit": 6,
+      "pathAdd": 5,
+      "pathRemove": 5,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 491,
+      "title": "非递减子序列",
+      "url": "problems/0491-non-decreasing-subsequences/",
+      "steps": 140,
+      "nodes": 15,
+      "bytes": 21748,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 10,
+      "exit": 10,
+      "pathAdd": 9,
+      "pathRemove": 9,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 46,
+      "title": "全排列",
+      "url": "problems/0046-permutations/",
+      "steps": 237,
+      "nodes": 32,
+      "bytes": 32903,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 16,
+      "exit": 16,
+      "pathAdd": 15,
+      "pathRemove": 15,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 47,
+      "title": "全排列 II",
+      "url": "problems/0047-permutations-ii/",
+      "steps": 150,
+      "nodes": 20,
+      "bytes": 21220,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 9,
+      "exit": 9,
+      "pathAdd": 8,
+      "pathRemove": 8,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 332,
+      "title": "重新安排行程",
+      "url": "problems/0332-reconstruct-itinerary/",
+      "steps": 64,
+      "nodes": 5,
+      "bytes": 11040,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 4,
+      "exit": 4,
+      "pathAdd": 0,
+      "pathRemove": 0,
+      "boardAdd": 0,
+      "boardRemove": 0,
+      "trace": "PASS"
+    },
+    {
+      "id": 51,
+      "title": "N 皇后",
+      "url": "problems/0051-n-queens/",
+      "steps": 531,
+      "nodes": 62,
+      "bytes": 94988,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 17,
+      "exit": 17,
+      "pathAdd": 0,
+      "pathRemove": 0,
+      "boardAdd": 16,
+      "boardRemove": 16,
+      "trace": "PASS"
+    },
+    {
+      "id": 37,
+      "title": "解数独",
+      "url": "problems/0037-sudoku-solver/",
+      "steps": 148380,
+      "nodes": 37654,
+      "bytes": 51168490,
+      "sourceStatus": "最新飞书算法与本地导入版本一致；注释可能不同。",
+      "java": "PASS",
+      "enter": 4209,
+      "exit": 4209,
+      "pathAdd": 0,
+      "pathRemove": 0,
+      "boardAdd": 4208,
+      "boardRemove": 4157,
+      "trace": "PASS"
+    }
+  ],
+  "browser": [
+    {
+      "id": 77,
+      "steps": 100,
+      "status": "PASS"
+    },
+    {
+      "id": 216,
+      "steps": 258,
+      "status": "PASS"
+    },
+    {
+      "id": 17,
+      "steps": 124,
+      "status": "PASS"
+    },
+    {
+      "id": 39,
+      "steps": 117,
+      "status": "PASS"
+    },
+    {
+      "id": 40,
+      "steps": 52,
+      "status": "PASS"
+    },
+    {
+      "id": 131,
+      "steps": 106,
+      "status": "PASS"
+    },
+    {
+      "id": 93,
+      "steps": 211,
+      "status": "PASS"
+    },
+    {
+      "id": 78,
+      "steps": 38,
+      "status": "PASS"
+    },
+    {
+      "id": 90,
+      "steps": 69,
+      "status": "PASS"
+    },
+    {
+      "id": 491,
+      "steps": 140,
+      "status": "PASS"
+    },
+    {
+      "id": 46,
+      "steps": 237,
+      "status": "PASS"
+    },
+    {
+      "id": 47,
+      "steps": 150,
+      "status": "PASS"
+    },
+    {
+      "id": 332,
+      "steps": 64,
+      "status": "PASS"
+    },
+    {
+      "id": 51,
+      "steps": 531,
+      "status": "PASS"
+    },
+    {
+      "id": 37,
+      "steps": 148380,
+      "status": "PASS"
+    }
+  ],
+  "checks": [
+    {
+      "id": 77,
+      "title": "组合",
+      "steps": 100,
+      "nodes": 11,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 216,
+      "title": "组合总和 III",
+      "steps": 258,
+      "nodes": 36,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 17,
+      "title": "电话号码的字母组合",
+      "steps": 124,
+      "nodes": 14,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 39,
+      "title": "组合总和",
+      "steps": 117,
+      "nodes": 18,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 40,
+      "title": "组合总和 II",
+      "steps": 52,
+      "nodes": 7,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 131,
+      "title": "分割回文串",
+      "steps": 106,
+      "nodes": 9,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 93,
+      "title": "复原 IP 地址",
+      "steps": 211,
+      "nodes": 18,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 78,
+      "title": "子集",
+      "steps": 38,
+      "nodes": 5,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 90,
+      "title": "子集 II",
+      "steps": 69,
+      "nodes": 9,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 491,
+      "title": "非递减子序列",
+      "steps": 140,
+      "nodes": 15,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 46,
+      "title": "全排列",
+      "steps": 237,
+      "nodes": 32,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 47,
+      "title": "全排列 II",
+      "steps": 150,
+      "nodes": 20,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 332,
+      "title": "重新安排行程",
+      "steps": 64,
+      "nodes": 5,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 51,
+      "title": "N 皇后",
+      "steps": 531,
+      "nodes": 62,
+      "source": "一致",
+      "trace": "PASS"
+    },
+    {
+      "id": 37,
+      "title": "解数独",
+      "steps": 148380,
+      "nodes": 37654,
+      "source": "一致",
+      "trace": "PASS"
+    }
+  ],
+  "home": {
+    "homeSearch": "PASS",
+    "chapter": "PASS",
+    "status": "PASS",
+    "mobile": "PASS",
+    "offlineHome": "PASS",
+    "offline131": "PASS",
+    "errors": []
+  },
+  "github": "awaiting authorization",
+  "pages": null,
+  "feishuWriteBack": false
+}

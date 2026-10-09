@@ -1,0 +1,30 @@
+# Java 编译输出
+/bin/
+/out/
+*.class
+
+# 本机独立 JDK，不随源码提交
+/.tools/
+
+# 编辑器生成的项目元数据
+/.classpath
+/.project
+/.settings/
+
+# 系统临时文件
+Thumbs.db
+.DS_Store
+
+# 可复用的轨迹工具保留，临时数据、日志、预览和下载不提交。
+/.work/*
+!/.work/visual-debug/
+/.work/visual-debug/*
+!/.work/visual-debug/scripts/
+/.work/visual-debug/scripts/probe.mjs
+/outputs/*.zip
+
+# 本机凭据与私有环境配置
+.env
+.env.*
+*.pem
+*.key
