@@ -1,14 +1,6 @@
 name: Deploy algorithm debuggers
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - docs/index.html
-      - docs/.nojekyll
-      - docs/assets/**
-      - docs/problems/**
-      - .github/workflows/deploy-pages.yml
 permissions:
   contents: read
   pages: write
