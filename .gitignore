@@ -21,6 +21,10 @@ Thumbs.db
 /.work/visual-debug/*
 !/.work/visual-debug/scripts/
 /.work/visual-debug/scripts/probe.mjs
+!/.work/binarytree/
+/.work/binarytree/*
+!/.work/binarytree/scripts/
+/.work/binarytree/scripts/probe.mjs
 /outputs/*.zip
 
 # 本机凭据与私有环境配置

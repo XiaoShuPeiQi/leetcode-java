@@ -9,9 +9,10 @@
 ```text
 LeetCode-Java/（当前工作区）
 ├── src/main/java/
-│   ├── common/                 TreeNode.java、ListNode.java
+│   ├── common/                 TreeNode.java、ListNode.java、TreeSupport.java
 │   └── leetcode/
-│       └── backtracking/       飞书原文的 15 道题，每题独立入口
+│       ├── backtracking/       飞书原文的 15 道题，每题独立入口
+│       └── binarytree/         飞书原文的 38 道题，78 个解法
 ├── docs/                       回溯原文、逐题导入与 Debug 记录
 ├── imports/                    原始响应、Markdown 快照、来源和运行记录
 ├── .vscode/                    Java 工程配置、扩展推荐
@@ -22,7 +23,7 @@ LeetCode-Java/（当前工作区）
 └── .gitignore
 ```
 
-按用户要求仅保留回溯章节，已删除其他空章节目录与占位笔记。未来提供实际题目或章节来源时再创建对应目录。没有实际来源时，不批量生成题解。
+当前有回溯与二叉树两个真实来源章节。其他章节在提供实际题目或文档后再创建；没有实际来源时，不批量生成题解。
 
 ## 环境与 Java 17 配置
 
@@ -226,3 +227,52 @@ https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-
 - 逐题比对源码：去掉本地 static 修饰与一层缩进后，15 份 Solution 类体与飞书 Java 代码完全一致。package、文件名、public 类名和链接均已核验，编译包含调试信息。
 - VS Code 图形界面的断点、递归单步和变量面板尚未实际操作验证；请按上方“单步 Debug”步骤执行一次。
 - 已保存 [完整响应](imports/回溯算法.feishu.json)、[原始 Markdown](imports/回溯算法.source.md)、[来源及输入记录](imports/回溯算法.import.json)；回溯章节以外暂不创建空目录或占位笔记。
+
+## 二叉树章节（2026-10-09）
+
+已读取[飞书二叉树原文](https://acn581cm6pdd.feishu.cn/docx/Xo3odqeiboNchExUhAFcvpEGnng)，导入 38 题，保留 78 个递归/迭代原文解法，全部编译运行 PASS。网页每题只制作第一种递归解法的调试器，树结构与调用树按从上到下布局。
+
+[二叉树在线目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=%E4%BA%8C%E5%8F%89%E6%A0%91) · [原文笔记](docs/二叉树算法.md) · [逐题输入、运行输出与 Debug 记录](docs/二叉树算法-导入记录.md)
+
+| 题号 | 题目 | Java | 递归调试器 | 来源与校验 |
+|---|---|---|---|---|
+| 144 | 二叉树的前序遍历 | [LC0144BinaryTreePreorderTraversal.java](src/main/java/leetcode/binarytree/LC0144BinaryTreePreorderTraversal.java) | [打开](docs/problems/0144-binary-tree-preorder-traversal/index.html) | [原文 3.1 / PASS](docs/二叉树算法-导入记录.md#lc0144) |
+| 94 | 二叉树的中序遍历 | [LC0094BinaryTreeInorderTraversal.java](src/main/java/leetcode/binarytree/LC0094BinaryTreeInorderTraversal.java) | [打开](docs/problems/0094-binary-tree-inorder-traversal/index.html) | [原文 3.2 / PASS](docs/二叉树算法-导入记录.md#lc0094) |
+| 145 | 二叉树的后序遍历 | [LC0145BinaryTreePostorderTraversal.java](src/main/java/leetcode/binarytree/LC0145BinaryTreePostorderTraversal.java) | [打开](docs/problems/0145-binary-tree-postorder-traversal/index.html) | [原文 3.3 / PASS](docs/二叉树算法-导入记录.md#lc0145) |
+| 102 | 二叉树的层序遍历 | [LC0102BinaryTreeLevelOrderTraversal.java](src/main/java/leetcode/binarytree/LC0102BinaryTreeLevelOrderTraversal.java) | [打开](docs/problems/0102-binary-tree-level-order-traversal/index.html) | [原文 3.4 / PASS](docs/二叉树算法-导入记录.md#lc0102) |
+| 107 | 二叉树的层序遍历 II | [LC0107BinaryTreeLevelOrderTraversalII.java](src/main/java/leetcode/binarytree/LC0107BinaryTreeLevelOrderTraversalII.java) | [打开](docs/problems/0107-binary-tree-level-order-traversal-ii/index.html) | [原文 3.5 / PASS](docs/二叉树算法-导入记录.md#lc0107) |
+| 199 | 二叉树的右视图 | [LC0199BinaryTreeRightSideView.java](src/main/java/leetcode/binarytree/LC0199BinaryTreeRightSideView.java) | [打开](docs/problems/0199-binary-tree-right-side-view/index.html) | [原文 3.6 / PASS](docs/二叉树算法-导入记录.md#lc0199) |
+| 637 | 二叉树的层平均值 | [LC0637AverageOfLevelsInBinaryTree.java](src/main/java/leetcode/binarytree/LC0637AverageOfLevelsInBinaryTree.java) | [打开](docs/problems/0637-average-of-levels-in-binary-tree/index.html) | [原文 3.7 / PASS](docs/二叉树算法-导入记录.md#lc0637) |
+| 429 | N 叉树的层序遍历 | [LC0429NAryTreeLevelOrderTraversal.java](src/main/java/leetcode/binarytree/LC0429NAryTreeLevelOrderTraversal.java) | [打开](docs/problems/0429-n-ary-tree-level-order-traversal/index.html) | [原文 3.8 / PASS](docs/二叉树算法-导入记录.md#lc0429) |
+| 515 | 在每个树行中找最大值 | [LC0515FindLargestValueInEachTreeRow.java](src/main/java/leetcode/binarytree/LC0515FindLargestValueInEachTreeRow.java) | [打开](docs/problems/0515-find-largest-value-in-each-tree-row/index.html) | [原文 3.9 / PASS](docs/二叉树算法-导入记录.md#lc0515) |
+| 116 | 填充每个节点的下一个右侧节点指针 | [LC0116PopulatingNextRightPointersInEachNode.java](src/main/java/leetcode/binarytree/LC0116PopulatingNextRightPointersInEachNode.java) | [打开](docs/problems/0116-populating-next-right-pointers-in-each-node/index.html) | [原文 3.10 / PASS](docs/二叉树算法-导入记录.md#lc0116) |
+| 117 | 填充每个节点的下一个右侧节点指针 II | [LC0117PopulatingNextRightPointersInEachNodeII.java](src/main/java/leetcode/binarytree/LC0117PopulatingNextRightPointersInEachNodeII.java) | [打开](docs/problems/0117-populating-next-right-pointers-in-each-node-ii/index.html) | [原文 3.11 / PASS](docs/二叉树算法-导入记录.md#lc0117) |
+| 226 | 翻转二叉树 | [LC0226InvertBinaryTree.java](src/main/java/leetcode/binarytree/LC0226InvertBinaryTree.java) | [打开](docs/problems/0226-invert-binary-tree/index.html) | [原文 3.12 / PASS](docs/二叉树算法-导入记录.md#lc0226) |
+| 101 | 对称二叉树 | [LC0101SymmetricTree.java](src/main/java/leetcode/binarytree/LC0101SymmetricTree.java) | [打开](docs/problems/0101-symmetric-tree/index.html) | [原文 3.13 / PASS](docs/二叉树算法-导入记录.md#lc0101) |
+| 104 | 二叉树的最大深度 | [LC0104MaximumDepthOfBinaryTree.java](src/main/java/leetcode/binarytree/LC0104MaximumDepthOfBinaryTree.java) | [打开](docs/problems/0104-maximum-depth-of-binary-tree/index.html) | [原文 3.14 / PASS](docs/二叉树算法-导入记录.md#lc0104) |
+| 559 | N 叉树的最大深度（关联补充） | [LC0559MaximumDepthOfNAryTree.java](src/main/java/leetcode/binarytree/LC0559MaximumDepthOfNAryTree.java) | [打开](docs/problems/0559-maximum-depth-of-n-ary-tree/index.html) | [原文 3.15 / PASS](docs/二叉树算法-导入记录.md#lc0559) |
+| 111 | 二叉树的最小深度 | [LC0111MinimumDepthOfBinaryTree.java](src/main/java/leetcode/binarytree/LC0111MinimumDepthOfBinaryTree.java) | [打开](docs/problems/0111-minimum-depth-of-binary-tree/index.html) | [原文 3.16 / PASS](docs/二叉树算法-导入记录.md#lc0111) |
+| 222 | 完全二叉树的节点个数 | [LC0222CountCompleteTreeNodes.java](src/main/java/leetcode/binarytree/LC0222CountCompleteTreeNodes.java) | [打开](docs/problems/0222-count-complete-tree-nodes/index.html) | [原文 3.17 / PASS](docs/二叉树算法-导入记录.md#lc0222) |
+| 110 | 平衡二叉树 | [LC0110BalancedBinaryTree.java](src/main/java/leetcode/binarytree/LC0110BalancedBinaryTree.java) | [打开](docs/problems/0110-balanced-binary-tree/index.html) | [原文 3.18 / PASS](docs/二叉树算法-导入记录.md#lc0110) |
+| 257 | 二叉树的所有路径 | [LC0257BinaryTreePaths.java](src/main/java/leetcode/binarytree/LC0257BinaryTreePaths.java) | [打开](docs/problems/0257-binary-tree-paths/index.html) | [原文 3.19 / PASS](docs/二叉树算法-导入记录.md#lc0257) |
+| 404 | 左叶子之和 | [LC0404SumOfLeftLeaves.java](src/main/java/leetcode/binarytree/LC0404SumOfLeftLeaves.java) | [打开](docs/problems/0404-sum-of-left-leaves/index.html) | [原文 3.20 / PASS](docs/二叉树算法-导入记录.md#lc0404) |
+| 513 | 找树左下角的值 | [LC0513FindBottomLeftTreeValue.java](src/main/java/leetcode/binarytree/LC0513FindBottomLeftTreeValue.java) | [打开](docs/problems/0513-find-bottom-left-tree-value/index.html) | [原文 3.21 / PASS](docs/二叉树算法-导入记录.md#lc0513) |
+| 112 | 路径总和 | [LC0112PathSum.java](src/main/java/leetcode/binarytree/LC0112PathSum.java) | [打开](docs/problems/0112-path-sum/index.html) | [原文 3.22 / PASS](docs/二叉树算法-导入记录.md#lc0112) |
+| 113 | 路径总和 II（关联补充） | [LC0113PathSumII.java](src/main/java/leetcode/binarytree/LC0113PathSumII.java) | [打开](docs/problems/0113-path-sum-ii/index.html) | [原文 3.23 / PASS](docs/二叉树算法-导入记录.md#lc0113) |
+| 106 | 从中序与后序遍历序列构造二叉树 | [LC0106ConstructBinaryTreeFromInorderAndPostorderTraversal.java](src/main/java/leetcode/binarytree/LC0106ConstructBinaryTreeFromInorderAndPostorderTraversal.java) | [打开](docs/problems/0106-construct-binary-tree-from-inorder-and-postorder-traversal/index.html) | [原文 3.24 / PASS](docs/二叉树算法-导入记录.md#lc0106) |
+| 105 | 从前序与中序遍历序列构造二叉树（关联补充） | [LC0105ConstructBinaryTreeFromPreorderAndInorderTraversal.java](src/main/java/leetcode/binarytree/LC0105ConstructBinaryTreeFromPreorderAndInorderTraversal.java) | [打开](docs/problems/0105-construct-binary-tree-from-preorder-and-inorder-traversal/index.html) | [原文 3.25 / PASS](docs/二叉树算法-导入记录.md#lc0105) |
+| 654 | 最大二叉树 | [LC0654MaximumBinaryTree.java](src/main/java/leetcode/binarytree/LC0654MaximumBinaryTree.java) | [打开](docs/problems/0654-maximum-binary-tree/index.html) | [原文 3.26 / PASS](docs/二叉树算法-导入记录.md#lc0654) |
+| 617 | 合并二叉树 | [LC0617MergeTwoBinaryTrees.java](src/main/java/leetcode/binarytree/LC0617MergeTwoBinaryTrees.java) | [打开](docs/problems/0617-merge-two-binary-trees/index.html) | [原文 3.27 / PASS](docs/二叉树算法-导入记录.md#lc0617) |
+| 700 | 二叉搜索树中的搜索 | [LC0700SearchInABinarySearchTree.java](src/main/java/leetcode/binarytree/LC0700SearchInABinarySearchTree.java) | [打开](docs/problems/0700-search-in-a-binary-search-tree/index.html) | [原文 3.28 / PASS](docs/二叉树算法-导入记录.md#lc0700) |
+| 98 | 验证二叉搜索树 | [LC0098ValidateBinarySearchTree.java](src/main/java/leetcode/binarytree/LC0098ValidateBinarySearchTree.java) | [打开](docs/problems/0098-validate-binary-search-tree/index.html) | [原文 3.29 / PASS](docs/二叉树算法-导入记录.md#lc0098) |
+| 530 | 二叉搜索树的最小绝对差 | [LC0530MinimumAbsoluteDifferenceInBST.java](src/main/java/leetcode/binarytree/LC0530MinimumAbsoluteDifferenceInBST.java) | [打开](docs/problems/0530-minimum-absolute-difference-in-bst/index.html) | [原文 3.30 / PASS](docs/二叉树算法-导入记录.md#lc0530) |
+| 501 | 二叉搜索树中的众数 | [LC0501FindModeInBinarySearchTree.java](src/main/java/leetcode/binarytree/LC0501FindModeInBinarySearchTree.java) | [打开](docs/problems/0501-find-mode-in-binary-search-tree/index.html) | [原文 3.31 / PASS](docs/二叉树算法-导入记录.md#lc0501) |
+| 236 | 二叉树的最近公共祖先 | [LC0236LowestCommonAncestorOfABinaryTree.java](src/main/java/leetcode/binarytree/LC0236LowestCommonAncestorOfABinaryTree.java) | [打开](docs/problems/0236-lowest-common-ancestor-of-a-binary-tree/index.html) | [原文 3.32 / PASS](docs/二叉树算法-导入记录.md#lc0236) |
+| 235 | 二叉搜索树的最近公共祖先 | [LC0235LowestCommonAncestorOfABinarySearchTree.java](src/main/java/leetcode/binarytree/LC0235LowestCommonAncestorOfABinarySearchTree.java) | [打开](docs/problems/0235-lowest-common-ancestor-of-a-binary-search-tree/index.html) | [原文 3.33 / PASS](docs/二叉树算法-导入记录.md#lc0235) |
+| 701 | 二叉搜索树中的插入操作 | [LC0701InsertIntoABinarySearchTree.java](src/main/java/leetcode/binarytree/LC0701InsertIntoABinarySearchTree.java) | [打开](docs/problems/0701-insert-into-a-binary-search-tree/index.html) | [原文 3.34 / PASS](docs/二叉树算法-导入记录.md#lc0701) |
+| 450 | 删除二叉搜索树中的节点 | [LC0450DeleteNodeInABST.java](src/main/java/leetcode/binarytree/LC0450DeleteNodeInABST.java) | [打开](docs/problems/0450-delete-node-in-a-bst/index.html) | [原文 3.35 / PASS](docs/二叉树算法-导入记录.md#lc0450) |
+| 669 | 修剪二叉搜索树 | [LC0669TrimABinarySearchTree.java](src/main/java/leetcode/binarytree/LC0669TrimABinarySearchTree.java) | [打开](docs/problems/0669-trim-a-binary-search-tree/index.html) | [原文 3.36 / PASS](docs/二叉树算法-导入记录.md#lc0669) |
+| 108 | 将有序数组转换为二叉搜索树 | [LC0108ConvertSortedArrayToBinarySearchTree.java](src/main/java/leetcode/binarytree/LC0108ConvertSortedArrayToBinarySearchTree.java) | [打开](docs/problems/0108-convert-sorted-array-to-binary-search-tree/index.html) | [原文 3.37 / PASS](docs/二叉树算法-导入记录.md#lc0108) |
+| 538 | 把二叉搜索树转换为累加树 | [LC0538ConvertBSTToGreaterTree.java](src/main/java/leetcode/binarytree/LC0538ConvertBSTToGreaterTree.java) | [打开](docs/problems/0538-convert-bst-to-greater-tree/index.html) | [原文 3.38 / PASS](docs/二叉树算法-导入记录.md#lc0538) |
+
+二叉树输入通过 `TreeSupport.fromLevelOrder` 按层构建，null 保留左右位置。HTML 高亮行、变量、节点身份和返回值来自真实 JDI。38 页均检查单步、回退、进度、栈帧切换、最终结果和纵向树连线；代表性页面另检验移动端布局。VS Code 图形界面需按导入记录手动验证。

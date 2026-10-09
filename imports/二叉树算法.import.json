@@ -1,0 +1,1006 @@
+{
+  "source_url": "https://acn581cm6pdd.feishu.cn/docx/Xo3odqeiboNchExUhAFcvpEGnng",
+  "revision_id": 246,
+  "problems": [
+    {
+      "id": 144,
+      "title": "二叉树的前序遍历",
+      "english": "Binary Tree Preorder Traversal",
+      "slug": "0144-binary-tree-preorder-traversal",
+      "section": "3.1",
+      "java_file": "src/main/java/leetcode/binarytree/LC0144BinaryTreePreorderTraversal.java",
+      "className": "LC0144BinaryTreePreorderTraversal",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Integer> preorderTraversal(TreeNode root) {\n        List<Integer> result = new ArrayList<>();\n        traversal(root, result);\n        return result;\n    }\n\n    // ① node 是当前子树；result 收集答案，不需要返回子树结果。\n    private void traversal(TreeNode node, List<Integer> result) {\n        // ② 空节点没有值可记录，结束这一支。\n        if (node == null) {\n            return;\n        }\n        // ③ 前序先记自己，再让左右子树做同样的事。\n        result.add(node.val);\n        traversal(node.left, result);\n        traversal(node.right, result);\n    }\n}",
+          "method": "preorderTraversal"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Integer> preorderTraversal(TreeNode root) {\n        List<Integer> result = new ArrayList<>();\n        if (root == null) {\n            return result;\n        }\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        stack.push(root);\n        while (!stack.isEmpty()) {\n            TreeNode node = stack.pop();\n            result.add(node.val);\n            // 栈后进先出：先压右、再压左，弹出时才是左→右。\n            if (node.right != null) {\n                stack.push(node.right);\n            }\n            if (node.left != null) {\n                stack.push(node.left);\n            }\n        }\n        return result;\n    }\n}",
+          "method": "preorderTraversal"
+        }
+      ],
+      "expected_java": "List.of(4, 2, 1, 3, 6, 5, 7)"
+    },
+    {
+      "id": 94,
+      "title": "二叉树的中序遍历",
+      "english": "Binary Tree Inorder Traversal",
+      "slug": "0094-binary-tree-inorder-traversal",
+      "section": "3.2",
+      "java_file": "src/main/java/leetcode/binarytree/LC0094BinaryTreeInorderTraversal.java",
+      "className": "LC0094BinaryTreeInorderTraversal",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Integer> inorderTraversal(TreeNode root) {\n        List<Integer> result = new ArrayList<>();\n        traversal(root, result);\n        return result;\n    }\n\n    // ① 把当前子树的中序结果追加到 result，无需返回值。\n    private void traversal(TreeNode node, List<Integer> result) {\n        // ② 空节点没有内容，直接返回。\n        if (node == null) {\n            return;\n        }\n        // ③ 中序要等左边完成，才记录自己，再处理右边。\n        traversal(node.left, result);\n        result.add(node.val);\n        traversal(node.right, result);\n    }\n}",
+          "method": "inorderTraversal"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Integer> inorderTraversal(TreeNode root) {\n        List<Integer> result = new ArrayList<>();\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        TreeNode cur = root;\n        while (cur != null || !stack.isEmpty()) {\n            // 沿左边走到底，栈记住稍后要回来的父节点。\n            while (cur != null) {\n                stack.push(cur);\n                cur = cur.left;\n            }\n            // 左子树完成了，现在记录当前节点，再转右边。\n            cur = stack.pop();\n            result.add(cur.val);\n            cur = cur.right;\n        }\n        return result;\n    }\n}",
+          "method": "inorderTraversal"
+        }
+      ],
+      "expected_java": "List.of(1, 2, 3, 4, 5, 6, 7)"
+    },
+    {
+      "id": 145,
+      "title": "二叉树的后序遍历",
+      "english": "Binary Tree Postorder Traversal",
+      "slug": "0145-binary-tree-postorder-traversal",
+      "section": "3.3",
+      "java_file": "src/main/java/leetcode/binarytree/LC0145BinaryTreePostorderTraversal.java",
+      "className": "LC0145BinaryTreePostorderTraversal",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Integer> postorderTraversal(TreeNode root) {\n        List<Integer> result = new ArrayList<>();\n        traversal(root, result);\n        return result;\n    }\n\n    // ① 把当前子树的后序结果追加到 result，无需返回值。\n    private void traversal(TreeNode node, List<Integer> result) {\n        // ② 空节点没有内容，直接返回。\n        if (node == null) {\n            return;\n        }\n        // ③ 后序先完成两个孩子，最后记录自己。\n        traversal(node.left, result);\n        traversal(node.right, result);\n        result.add(node.val);\n    }\n}",
+          "method": "postorderTraversal"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Integer> postorderTraversal(TreeNode root) {\n        List<Integer> result = new ArrayList<>();\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        TreeNode cur = root;\n        // 记住刚完成的节点，判断右子树是否已经处理过。\n        TreeNode lastVisited = null;\n        while (cur != null || !stack.isEmpty()) {\n            if (cur != null) {\n                stack.push(cur);\n                cur = cur.left;\n            } else {\n                // 先看栈顶，不能马上弹出：它还可能要等右子树。\n                TreeNode node = stack.peek();\n                // 右子树尚未完成就先走右边；否则才处理根。\n                if (node.right != null && node.right != lastVisited) {\n                    cur = node.right;\n                } else {\n                    result.add(node.val);\n                    lastVisited = stack.pop();\n                }\n            }\n        }\n        return result;\n    }\n}",
+          "method": "postorderTraversal"
+        }
+      ],
+      "expected_java": "List.of(1, 3, 2, 5, 7, 6, 4)"
+    },
+    {
+      "id": 102,
+      "title": "二叉树的层序遍历",
+      "english": "Binary Tree Level Order Traversal",
+      "slug": "0102-binary-tree-level-order-traversal",
+      "section": "3.4",
+      "java_file": "src/main/java/leetcode/binarytree/LC0102BinaryTreeLevelOrderTraversal.java",
+      "className": "LC0102BinaryTreeLevelOrderTraversal",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<List<Integer>> levelOrder(TreeNode root) {\n        List<List<Integer>> result = new ArrayList<>();\n        traversal(root, 0, result);\n        return result;\n    }\n\n    // ① depth 是层下标，根为 0；节点写入 result[depth]。\n    private void traversal(TreeNode node, int depth, List<List<Integer>> result) {\n        // ② 空节点不属于任何层，直接返回。\n        if (node == null) {\n            return;\n        }\n        // ③ 首次到达这一层先建列表，再记当前值并继续下一层。\n        if (depth == result.size()) {\n            result.add(new ArrayList<>());\n        }\n        result.get(depth).add(node.val);\n        // 孩子属于下一层；先左后右保证同层从左到右。\n        traversal(node.left, depth + 1, result);\n        traversal(node.right, depth + 1, result);\n    }\n}",
+          "method": "levelOrder"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<List<Integer>> levelOrder(TreeNode root) {\n        List<List<Integer>> result = new ArrayList<>();\n        if (root == null) {\n            return result;\n        }\n        Queue<TreeNode> queue = new ArrayDeque<>();\n        queue.offer(root);\n        while (!queue.isEmpty()) {\n            // 先固定本层数量；本轮新入队的孩子留到下一层处理。\n            int levelSize = queue.size();\n            List<Integer> level = new ArrayList<>();\n            for (int i = 0; i < levelSize; i++) {\n                TreeNode node = queue.poll();\n                level.add(node.val);\n                if (node.left != null) {\n                    queue.offer(node.left);\n                }\n                if (node.right != null) {\n                    queue.offer(node.right);\n                }\n            }\n            result.add(level);\n        }\n        return result;\n    }\n}",
+          "method": "levelOrder"
+        }
+      ],
+      "expected_java": "List.of(List.of(4), List.of(2, 6), List.of(1, 3, 5, 7))"
+    },
+    {
+      "id": 107,
+      "title": "二叉树的层序遍历 II",
+      "english": "Binary Tree Level Order Traversal II",
+      "slug": "0107-binary-tree-level-order-traversal-ii",
+      "section": "3.5",
+      "java_file": "src/main/java/leetcode/binarytree/LC0107BinaryTreeLevelOrderTraversalII.java",
+      "className": "LC0107BinaryTreeLevelOrderTraversalII",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<List<Integer>> levelOrderBottom(TreeNode root) {\n        List<List<Integer>> result = new ArrayList<>();\n        traversal(root, 0, result);\n        // 只反转层的先后，不改变每层内部的左右顺序。\n        Collections.reverse(result);\n        return result;\n    }\n\n    // ① 先按 depth 收集正常层序，反转交给入口统一做。\n    private void traversal(TreeNode node, int depth, List<List<Integer>> result) {\n        // ② 空节点没有值，结束这一支。\n        if (node == null) {\n            return;\n        }\n        // ③ 先建当前层、加当前值，再按左到右收集孩子。\n        if (depth == result.size()) {\n            result.add(new ArrayList<>());\n        }\n        result.get(depth).add(node.val);\n        traversal(node.left, depth + 1, result);\n        traversal(node.right, depth + 1, result);\n    }\n}",
+          "method": "levelOrderBottom"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<List<Integer>> levelOrderBottom(TreeNode root) {\n        List<List<Integer>> result = new ArrayList<>();\n        if (root == null) {\n            return result;\n        }\n        Queue<TreeNode> queue = new ArrayDeque<>();\n        queue.offer(root);\n        while (!queue.isEmpty()) {\n            // 先固定本层数量；本轮新入队的孩子留到下一层处理。\n            int levelSize = queue.size();\n            List<Integer> level = new ArrayList<>();\n            for (int i = 0; i < levelSize; i++) {\n                TreeNode node = queue.poll();\n                level.add(node.val);\n                if (node.left != null) {\n                    queue.offer(node.left);\n                }\n                if (node.right != null) {\n                    queue.offer(node.right);\n                }\n            }\n            result.add(level);\n        }\n        // 只反转层的先后，不反转每层的节点。\n        Collections.reverse(result);\n        return result;\n    }\n}",
+          "method": "levelOrderBottom"
+        }
+      ],
+      "expected_java": "List.of(List.of(1, 3, 5, 7), List.of(2, 6), List.of(4))"
+    },
+    {
+      "id": 199,
+      "title": "二叉树的右视图",
+      "english": "Binary Tree Right Side View",
+      "slug": "0199-binary-tree-right-side-view",
+      "section": "3.6",
+      "java_file": "src/main/java/leetcode/binarytree/LC0199BinaryTreeRightSideView.java",
+      "className": "LC0199BinaryTreeRightSideView",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Integer> rightSideView(TreeNode root) {\n        List<Integer> result = new ArrayList<>();\n        traversal(root, 0, result);\n        return result;\n    }\n\n    // ① depth 标记层；result 每层只保留最右边一个值。\n    private void traversal(TreeNode node, int depth, List<Integer> result) {\n        // ② 空节点看不到，直接返回。\n        if (node == null) {\n            return;\n        }\n        // ③ 先右后左，所以新深度的第一个节点就是最右节点。\n        if (depth == result.size()) {\n            result.add(node.val);\n        }\n        // 右侧优先占位；右侧缺失时，左子树仍能补上更深层。\n        traversal(node.right, depth + 1, result);\n        traversal(node.left, depth + 1, result);\n    }\n}",
+          "method": "rightSideView"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Integer> rightSideView(TreeNode root) {\n        List<Integer> result = new ArrayList<>();\n        if (root == null) {\n            return result;\n        }\n        Queue<TreeNode> queue = new ArrayDeque<>();\n        queue.offer(root);\n        while (!queue.isEmpty()) {\n            // 先固定本层数量；本轮新入队的孩子留到下一层处理。\n            int levelSize = queue.size();\n            for (int i = 0; i < levelSize; i++) {\n                TreeNode node = queue.poll();\n                // 本层从左到右出队，最后一个就是右视图。\n                if (i == levelSize - 1) {\n                    result.add(node.val);\n                }\n                if (node.left != null) {\n                    queue.offer(node.left);\n                }\n                if (node.right != null) {\n                    queue.offer(node.right);\n                }\n            }\n        }\n        return result;\n    }\n}",
+          "method": "rightSideView"
+        }
+      ],
+      "expected_java": "List.of(4, 6, 7)"
+    },
+    {
+      "id": 637,
+      "title": "二叉树的层平均值",
+      "english": "Average Of Levels In Binary Tree",
+      "slug": "0637-average-of-levels-in-binary-tree",
+      "section": "3.7",
+      "java_file": "src/main/java/leetcode/binarytree/LC0637AverageOfLevelsInBinaryTree.java",
+      "className": "LC0637AverageOfLevelsInBinaryTree",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Double> averageOfLevels(TreeNode root) {\n        List<Double> sums = new ArrayList<>();\n        List<Integer> counts = new ArrayList<>();\n        traversal(root, 0, sums, counts);\n        for (int i = 0; i < sums.size(); i++) {\n            sums.set(i, sums.get(i) / counts.get(i));\n        }\n        return sums;\n    }\n\n    // ① depth 标记层；sums 和 counts 分别记录各层总和、数量。\n    private void traversal(TreeNode node, int depth,\n            List<Double> sums, List<Integer> counts) {\n        // ② 空节点不参与统计。\n        if (node == null) {\n            return;\n        }\n        // ③ 新层先建统计位置；当前值和数量更新后，再处理孩子。\n        if (depth == sums.size()) {\n            // 总和用 double，避免一整层用 int 相加溢出。\n            sums.add(0.0);\n            counts.add(0);\n        }\n        sums.set(depth, sums.get(depth) + node.val);\n        counts.set(depth, counts.get(depth) + 1);\n        traversal(node.left, depth + 1, sums, counts);\n        traversal(node.right, depth + 1, sums, counts);\n    }\n}",
+          "method": "averageOfLevels"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Double> averageOfLevels(TreeNode root) {\n        List<Double> result = new ArrayList<>();\n        if (root == null) {\n            return result;\n        }\n        Queue<TreeNode> queue = new ArrayDeque<>();\n        queue.offer(root);\n        while (!queue.isEmpty()) {\n            // 先固定本层数量；本轮新入队的孩子留到下一层处理。\n            int levelSize = queue.size();\n            // 每层重新累计，用 double 防止 int 求和溢出。\n            double sum = 0;\n            for (int i = 0; i < levelSize; i++) {\n                TreeNode node = queue.poll();\n                sum += node.val;\n                if (node.left != null) {\n                    queue.offer(node.left);\n                }\n                if (node.right != null) {\n                    queue.offer(node.right);\n                }\n            }\n            result.add(sum / levelSize);\n        }\n        return result;\n    }\n}",
+          "method": "averageOfLevels"
+        }
+      ],
+      "expected_java": "List.of(4.0, 4.0, 4.0)"
+    },
+    {
+      "id": 429,
+      "title": "N 叉树的层序遍历",
+      "english": "NAry Tree Level Order Traversal",
+      "slug": "0429-n-ary-tree-level-order-traversal",
+      "section": "3.8",
+      "java_file": "src/main/java/leetcode/binarytree/LC0429NAryTreeLevelOrderTraversal.java",
+      "className": "LC0429NAryTreeLevelOrderTraversal",
+      "input": "N 叉树：1 的孩子为 3、2、4；3 的孩子为 5、6",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<List<Integer>> levelOrder(Node root) {\n        List<List<Integer>> result = new ArrayList<>();\n        traversal(root, 0, result);\n        return result;\n    }\n\n    // ① depth 决定放在哪一层；result 保存各层节点。\n    private void traversal(Node node, int depth, List<List<Integer>> result) {\n        // ② 空节点没有内容，直接返回。\n        if (node == null) {\n            return;\n        }\n        // ③ 记录当前节点，再按 children 的顺序处理下一层。\n        if (depth == result.size()) {\n            result.add(new ArrayList<>());\n        }\n        result.get(depth).add(node.val);\n        if (node.children != null) {\n            // 二叉树的两次递归，在这里换成遍历所有孩子。\n            for (Node child : node.children) {\n                traversal(child, depth + 1, result);\n            }\n        }\n    }\n}",
+          "method": "levelOrder"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<List<Integer>> levelOrder(Node root) {\n        List<List<Integer>> result = new ArrayList<>();\n        if (root == null) {\n            return result;\n        }\n        Queue<Node> queue = new ArrayDeque<>();\n        queue.offer(root);\n        while (!queue.isEmpty()) {\n            // 先固定本层数量；本轮新入队的孩子留到下一层处理。\n            int levelSize = queue.size();\n            List<Integer> level = new ArrayList<>();\n            for (int i = 0; i < levelSize; i++) {\n                Node node = queue.poll();\n                level.add(node.val);\n                if (node.children != null) {\n                    // 按孩子列表顺序入队，保持下一层从左到右。\n                    for (Node child : node.children) {\n                        if (child != null) {\n                            queue.offer(child);\n                        }\n                    }\n                }\n            }\n            result.add(level);\n        }\n        return result;\n    }\n}",
+          "method": "levelOrder"
+        }
+      ],
+      "expected_java": "List.of(List.of(1), List.of(3, 2, 4), List.of(5, 6))"
+    },
+    {
+      "id": 515,
+      "title": "在每个树行中找最大值",
+      "english": "Find Largest Value In Each Tree Row",
+      "slug": "0515-find-largest-value-in-each-tree-row",
+      "section": "3.9",
+      "java_file": "src/main/java/leetcode/binarytree/LC0515FindLargestValueInEachTreeRow.java",
+      "className": "LC0515FindLargestValueInEachTreeRow",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Integer> largestValues(TreeNode root) {\n        List<Integer> result = new ArrayList<>();\n        traversal(root, 0, result);\n        return result;\n    }\n\n    // ① depth 标记层；result[depth] 保存这层目前的最大值。\n    private void traversal(TreeNode node, int depth, List<Integer> result) {\n        // ② 空节点不参与最大值比较。\n        if (node == null) {\n            return;\n        }\n        // ③ 新层用真实节点值初始化，避免全负数时误取 0。\n        if (depth == result.size()) {\n            result.add(node.val);\n        } else {\n            result.set(depth, Math.max(result.get(depth), node.val));\n        }\n        traversal(node.left, depth + 1, result);\n        traversal(node.right, depth + 1, result);\n    }\n}",
+          "method": "largestValues"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<Integer> largestValues(TreeNode root) {\n        List<Integer> result = new ArrayList<>();\n        if (root == null) {\n            return result;\n        }\n        Queue<TreeNode> queue = new ArrayDeque<>();\n        queue.offer(root);\n        while (!queue.isEmpty()) {\n            // 先固定本层数量；本轮新入队的孩子留到下一层处理。\n            int levelSize = queue.size();\n            // 一层可能全是负数，不能用 0 当初始最大值。\n            int maximum = Integer.MIN_VALUE;\n            for (int i = 0; i < levelSize; i++) {\n                TreeNode node = queue.poll();\n                maximum = Math.max(maximum, node.val);\n                if (node.left != null) {\n                    queue.offer(node.left);\n                }\n                if (node.right != null) {\n                    queue.offer(node.right);\n                }\n            }\n            result.add(maximum);\n        }\n        return result;\n    }\n}",
+          "method": "largestValues"
+        }
+      ],
+      "expected_java": "List.of(4, 6, 7)"
+    },
+    {
+      "id": 116,
+      "title": "填充每个节点的下一个右侧节点指针",
+      "english": "Populating Next Right Pointers In Each Node",
+      "slug": "0116-populating-next-right-pointers-in-each-node",
+      "section": "3.10",
+      "java_file": "src/main/java/leetcode/binarytree/LC0116PopulatingNextRightPointersInEachNode.java",
+      "className": "LC0116PopulatingNextRightPointersInEachNode",
+      "input": "root = [1, 2, 3, 4, 5, 6, 7]",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public Node connect(Node root) {\n        if (root != null) {\n            root.next = null;\n        }\n        link(root);\n        return root;\n    }\n\n    // ① 进入 link 时，本层 next 已可用；现在负责连接孩子。\n    private void link(Node node) {\n        // ② 空节点或叶子没有孩子可连接。\n        if (node == null || node.left == null) {\n            return;\n        }\n        // ③ 先连同父兄弟，再连跨父邻居；连好后孩子才能继续使用 next。\n        node.left.next = node.right;\n        node.right.next = null;\n        if (node.next != null) {\n            // 跨父连接：自己的右孩子，连隔壁父亲的左孩子。\n            node.right.next = node.next.left;\n        }\n        link(node.left);\n        link(node.right);\n    }\n}",
+          "method": "connect"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public Node connect(Node root) {\n        if (root == null) {\n            return null;\n        }\n        root.next = null;\n        Node levelStart = root;\n        // 叶子层已由上一层连好；没有下一层时停止。\n        while (levelStart.left != null) {\n            Node cur = levelStart;\n            while (cur != null) {\n                // 连同父兄弟，再连隔壁父亲的左孩子。\n                cur.left.next = cur.right;\n                cur.right.next = null;\n                if (cur.next != null) {\n                    cur.right.next = cur.next.left;\n                }\n                // 本层 next 已经连好，可代替队列横向遍历。\n                cur = cur.next;\n            }\n            // 本层完成后，转到下一层的最左节点。\n            levelStart = levelStart.left;\n        }\n        return root;\n    }\n}",
+          "method": "connect"
+        }
+      ],
+      "expected_java": "List.of(List.of(1), List.of(2, 3), List.of(4, 5, 6, 7))"
+    },
+    {
+      "id": 117,
+      "title": "填充每个节点的下一个右侧节点指针 II",
+      "english": "Populating Next Right Pointers In Each Node II",
+      "slug": "0117-populating-next-right-pointers-in-each-node-ii",
+      "section": "3.11",
+      "java_file": "src/main/java/leetcode/binarytree/LC0117PopulatingNextRightPointersInEachNodeII.java",
+      "className": "LC0117PopulatingNextRightPointersInEachNodeII",
+      "input": "root = [1, 2, 3, 4, null, null, 5]",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public Node connect(Node root) {\n        link(root, 0, new ArrayList<>());\n        return root;\n    }\n\n    // ① previous[depth] 记住本层刚访问的节点，便于连到当前。\n    private void link(Node node, int depth, List<Node> previous) {\n        // ② 空位置略过，不加入 next 链。\n        if (node == null) {\n            return;\n        }\n        // ③ 先清空旧 next；新层登记首节点，已有层把前一个节点连过来。\n        node.next = null;\n        if (depth == previous.size()) {\n            previous.add(node);\n        } else {\n            previous.get(depth).next = node;\n            previous.set(depth, node);\n        }\n        // 先左后右，使同一层节点按从左到右到达。\n        link(node.left, depth + 1, previous);\n        link(node.right, depth + 1, previous);\n    }\n}",
+          "method": "connect"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public Node connect(Node root) {\n        if (root == null) {\n            return null;\n        }\n        root.next = null;\n        Node levelStart = root;\n        while (levelStart != null) {\n            // dummy 不进原树，只作为下一层链表的虚拟头。\n            Node dummy = new Node(0);\n            Node tail = dummy;\n            for (Node node = levelStart; node != null; node = node.next) {\n                if (node.left != null) {\n                    // 把非空孩子依次接到链尾，空缺自然被跳过。\n                    tail.next = node.left;\n                    tail = tail.next;\n                }\n                if (node.right != null) {\n                    tail.next = node.right;\n                    tail = tail.next;\n                }\n            }\n            // 最后节点收尾，避免保留旧 next。\n            tail.next = null;\n            // dummy.next 就是下一层首节点，没有孩子时为 null。\n            levelStart = dummy.next;\n        }\n        return root;\n    }\n}",
+          "method": "connect"
+        }
+      ],
+      "expected_java": "List.of(List.of(1), List.of(2, 3), List.of(4, 5))"
+    },
+    {
+      "id": 226,
+      "title": "翻转二叉树",
+      "english": "Invert Binary Tree",
+      "slug": "0226-invert-binary-tree",
+      "section": "3.12",
+      "java_file": "src/main/java/leetcode/binarytree/LC0226InvertBinaryTree.java",
+      "className": "LC0226InvertBinaryTree",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回当前子树翻转后的根；操作直接修改原节点。\n    public TreeNode invertTree(TreeNode root) {\n        // ② 空树翻转后仍为空。\n        if (root == null) {\n            return null;\n        }\n        // ③ 交换两侧，再递归翻转交换后的孩子；当前根仍是 root。\n        TreeNode temporary = root.left;\n        root.left = root.right;\n        root.right = temporary;\n        invertTree(root.left);\n        invertTree(root.right);\n        return root;\n    }\n}",
+          "method": "invertTree"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode invertTree(TreeNode root) {\n        if (root == null) {\n            return null;\n        }\n        Queue<TreeNode> queue = new ArrayDeque<>();\n        queue.offer(root);\n        while (!queue.isEmpty()) {\n            TreeNode node = queue.poll();\n            // 每个节点只交换一次，所有局部交换组成整棵镜像。\n            TreeNode temporary = node.left;\n            node.left = node.right;\n            node.right = temporary;\n            if (node.left != null) {\n                queue.offer(node.left);\n            }\n            if (node.right != null) {\n                queue.offer(node.right);\n            }\n        }\n        return root;\n    }\n}",
+          "method": "invertTree"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(TreeSupport.fromLevelOrder(4, 6, 2, 7, 5, 3, 1))"
+    },
+    {
+      "id": 101,
+      "title": "对称二叉树",
+      "english": "Symmetric Tree",
+      "slug": "0101-symmetric-tree",
+      "section": "3.13",
+      "java_file": "src/main/java/leetcode/binarytree/LC0101SymmetricTree.java",
+      "className": "LC0101SymmetricTree",
+      "input": "root = [1, 2, 2, 3, 4, 4, 3]",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public boolean isSymmetric(TreeNode root) {\n        if (root == null) {\n            return true;\n        }\n        return mirror(root.left, root.right);\n    }\n\n    // ① 两个参数是待比较的子树根；返回它们是否镜像。\n    private boolean mirror(TreeNode left, TreeNode right) {\n        // ② 两边都空才匹配；只有一边空说明结构不对称。\n        if (left == null || right == null) {\n            return left == right;\n        }\n        // ③ 值相同后，再同时检查外侧和内侧的镜像关系。\n        if (left.val != right.val) {\n            return false;\n        }\n        // 外侧对外侧、内侧对内侧；两组都匹配才是镜像。\n        return mirror(left.left, right.right)\n                && mirror(left.right, right.left);\n    }\n}",
+          "method": "isSymmetric"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public boolean isSymmetric(TreeNode root) {\n        if (root == null) {\n            return true;\n        }\n        // 队列里保存节点对；数组可以保留 null，空结构也要比较。\n        Queue<TreeNode[]> queue = new ArrayDeque<>();\n        queue.offer(new TreeNode[] {root.left, root.right});\n        while (!queue.isEmpty()) {\n            TreeNode[] pair = queue.poll();\n            TreeNode left = pair[0];\n            TreeNode right = pair[1];\n            // 两空匹配；一空说明结构不对称，直接失败。\n            if (left == null || right == null) {\n                if (left != right) {\n                    return false;\n                }\n                continue;\n            }\n            if (left.val != right.val) {\n                return false;\n            }\n            // 按镜像配对：外侧对外侧，内侧对内侧。\n            queue.offer(new TreeNode[] {left.left, right.right});\n            queue.offer(new TreeNode[] {left.right, right.left});\n        }\n        return true;\n    }\n}",
+          "method": "isSymmetric"
+        }
+      ],
+      "expected_java": "true"
+    },
+    {
+      "id": 104,
+      "title": "二叉树的最大深度",
+      "english": "Maximum Depth Of Binary Tree",
+      "slug": "0104-maximum-depth-of-binary-tree",
+      "section": "3.14",
+      "java_file": "src/main/java/leetcode/binarytree/LC0104MaximumDepthOfBinaryTree.java",
+      "className": "LC0104MaximumDepthOfBinaryTree",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归：后序返回高度",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回当前子树的高度，不是当前节点距离根的深度。\n    public int maxDepth(TreeNode root) {\n        // ② 空树有 0 层；这样叶子才能由 max(0, 0) + 1 得到 1。\n        if (root == null) {\n            return 0;\n        }\n        // ③ 父高度依赖孩子：先拿左右高度，再取较大值加自己一层。\n        int leftHeight = maxDepth(root.left);\n        int rightHeight = maxDepth(root.right);\n        return Math.max(leftHeight, rightHeight) + 1;\n    }\n}",
+          "method": "maxDepth"
+        },
+        {
+          "label": "方法2：递归：前序传递深度",
+          "className": "SolutionDepth",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private int maximum;\n\n    public int maxDepth(TreeNode root) {\n        // 每次调用重新统计；根从第 1 层开始。\n        maximum = 0;\n        traversal(root, 1);\n        return maximum;\n    }\n\n    // ① depth 是从根走到当前节点的层数，maximum 保存全树最大值。\n    private void traversal(TreeNode node, int depth) {\n        // ② 空位置不算一层，直接返回。\n        if (node == null) {\n            return;\n        }\n        // ③ 先用当前深度更新最大值，再给孩子传 depth + 1。\n        maximum = Math.max(maximum, depth);\n        traversal(node.left, depth + 1);\n        traversal(node.right, depth + 1);\n    }\n}",
+          "method": "maxDepth"
+        },
+        {
+          "label": "方法3：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public int maxDepth(TreeNode root) {\n        if (root == null) {\n            return 0;\n        }\n        Queue<TreeNode> queue = new ArrayDeque<>();\n        queue.offer(root);\n        int depth = 0;\n        while (!queue.isEmpty()) {\n            // 先固定本层数量；本轮新入队的孩子留到下一层处理。\n            int levelSize = queue.size();\n            // 每处理一轮就是一层；层数即最大深度。\n            depth++;\n            for (int i = 0; i < levelSize; i++) {\n                TreeNode node = queue.poll();\n                if (node.left != null) {\n                    queue.offer(node.left);\n                }\n                if (node.right != null) {\n                    queue.offer(node.right);\n                }\n            }\n        }\n        return depth;\n    }\n}",
+          "method": "maxDepth"
+        }
+      ],
+      "expected_java": "3"
+    },
+    {
+      "id": 559,
+      "title": "N 叉树的最大深度（关联补充）",
+      "english": "Maximum Depth Of NAry Tree",
+      "slug": "0559-maximum-depth-of-n-ary-tree",
+      "section": "3.15",
+      "java_file": "src/main/java/leetcode/binarytree/LC0559MaximumDepthOfNAryTree.java",
+      "className": "LC0559MaximumDepthOfNAryTree",
+      "input": "N 叉树：1 的孩子为 3、2、4；3 的孩子为 5、6",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回当前 N 叉子树高度，供父节点选最高的孩子。\n    public int maxDepth(Node root) {\n        // ② 空树高度为 0。\n        if (root == null) {\n            return 0;\n        }\n        // ③ 所有孩子取最大高度；没有孩子时保留 0，再加自己一层。\n        int childHeight = 0;\n        if (root.children != null) {\n            for (Node child : root.children) {\n                childHeight = Math.max(childHeight, maxDepth(child));\n            }\n        }\n        return childHeight + 1;\n    }\n}",
+          "method": "maxDepth"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public int maxDepth(Node root) {\n        if (root == null) {\n            return 0;\n        }\n        Queue<Node> queue = new ArrayDeque<>();\n        queue.offer(root);\n        int depth = 0;\n        while (!queue.isEmpty()) {\n            // 先固定本层数量；本轮新入队的孩子留到下一层处理。\n            int levelSize = queue.size();\n            // 每轮完整处理一层，统计总层数。\n            depth++;\n            for (int i = 0; i < levelSize; i++) {\n                Node node = queue.poll();\n                if (node.children != null) {\n                    for (Node child : node.children) {\n                        if (child != null) {\n                            queue.offer(child);\n                        }\n                    }\n                }\n            }\n        }\n        return depth;\n    }\n}",
+          "method": "maxDepth"
+        }
+      ],
+      "expected_java": "3"
+    },
+    {
+      "id": 111,
+      "title": "二叉树的最小深度",
+      "english": "Minimum Depth Of Binary Tree",
+      "slug": "0111-minimum-depth-of-binary-tree",
+      "section": "3.16",
+      "java_file": "src/main/java/leetcode/binarytree/LC0111MinimumDepthOfBinaryTree.java",
+      "className": "LC0111MinimumDepthOfBinaryTree",
+      "input": "root = [1, null, 2]",
+      "test_source": "飞书原文 4.4 的最小反例",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回从当前根到最近叶子的节点数。\n    public int minDepth(TreeNode root) {\n        // ② 空树为 0，但空孩子不能当作可走的叶子路径。\n        if (root == null) {\n            return 0;\n        }\n        // ③ 单孩子只能走存在的一边；两边都在才取 min，最后加自己。\n        if (root.left == null) {\n            return minDepth(root.right) + 1;\n        }\n        if (root.right == null) {\n            return minDepth(root.left) + 1;\n        }\n        int leftDepth = minDepth(root.left);\n        int rightDepth = minDepth(root.right);\n        return Math.min(leftDepth, rightDepth) + 1;\n    }\n}",
+          "method": "minDepth"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public int minDepth(TreeNode root) {\n        if (root == null) {\n            return 0;\n        }\n        Queue<TreeNode> queue = new ArrayDeque<>();\n        queue.offer(root);\n        int depth = 1;\n        while (!queue.isEmpty()) {\n            // 先固定本层数量；本轮新入队的孩子留到下一层处理。\n            int levelSize = queue.size();\n            for (int i = 0; i < levelSize; i++) {\n                TreeNode node = queue.poll();\n                // BFS 从浅到深；第一个叶子就给出最短根到叶路径。\n                if (node.left == null && node.right == null) {\n                    return depth;\n                }\n                if (node.left != null) {\n                    queue.offer(node.left);\n                }\n                if (node.right != null) {\n                    queue.offer(node.right);\n                }\n            }\n            depth++;\n        }\n        return depth;\n    }\n}",
+          "method": "minDepth"
+        }
+      ],
+      "expected_java": "2"
+    },
+    {
+      "id": 222,
+      "title": "完全二叉树的节点个数",
+      "english": "Count Complete Tree Nodes",
+      "slug": "0222-count-complete-tree-nodes",
+      "section": "3.17",
+      "java_file": "src/main/java/leetcode/binarytree/LC0222CountCompleteTreeNodes.java",
+      "className": "LC0222CountCompleteTreeNodes",
+      "input": "root = [1, 2, 3, 4, 5, 6]",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回当前完全子树的节点总数。\n    public int countNodes(TreeNode root) {\n        // ② 空树没有节点，返回 0。\n        if (root == null) {\n            return 0;\n        }\n        // ③ 先看是否整棵满；能用公式就直接算，否则递归左右再加自己。\n        int leftHeight = leftHeight(root);\n        int rightHeight = 0;\n        TreeNode cur = root;\n        while (cur != null) {\n            rightHeight++;\n            cur = cur.right;\n        }\n        if (leftHeight == rightHeight) {\n            // 完全树的两端同高，才能判定整棵满；h 层共 2^h - 1 个节点。\n            return (int) ((1L << leftHeight) - 1);\n        }\n        return countNodes(root.left) + countNodes(root.right) + 1;\n    }\n\n    private int leftHeight(TreeNode node) {\n        int height = 0;\n        while (node != null) {\n            height++;\n            node = node.left;\n        }\n        return height;\n    }\n}",
+          "method": "countNodes"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private int leftHeight(TreeNode node) {\n        int height = 0;\n        while (node != null) {\n            height++;\n            node = node.left;\n        }\n        return height;\n    }\n\n    public int countNodes(TreeNode root) {\n        long count = 0;\n        TreeNode cur = root;\n        while (cur != null) {\n            // 比较的是左右子树的左链高度，用完全树性质确定哪侧满。\n            int leftHeight = leftHeight(cur.left);\n            int rightHeight = leftHeight(cur.right);\n            if (leftHeight == rightHeight) {\n                // 左子树满：左树节点数 + 当前根 = 2^leftHeight。\n                count += 1L << leftHeight;\n                cur = cur.right;\n            } else {\n                // 右子树满且矮一层，数掉它和当前根。\n                count += 1L << rightHeight;\n                cur = cur.left;\n            }\n        }\n        return (int) count;\n    }\n}",
+          "method": "countNodes"
+        }
+      ],
+      "expected_java": "6"
+    },
+    {
+      "id": 110,
+      "title": "平衡二叉树",
+      "english": "Balanced Binary Tree",
+      "slug": "0110-balanced-binary-tree",
+      "section": "3.18",
+      "java_file": "src/main/java/leetcode/binarytree/LC0110BalancedBinaryTree.java",
+      "className": "LC0110BalancedBinaryTree",
+      "input": "root = [1, 2, 3, 4, null, null, null, 5]",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public boolean isBalanced(TreeNode root) {\n        return height(root) != -1;\n    }\n\n    // ① 平衡时返回高度，不平衡时返回 -1；一次递归同时回答两件事。\n    private int height(TreeNode node) {\n        // ② 空树高度为 0，并且平衡。\n        if (node == null) {\n            return 0;\n        }\n        // ③ 先拿孩子结果；发现失衡就向上传 -1，否则合成当前高度。\n        int leftHeight = height(node.left);\n        // 孩子已失衡，父节点也必然失衡，无需再算另一边。\n        if (leftHeight == -1) {\n            return -1;\n        }\n        int rightHeight = height(node.right);\n        if (rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) {\n            return -1;\n        }\n        return Math.max(leftHeight, rightHeight) + 1;\n    }\n}",
+          "method": "isBalanced"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public boolean isBalanced(TreeNode root) {\n        // 递归用返回值传高度；这里用 Map 存已完成子树的高度。\n        Map<TreeNode, Integer> heights = new HashMap<>();\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        TreeNode cur = root;\n        TreeNode lastVisited = null;\n        while (cur != null || !stack.isEmpty()) {\n            if (cur != null) {\n                stack.push(cur);\n                cur = cur.left;\n            } else {\n                TreeNode node = stack.peek();\n                // 右树未完成先处理右树；两边完成后才合成当前高度。\n                if (node.right != null && node.right != lastVisited) {\n                    cur = node.right;\n                } else {\n                    // 此时两个孩子已处理完，空孩子默认高度 0。\n                    int leftHeight = heights.getOrDefault(node.left, 0);\n                    int rightHeight = heights.getOrDefault(node.right, 0);\n                    if (Math.abs(leftHeight - rightHeight) > 1) {\n                        return false;\n                    }\n                    heights.put(node, Math.max(leftHeight, rightHeight) + 1);\n                    lastVisited = stack.pop();\n                }\n            }\n        }\n        return true;\n    }\n}",
+          "method": "isBalanced"
+        }
+      ],
+      "expected_java": "false"
+    },
+    {
+      "id": 257,
+      "title": "二叉树的所有路径",
+      "english": "Binary Tree Paths",
+      "slug": "0257-binary-tree-paths",
+      "section": "3.19",
+      "java_file": "src/main/java/leetcode/binarytree/LC0257BinaryTreePaths.java",
+      "className": "LC0257BinaryTreePaths",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<String> binaryTreePaths(TreeNode root) {\n        List<String> result = new ArrayList<>();\n        traversal(root, new StringBuilder(), result);\n        return result;\n    }\n\n    // ① path 是从根走到当前节点前的共享路径，result 保存完整答案。\n    private void traversal(TreeNode node, StringBuilder path, List<String> result) {\n        // ② 空节点没有值可追加，直接返回。\n        if (node == null) {\n            return;\n        }\n        // ③ 先记旧长度、加自己；孩子结束后恢复，兄弟分支才不会串路径。\n        int oldLength = path.length();\n        if (oldLength > 0) {\n            path.append(\"->\");\n        }\n        path.append(node.val);\n        if (node.left == null && node.right == null) {\n            // 到叶子才是一条完整路径；toString 保存独立结果。\n            result.add(path.toString());\n        } else {\n            traversal(node.left, path, result);\n            traversal(node.right, path, result);\n        }\n        // 回到进入前的父路径，防止左分支内容混入右分支。\n        path.setLength(oldLength);\n    }\n}",
+          "method": "binaryTreePaths"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private static class State {\n        TreeNode node;\n        // 每个栈状态带独立字符串路径，所以不需要共享路径的撤销。\n        String path;\n\n        State(TreeNode node, String path) {\n            this.node = node;\n            this.path = path;\n        }\n    }\n\n    public List<String> binaryTreePaths(TreeNode root) {\n        List<String> result = new ArrayList<>();\n        if (root == null) {\n            return result;\n        }\n        Deque<State> stack = new ArrayDeque<>();\n        stack.push(new State(root, String.valueOf(root.val)));\n        while (!stack.isEmpty()) {\n            State state = stack.pop();\n            TreeNode node = state.node;\n            // 到叶子才收集完整的根到叶路径。\n            if (node.left == null && node.right == null) {\n                result.add(state.path);\n            }\n            if (node.right != null) {\n                String nextPath = state.path + \"->\" + node.right.val;\n                stack.push(new State(node.right, nextPath));\n            }\n            if (node.left != null) {\n                String nextPath = state.path + \"->\" + node.left.val;\n                stack.push(new State(node.left, nextPath));\n            }\n        }\n        return result;\n    }\n}",
+          "method": "binaryTreePaths"
+        }
+      ],
+      "expected_java": "List.of(\"4->2->1\", \"4->2->3\", \"4->6->5\", \"4->6->7\")"
+    },
+    {
+      "id": 404,
+      "title": "左叶子之和",
+      "english": "Sum Of Left Leaves",
+      "slug": "0404-sum-of-left-leaves",
+      "section": "3.20",
+      "java_file": "src/main/java/leetcode/binarytree/LC0404SumOfLeftLeaves.java",
+      "className": "LC0404SumOfLeftLeaves",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回当前子树内部所有左叶子的和，不把当前根自动算进去。\n    public int sumOfLeftLeaves(TreeNode root) {\n        // ② 空树贡献为 0。\n        if (root == null) {\n            return 0;\n        }\n        // ③ 从父节点认出左叶子；不是叶子就继续找，再加右树内部贡献。\n        int leftSum;\n        if (isLeaf(root.left)) {\n            leftSum = root.left.val;\n        } else {\n            leftSum = sumOfLeftLeaves(root.left);\n        }\n        // 右孩子本身不计入，但右子树内部仍可能有左叶子。\n        return leftSum + sumOfLeftLeaves(root.right);\n    }\n\n    private boolean isLeaf(TreeNode node) {\n        return node != null && node.left == null && node.right == null;\n    }\n}",
+          "method": "sumOfLeftLeaves"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private boolean isLeaf(TreeNode node) {\n        return node != null && node.left == null && node.right == null;\n    }\n\n    public int sumOfLeftLeaves(TreeNode root) {\n        if (root == null) {\n            return 0;\n        }\n        int sum = 0;\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        stack.push(root);\n        while (!stack.isEmpty()) {\n            TreeNode node = stack.pop();\n            // 从父节点检查左孩子，必须同时满足“在左边”和“是叶子”。\n            if (isLeaf(node.left)) {\n                sum += node.left.val;\n            }\n            if (node.right != null) {\n                stack.push(node.right);\n            }\n            if (node.left != null) {\n                stack.push(node.left);\n            }\n        }\n        return sum;\n    }\n}",
+          "method": "sumOfLeftLeaves"
+        }
+      ],
+      "expected_java": "6"
+    },
+    {
+      "id": 513,
+      "title": "找树左下角的值",
+      "english": "Find Bottom Left Tree Value",
+      "slug": "0513-find-bottom-left-tree-value",
+      "section": "3.21",
+      "java_file": "src/main/java/leetcode/binarytree/LC0513FindBottomLeftTreeValue.java",
+      "className": "LC0513FindBottomLeftTreeValue",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private int deepest;\n\n    private int answer;\n\n    public int findBottomLeftValue(TreeNode root) {\n        deepest = -1;\n        answer = root.val;\n        traversal(root, 0);\n        return answer;\n    }\n\n    // ① depth 是当前层；deepest 和 answer 记录已见最深层及其首节点。\n    private void traversal(TreeNode node, int depth) {\n        // ② 空节点不更新答案。\n        if (node == null) {\n            return;\n        }\n        // ③ 先左后右，只在更深时更新；同层后来的节点不能覆盖最左值。\n        if (depth > deepest) {\n            deepest = depth;\n            answer = node.val;\n        }\n        traversal(node.left, depth + 1);\n        traversal(node.right, depth + 1);\n    }\n}",
+          "method": "findBottomLeftValue"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public int findBottomLeftValue(TreeNode root) {\n        Queue<TreeNode> queue = new ArrayDeque<>();\n        queue.offer(root);\n        int result = root.val;\n        while (!queue.isEmpty()) {\n            // 先固定本层数量；本轮新入队的孩子留到下一层处理。\n            int levelSize = queue.size();\n            // 每层开始时队首是本层最左节点；更深一层会覆盖答案。\n            result = queue.peek().val;\n            for (int i = 0; i < levelSize; i++) {\n                TreeNode node = queue.poll();\n                if (node.left != null) {\n                    queue.offer(node.left);\n                }\n                if (node.right != null) {\n                    queue.offer(node.right);\n                }\n            }\n        }\n        return result;\n    }\n}",
+          "method": "findBottomLeftValue"
+        }
+      ],
+      "expected_java": "1"
+    },
+    {
+      "id": 112,
+      "title": "路径总和",
+      "english": "Path Sum",
+      "slug": "0112-path-sum",
+      "section": "3.22",
+      "java_file": "src/main/java/leetcode/binarytree/LC0112PathSum.java",
+      "className": "LC0112PathSum",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7], targetSum = 7",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public boolean hasPathSum(TreeNode root, int targetSum) {\n        return exists(root, targetSum);\n    }\n\n    // ① remaining 是当前节点到叶子还需凑出的和，尚未扣当前值。\n    private boolean exists(TreeNode node, long remaining) {\n        // ② 空树没有根到叶路径，所以返回 false。\n        if (node == null) {\n            return false;\n        }\n        // ③ 到叶子才判成功；非叶子扣掉自己，把剩余任务交给任一孩子。\n        if (node.left == null && node.right == null) {\n            return remaining == node.val;\n        }\n        // 数字按值传递，每个孩子拿相同余量，不需要手动恢复。\n        long nextRemaining = remaining - node.val;\n        // 任一侧找到即可；|| 会在左侧成功时停止搜索。\n        return exists(node.left, nextRemaining) || exists(node.right, nextRemaining);\n    }\n}",
+          "method": "hasPathSum"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private static class State {\n        TreeNode node;\n        // 保存到达当前节点之前的余量，弹出时再扣当前值。\n        long remaining;\n\n        State(TreeNode node, long remaining) {\n            this.node = node;\n            this.remaining = remaining;\n        }\n    }\n\n    public boolean hasPathSum(TreeNode root, int targetSum) {\n        if (root == null) {\n            return false;\n        }\n        Deque<State> stack = new ArrayDeque<>();\n        stack.push(new State(root, targetSum));\n        while (!stack.isEmpty()) {\n            State state = stack.pop();\n            TreeNode node = state.node;\n            long remaining = state.remaining - node.val;\n            // 扣完且到叶子才成功；非叶子余量为 0 也不能提前返回。\n            if (node.left == null && node.right == null && remaining == 0) {\n                return true;\n            }\n            if (node.right != null) {\n                stack.push(new State(node.right, remaining));\n            }\n            if (node.left != null) {\n                stack.push(new State(node.left, remaining));\n            }\n        }\n        return false;\n    }\n}",
+          "method": "hasPathSum"
+        }
+      ],
+      "expected_java": "true"
+    },
+    {
+      "id": 113,
+      "title": "路径总和 II（关联补充）",
+      "english": "Path Sum II",
+      "slug": "0113-path-sum-ii",
+      "section": "3.23",
+      "java_file": "src/main/java/leetcode/binarytree/LC0113PathSumII.java",
+      "className": "LC0113PathSumII",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7], targetSum = 7",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {\n        List<List<Integer>> result = new ArrayList<>();\n        traversal(root, targetSum, new ArrayList<>(), result);\n        return result;\n    }\n\n    // ① remaining 尚未扣当前值；path 是共享的当前路径，结果要复制。\n    private void traversal(TreeNode node, long remaining,\n            List<Integer> path, List<List<Integer>> result) {\n        // ② 空节点没有路径可继续，直接返回。\n        if (node == null) {\n            return;\n        }\n        // ③ 加自己、扣目标，到合格叶子存快照；两边搜索完后撤销当前节点。\n        path.add(node.val);\n        long nextRemaining = remaining - node.val;\n        if (node.left == null && node.right == null && nextRemaining == 0) {\n            // 保存副本；直接放 path，后续撤销会把已有答案改掉。\n            result.add(new ArrayList<>(path));\n        }\n        traversal(node.left, nextRemaining, path, result);\n        traversal(node.right, nextRemaining, path, result);\n        // path 被各层共享，返回前删掉自己，恢复父路径。\n        path.remove(path.size() - 1);\n    }\n}",
+          "method": "pathSum"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private static class Frame {\n        TreeNode node;\n        long remaining;\n        // false 模拟进入递归，true 模拟返回时撤销路径。\n        boolean exit;\n\n        Frame(TreeNode node, long remaining, boolean exit) {\n            this.node = node;\n            this.remaining = remaining;\n            this.exit = exit;\n        }\n    }\n\n    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {\n        List<List<Integer>> result = new ArrayList<>();\n        if (root == null) {\n            return result;\n        }\n        List<Integer> path = new ArrayList<>();\n        Deque<Frame> stack = new ArrayDeque<>();\n        stack.push(new Frame(root, targetSum, false));\n        while (!stack.isEmpty()) {\n            Frame frame = stack.pop();\n            // 退出时移除当前节点，恢复父路径后再处理兄弟分支。\n            if (frame.exit) {\n                path.remove(path.size() - 1);\n                continue;\n            }\n            TreeNode node = frame.node;\n            path.add(node.val);\n            long remaining = frame.remaining - node.val;\n            if (node.left == null && node.right == null && remaining == 0) {\n                // 答案保存副本，避免退出事件撤销共享 path 时破坏结果。\n                result.add(new ArrayList<>(path));\n            }\n            // 退出事件最后执行，确保左右子树处理期间父路径一直存在。\n            stack.push(new Frame(node, remaining, true));\n            if (node.right != null) {\n                stack.push(new Frame(node.right, remaining, false));\n            }\n            if (node.left != null) {\n                stack.push(new Frame(node.left, remaining, false));\n            }\n        }\n        return result;\n    }\n}",
+          "method": "pathSum"
+        }
+      ],
+      "expected_java": "List.of(List.of(4, 2, 1))"
+    },
+    {
+      "id": 106,
+      "title": "从中序与后序遍历序列构造二叉树",
+      "english": "Construct Binary Tree From Inorder And Postorder Traversal",
+      "slug": "0106-construct-binary-tree-from-inorder-and-postorder-traversal",
+      "section": "3.24",
+      "java_file": "src/main/java/leetcode/binarytree/LC0106ConstructBinaryTreeFromInorderAndPostorderTraversal.java",
+      "className": "LC0106ConstructBinaryTreeFromInorderAndPostorderTraversal",
+      "input": "inorder = [1, 2, 3, 4, 5, 6, 7], postorder = [1, 3, 2, 5, 7, 6, 4]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode buildTree(int[] inorder, int[] postorder) {\n        Map<Integer, Integer> positions = new HashMap<>();\n        for (int i = 0; i < inorder.length; i++) {\n            positions.put(inorder[i], i);\n        }\n        return build(postorder, 0, postorder.length, 0, inorder.length, positions);\n    }\n\n    // ① 两组 [left, right) 区间描述同一棵子树；返回建好的根。\n    private TreeNode build(int[] postorder, int postLeft, int postRight,\n            int inLeft, int inRight, Map<Integer, Integer> positions) {\n        // ② 空区间没有节点，返回 null 供父节点挂接。\n        if (postLeft == postRight) {\n            return null;\n        }\n        // ③ 后序末尾是根；中序定位根后，用左侧节点数切分后序。\n        int rootValue = postorder[postRight - 1];\n        int pivot = positions.get(rootValue);\n        int leftSize = pivot - inLeft;\n        TreeNode root = new TreeNode(rootValue);\n        // 后序先左后右再根；左区间取前 leftSize 个，右区间排除末尾根。\n        root.left = build(postorder, postLeft, postLeft + leftSize,\n                inLeft, pivot, positions);\n        root.right = build(postorder, postLeft + leftSize, postRight - 1,\n                pivot + 1, inRight, positions);\n        return root;\n    }\n}",
+          "method": "buildTree"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode buildTree(int[] inorder, int[] postorder) {\n        if (postorder.length == 0) {\n            return null;\n        }\n        TreeNode root = new TreeNode(postorder[postorder.length - 1]);\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        stack.push(root);\n        // 倒着读后序为根→右→左；倒着读中序为右→根→左。\n        int inorderIndex = inorder.length - 1;\n        for (int i = postorder.length - 2; i >= 0; i--) {\n            TreeNode parent = stack.peek();\n            TreeNode child = new TreeNode(postorder[i]);\n            // 还没到当前根的中序位置，说明继续构造右侧。\n            if (parent.val != inorder[inorderIndex]) {\n                parent.right = child;\n            } else {\n                while (!stack.isEmpty()\n                        && stack.peek().val == inorder[inorderIndex]) {\n                    parent = stack.pop();\n                    inorderIndex--;\n                }\n                // 匹配中序后弹回祖先，下一节点接最后弹出祖先的左侧。\n                parent.left = child;\n            }\n            stack.push(child);\n        }\n        return root;\n    }\n}",
+          "method": "buildTree"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(TreeSupport.fromLevelOrder(4, 2, 6, 1, 3, 5, 7))"
+    },
+    {
+      "id": 105,
+      "title": "从前序与中序遍历序列构造二叉树（关联补充）",
+      "english": "Construct Binary Tree From Preorder And Inorder Traversal",
+      "slug": "0105-construct-binary-tree-from-preorder-and-inorder-traversal",
+      "section": "3.25",
+      "java_file": "src/main/java/leetcode/binarytree/LC0105ConstructBinaryTreeFromPreorderAndInorderTraversal.java",
+      "className": "LC0105ConstructBinaryTreeFromPreorderAndInorderTraversal",
+      "input": "preorder = [4, 2, 1, 3, 6, 5, 7], inorder = [1, 2, 3, 4, 5, 6, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode buildTree(int[] preorder, int[] inorder) {\n        Map<Integer, Integer> positions = new HashMap<>();\n        for (int i = 0; i < inorder.length; i++) {\n            positions.put(inorder[i], i);\n        }\n        return build(preorder, 0, 0, inorder.length, positions);\n    }\n\n    // ① preLeft 指向子树根；[inLeft, inRight) 圈定这棵子树的全部节点。\n    private TreeNode build(int[] preorder, int preLeft, int inLeft, int inRight,\n            Map<Integer, Integer> positions) {\n        // ② 中序区间为空，说明这棵子树为空。\n        if (inLeft == inRight) {\n            return null;\n        }\n        // ③ 前序起点是根；中序左侧数量决定两边的前序起点。\n        TreeNode root = new TreeNode(preorder[preLeft]);\n        int pivot = positions.get(root.val);\n        int leftSize = pivot - inLeft;\n        root.left = build(preorder, preLeft + 1, inLeft, pivot, positions);\n        // 跳过前序里的根和整棵左子树，才到右子树起点。\n        root.right = build(preorder, preLeft + leftSize + 1,\n                pivot + 1, inRight, positions);\n        return root;\n    }\n}",
+          "method": "buildTree"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode buildTree(int[] preorder, int[] inorder) {\n        if (preorder.length == 0) {\n            return null;\n        }\n        TreeNode root = new TreeNode(preorder[0]);\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        stack.push(root);\n        // 前序按根→左→右读入，中序用来判断何时从左侧返回。\n        int inorderIndex = 0;\n        for (int i = 1; i < preorder.length; i++) {\n            TreeNode parent = stack.peek();\n            TreeNode child = new TreeNode(preorder[i]);\n            // 还没匹配当前根的中序位置，继续往左构造。\n            if (parent.val != inorder[inorderIndex]) {\n                parent.left = child;\n            } else {\n                while (!stack.isEmpty()\n                        && stack.peek().val == inorder[inorderIndex]) {\n                    parent = stack.pop();\n                    inorderIndex++;\n                }\n                // 连续匹配并弹栈后，下一节点属于最后弹出祖先的右侧。\n                parent.right = child;\n            }\n            stack.push(child);\n        }\n        return root;\n    }\n}",
+          "method": "buildTree"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(TreeSupport.fromLevelOrder(4, 2, 6, 1, 3, 5, 7))"
+    },
+    {
+      "id": 654,
+      "title": "最大二叉树",
+      "english": "Maximum Binary Tree",
+      "slug": "0654-maximum-binary-tree",
+      "section": "3.26",
+      "java_file": "src/main/java/leetcode/binarytree/LC0654MaximumBinaryTree.java",
+      "className": "LC0654MaximumBinaryTree",
+      "input": "nums = [3, 2, 1, 6, 0, 5]",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode constructMaximumBinaryTree(int[] nums) {\n        return build(nums, 0, nums.length);\n    }\n\n    // ① 返回 nums[left, right) 构成的最大二叉树根。\n    private TreeNode build(int[] nums, int left, int right) {\n        // ② 空区间没有节点，返回 null。\n        if (left == right) {\n            return null;\n        }\n        // ③ 找区间最大值建根，再递归两侧；根下标不能重复进入子区间。\n        int maximumIndex = left;\n        for (int i = left + 1; i < right; i++) {\n            if (nums[i] > nums[maximumIndex]) {\n                maximumIndex = i;\n            }\n        }\n        TreeNode root = new TreeNode(nums[maximumIndex]);\n        root.left = build(nums, left, maximumIndex);\n        root.right = build(nums, maximumIndex + 1, right);\n        return root;\n    }\n}",
+          "method": "constructMaximumBinaryTree"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode constructMaximumBinaryTree(int[] nums) {\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        for (int value : nums) {\n            TreeNode node = new TreeNode(value);\n            // 新值更大，弹出的较小右链归入新节点左树；最后弹出者是这棵树的根。\n            while (!stack.isEmpty() && stack.peek().val < value) {\n                node.left = stack.pop();\n            }\n            if (!stack.isEmpty()) {\n                // 留下的栈顶更大且在左边，新节点成为它的右孩子。\n                stack.peek().right = node;\n            }\n            stack.push(node);\n        }\n        // 栈底是没有更大父节点的最大值，即整棵树的根。\n        return stack.peekLast();\n    }\n}",
+          "method": "constructMaximumBinaryTree"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(TreeSupport.fromLevelOrder(6, 3, 5, null, 2, 0, null, null, 1))"
+    },
+    {
+      "id": 617,
+      "title": "合并二叉树",
+      "english": "Merge Two Binary Trees",
+      "slug": "0617-merge-two-binary-trees",
+      "section": "3.27",
+      "java_file": "src/main/java/leetcode/binarytree/LC0617MergeTwoBinaryTrees.java",
+      "className": "LC0617MergeTwoBinaryTrees",
+      "input": "root1 = [1, 3, 2, 5], root2 = [2, 1, 3, null, 4, null, 7]",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 两个参数表示同一位置的子树；返回合并后的根。\n    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {\n        // ② 一边为空，直接复用另一边；两边都空自然返回 null。\n        if (root1 == null) {\n            return root2;\n        }\n        // 第二棵空，第一棵原样保留；这里不会新建独立副本。\n        if (root2 == null) {\n            return root1;\n        }\n        // ③ 两边都有才相加；孩子可能换根，必须接回两次递归的返回值。\n        root1.val += root2.val;\n        root1.left = mergeTrees(root1.left, root2.left);\n        root1.right = mergeTrees(root1.right, root2.right);\n        return root1;\n    }\n}",
+          "method": "mergeTrees"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {\n        if (root1 == null) {\n            return root2;\n        }\n        if (root2 == null) {\n            return root1;\n        }\n        Deque<TreeNode[]> stack = new ArrayDeque<>();\n        // 每对节点代表两棵树中的同一位置，值写回第一棵。\n        stack.push(new TreeNode[] {root1, root2});\n        while (!stack.isEmpty()) {\n            TreeNode[] pair = stack.pop();\n            TreeNode target = pair[0];\n            TreeNode source = pair[1];\n            target.val += source.val;\n            if (target.left == null) {\n                // 目标侧为空就直接复用来源侧；两边都有才继续成对处理。\n                target.left = source.left;\n            } else if (source.left != null) {\n                stack.push(new TreeNode[] {target.left, source.left});\n            }\n            if (target.right == null) {\n                target.right = source.right;\n            } else if (source.right != null) {\n                stack.push(new TreeNode[] {target.right, source.right});\n            }\n        }\n        return root1;\n    }\n}",
+          "method": "mergeTrees"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(TreeSupport.fromLevelOrder(3, 4, 5, 5, 4, null, 7))"
+    },
+    {
+      "id": 700,
+      "title": "二叉搜索树中的搜索",
+      "english": "Search In ABinary Search Tree",
+      "slug": "0700-search-in-a-binary-search-tree",
+      "section": "3.28",
+      "java_file": "src/main/java/leetcode/binarytree/LC0700SearchInABinarySearchTree.java",
+      "className": "LC0700SearchInABinarySearchTree",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7], val = 2",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回目标节点本身；没找到返回 null。\n    public TreeNode searchBST(TreeNode root, int val) {\n        // ② 空树表示没找到，值相等则已经命中，都无需继续。\n        if (root == null || root.val == val) {\n            return root;\n        }\n        // ③ BST 排除另一侧，只递归可能含目标的一边，并把结果返回。\n        if (val < root.val) {\n            return searchBST(root.left, val);\n        }\n        return searchBST(root.right, val);\n    }\n}",
+          "method": "searchBST"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode searchBST(TreeNode root, int val) {\n        TreeNode cur = root;\n        while (cur != null) {\n            if (cur.val == val) {\n                return cur;\n            }\n            // 比较大小后只走可能含目标的一侧，不必遍历另一边。\n            if (val < cur.val) {\n                cur = cur.left;\n            } else {\n                cur = cur.right;\n            }\n        }\n        return null;\n    }\n}",
+          "method": "searchBST"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(TreeSupport.fromLevelOrder(2, 1, 3))"
+    },
+    {
+      "id": 98,
+      "title": "验证二叉搜索树",
+      "english": "Validate Binary Search Tree",
+      "slug": "0098-validate-binary-search-tree",
+      "section": "3.29",
+      "java_file": "src/main/java/leetcode/binarytree/LC0098ValidateBinarySearchTree.java",
+      "className": "LC0098ValidateBinarySearchTree",
+      "input": "root = [10, null, 15, 6]",
+      "test_source": "飞书原文 4.4 的最小反例",
+      "variants": [
+        {
+          "label": "方法1：递归：中序比较前驱",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private TreeNode previous;\n\n    public boolean isValidBST(TreeNode root) {\n        // 每次入口重置，避免上次调用的前驱影响本次判断。\n        previous = null;\n        return validate(root);\n    }\n\n    // ① 检查当前子树；previous 保存整个中序过程的上一个节点。\n    private boolean validate(TreeNode node) {\n        // ② 空树不会破坏严格递增，返回 true。\n        if (node == null) {\n            return true;\n        }\n        // ③ 先左、再比当前与前驱、最后右；任一步失败就停止。\n        if (!validate(node.left)) {\n            return false;\n        }\n        // 必须严格递增；相等也不是本题的合法 BST。\n        if (previous != null && node.val <= previous.val) {\n            return false;\n        }\n        previous = node;\n        return validate(node.right);\n    }\n}",
+          "method": "isValidBST"
+        },
+        {
+          "label": "方法2：递归：传递上下界",
+          "className": "SolutionBounds",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public boolean isValidBST(TreeNode root) {\n        // 边界用 long，允许节点本身取 int 的最小或最大值。\n        return within(root, Long.MIN_VALUE, Long.MAX_VALUE);\n    }\n\n    // ① 当前子树所有值必须在 (lower, upper) 内，边界来自全部祖先。\n    private boolean within(TreeNode node, long lower, long upper) {\n        // ② 空树没有违反边界的节点，返回 true。\n        if (node == null) {\n            return true;\n        }\n        // ③ 先检查当前值；左边收紧上界，右边收紧下界。\n        if (node.val <= lower || node.val >= upper) {\n            return false;\n        }\n        return within(node.left, lower, node.val)\n                && within(node.right, node.val, upper);\n    }\n}",
+          "method": "isValidBST"
+        },
+        {
+          "label": "方法3：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public boolean isValidBST(TreeNode root) {\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        TreeNode cur = root;\n        TreeNode previous = null;\n        while (cur != null || !stack.isEmpty()) {\n            // 沿左链压栈，保存之后返回并处理中间节点的位置。\n            while (cur != null) {\n                stack.push(cur);\n                cur = cur.left;\n            }\n            // 中序轮到当前值；必须大于前驱，否则立即失败。\n            cur = stack.pop();\n            if (previous != null && cur.val <= previous.val) {\n                return false;\n            }\n            previous = cur;\n            cur = cur.right;\n        }\n        return true;\n    }\n}",
+          "method": "isValidBST"
+        }
+      ],
+      "expected_java": "false"
+    },
+    {
+      "id": 530,
+      "title": "二叉搜索树的最小绝对差",
+      "english": "Minimum Absolute Difference In BST",
+      "slug": "0530-minimum-absolute-difference-in-bst",
+      "section": "3.30",
+      "java_file": "src/main/java/leetcode/binarytree/LC0530MinimumAbsoluteDifferenceInBST.java",
+      "className": "LC0530MinimumAbsoluteDifferenceInBST",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private TreeNode previous;\n\n    private int minimum;\n\n    public int getMinimumDifference(TreeNode root) {\n        previous = null;\n        minimum = Integer.MAX_VALUE;\n        traversal(root);\n        return minimum;\n    }\n\n    // ① 中序访问当前子树；previous 和 minimum 保存相邻比较状态。\n    private void traversal(TreeNode node) {\n        // ② 空节点没有数值可比较。\n        if (node == null) {\n            return;\n        }\n        // ③ 先完成左边，当前才紧挨 previous；比较后更新前驱，再走右边。\n        traversal(node.left);\n        if (previous != null) {\n            minimum = Math.min(minimum, node.val - previous.val);\n        }\n        // 比较完成再更新，不能先覆盖前驱再求差。\n        previous = node;\n        traversal(node.right);\n    }\n}",
+          "method": "getMinimumDifference"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public int getMinimumDifference(TreeNode root) {\n        int result = Integer.MAX_VALUE;\n        TreeNode previous = null;\n        TreeNode cur = root;\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        while (cur != null || !stack.isEmpty()) {\n            // 沿左链压栈，保存之后返回并处理中间节点的位置。\n            while (cur != null) {\n                stack.push(cur);\n                cur = cur.left;\n            }\n            cur = stack.pop();\n            // 有序序列只需比较相邻值；第一个没有前驱。\n            if (previous != null) {\n                result = Math.min(result, cur.val - previous.val);\n            }\n            // 比较后再更新前驱，供下一个中序节点使用。\n            previous = cur;\n            cur = cur.right;\n        }\n        return result;\n    }\n}",
+          "method": "getMinimumDifference"
+        }
+      ],
+      "expected_java": "1"
+    },
+    {
+      "id": 501,
+      "title": "二叉搜索树中的众数",
+      "english": "Find Mode In Binary Search Tree",
+      "slug": "0501-find-mode-in-binary-search-tree",
+      "section": "3.31",
+      "java_file": "src/main/java/leetcode/binarytree/LC0501FindModeInBinarySearchTree.java",
+      "className": "LC0501FindModeInBinarySearchTree",
+      "input": "root = [2, 1, 2]",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private Integer previous;\n\n    private int count;\n\n    private int maximumCount;\n\n    private List<Integer> modes;\n\n    private void reset() {\n        previous = null;\n        count = 0;\n        maximumCount = 0;\n        modes = new ArrayList<>();\n    }\n\n    public int[] findMode(TreeNode root) {\n        // 新一次遍历必须清空上次调用留下的计数和答案。\n        reset();\n        traversal(root);\n        return toArray();\n    }\n\n    // ① 中序访问当前子树，连续计数和众数由共享字段维护。\n    private void traversal(TreeNode node) {\n        // ② 空节点不参与频次统计。\n        if (node == null) {\n            return;\n        }\n        // ③ 左→当前→右让相同值连续出现；record 只需统计连续段。\n        traversal(node.left);\n        record(node.val);\n        traversal(node.right);\n    }\n\n    private void record(int value) {\n        // 中序中相同值连续：相同就续段，不同就从 1 重新计数。\n        if (previous != null && previous == value) {\n            count++;\n        } else {\n            count = 1;\n        }\n        if (count > maximumCount) {\n            maximumCount = count;\n            // 出现更高频率，原来的候选都不再是众数。\n            modes.clear();\n            modes.add(value);\n        // 达到相同最高频率，当前值也应列入答案。\n        } else if (count == maximumCount) {\n            modes.add(value);\n        }\n        previous = value;\n    }\n\n    private int[] toArray() {\n        int[] result = new int[modes.size()];\n        for (int i = 0; i < modes.size(); i++) {\n            result[i] = modes.get(i);\n        }\n        return result;\n    }\n}",
+          "method": "findMode"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private Integer previous;\n\n    private int count;\n\n    private int maximumCount;\n\n    private List<Integer> modes;\n\n    private void reset() {\n        previous = null;\n        count = 0;\n        maximumCount = 0;\n        modes = new ArrayList<>();\n    }\n\n    private void record(int value) {\n        // 中序中相同值连续：相同就续段，不同就从 1 重新计数。\n        if (previous != null && previous == value) {\n            count++;\n        } else {\n            count = 1;\n        }\n        if (count > maximumCount) {\n            maximumCount = count;\n            // 出现更高频率，原来的候选都不再是众数。\n            modes.clear();\n            modes.add(value);\n        // 达到相同最高频率，当前值也应列入答案。\n        } else if (count == maximumCount) {\n            modes.add(value);\n        }\n        previous = value;\n    }\n\n    private int[] toArray() {\n        int[] result = new int[modes.size()];\n        for (int i = 0; i < modes.size(); i++) {\n            result[i] = modes.get(i);\n        }\n        return result;\n    }\n\n    public int[] findMode(TreeNode root) {\n        // 入口重置状态；中序使相同值连续，record 负责统计。\n        reset();\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        TreeNode cur = root;\n        while (cur != null || !stack.isEmpty()) {\n            // 沿左链压栈，保存之后返回并处理中间节点的位置。\n            while (cur != null) {\n                stack.push(cur);\n                cur = cur.left;\n            }\n            cur = stack.pop();\n            record(cur.val);\n            cur = cur.right;\n        }\n        return toArray();\n    }\n}",
+          "method": "findMode"
+        }
+      ],
+      "expected_java": "new int[] {2}"
+    },
+    {
+      "id": 236,
+      "title": "二叉树的最近公共祖先",
+      "english": "Lowest Common Ancestor Of ABinary Tree",
+      "slug": "0236-lowest-common-ancestor-of-a-binary-tree",
+      "section": "3.32",
+      "java_file": "src/main/java/leetcode/binarytree/LC0236LowestCommonAncestorOfABinaryTree.java",
+      "className": "LC0236LowestCommonAncestorOfABinaryTree",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7], p = 节点 1, q = 节点 3",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回本子树发现的目标，或已经确定的公共祖先；未发现返回 null。\n    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {\n        // ② 空返回 null；遇到 p/q 返回自己，因为目标也可以是祖先。\n        if (root == null || root == p || root == q) {\n            return root;\n        }\n        // ③ 先让左右报告；两边都有则在当前汇合，一边有则继续向上传。\n        TreeNode left = lowestCommonAncestor(root.left, p, q);\n        TreeNode right = lowestCommonAncestor(root.right, p, q);\n        // 左右各有目标（或已确定结果），它们在当前节点汇合。\n        if (left != null && right != null) {\n            return root;\n        }\n        if (left != null) {\n            return left;\n        }\n        return right;\n    }\n}",
+          "method": "lowestCommonAncestor"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode lowestCommonAncestor(TreeNode root,\n            TreeNode p, TreeNode q) {\n        if (root == null) {\n            return null;\n        }\n        // 先记录父节点，后面才能从目标向上走。\n        Map<TreeNode, TreeNode> parents = new HashMap<>();\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        parents.put(root, null);\n        stack.push(root);\n        while (!stack.isEmpty() && (!parents.containsKey(p) || !parents.containsKey(q))) {\n            TreeNode node = stack.pop();\n            if (node.left != null) {\n                parents.put(node.left, node);\n                stack.push(node.left);\n            }\n            if (node.right != null) {\n                parents.put(node.right, node);\n                stack.push(node.right);\n            }\n        }\n        if (!parents.containsKey(p) || !parents.containsKey(q)) {\n            return null;\n        }\n        // 保存 p 的整条祖先链，再让 q 向上找第一个交点。\n        Set<TreeNode> ancestors = new HashSet<>();\n        TreeNode cur = p;\n        while (cur != null) {\n            ancestors.add(cur);\n            cur = parents.get(cur);\n        }\n        cur = q;\n        // q 从下往上，第一个交点就是最近公共祖先。\n        while (!ancestors.contains(cur)) {\n            cur = parents.get(cur);\n        }\n        return cur;\n    }\n}",
+          "method": "lowestCommonAncestor"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(root.left)"
+    },
+    {
+      "id": 235,
+      "title": "二叉搜索树的最近公共祖先",
+      "english": "Lowest Common Ancestor Of ABinary Search Tree",
+      "slug": "0235-lowest-common-ancestor-of-a-binary-search-tree",
+      "section": "3.33",
+      "java_file": "src/main/java/leetcode/binarytree/LC0235LowestCommonAncestorOfABinarySearchTree.java",
+      "className": "LC0235LowestCommonAncestorOfABinarySearchTree",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7], p = 节点 1, q = 节点 3",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回当前子树中 p、q 的最近公共祖先，题目保证目标存在。\n    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {\n        // ② 空树没有可返回的祖先。\n        if (root == null) {\n            return null;\n        }\n        // ③ 两个目标同侧就继续走；分居两侧或命中当前时，当前就是祖先。\n        if (p.val < root.val && q.val < root.val) {\n            return lowestCommonAncestor(root.left, p, q);\n        }\n        if (p.val > root.val && q.val > root.val) {\n            return lowestCommonAncestor(root.right, p, q);\n        }\n        return root;\n    }\n}",
+          "method": "lowestCommonAncestor"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode lowestCommonAncestor(TreeNode root,\n            TreeNode p, TreeNode q) {\n        TreeNode cur = root;\n        while (cur != null) {\n            // 两目标在同侧就继续走；第一次分叉或命中就是公共祖先。\n            if (p.val < cur.val && q.val < cur.val) {\n                cur = cur.left;\n            } else if (p.val > cur.val && q.val > cur.val) {\n                cur = cur.right;\n            } else {\n                return cur;\n            }\n        }\n        return null;\n    }\n}",
+          "method": "lowestCommonAncestor"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(root.left)"
+    },
+    {
+      "id": 701,
+      "title": "二叉搜索树中的插入操作",
+      "english": "Insert Into ABinary Search Tree",
+      "slug": "0701-insert-into-a-binary-search-tree",
+      "section": "3.34",
+      "java_file": "src/main/java/leetcode/binarytree/LC0701InsertIntoABinarySearchTree.java",
+      "className": "LC0701InsertIntoABinarySearchTree",
+      "input": "root = [4, 2, 7, 1, 3], val = 5",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回插入后的子树根，父节点靠这个返回值接回孩子。\n    public TreeNode insertIntoBST(TreeNode root, int val) {\n        // ② 走到空位置就创建节点，它就是这一小棵树的新根。\n        if (root == null) {\n            return new TreeNode(val);\n        }\n        // ③ 按大小只改一侧；接回新根后，当前子树仍以 root 为根。\n        if (val < root.val) {\n            // 递归可能把空孩子变成新节点，必须用返回值接回。\n            root.left = insertIntoBST(root.left, val);\n        } else {\n            root.right = insertIntoBST(root.right, val);\n        }\n        return root;\n    }\n}",
+          "method": "insertIntoBST"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode insertIntoBST(TreeNode root, int val) {\n        if (root == null) {\n            return new TreeNode(val);\n        }\n        TreeNode cur = root;\n        while (true) {\n            if (val < cur.val) {\n                // 沿搜索方向找到空孩子，在那里挂上新节点即可。\n                if (cur.left == null) {\n                    cur.left = new TreeNode(val);\n                    break;\n                }\n                cur = cur.left;\n            } else {\n                if (cur.right == null) {\n                    cur.right = new TreeNode(val);\n                    break;\n                }\n                cur = cur.right;\n            }\n        }\n        return root;\n    }\n}",
+          "method": "insertIntoBST"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(TreeSupport.fromLevelOrder(4, 2, 7, 1, 3, 5))"
+    },
+    {
+      "id": 450,
+      "title": "删除二叉搜索树中的节点",
+      "english": "Delete Node In ABST",
+      "slug": "0450-delete-node-in-a-bst",
+      "section": "3.35",
+      "java_file": "src/main/java/leetcode/binarytree/LC0450DeleteNodeInABST.java",
+      "className": "LC0450DeleteNodeInABST",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7], key = 4",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回删除后的子树根；删掉当前根时，返回的节点可能改变。\n    public TreeNode deleteNode(TreeNode root, int key) {\n        // ② 空位置说明没找到目标，返回 null。\n        if (root == null) {\n            return null;\n        }\n        // ③ 未命中只改一侧；命中后按孩子数量，决定由谁接替当前根。\n        if (key < root.val) {\n            root.left = deleteNode(root.left, key);\n        } else if (key > root.val) {\n            root.right = deleteNode(root.right, key);\n        } else {\n            // 无孩子或只有右孩子：由右边接替；返回值可能为 null。\n            if (root.left == null) {\n                return root.right;\n            }\n            // 只有左孩子：由左边接替。\n            if (root.right == null) {\n                return root.left;\n            }\n            // 两个孩子都在：右子树最小节点是中序后继，且没有左孩子。\n            TreeNode successor = root.right;\n            while (successor.left != null) {\n                successor = successor.left;\n            }\n            root.val = successor.val;\n            // 复制后继值后，删掉原后继，避免重复，并接回修改后的右树。\n            root.right = deleteNode(root.right, successor.val);\n        }\n        return root;\n    }\n}",
+          "method": "deleteNode"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode deleteNode(TreeNode root, int key) {\n        // 迭代没有返回值接回机制，需要记住父节点来改孩子引用。\n        TreeNode parent = null;\n        TreeNode cur = root;\n        while (cur != null && cur.val != key) {\n            parent = cur;\n            if (key < cur.val) {\n                cur = cur.left;\n            } else {\n                cur = cur.right;\n            }\n        }\n        if (cur == null) {\n            return root;\n        }\n        // 两个孩子：复制右侧最小值，再把待删除对象改成后继。\n        if (cur.left != null && cur.right != null) {\n            TreeNode successorParent = cur;\n            TreeNode successor = cur.right;\n            while (successor.left != null) {\n                successorParent = successor;\n                successor = successor.left;\n            }\n            cur.val = successor.val;\n            parent = successorParent;\n            cur = successor;\n        }\n        // 后继没有左孩子；一般待删节点至多一个孩子，由非空侧接替。\n        TreeNode replacement = cur.left;\n        if (replacement == null) {\n            replacement = cur.right;\n        }\n        // 删的是整棵树根，直接返回 replacement 作为新根。\n        if (parent == null) {\n            return replacement;\n        }\n        if (parent.left == cur) {\n            parent.left = replacement;\n        } else {\n            parent.right = replacement;\n        }\n        return root;\n    }\n}",
+          "method": "deleteNode"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(TreeSupport.fromLevelOrder(5, 2, 6, 1, 3, null, 7))"
+    },
+    {
+      "id": 669,
+      "title": "修剪二叉搜索树",
+      "english": "Trim ABinary Search Tree",
+      "slug": "0669-trim-a-binary-search-tree",
+      "section": "3.36",
+      "java_file": "src/main/java/leetcode/binarytree/LC0669TrimABinarySearchTree.java",
+      "className": "LC0669TrimABinarySearchTree",
+      "input": "root = [3, 1, 4, null, 2], low = 2, high = 4",
+      "test_source": "本地设计的代表性用例；原文未提供该题独立输入",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    // ① 返回保留 [low, high] 后的子树根，根可能被替换。\n    public TreeNode trimBST(TreeNode root, int low, int high) {\n        // ② 空树无需修剪，返回 null。\n        if (root == null) {\n            return null;\n        }\n        // ③ 利用 BST 舍弃整侧；越界时返回仍可能合法的一侧，合法时接回两侧。\n        if (root.val < low) {\n            // 当前和左侧都太小；右侧可能合法，要递归保留，不能直接返回 null。\n            return trimBST(root.right, low, high);\n        }\n        if (root.val > high) {\n            // 当前和右侧都太大；合法节点只可能留在左侧。\n            return trimBST(root.left, low, high);\n        }\n        // 当前合法，接回修剪后的孩子；孩子的根可能已换掉。\n        root.left = trimBST(root.left, low, high);\n        root.right = trimBST(root.right, low, high);\n        return root;\n    }\n}",
+          "method": "trimBST"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode trimBST(TreeNode root, int low, int high) {\n        // 先沿可能合法的一侧移动，找到能保留的新根。\n        while (root != null && (root.val < low || root.val > high)) {\n            if (root.val < low) {\n                root = root.right;\n            } else {\n                root = root.left;\n            }\n        }\n        if (root == null) {\n            return null;\n        }\n        TreeNode cur = root;\n        while (cur != null) {\n            while (cur.left != null && cur.left.val < low) {\n                // 左孩子太小，它和其左侧都丢弃，但右侧可能合法，要接上。\n                cur.left = cur.left.right;\n            }\n            cur = cur.left;\n        }\n        cur = root;\n        while (cur != null) {\n            while (cur.right != null && cur.right.val > high) {\n                // 右孩子太大，对称地保留它仍可能合法的左侧。\n                cur.right = cur.right.left;\n            }\n            cur = cur.right;\n        }\n        return root;\n    }\n}",
+          "method": "trimBST"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(TreeSupport.fromLevelOrder(3, 2, 4))"
+    },
+    {
+      "id": 108,
+      "title": "将有序数组转换为二叉搜索树",
+      "english": "Convert Sorted Array To Binary Search Tree",
+      "slug": "0108-convert-sorted-array-to-binary-search-tree",
+      "section": "3.37",
+      "java_file": "src/main/java/leetcode/binarytree/LC0108ConvertSortedArrayToBinarySearchTree.java",
+      "className": "LC0108ConvertSortedArrayToBinarySearchTree",
+      "input": "nums = [1, 2, 3, 4, 5, 6, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode sortedArrayToBST(int[] nums) {\n        return build(nums, 0, nums.length);\n    }\n\n    // ① 返回 nums[left, right) 构成的平衡 BST 根。\n    private TreeNode build(int[] nums, int left, int right) {\n        // ② 空区间没有节点，返回 null。\n        if (left == right) {\n            return null;\n        }\n        // ③ 有序保证左小右大；选中点让两侧数量接近，再分别建孩子。\n        int middle = left + (right - left) / 2;\n        TreeNode root = new TreeNode(nums[middle]);\n        root.left = build(nums, left, middle);\n        root.right = build(nums, middle + 1, right);\n        return root;\n    }\n}",
+          "method": "sortedArrayToBST"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private static class Task {\n        TreeNode node;\n        int left;\n        int right;\n\n        Task(TreeNode node, int left, int right) {\n            this.node = node;\n            this.left = left;\n            this.right = right;\n        }\n    }\n\n    public TreeNode sortedArrayToBST(int[] nums) {\n        if (nums.length == 0) {\n            return null;\n        }\n        TreeNode root = new TreeNode(0);\n        Deque<Task> stack = new ArrayDeque<>();\n        // 一个任务表示：把指定半开区间建成以 node 为根的子树。\n        stack.push(new Task(root, 0, nums.length));\n        while (!stack.isEmpty()) {\n            Task task = stack.pop();\n            // 当前区间选中点；左右区间分别交给新任务，排除中点。\n            int middle = task.left + (task.right - task.left) / 2;\n            task.node.val = nums[middle];\n            if (middle + 1 < task.right) {\n                task.node.right = new TreeNode(0);\n                stack.push(new Task(task.node.right, middle + 1, task.right));\n            }\n            if (task.left < middle) {\n                task.node.left = new TreeNode(0);\n                stack.push(new Task(task.node.left, task.left, middle));\n            }\n        }\n        return root;\n    }\n}",
+          "method": "sortedArrayToBST"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(TreeSupport.fromLevelOrder(4, 2, 6, 1, 3, 5, 7))"
+    },
+    {
+      "id": 538,
+      "title": "把二叉搜索树转换为累加树",
+      "english": "Convert BSTTo Greater Tree",
+      "slug": "0538-convert-bst-to-greater-tree",
+      "section": "3.38",
+      "java_file": "src/main/java/leetcode/binarytree/LC0538ConvertBSTToGreaterTree.java",
+      "className": "LC0538ConvertBSTToGreaterTree",
+      "input": "root = [4, 2, 6, 1, 3, 5, 7]",
+      "test_source": "飞书原文 2.2 的七节点树（相关数组取该树的遍历序列）",
+      "variants": [
+        {
+          "label": "方法1：递归",
+          "className": "Solution",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    private int sum;\n\n    public TreeNode convertBST(TreeNode root) {\n        // 每次转换重新开始累计，避免复用 Solution 时带入旧结果。\n        sum = 0;\n        accumulate(root);\n        return root;\n    }\n\n    // ① sum 是已访问的更大原值之和；遍历时直接修改节点值。\n    private void accumulate(TreeNode node) {\n        // ② 空节点没有值可累加。\n        if (node == null) {\n            return;\n        }\n        // ③ 右→根→左从大到小；先累加当前旧值再写回，供更小节点使用。\n        accumulate(node.right);\n        sum += node.val;\n        node.val = sum;\n        accumulate(node.left);\n    }\n}",
+          "method": "convertBST"
+        },
+        {
+          "label": "方法2：迭代",
+          "className": "SolutionIterative",
+          "source_java": "import java.util.*;\n\nclass Solution {\n    public TreeNode convertBST(TreeNode root) {\n        int runningSum = 0;\n        Deque<TreeNode> stack = new ArrayDeque<>();\n        TreeNode cur = root;\n        while (cur != null || !stack.isEmpty()) {\n            // 先沿右链走到底，反中序才能从大到小访问。\n            while (cur != null) {\n                stack.push(cur);\n                cur = cur.right;\n            }\n            cur = stack.pop();\n            // 先加原值再写回，此时累计和已包含所有更大的原值。\n            runningSum += cur.val;\n            cur.val = runningSum;\n            cur = cur.left;\n        }\n        return root;\n    }\n}",
+          "method": "convertBST"
+        }
+      ],
+      "expected_java": "TreeSupport.toLevelOrder(TreeSupport.fromLevelOrder(22, 27, 13, 28, 25, 18, 7))"
+    }
+  ]
+}

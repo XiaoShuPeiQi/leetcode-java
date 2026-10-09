@@ -1,6 +1,10 @@
 (() => {
  const catalog=window.CATALOG||[],cards=document.getElementById('cards'),search=document.getElementById('search'),status=document.getElementById('status');
- let chapter='all';
+ let chapter=new URLSearchParams(location.search).get('chapter')||'all';
+ const chapters=[...new Set(catalog.map(p=>p.chapter))];
+ if(chapter!=='all'&&!chapters.includes(chapter))chapter='all';
+ document.getElementById('chapter-count').textContent=String(chapters.length).padStart(2,'0');
+ document.querySelectorAll('[data-chapter]').forEach(b=>b.classList.toggle('selected',b.dataset.chapter===chapter));
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  document.getElementById('problem-count').textContent=catalog.length;
  document.getElementById('all-count').textContent=catalog.length;
