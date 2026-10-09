@@ -13,7 +13,7 @@ LeetCode-Java/（当前工作区）
 │   └── leetcode/
 │       ├── backtracking/       飞书原文的 15 道题，每题独立入口
 │       └── binarytree/         飞书原文的 38 道题，78 个解法
-├── docs/                       回溯原文、逐题导入与 Debug 记录
+├── docs/                       回溯/二叉树原文、逐题导入与 Debug 记录
 ├── imports/                    原始响应、Markdown 快照、来源和运行记录
 ├── .vscode/                    Java 工程配置、扩展推荐
 ├── .tools/jdk-17/              本机 Java 17，忽略提交
@@ -233,6 +233,8 @@ https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-
 已读取[飞书二叉树原文](https://acn581cm6pdd.feishu.cn/docx/Xo3odqeiboNchExUhAFcvpEGnng)，导入 38 题，保留 78 个递归/迭代原文解法，全部编译运行 PASS。网页每题只制作第一种递归解法的调试器，树结构与调用树按从上到下布局。
 
 [二叉树在线目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=%E4%BA%8C%E5%8F%89%E6%A0%91) · [原文笔记](docs/二叉树算法.md) · [逐题输入、运行输出与 Debug 记录](docs/二叉树算法-导入记录.md)
+
+38 个线上调试器均核对通过，38 个链接已写回飞书对应题目标题下方并回读确认，原文正文和代码块保持一致。详见[飞书写回与在线链接记录](docs/二叉树算法-调试器链接.md)。
 
 | 题号 | 题目 | Java | 递归调试器 | 来源与校验 |
 |---|---|---|---|---|
