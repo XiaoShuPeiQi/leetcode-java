@@ -25,6 +25,7 @@ Thumbs.db
 /.work/binarytree/*
 !/.work/binarytree/scripts/
 /.work/binarytree/scripts/probe.mjs
+/.work/binarytree/scripts/update-ui.mjs
 /outputs/*.zip
 
 # 本机凭据与私有环境配置

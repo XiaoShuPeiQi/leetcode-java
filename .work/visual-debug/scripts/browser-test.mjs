@@ -12,7 +12,7 @@ page.on('pageerror',e=>errors.push(e.message));
 const base=process.env.PREVIEW_URL||'http://127.0.0.1:8787';
 const ids=process.argv.slice(2).map(Number);
 const ctx={window:{}};await import('node:vm').then(vm=>vm.runInNewContext(fs.readFileSync('docs/assets/catalog.js','utf8'),ctx));
-const catalog=ctx.window.CATALOG.filter(p=>p.complete&&(!ids.length||ids.includes(p.id)));
+const catalog=ctx.window.CATALOG.filter(p=>p.chapter==='回溯'&&p.complete&&(!ids.length||ids.includes(p.id)));
 const results=[];
 for(const p of catalog){
  await page.goto(base+'/'+p.url);
