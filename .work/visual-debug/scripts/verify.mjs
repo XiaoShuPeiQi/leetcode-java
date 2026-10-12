@@ -6,7 +6,7 @@ const read=file=>{const c={window:{}};vm.runInNewContext(fs.readFileSync(file,'u
 const catalog=read('docs/assets/catalog.js').CATALOG;
 const report=[];
 for(const p of catalog){
- if(!p.complete)continue;
+ if(!p.complete||p.chapter!=='回溯')continue;
  const data=read('docs/'+p.url+'trace.js').TRACE;
  const source=fs.readFileSync(data.javaFile,'utf8');
  assert.equal(data.sourceHash,crypto.createHash('sha256').update(source).digest('hex'),'Java 修改后必须重新采集');

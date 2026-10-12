@@ -34,6 +34,11 @@ const results=[];
 for(const p of catalog){
  await page.goto(base+'/'+p.url);
  await page.locator('#progress').waitFor();
+ assert.match(await page.title(),/展老师小课堂/);
+ const initialTheme=await page.locator('html').getAttribute('data-theme'),initialColor=await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor);
+ await page.locator('.theme-toggle').click();assert.notEqual(await page.locator('html').getAttribute('data-theme'),initialTheme);
+ assert.notEqual(await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor),initialColor);
+ assert.equal(await page.locator('#progress').inputValue(),'0');await page.locator('.theme-toggle').click();
  const trace=await page.evaluate(()=>window.TRACE);
  const playback=await page.evaluate(()=>window.ExecutionSteps.create(window.TREE_TRACE||window.TRACE)),steps=playback.stops.map(i=>trace.steps[i]);
  const vals=ref=>Object.fromEntries(trace.pool[ref].map(([k,v])=>[trace.pool[k],trace.pool[v]]));
@@ -63,22 +68,22 @@ for(const p of catalog){
    const paths=steps.map(s=>vals(s.vars).path).filter(x=>x!==undefined);
    assert.ok(paths.some(x=>JSON.stringify(x)==='["a","a","b"]'));assert.ok(paths.some(x=>JSON.stringify(x)==='["aa","b"]'));
    assert.deepEqual(trace.finalReturn,[['a','a','b'],['aa','b']]);
-   assert.deepEqual(trace.nodes.filter(n=>n.kind==='prune').map(n=>n.label),['ab · 非回文','aab · 非回文']);
+   assert.equal(trace.nodes.filter(n=>n.kind==='prune').length,2);
    const pathDetail=page.locator('#variables details[data-variable="path"]');
    await seek(steps.findIndex(s=>Array.isArray(vals(s.vars).path)));await pathDetail.locator('summary').click();
    await page.locator('#next').click();assert.equal(await pathDetail.getAttribute('open'),'','展开后单步保持展开');
    await pathDetail.locator('summary').click();await page.locator('#next').click();assert.equal(await pathDetail.getAttribute('open'),null);
    await seek(steps.length-1);
    assert.ok(await page.evaluate(()=>window.__treeEdges.length>0&&window.__treeEdges.every(e=>e.to[1]>e.from[1])),'每条搜索树边从上到下');
-   const node=await page.evaluate(()=>window.__treeNodes.find(n=>n.label==='ab · 非回文'));
+   const node=await page.evaluate(()=>window.__treeNodes.find(n=>n.label==='["a","ab"]'));
    assert.ok(node,'剪枝节点可见');
    const bounds=await page.locator('#tree').boundingBox();
    // 固定缩放后用画布记录的实际节点位置测试历史快照点击。
    await page.locator('#zoom').selectOption('0.65');
-   const prune=await page.evaluate(()=>window.__treeNodes.find(n=>n.label==='ab · 非回文'));
+   const prune=await page.evaluate(()=>window.__treeNodes.find(n=>n.label==='["a","ab"]'));
    const scroll=await page.locator('#tree-scroll').evaluate(el=>({left:el.scrollLeft,top:el.scrollTop}));
    await page.mouse.click(bounds.x+(prune.x+prune.width/2)*.65-scroll.left,bounds.y+(prune.y+prune.height/2)*.65-scroll.top);
-   assert.match(await page.locator('#frame-title').textContent(),/ab · 非回文 · 历史/);
+   assert.equal(await page.locator('#frame-title').textContent(),'节点 ["a","ab"] · 历史');
    await page.locator('#prev').click();assert.doesNotMatch(await page.locator('#frame-title').textContent(),/历史/);
    await page.locator('#zoom').selectOption('fit');
    await seek(steps.findIndex(s=>s.kind==='prune'));

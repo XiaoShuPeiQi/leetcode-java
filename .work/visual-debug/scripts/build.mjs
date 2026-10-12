@@ -2,6 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import readline from 'node:readline';
+import vm from 'node:vm';
+const stateContext={window:{}};
+vm.runInNewContext(fs.readFileSync('docs/assets/search-state.js','utf8'),stateContext);
 
 const meta = JSON.parse(fs.readFileSync('imports/回溯算法.import.json', 'utf8'));
 const latestFile = '.work/visual-debug/tmp/feishu-current.json';
@@ -94,13 +97,8 @@ for (const p of meta.problems) {
     if (event.kind==='exit' && event.method===recursiveName) {exited.push(activeFrame.id); if(active!==undefined) nodes[active].returned=i;}
     if (kind==='prune' && event.kind==='line') {
       const candidateVars=skippedVars||vars;
-      let label = '跳过候选';
-      if (p.id===131) label = candidateVars.s.slice(candidateVars.startIndex,candidateVars.end+1)+' · 非回文';
-      else if (candidateVars.digit!==undefined) label = '数字 '+candidateVars.digit+' 冲突';
-      else if (candidateVars.col!==undefined) label = '列 '+candidateVars.col+' 冲突';
-      else if (candidateVars.i!==undefined) label = '候选 '+(candidateVars.nums?.[candidateVars.i] ?? candidateVars.candidates?.[candidateVars.i] ?? candidateVars.i);
-      else if (candidateVars.end!==undefined) label = candidateVars.s?.slice(candidateVars.startIndex,candidateVars.end+1)||'停止延长';
-      nodes.push({id:nodes.length,parent:active??0,born:i,label,kind:'prune',state:internVars(candidateVars)});
+      const rejected=stateContext.window.SearchState.discarded(p.id,candidateVars);
+      nodes.push({id:nodes.length,parent:active??0,born:i,label:rejected.label,detail:rejected.reason,kind:'prune',state:internVars(candidateVars)});
     }
     if (event.kind==='line' && kind==='choose' && /path\.(add|append)/.test(code)) added.push(i);
     if (event.kind==='line' && kind==='undo' && /path\.(remove|deleteCharAt)/.test(code)) removed.push(i);
@@ -135,11 +133,13 @@ for (const p of meta.problems) {
   const rows=steps.map(s=>[s.line,stepKinds.indexOf(s.kind),stepPhases.indexOf(s.phase),intern(s.method),s.stack,s.vars,s.active,s.returnValue===undefined?-1:intern(s.returnValue),s.conditionLine||0]);
   const header={...data,steps:undefined,stepKinds,stepPhases};
   fs.writeFileSync(path.join(dir,'trace.js'),'window.TRACE = '+stringify(header)+';\nwindow.TRACE.steps = '+stringify(rows)+'.map(s=>({line:s[0],kind:window.TRACE.stepKinds[s[1]],phase:window.TRACE.stepPhases[s[2]],method:window.TRACE.pool[s[3]],stack:s[4],vars:s[5],active:s[6],returnValue:s[7]<0?undefined:window.TRACE.pool[s[7]],conditionLine:s[8]||null}));\n');
-  fs.writeFileSync(path.join(dir,'index.html'),'<!doctype html>\n<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+p.id+' · '+escapeHTML(p.title)+' — 逐行</title><link rel="stylesheet" href="../../assets/player.css"><link rel="stylesheet" href="../../assets/stack-view.css"></head><body><div id="app"></div><script src="trace.js"></script><script src="../../assets/execution-steps.js"></script><script src="../../assets/stack-view.js"></script><script src="../../assets/player.js"></script></body></html>\n');
+  fs.writeFileSync(path.join(dir,'index.html'),'<!doctype html>\n<html lang="zh-CN"><head><script src="../../assets/theme.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+p.id+' · '+escapeHTML(p.title)+' — 展老师小课堂</title><link rel="stylesheet" href="../../assets/player.css"><link rel="stylesheet" href="../../assets/stack-view.css"><link rel="stylesheet" href="../../assets/theme.css"></head><body><div id="app"></div><script src="trace.js"></script><script src="../../assets/execution-steps.js"></script><script src="../../assets/stack-view.js"></script><script src="../../assets/search-state.js"></script><script src="../../assets/player.js"></script></body></html>\n');
   reports.push({id:p.id,title:p.title,url,steps:steps.length,nodes:nodes.length,bytes:fs.statSync(path.join(dir,'trace.js')).size,sourceStatus,...data.validation});
 }
 fs.mkdirSync('docs/assets',{recursive:true});
-const catalog=meta.problems.map(p=>{const slug=String(p.id).padStart(4,'0')+'-'+slugs[p.id];return {id:p.id,title:p.title,english:english[p.id],chapter:'回溯',input:p.input,source:meta.source_url,url:'problems/'+slug+'/',complete:fs.existsSync('docs/problems/'+slug+'/trace.js')};});
+const previousCatalog={window:{}};
+if(fs.existsSync('docs/assets/catalog.js'))vm.runInNewContext(fs.readFileSync('docs/assets/catalog.js','utf8'),previousCatalog);
+const catalog=[...(previousCatalog.window.CATALOG||[]).filter(p=>p.chapter!=='回溯'),...meta.problems.map(p=>{const slug=String(p.id).padStart(4,'0')+'-'+slugs[p.id];return {id:p.id,title:p.title,english:english[p.id],chapter:'回溯',input:p.input,source:meta.source_url,url:'problems/'+slug+'/',complete:fs.existsSync('docs/problems/'+slug+'/trace.js')};})];
 fs.writeFileSync('docs/assets/catalog.js','window.CATALOG = '+stringify(catalog)+';\n');
 fs.writeFileSync('.work/visual-debug/logs/build-report.json',JSON.stringify(reports,null,2));
 console.log(JSON.stringify(reports,null,2));

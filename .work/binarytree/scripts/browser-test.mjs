@@ -23,6 +23,11 @@ assert.equal(await page.locator('#problem-count').textContent(),'53');
 await page.getByRole('button',{name:'回溯算法',exact:true}).click();assert.equal(await page.locator('.card').count(),15);
 for(const p of context.window.CATALOG.filter(p=>p.chapter==='二叉树')){
  await page.goto(base+'/'+p.url);await page.locator('#progress').waitFor();
+ assert.match(await page.title(),/展老师小课堂/);
+ const initialTheme=await page.locator('html').getAttribute('data-theme'),initialColor=await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor);
+ await page.locator('.theme-toggle').click();assert.notEqual(await page.locator('html').getAttribute('data-theme'),initialTheme);
+ assert.notEqual(await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor),initialColor);
+ assert.equal(await page.locator('#progress').inputValue(),'0');await page.locator('.theme-toggle').click();
  const trace=await page.evaluate(()=>window.TREE_TRACE);
  const playback=await page.evaluate(()=>window.ExecutionSteps.create(window.TREE_TRACE||window.TRACE)),steps=playback.stops.map(i=>trace.steps[i]);
  assert.ok(trace.calls.every(c=>c.returned!==undefined));

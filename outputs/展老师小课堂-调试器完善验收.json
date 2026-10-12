@@ -1,0 +1,371 @@
+{
+  "date": "2026-10-13",
+  "backtracking": [
+    {
+      "id": 77,
+      "steps": 75,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 216,
+      "steps": 202,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 17,
+      "steps": 93,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 39,
+      "steps": 88,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 40,
+      "steps": 41,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 131,
+      "steps": 75,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 93,
+      "steps": 176,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 78,
+      "steps": 25,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 90,
+      "steps": 50,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 491,
+      "steps": 109,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 46,
+      "steps": 194,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 47,
+      "steps": 125,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 332,
+      "steps": 45,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 51,
+      "steps": 481,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    },
+    {
+      "id": 37,
+      "steps": 139960,
+      "compactLayout": "PASS",
+      "status": "PASS"
+    }
+  ],
+  "binarytree": [
+    {
+      "id": 144,
+      "status": "PASS",
+      "steps": 48
+    },
+    {
+      "id": 94,
+      "status": "PASS",
+      "steps": 48
+    },
+    {
+      "id": 145,
+      "status": "PASS",
+      "steps": 48
+    },
+    {
+      "id": 102,
+      "status": "PASS",
+      "steps": 58
+    },
+    {
+      "id": 107,
+      "status": "PASS",
+      "steps": 59
+    },
+    {
+      "id": 199,
+      "status": "PASS",
+      "steps": 51
+    },
+    {
+      "id": 637,
+      "status": "PASS",
+      "steps": 76
+    },
+    {
+      "id": 429,
+      "status": "PASS",
+      "steps": 42
+    },
+    {
+      "id": 515,
+      "status": "PASS",
+      "steps": 55
+    },
+    {
+      "id": 116,
+      "status": "PASS",
+      "steps": 32
+    },
+    {
+      "id": 117,
+      "status": "PASS",
+      "steps": 47
+    },
+    {
+      "id": 226,
+      "status": "PASS",
+      "steps": 66
+    },
+    {
+      "id": 101,
+      "status": "PASS",
+      "steps": 26
+    },
+    {
+      "id": 104,
+      "status": "PASS",
+      "steps": 45
+    },
+    {
+      "id": 559,
+      "status": "PASS",
+      "steps": 36
+    },
+    {
+      "id": 111,
+      "status": "PASS",
+      "steps": 9
+    },
+    {
+      "id": 222,
+      "status": "PASS",
+      "steps": 85
+    },
+    {
+      "id": 110,
+      "status": "PASS",
+      "steps": 32
+    },
+    {
+      "id": 257,
+      "status": "PASS",
+      "steps": 62
+    },
+    {
+      "id": 404,
+      "status": "PASS",
+      "steps": 34
+    },
+    {
+      "id": 513,
+      "status": "PASS",
+      "steps": 55
+    },
+    {
+      "id": 112,
+      "status": "PASS",
+      "steps": 13
+    },
+    {
+      "id": 113,
+      "status": "PASS",
+      "steps": 70
+    },
+    {
+      "id": 106,
+      "status": "PASS",
+      "steps": 90
+    },
+    {
+      "id": 105,
+      "status": "PASS",
+      "steps": 83
+    },
+    {
+      "id": 654,
+      "status": "PASS",
+      "steps": 78
+    },
+    {
+      "id": 617,
+      "status": "PASS",
+      "steps": 28
+    },
+    {
+      "id": 700,
+      "status": "PASS",
+      "steps": 6
+    },
+    {
+      "id": 98,
+      "status": "PASS",
+      "steps": 19
+    },
+    {
+      "id": 530,
+      "status": "PASS",
+      "steps": 62
+    },
+    {
+      "id": 501,
+      "status": "PASS",
+      "steps": 53
+    },
+    {
+      "id": 236,
+      "status": "PASS",
+      "steps": 42
+    },
+    {
+      "id": 235,
+      "status": "PASS",
+      "steps": 8
+    },
+    {
+      "id": 701,
+      "status": "PASS",
+      "steps": 11
+    },
+    {
+      "id": 450,
+      "status": "PASS",
+      "steps": 22
+    },
+    {
+      "id": 669,
+      "status": "PASS",
+      "steps": 30
+    },
+    {
+      "id": 108,
+      "status": "PASS",
+      "steps": 60
+    },
+    {
+      "id": 538,
+      "status": "PASS",
+      "steps": 55
+    }
+  ],
+  "classroom": {
+    "pages": [
+      {
+        "id": 77,
+        "discardedBranches": 0,
+        "status": "PASS"
+      },
+      {
+        "id": 216,
+        "discardedBranches": 16,
+        "status": "PASS"
+      },
+      {
+        "id": 17,
+        "discardedBranches": 0,
+        "status": "PASS"
+      },
+      {
+        "id": 39,
+        "discardedBranches": 7,
+        "status": "PASS"
+      },
+      {
+        "id": 40,
+        "discardedBranches": 2,
+        "status": "PASS"
+      },
+      {
+        "id": 131,
+        "discardedBranches": 2,
+        "status": "PASS"
+      },
+      {
+        "id": 93,
+        "discardedBranches": 4,
+        "status": "PASS"
+      },
+      {
+        "id": 78,
+        "discardedBranches": 0,
+        "status": "PASS"
+      },
+      {
+        "id": 90,
+        "discardedBranches": 2,
+        "status": "PASS"
+      },
+      {
+        "id": 491,
+        "discardedBranches": 4,
+        "status": "PASS"
+      },
+      {
+        "id": 46,
+        "discardedBranches": 15,
+        "status": "PASS"
+      },
+      {
+        "id": 47,
+        "discardedBranches": 10,
+        "status": "PASS"
+      },
+      {
+        "id": 332,
+        "discardedBranches": 0,
+        "status": "PASS"
+      },
+      {
+        "id": 51,
+        "discardedBranches": 44,
+        "status": "PASS"
+      },
+      {
+        "id": 37,
+        "discardedBranches": 33444,
+        "status": "PASS"
+      }
+    ],
+    "brandPages": 53,
+    "treeOrder": "PASS",
+    "themes": "PASS",
+    "offline": "PASS",
+    "errors": []
+  }
+}
