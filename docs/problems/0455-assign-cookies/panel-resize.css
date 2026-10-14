@@ -1,0 +1,46 @@
+.cookie-splitter { display: none; }
+
+@media (min-width: 1201px) {
+    .cookie-resizable {
+        grid-template-columns: minmax(260px, 1fr) 12px minmax(240px, 1fr) 12px minmax(200px, .68fr);
+        gap: 0;
+    }
+
+    .cookie-splitter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: col-resize;
+        touch-action: none;
+        border-radius: 6px;
+        outline: none;
+    }
+
+    .cookie-splitter::before {
+        content: "";
+        width: 3px;
+        height: 38px;
+        border-radius: 3px;
+        background: var(--muted);
+        opacity: .45;
+    }
+
+    .cookie-splitter:hover,
+    .cookie-splitter:focus-visible,
+    .cookie-splitter.is-dragging {
+        background: var(--selected);
+    }
+
+    .cookie-splitter:hover::before,
+    .cookie-splitter:focus-visible::before,
+    .cookie-splitter.is-dragging::before {
+        background: var(--accent);
+        opacity: 1;
+    }
+}
+
+body.cookie-panel-dragging,
+body.cookie-panel-dragging * {
+    cursor: col-resize !important;
+    user-select: none !important;
+}
