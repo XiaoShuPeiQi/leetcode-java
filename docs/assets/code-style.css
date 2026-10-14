@@ -1,0 +1,122 @@
+/* 全站共用：微软雅黑、两种主题代码加粗，浅色 Java 配色参照力扣。 */
+html[data-theme] {
+    --sans: "Microsoft YaHei", "Microsoft YaHei UI", sans-serif;
+    --classroom-mono: Consolas, "Cascadia Code", "Microsoft YaHei", monospace;
+}
+
+html[data-theme] body {
+    font-family: var(--sans);
+    font-weight: 500;
+}
+
+html[data-theme] .code {
+    font-family: var(--classroom-mono);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+html[data-theme] .code-line > code {
+    font-family: inherit;
+}
+
+html[data-theme] .gutter {
+    font-weight: 400;
+}
+
+html[data-theme] .topbar nav,
+html[data-theme] .panel-title,
+html[data-theme] button,
+html[data-theme] .state-label,
+html[data-theme] .lesson-input,
+html[data-theme] .variable.scalar,
+html[data-theme] .variable summary,
+html[data-theme] .stack-heading,
+html[data-theme] .stack-args,
+html[data-theme] .stack-locals,
+html[data-theme] .verification,
+html[data-theme] .state-caption,
+html[data-theme] .state-status,
+html[data-theme] .step-info {
+    font-weight: 600;
+}
+
+html[data-theme] .variables,
+html[data-theme] .variable,
+html[data-theme] .variable summary,
+html[data-theme] .variable pre,
+html[data-theme] .stack-heading,
+html[data-theme] .stack-args,
+html[data-theme] .stack-locals,
+html[data-theme] .state-caption,
+html[data-theme] .state-status,
+html[data-theme] .state-label,
+html[data-theme] .state-cell,
+html[data-theme] .lesson-input,
+html[data-theme] #explanation,
+html[data-theme] .result pre,
+html[data-theme] .verification dd {
+    font-family: var(--classroom-mono);
+}
+
+html[data-theme] .state-body svg text {
+    font-family: var(--classroom-mono);
+}
+
+html[data-theme="light"] .code {
+    color: #1f2328;
+    background: #ffffff;
+}
+
+html[data-theme="light"] .code-line > code {
+    color: #1f2328;
+}
+
+html[data-theme="light"] .gutter {
+    color: #536477;
+}
+
+html[data-theme="light"] .code-line.current .gutter {
+    color: #08745a;
+}
+
+html[data-theme="light"] .java-token-keyword {
+    color: #0000ff;
+}
+
+html[data-theme="light"] .java-token-control {
+    color: #b000cc;
+}
+
+html[data-theme="light"] .java-token-type {
+    color: #006f89;
+}
+
+html[data-theme="light"] .java-token-identifier {
+    color: #001080;
+}
+
+html[data-theme="light"] .java-token-method {
+    color: #795e26;
+}
+
+html[data-theme="light"] .java-token-number {
+    color: #00765e;
+}
+
+html[data-theme="light"] .java-token-comment {
+    color: #007800;
+}
+
+html[data-theme="light"] .java-token-string {
+    color: #795e26;
+}
+
+html[data-theme] button,
+html[data-theme] input,
+html[data-theme] select { font-family: var(--sans); }
+html[data-theme] .stack-motion,
+html[data-theme] .stack-return,
+html[data-theme] .discarded-branch,
+html[data-theme] .card-input,
+html[data-theme] .mini-code { font-family: var(--classroom-mono); }
+html[data-theme] .mini-code { font-weight: 600; }

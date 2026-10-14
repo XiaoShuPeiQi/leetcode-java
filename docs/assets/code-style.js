@@ -1,15 +1,13 @@
 (() => {
     'use strict';
-    if (window.GREEDY_TRACE?.id !== 455) return;
 
     const root = document.documentElement;
-    root.setAttribute('data-cookie-color-preview', '');
     const escapeHTML = text => text.replace(/[&<>"']/g, character => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
     }[character]));
     const declarations = new Set(['class', 'public', 'private', 'protected', 'static', 'final', 'new', 'true', 'false', 'null']);
     const controls = new Set(['for', 'if', 'else', 'return', 'while', 'do', 'break', 'continue', 'switch', 'case', 'try', 'catch', 'throw']);
-    const types = new Set(['int', 'boolean', 'char', 'long', 'double', 'float', 'byte', 'short', 'void', 'String', 'Integer', 'Solution']);
+    const types = new Set(['int', 'boolean', 'char', 'long', 'double', 'float', 'byte', 'short', 'void', 'String', 'Integer', 'Solution', 'TreeNode', 'ListNode', 'Node']);
     const rows = [...document.querySelectorAll('#code .code-line > code')].map(element => ({
         element, original: element.innerHTML, text: element.textContent
     }));
@@ -28,7 +26,7 @@
                 : types.has(token) ? 'type'
                 : /^\s*\(/.test(text.slice(match.index + token.length)) ? 'method'
                 : 'identifier';
-            html += '<span class="cookie-token-' + kind + '">' + escapeHTML(token) + '</span>';
+            html += '<span class="java-token-' + kind + '">' + escapeHTML(token) + '</span>';
             end = match.index + token.length;
         }
         return html + escapeHTML(text.slice(end));

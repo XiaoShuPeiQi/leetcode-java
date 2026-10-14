@@ -1,21 +1,22 @@
 (() => {
-    if (window.GREEDY_TRACE?.id !== 455) return;
     const workspace = document.querySelector('.workspace');
     if (!workspace) return;
-    const panels = [...workspace.children];
+    const panels = [...workspace.querySelectorAll(':scope > .panel')];
+    if (panels.length !== 3) return;
     const minimums = [260, 240, 200];
     const desktop = matchMedia('(min-width: 1201px)');
     let sizes = null;
     let drag = null;
-    workspace.classList.add('cookie-resizable');
+    workspace.classList.add('classroom-resizable');
 
     const handles = panels.slice(0, 2).map((panel, index) => {
         const handle = document.createElement('div');
-        handle.className = 'cookie-splitter';
+        handle.className = 'classroom-splitter';
         handle.tabIndex = 0;
         handle.setAttribute('role', 'separator');
         handle.setAttribute('aria-orientation', 'vertical');
-        handle.setAttribute('aria-label', index === 0 ? '调整代码与可视化状态宽度' : '调整可视化状态与调用栈宽度');
+        const visualName = panels[1].querySelector('.panel-title > span').textContent;
+        handle.setAttribute('aria-label', index === 0 ? `调整代码与${visualName}宽度` : `调整${visualName}与调用栈宽度`);
         handle.title = '左右拖动调整宽度 · 双击恢复默认 · 方向键微调';
         panel.after(handle);
         return handle;
@@ -53,7 +54,7 @@
         const {handle, pointerId} = drag;
         drag = null;
         handle.classList.remove('is-dragging');
-        document.body.classList.remove('cookie-panel-dragging');
+        document.body.classList.remove('classroom-panel-dragging');
         if (handle.hasPointerCapture(pointerId)) handle.releasePointerCapture(pointerId);
     }
 
@@ -65,7 +66,7 @@
             drag = {handle, pointerId: event.pointerId, index, x: event.clientX, initial: widths()};
             handle.setPointerCapture(event.pointerId);
             handle.classList.add('is-dragging');
-            document.body.classList.add('cookie-panel-dragging');
+            document.body.classList.add('classroom-panel-dragging');
         });
         handle.addEventListener('pointermove', event => {
             if (drag?.handle === handle && drag.pointerId === event.pointerId) {
@@ -76,6 +77,7 @@
         handle.addEventListener('keydown', event => {
             if (!desktop.matches || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
             event.preventDefault();
+            event.stopPropagation();
             move(index, (event.key === 'ArrowLeft' ? -1 : 1) * (event.shiftKey ? 50 : 10), widths());
         });
         handle.addEventListener('dblclick', () => {
@@ -108,5 +110,7 @@
         fit();
     }).observe(workspace);
     desktop.addEventListener('change', fit);
+    // 画布尺寸由面板决定；拖动后通知树图重新布局。
+    new ResizeObserver(() => document.dispatchEvent(new Event('classroompanelresize'))).observe(panels[1]);
     updateAria();
 })();
