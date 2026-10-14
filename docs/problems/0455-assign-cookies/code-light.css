@@ -2,6 +2,8 @@
 html[data-theme="light"][data-cookie-color-preview] .code {
     color: #1f2328;
     background: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 html[data-theme="light"][data-cookie-color-preview] .code-line > code {
@@ -10,6 +12,7 @@ html[data-theme="light"][data-cookie-color-preview] .code-line > code {
 
 html[data-theme="light"][data-cookie-color-preview] .gutter {
     color: #536477;
+    font-weight: 400;
 }
 
 html[data-theme="light"][data-cookie-color-preview] .code-line.current .gutter {
