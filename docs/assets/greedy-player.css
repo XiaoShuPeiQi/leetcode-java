@@ -1,0 +1,17 @@
+.greedy-player .state-body{height:calc(100% - 43px);overflow:auto;padding:12px 14px;background-image:radial-gradient(var(--dot) .65px,transparent .65px);background-size:18px 18px}
+.greedy-player .state-label{font:11px Consolas,monospace;color:var(--muted);margin:12px 0 6px}
+.greedy-player .state-array{display:flex;flex-wrap:wrap;gap:5px}
+.greedy-player .state-cell{padding:6px 8px;min-width:35px;text-align:center;background:var(--heading);border:1px solid var(--line);border-radius:5px;font:12px Consolas,monospace}
+.greedy-player .state-cell small{display:block;margin-top:4px;color:var(--muted);font-size:10px}
+.greedy-player .state-cell.active{background:var(--selected);border-color:var(--accent);color:var(--accent)}
+.greedy-player .state-cell.covered{background:var(--canvas-answer)}
+.greedy-player .state-caption{font:11px/1.7 Consolas,"Microsoft YaHei",monospace;color:var(--muted);margin:9px 0}
+.greedy-player .state-status{font:11px/1.7 Consolas,monospace;color:var(--accent);padding:7px 9px;border:1px solid var(--line);border-radius:5px;background:var(--panel);overflow-wrap:anywhere}
+.greedy-player .state-body svg{display:block;width:100%;height:auto;min-width:280px}
+.greedy-player .state-body svg text{fill:var(--text);font:11px Consolas,"Microsoft YaHei",monospace}
+.greedy-player .state-body svg .muted{fill:var(--muted)}
+.greedy-player .lesson-input{max-width:100%;overflow-wrap:anywhere}
+.greedy-player .code-line.breakpoint .gutter:before{content:'●';color:var(--canvas-prune-border);margin-right:3px}
+.greedy-player .code-line{cursor:pointer}
+.greedy-player .code-line:focus-visible{outline:1px solid var(--accent);outline-offset:-1px}
+@media(max-width:700px){.greedy-player .state-body{padding:9px 10px}.greedy-player .state-cell{font-size:11px;padding:5px 7px}.greedy-player .lesson-input{display:block;line-height:1.6}}

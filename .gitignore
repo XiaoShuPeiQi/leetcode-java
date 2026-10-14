@@ -33,3 +33,8 @@ Thumbs.db
 .env.*
 *.pem
 *.key
+
+# 贪心章节保留可复用的JDI录制与网页构建工具。
+!/.work/greedy/
+/.work/greedy/*
+!/.work/greedy/scripts/

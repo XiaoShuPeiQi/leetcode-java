@@ -12,7 +12,8 @@ LeetCode-Java/（当前工作区）
 │   ├── common/                 TreeNode.java、ListNode.java、TreeSupport.java
 │   └── leetcode/
 │       ├── backtracking/       飞书原文的 15 道题，每题独立入口
-│       └── binarytree/         飞书原文的 38 道题，78 个解法
+│       ├── binarytree/         飞书原文的 38 道题，78 个解法
+│       └── greedy/             飞书当前笔记的 17 道题，真实 JDI 回放
 ├── docs/                       回溯/二叉树原文、逐题导入与 Debug 记录
 ├── imports/                    原始响应、Markdown 快照、来源和运行记录
 ├── .vscode/                    Java 工程配置、扩展推荐
@@ -23,7 +24,7 @@ LeetCode-Java/（当前工作区）
 └── .gitignore
 ```
 
-当前有回溯与二叉树两个真实来源章节。其他章节在提供实际题目或文档后再创建；没有实际来源时，不批量生成题解。
+当前有回溯、二叉树与贪心三个真实来源章节。其他章节在提供实际题目或文档后再创建；没有实际来源时，不批量生成题解。
 
 ## 环境与 Java 17 配置
 
@@ -284,3 +285,31 @@ https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-
 | 538 | 把二叉搜索树转换为累加树 | [LC0538ConvertBSTToGreaterTree.java](src/main/java/leetcode/binarytree/LC0538ConvertBSTToGreaterTree.java) | [打开](docs/problems/0538-convert-bst-to-greater-tree/index.html) | [原文 3.38 / PASS](docs/二叉树算法-导入记录.md#lc0538) |
 
 二叉树输入通过 `TreeSupport.fromLevelOrder` 按层构建，null 保留左右位置。HTML 高亮行、变量、节点身份和返回值来自真实 JDI。38 页均检查单步、回退、进度、栈帧切换、最终结果和纵向树连线；代表性页面另检验移动端布局。VS Code 图形界面需按导入记录手动验证。
+
+## 贪心章节（2026-10-14）
+
+从[飞书当前贪心笔记](https://acn581cm6pdd.feishu.cn/wiki/QHnaw0xWDiNBTfkmaG3cbydHnYf)导入17题，Solution类体只增加static与外层运行适配。代表性输入与笔记实例推演一致；全部使用Java 17 / JDI录制真实执行快照，保留现有小课堂主题、代码高亮、步进导航、变量及调用栈组件。
+
+[贪心在线目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=%E8%B4%AA%E5%BF%83) · [逐题链接](docs/贪心算法-调试器链接.md) · [真实轨迹验收](outputs/贪心算法-调试器验收.json) · [浏览器验收](outputs/贪心算法-浏览器验收.json)
+
+| 题号 | 题目 | Java | 独立调试器 |
+|---|---|---|---|
+| 455 | 分发饼干 | [LC0455AssignCookies.java](src/main/java/leetcode/greedy/LC0455AssignCookies.java) | [打开](docs/problems/0455-assign-cookies/index.html) |
+| 376 | 摆动序列 | [LC0376WiggleSubsequence.java](src/main/java/leetcode/greedy/LC0376WiggleSubsequence.java) | [打开](docs/problems/0376-wiggle-subsequence/index.html) |
+| 53 | 最大子数组和（网站旧称最大子序和） | [LC0053MaximumSubarray.java](src/main/java/leetcode/greedy/LC0053MaximumSubarray.java) | [打开](docs/problems/0053-maximum-subarray/index.html) |
+| 122 | 买卖股票的最佳时机 II | [LC0122BestTimeToBuyAndSellStockII.java](src/main/java/leetcode/greedy/LC0122BestTimeToBuyAndSellStockII.java) | [打开](docs/problems/0122-best-time-to-buy-and-sell-stock-ii/index.html) |
+| 55 | 跳跃游戏 | [LC0055JumpGame.java](src/main/java/leetcode/greedy/LC0055JumpGame.java) | [打开](docs/problems/0055-jump-game/index.html) |
+| 45 | 跳跃游戏 II | [LC0045JumpGameII.java](src/main/java/leetcode/greedy/LC0045JumpGameII.java) | [打开](docs/problems/0045-jump-game-ii/index.html) |
+| 1005 | K 次取反后最大化的数组和 | [LC1005MaximizeSumOfArrayAfterKNegations.java](src/main/java/leetcode/greedy/LC1005MaximizeSumOfArrayAfterKNegations.java) | [打开](docs/problems/1005-maximize-sum-of-array-after-k-negations/index.html) |
+| 134 | 加油站 | [LC0134GasStation.java](src/main/java/leetcode/greedy/LC0134GasStation.java) | [打开](docs/problems/0134-gas-station/index.html) |
+| 135 | 分发糖果 | [LC0135Candy.java](src/main/java/leetcode/greedy/LC0135Candy.java) | [打开](docs/problems/0135-candy/index.html) |
+| 860 | 柠檬水找零 | [LC0860LemonadeChange.java](src/main/java/leetcode/greedy/LC0860LemonadeChange.java) | [打开](docs/problems/0860-lemonade-change/index.html) |
+| 406 | 根据身高重建队列 | [LC0406QueueReconstructionByHeight.java](src/main/java/leetcode/greedy/LC0406QueueReconstructionByHeight.java) | [打开](docs/problems/0406-queue-reconstruction-by-height/index.html) |
+| 452 | 用最少数量的箭引爆气球 | [LC0452MinimumNumberOfArrowsToBurstBalloons.java](src/main/java/leetcode/greedy/LC0452MinimumNumberOfArrowsToBurstBalloons.java) | [打开](docs/problems/0452-minimum-number-of-arrows-to-burst-balloons/index.html) |
+| 435 | 无重叠区间 | [LC0435NonOverlappingIntervals.java](src/main/java/leetcode/greedy/LC0435NonOverlappingIntervals.java) | [打开](docs/problems/0435-non-overlapping-intervals/index.html) |
+| 763 | 划分字母区间 | [LC0763PartitionLabels.java](src/main/java/leetcode/greedy/LC0763PartitionLabels.java) | [打开](docs/problems/0763-partition-labels/index.html) |
+| 56 | 合并区间 | [LC0056MergeIntervals.java](src/main/java/leetcode/greedy/LC0056MergeIntervals.java) | [打开](docs/problems/0056-merge-intervals/index.html) |
+| 738 | 单调递增的数字 | [LC0738MonotoneIncreasingDigits.java](src/main/java/leetcode/greedy/LC0738MonotoneIncreasingDigits.java) | [打开](docs/problems/0738-monotone-increasing-digits/index.html) |
+| 968 | 监控二叉树 | [LC0968BinaryTreeCameras.java](src/main/java/leetcode/greedy/LC0968BinaryTreeCameras.java) | [打开](docs/problems/0968-binary-tree-cameras/index.html) |
+
+重新录制：在项目根目录执行 `.work/greedy/scripts/capture.ps1 -JdkPath <本机JDK17目录>`，再执行 `node .work/greedy/scripts/build.mjs`。网页是固定代表性输入的真实执行回放，不是任意Java输入运行器。
