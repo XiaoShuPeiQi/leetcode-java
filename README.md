@@ -24,7 +24,7 @@ LeetCode-Java/（当前工作区）
 └── .gitignore
 ```
 
-当前有回溯、二叉树与贪心三个真实来源章节。其他章节在提供实际题目或文档后再创建；没有实际来源时，不批量生成题解。
+当前有回溯、二叉树、贪心与动态规划四个真实来源章节。其他章节在提供实际题目或文档后再创建；没有实际来源时，不批量生成题解。
 
 ## 环境与 Java 17 配置
 
@@ -315,3 +315,58 @@ https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-
 | 968 | 监控二叉树 | [LC0968BinaryTreeCameras.java](src/main/java/leetcode/greedy/LC0968BinaryTreeCameras.java) | [打开](docs/problems/0968-binary-tree-cameras/index.html) |
 
 重新录制：在项目根目录执行 `.work/greedy/scripts/capture.ps1 -JdkPath <本机JDK17目录>`，再执行 `node .work/greedy/scripts/build.mjs`。网页是固定代表性输入的真实执行回放，不是任意Java输入运行器。
+
+
+## 动态规划章节（2026-10-16）
+
+依据[代码随想录动态规划目录](https://programmercarl.com/algo/dynamic-programming/)的54篇内容，整理37道不同的力扣题；理论、周总结与卡码网练习不另算力扣题。每题有第一思路、DP五步、实例推演、独立可粘贴的Java解法及易错点。
+
+[飞书章节](https://acn581cm6pdd.feishu.cn/wiki/TvWwwHEUBi8S2Gk6apqc9W9cnVe) · [本地完整笔记](docs/动态规划.md) · [在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92) · [代码校验](outputs/动态规划-代码验收.json) · [浏览器校验](outputs/动态规划-浏览器验收.json)
+
+37份LeetCode Java入口按当日官方模板核验，独立代码块以Java 8目标编译。原生Java 17程序经过6,703组独立参考检查，37个代表性输入均输出PASS并录制真实JDI轨迹。页面保留现有代码高亮、主题、微软雅黑、分隔条拖动、步进、回退、断点和调用栈；新增DP数组/矩阵、读取来源、待写入状态、股票阶段和树形DP返回状态显示。
+
+53、122沿用原题文件，新增DPSolution与`main dp`入口；原Solution和默认main输入/行为保留。仓库共有107个章节调试入口、105个不同题号，不重复创建同题主文件。网页仍是固定实例回放，不能在网页执行任意Java。
+
+| 题号 | 题目 | Java | 独立调试器 |
+|---|---|---|---|
+| 509 | 斐波那契数 | [LC0509FibonacciNumber.java](src/main/java/leetcode/dp/LC0509FibonacciNumber.java) | [打开](docs/problems/0509-fibonacci-number/index.html) |
+| 70 | 爬楼梯 | [LC0070ClimbingStairs.java](src/main/java/leetcode/dp/LC0070ClimbingStairs.java) | [打开](docs/problems/0070-climbing-stairs/index.html) |
+| 746 | 使用最小花费爬楼梯 | [LC0746MinCostClimbingStairs.java](src/main/java/leetcode/dp/LC0746MinCostClimbingStairs.java) | [打开](docs/problems/0746-min-cost-climbing-stairs/index.html) |
+| 62 | 不同路径 | [LC0062UniquePaths.java](src/main/java/leetcode/dp/LC0062UniquePaths.java) | [打开](docs/problems/0062-unique-paths/index.html) |
+| 63 | 不同路径 II | [LC0063UniquePathsII.java](src/main/java/leetcode/dp/LC0063UniquePathsII.java) | [打开](docs/problems/0063-unique-paths-ii/index.html) |
+| 343 | 整数拆分 | [LC0343IntegerBreak.java](src/main/java/leetcode/dp/LC0343IntegerBreak.java) | [打开](docs/problems/0343-integer-break/index.html) |
+| 96 | 不同的二叉搜索树 | [LC0096UniqueBinarySearchTrees.java](src/main/java/leetcode/dp/LC0096UniqueBinarySearchTrees.java) | [打开](docs/problems/0096-unique-binary-search-trees/index.html) |
+| 416 | 分割等和子集 | [LC0416PartitionEqualSubsetSum.java](src/main/java/leetcode/dp/LC0416PartitionEqualSubsetSum.java) | [打开](docs/problems/0416-partition-equal-subset-sum/index.html) |
+| 1049 | 最后一块石头的重量 II | [LC1049LastStoneWeightII.java](src/main/java/leetcode/dp/LC1049LastStoneWeightII.java) | [打开](docs/problems/1049-last-stone-weight-ii/index.html) |
+| 494 | 目标和 | [LC0494TargetSum.java](src/main/java/leetcode/dp/LC0494TargetSum.java) | [打开](docs/problems/0494-target-sum/index.html) |
+| 474 | 一和零 | [LC0474OnesandZeroes.java](src/main/java/leetcode/dp/LC0474OnesandZeroes.java) | [打开](docs/problems/0474-ones-and-zeroes/index.html) |
+| 518 | 零钱兑换 II | [LC0518CoinChangeII.java](src/main/java/leetcode/dp/LC0518CoinChangeII.java) | [打开](docs/problems/0518-coin-change-ii/index.html) |
+| 377 | 组合总和 Ⅳ | [LC0377CombinationSumIV.java](src/main/java/leetcode/dp/LC0377CombinationSumIV.java) | [打开](docs/problems/0377-combination-sum-iv/index.html) |
+| 322 | 零钱兑换 | [LC0322CoinChange.java](src/main/java/leetcode/dp/LC0322CoinChange.java) | [打开](docs/problems/0322-coin-change/index.html) |
+| 279 | 完全平方数 | [LC0279PerfectSquares.java](src/main/java/leetcode/dp/LC0279PerfectSquares.java) | [打开](docs/problems/0279-perfect-squares/index.html) |
+| 139 | 单词拆分 | [LC0139WordBreak.java](src/main/java/leetcode/dp/LC0139WordBreak.java) | [打开](docs/problems/0139-word-break/index.html) |
+| 198 | 打家劫舍 | [LC0198HouseRobber.java](src/main/java/leetcode/dp/LC0198HouseRobber.java) | [打开](docs/problems/0198-house-robber/index.html) |
+| 213 | 打家劫舍 II | [LC0213HouseRobberII.java](src/main/java/leetcode/dp/LC0213HouseRobberII.java) | [打开](docs/problems/0213-house-robber-ii/index.html) |
+| 337 | 打家劫舍 III | [LC0337HouseRobberIII.java](src/main/java/leetcode/dp/LC0337HouseRobberIII.java) | [打开](docs/problems/0337-house-robber-iii/index.html) |
+| 121 | 买卖股票的最佳时机 | [LC0121BestTimetoBuyandSellStock.java](src/main/java/leetcode/dp/LC0121BestTimetoBuyandSellStock.java) | [打开](docs/problems/0121-best-time-to-buy-and-sell-stock/index.html) |
+| 122 | 买卖股票的最佳时机 II | [LC0122BestTimeToBuyAndSellStockII.java](src/main/java/leetcode/greedy/LC0122BestTimeToBuyAndSellStockII.java) | [打开](docs/problems/dp-0122-best-time-to-buy-and-sell-stock-ii/index.html) |
+| 123 | 买卖股票的最佳时机 III | [LC0123BestTimetoBuyandSellStockIII.java](src/main/java/leetcode/dp/LC0123BestTimetoBuyandSellStockIII.java) | [打开](docs/problems/0123-best-time-to-buy-and-sell-stock-iii/index.html) |
+| 188 | 买卖股票的最佳时机 IV | [LC0188BestTimetoBuyandSellStockIV.java](src/main/java/leetcode/dp/LC0188BestTimetoBuyandSellStockIV.java) | [打开](docs/problems/0188-best-time-to-buy-and-sell-stock-iv/index.html) |
+| 309 | 买卖股票的最佳时机含冷冻期 | [LC0309BestTimetoBuyandSellStockwithCooldown.java](src/main/java/leetcode/dp/LC0309BestTimetoBuyandSellStockwithCooldown.java) | [打开](docs/problems/0309-best-time-to-buy-and-sell-stock-with-cooldown/index.html) |
+| 714 | 买卖股票的最佳时机含手续费 | [LC0714BestTimetoBuyandSellStockwithTransactionFee.java](src/main/java/leetcode/dp/LC0714BestTimetoBuyandSellStockwithTransactionFee.java) | [打开](docs/problems/0714-best-time-to-buy-and-sell-stock-with-transaction-fee/index.html) |
+| 300 | 最长递增子序列 | [LC0300LongestIncreasingSubsequence.java](src/main/java/leetcode/dp/LC0300LongestIncreasingSubsequence.java) | [打开](docs/problems/0300-longest-increasing-subsequence/index.html) |
+| 674 | 最长连续递增序列 | [LC0674LongestContinuousIncreasingSubsequence.java](src/main/java/leetcode/dp/LC0674LongestContinuousIncreasingSubsequence.java) | [打开](docs/problems/0674-longest-continuous-increasing-subsequence/index.html) |
+| 718 | 最长重复子数组 | [LC0718MaximumLengthofRepeatedSubarray.java](src/main/java/leetcode/dp/LC0718MaximumLengthofRepeatedSubarray.java) | [打开](docs/problems/0718-maximum-length-of-repeated-subarray/index.html) |
+| 1143 | 最长公共子序列 | [LC1143LongestCommonSubsequence.java](src/main/java/leetcode/dp/LC1143LongestCommonSubsequence.java) | [打开](docs/problems/1143-longest-common-subsequence/index.html) |
+| 1035 | 不相交的线 | [LC1035UncrossedLines.java](src/main/java/leetcode/dp/LC1035UncrossedLines.java) | [打开](docs/problems/1035-uncrossed-lines/index.html) |
+| 53 | 最大子数组和 | [LC0053MaximumSubarray.java](src/main/java/leetcode/greedy/LC0053MaximumSubarray.java) | [打开](docs/problems/dp-0053-maximum-subarray/index.html) |
+| 392 | 判断子序列 | [LC0392IsSubsequence.java](src/main/java/leetcode/dp/LC0392IsSubsequence.java) | [打开](docs/problems/0392-is-subsequence/index.html) |
+| 115 | 不同的子序列 | [LC0115DistinctSubsequences.java](src/main/java/leetcode/dp/LC0115DistinctSubsequences.java) | [打开](docs/problems/0115-distinct-subsequences/index.html) |
+| 583 | 两个字符串的删除操作 | [LC0583DeleteOperationforTwoStrings.java](src/main/java/leetcode/dp/LC0583DeleteOperationforTwoStrings.java) | [打开](docs/problems/0583-delete-operation-for-two-strings/index.html) |
+| 72 | 编辑距离 | [LC0072EditDistance.java](src/main/java/leetcode/dp/LC0072EditDistance.java) | [打开](docs/problems/0072-edit-distance/index.html) |
+| 647 | 回文子串 | [LC0647PalindromicSubstrings.java](src/main/java/leetcode/dp/LC0647PalindromicSubstrings.java) | [打开](docs/problems/0647-palindromic-substrings/index.html) |
+| 516 | 最长回文子序列 | [LC0516LongestPalindromicSubsequence.java](src/main/java/leetcode/dp/LC0516LongestPalindromicSubsequence.java) | [打开](docs/problems/0516-longest-palindromic-subsequence/index.html) |
+
+在项目根目录重新校验：`py -3.11 .work/dp/scripts/verify.py --jdk <JDK17目录>`。重新录制：`.work/dp/scripts/capture.ps1 -JdkPath <JDK17目录>`，再执行 `node .work/dp/scripts/build.mjs`。浏览器验收使用Node 20及以上，并通过CODEX_TEST_MODULES指定包含Playwright的node_modules目录。
+
+VS Code图形界面的Java断点与变量面板未自动操作；可按本README的Debug步骤使用每题main。网页交互有独立浏览器验收记录。

@@ -1,0 +1,298 @@
+[
+  {
+    "id": 509,
+    "slug": "fibonacci-number",
+    "title": "Fibonacci Number",
+    "translatedTitle": "斐波那契数",
+    "signature": "public int fib(int n)",
+    "template": "class Solution {\n    public int fib(int n) {\n        \n    }\n}"
+  },
+  {
+    "id": 70,
+    "slug": "climbing-stairs",
+    "title": "Climbing Stairs",
+    "translatedTitle": "爬楼梯",
+    "signature": "public int climbStairs(int n)",
+    "template": "class Solution {\n    public int climbStairs(int n) {\n        \n    }\n}"
+  },
+  {
+    "id": 746,
+    "slug": "min-cost-climbing-stairs",
+    "title": "Min Cost Climbing Stairs",
+    "translatedTitle": "使用最小花费爬楼梯",
+    "signature": "public int minCostClimbingStairs(int[] cost)",
+    "template": "class Solution {\n    public int minCostClimbingStairs(int[] cost) {\n        \n    }\n}"
+  },
+  {
+    "id": 62,
+    "slug": "unique-paths",
+    "title": "Unique Paths",
+    "translatedTitle": "不同路径",
+    "signature": "public int uniquePaths(int m, int n)",
+    "template": "class Solution {\n    public int uniquePaths(int m, int n) {\n        \n    }\n}"
+  },
+  {
+    "id": 63,
+    "slug": "unique-paths-ii",
+    "title": "Unique Paths II",
+    "translatedTitle": "不同路径 II",
+    "signature": "public int uniquePathsWithObstacles(int[][] obstacleGrid)",
+    "template": "class Solution {\n    public int uniquePathsWithObstacles(int[][] obstacleGrid) {\n        \n    }\n}"
+  },
+  {
+    "id": 343,
+    "slug": "integer-break",
+    "title": "Integer Break",
+    "translatedTitle": "整数拆分",
+    "signature": "public int integerBreak(int n)",
+    "template": "class Solution {\n    public int integerBreak(int n) {\n        \n    }\n}"
+  },
+  {
+    "id": 96,
+    "slug": "unique-binary-search-trees",
+    "title": "Unique Binary Search Trees",
+    "translatedTitle": "不同的二叉搜索树",
+    "signature": "public int numTrees(int n)",
+    "template": "class Solution {\n    public int numTrees(int n) {\n        \n    }\n}"
+  },
+  {
+    "id": 416,
+    "slug": "partition-equal-subset-sum",
+    "title": "Partition Equal Subset Sum",
+    "translatedTitle": "分割等和子集",
+    "signature": "public boolean canPartition(int[] nums)",
+    "template": "class Solution {\n    public boolean canPartition(int[] nums) {\n        \n    }\n}"
+  },
+  {
+    "id": 1049,
+    "slug": "last-stone-weight-ii",
+    "title": "Last Stone Weight II",
+    "translatedTitle": "最后一块石头的重量 II",
+    "signature": "public int lastStoneWeightII(int[] stones)",
+    "template": "class Solution {\n    public int lastStoneWeightII(int[] stones) {\n        \n    }\n}"
+  },
+  {
+    "id": 494,
+    "slug": "target-sum",
+    "title": "Target Sum",
+    "translatedTitle": "目标和",
+    "signature": "public int findTargetSumWays(int[] nums, int target)",
+    "template": "class Solution {\n    public int findTargetSumWays(int[] nums, int target) {\n        \n    }\n}"
+  },
+  {
+    "id": 474,
+    "slug": "ones-and-zeroes",
+    "title": "Ones and Zeroes",
+    "translatedTitle": "一和零",
+    "signature": "public int findMaxForm(String[] strs, int m, int n)",
+    "template": "class Solution {\n    public int findMaxForm(String[] strs, int m, int n) {\n        \n    }\n}"
+  },
+  {
+    "id": 518,
+    "slug": "coin-change-ii",
+    "title": "Coin Change II",
+    "translatedTitle": "零钱兑换 II",
+    "signature": "public int change(int amount, int[] coins)",
+    "template": "class Solution {\n    public int change(int amount, int[] coins) {\n        \n    }\n}"
+  },
+  {
+    "id": 377,
+    "slug": "combination-sum-iv",
+    "title": "Combination Sum IV",
+    "translatedTitle": "组合总和 Ⅳ",
+    "signature": "public int combinationSum4(int[] nums, int target)",
+    "template": "class Solution {\n    public int combinationSum4(int[] nums, int target) {\n        \n    }\n}"
+  },
+  {
+    "id": 322,
+    "slug": "coin-change",
+    "title": "Coin Change",
+    "translatedTitle": "零钱兑换",
+    "signature": "public int coinChange(int[] coins, int amount)",
+    "template": "class Solution {\n    public int coinChange(int[] coins, int amount) {\n        \n    }\n}"
+  },
+  {
+    "id": 279,
+    "slug": "perfect-squares",
+    "title": "Perfect Squares",
+    "translatedTitle": "完全平方数",
+    "signature": "public int numSquares(int n)",
+    "template": "class Solution {\n    public int numSquares(int n) {\n        \n    }\n}"
+  },
+  {
+    "id": 139,
+    "slug": "word-break",
+    "title": "Word Break",
+    "translatedTitle": "单词拆分",
+    "signature": "public boolean wordBreak(String s, List<String> wordDict)",
+    "template": "class Solution {\n    public boolean wordBreak(String s, List<String> wordDict) {\n        \n    }\n}"
+  },
+  {
+    "id": 198,
+    "slug": "house-robber",
+    "title": "House Robber",
+    "translatedTitle": "打家劫舍",
+    "signature": "public int rob(int[] nums)",
+    "template": "class Solution {\n    public int rob(int[] nums) {\n        \n    }\n}"
+  },
+  {
+    "id": 213,
+    "slug": "house-robber-ii",
+    "title": "House Robber II",
+    "translatedTitle": "打家劫舍 II",
+    "signature": "public int rob(int[] nums)",
+    "template": "class Solution {\n    public int rob(int[] nums) {\n        \n    }\n}"
+  },
+  {
+    "id": 337,
+    "slug": "house-robber-iii",
+    "title": "House Robber III",
+    "translatedTitle": "打家劫舍 III",
+    "signature": "public int rob(TreeNode root)",
+    "template": "/**\n * Definition for a binary tree node.\n * public class TreeNode {\n *     int val;\n *     TreeNode left;\n *     TreeNode right;\n *     TreeNode() {}\n *     TreeNode(int val) { this.val = val; }\n *     TreeNode(int val, TreeNode left, TreeNode right) {\n *         this.val = val;\n *         this.left = left;\n *         this.right = right;\n *     }\n * }\n */\nclass Solution {\n    public int rob(TreeNode root) {\n        \n    }\n}"
+  },
+  {
+    "id": 121,
+    "slug": "best-time-to-buy-and-sell-stock",
+    "title": "Best Time to Buy and Sell Stock",
+    "translatedTitle": "买卖股票的最佳时机",
+    "signature": "public int maxProfit(int[] prices)",
+    "template": "class Solution {\n    public int maxProfit(int[] prices) {\n        \n    }\n}"
+  },
+  {
+    "id": 122,
+    "slug": "best-time-to-buy-and-sell-stock-ii",
+    "title": "Best Time to Buy and Sell Stock II",
+    "translatedTitle": "买卖股票的最佳时机 II",
+    "signature": "public int maxProfit(int[] prices)",
+    "template": "class Solution {\n    public int maxProfit(int[] prices) {\n        \n    }\n}"
+  },
+  {
+    "id": 123,
+    "slug": "best-time-to-buy-and-sell-stock-iii",
+    "title": "Best Time to Buy and Sell Stock III",
+    "translatedTitle": "买卖股票的最佳时机 III",
+    "signature": "public int maxProfit(int[] prices)",
+    "template": "class Solution {\n    public int maxProfit(int[] prices) {\n        \n    }\n}"
+  },
+  {
+    "id": 188,
+    "slug": "best-time-to-buy-and-sell-stock-iv",
+    "title": "Best Time to Buy and Sell Stock IV",
+    "translatedTitle": "买卖股票的最佳时机 IV",
+    "signature": "public int maxProfit(int k, int[] prices)",
+    "template": "class Solution {\n    public int maxProfit(int k, int[] prices) {\n        \n    }\n}"
+  },
+  {
+    "id": 309,
+    "slug": "best-time-to-buy-and-sell-stock-with-cooldown",
+    "title": "Best Time to Buy and Sell Stock with Cooldown",
+    "translatedTitle": "买卖股票的最佳时机含冷冻期",
+    "signature": "public int maxProfit(int[] prices)",
+    "template": "class Solution {\n    public int maxProfit(int[] prices) {\n        \n    }\n}"
+  },
+  {
+    "id": 714,
+    "slug": "best-time-to-buy-and-sell-stock-with-transaction-fee",
+    "title": "Best Time to Buy and Sell Stock with Transaction Fee",
+    "translatedTitle": "买卖股票的最佳时机含手续费",
+    "signature": "public int maxProfit(int[] prices, int fee)",
+    "template": "class Solution {\n    public int maxProfit(int[] prices, int fee) {\n        \n    }\n}"
+  },
+  {
+    "id": 300,
+    "slug": "longest-increasing-subsequence",
+    "title": "Longest Increasing Subsequence",
+    "translatedTitle": "最长递增子序列",
+    "signature": "public int lengthOfLIS(int[] nums)",
+    "template": "class Solution {\n    public int lengthOfLIS(int[] nums) {\n        \n    }\n}"
+  },
+  {
+    "id": 674,
+    "slug": "longest-continuous-increasing-subsequence",
+    "title": "Longest Continuous Increasing Subsequence",
+    "translatedTitle": "最长连续递增序列",
+    "signature": "public int findLengthOfLCIS(int[] nums)",
+    "template": "class Solution {\n    public int findLengthOfLCIS(int[] nums) {\n        \n    }\n}"
+  },
+  {
+    "id": 718,
+    "slug": "maximum-length-of-repeated-subarray",
+    "title": "Maximum Length of Repeated Subarray",
+    "translatedTitle": "最长重复子数组",
+    "signature": "public int findLength(int[] nums1, int[] nums2)",
+    "template": "class Solution {\n    public int findLength(int[] nums1, int[] nums2) {\n        \n    }\n}"
+  },
+  {
+    "id": 1143,
+    "slug": "longest-common-subsequence",
+    "title": "Longest Common Subsequence",
+    "translatedTitle": "最长公共子序列",
+    "signature": "public int longestCommonSubsequence(String text1, String text2)",
+    "template": "class Solution {\n    public int longestCommonSubsequence(String text1, String text2) {\n        \n    }\n}"
+  },
+  {
+    "id": 1035,
+    "slug": "uncrossed-lines",
+    "title": "Uncrossed Lines",
+    "translatedTitle": "不相交的线",
+    "signature": "public int maxUncrossedLines(int[] nums1, int[] nums2)",
+    "template": "class Solution {\n    public int maxUncrossedLines(int[] nums1, int[] nums2) {\n        \n    }\n}"
+  },
+  {
+    "id": 53,
+    "slug": "maximum-subarray",
+    "title": "Maximum Subarray",
+    "translatedTitle": "最大子数组和",
+    "signature": "public int maxSubArray(int[] nums)",
+    "template": "class Solution {\n    public int maxSubArray(int[] nums) {\n        \n    }\n}"
+  },
+  {
+    "id": 392,
+    "slug": "is-subsequence",
+    "title": "Is Subsequence",
+    "translatedTitle": "判断子序列",
+    "signature": "public boolean isSubsequence(String s, String t)",
+    "template": "class Solution {\n    public boolean isSubsequence(String s, String t) {\n        \n    }\n}"
+  },
+  {
+    "id": 115,
+    "slug": "distinct-subsequences",
+    "title": "Distinct Subsequences",
+    "translatedTitle": "不同的子序列",
+    "signature": "public int numDistinct(String s, String t)",
+    "template": "class Solution {\n    public int numDistinct(String s, String t) {\n        \n    }\n}"
+  },
+  {
+    "id": 583,
+    "slug": "delete-operation-for-two-strings",
+    "title": "Delete Operation for Two Strings",
+    "translatedTitle": "两个字符串的删除操作",
+    "signature": "public int minDistance(String word1, String word2)",
+    "template": "class Solution {\n    public int minDistance(String word1, String word2) {\n        \n    }\n}"
+  },
+  {
+    "id": 72,
+    "slug": "edit-distance",
+    "title": "Edit Distance",
+    "translatedTitle": "编辑距离",
+    "signature": "public int minDistance(String word1, String word2)",
+    "template": "class Solution {\n    public int minDistance(String word1, String word2) {\n        \n    }\n}"
+  },
+  {
+    "id": 647,
+    "slug": "palindromic-substrings",
+    "title": "Palindromic Substrings",
+    "translatedTitle": "回文子串",
+    "signature": "public int countSubstrings(String s)",
+    "template": "class Solution {\n    public int countSubstrings(String s) {\n        \n    }\n}"
+  },
+  {
+    "id": 516,
+    "slug": "longest-palindromic-subsequence",
+    "title": "Longest Palindromic Subsequence",
+    "translatedTitle": "最长回文子序列",
+    "signature": "public int longestPalindromeSubseq(String s)",
+    "template": "class Solution {\n    public int longestPalindromeSubseq(String s) {\n        \n    }\n}"
+  }
+]

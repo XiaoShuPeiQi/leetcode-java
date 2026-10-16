@@ -38,3 +38,8 @@ Thumbs.db
 !/.work/greedy/
 /.work/greedy/*
 !/.work/greedy/scripts/
+
+# 动态规划的可复用验证、录制与页面构建工具。
+!/.work/dp/
+/.work/dp/*
+!/.work/dp/scripts/
