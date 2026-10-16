@@ -11,3 +11,4 @@
 .dp-legend .read{background:var(--canvas-answer)}
 .dp-legend .changed{box-shadow:inset 0 -3px 0 var(--accent)}
 .dp-meaning{font-family:"Microsoft YaHei",sans-serif!important;color:var(--text)!important;line-height:1.8!important}
+.greedy-player .state-body svg.dp-tree{width:100%;height:285px;min-width:0}

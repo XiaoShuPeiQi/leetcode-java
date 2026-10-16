@@ -53,7 +53,7 @@ function dpTree(step,vars){
  const root=ref(data.pool[step.roots].root);if(root===null)return '<p class="empty">当前为空节点，返回[0,0]。</p>';
  const states=data.pool[step.states],positions=[],edges=[],seen=new Set();let leaf=0;
  function visit(id,depth){if(seen.has(id)||!heap[id])return null;seen.add(id);const n=heap[id],children=[ref(n.left),ref(n.right)].filter(x=>x!==null),xx=children.map(c=>visit(c,depth+1)).filter(x=>x!==null);const x=xx.length?(xx[0]+xx.at(-1))/2:55+leaf++*115;positions.push({id,x,y:32+depth*85});children.forEach(c=>edges.push([id,c]));return x;}visit(root,0);
- const w=Math.max(250,...positions.map(p=>p.x+55)),h=Math.max(...positions.map(p=>p.y+68)),by=new Map(positions.map(p=>[p.id,p]));let out='<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="树形DP：各子树不偷与偷当前节点的收益">';
+ const w=Math.max(250,...positions.map(p=>p.x+55)),h=Math.max(...positions.map(p=>p.y+68)),by=new Map(positions.map(p=>[p.id,p]));let out='<svg class="dp-tree" viewBox="0 0 '+w+' '+h+'" role="img" aria-label="树形DP：各子树不偷与偷当前节点的收益">';
  for(const [a,b] of edges){const p=by.get(a),q=by.get(b);if(p&&q)out+='<line x1="'+p.x+'" y1="'+p.y+'" x2="'+q.x+'" y2="'+q.y+'" stroke="var(--canvas-edge)"/>';}
  for(const p of positions){const active=ref(vars.node??vars.root)===p.id;out+='<circle cx="'+p.x+'" cy="'+p.y+'" r="22" fill="'+(active?'var(--canvas-active)':'var(--canvas-fill)')+'" stroke="'+(active?'var(--accent)':'var(--canvas-border)')+'"/><text x="'+p.x+'" y="'+(p.y+4)+'" text-anchor="middle">'+heap[p.id].val+'</text><text x="'+p.x+'" y="'+(p.y+40)+'" text-anchor="middle">'+(states[p.id]===undefined?'待返回':'['+states[p.id].join(', ')+']')+'</text>';}
  return out+'</svg><p class="state-caption">每个返回值为[不偷本节点, 偷本节点]。节点显示真实值，相同值仍是不同节点；标签来自实际递归返回。</p>';
