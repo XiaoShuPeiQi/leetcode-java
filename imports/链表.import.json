@@ -1,0 +1,225 @@
+{
+  "source_url": "https://acn581cm6pdd.feishu.cn/wiki/HPizwBkbkiEf0zks7jUcvs8En2b",
+  "revision_id": 115,
+  "problems": [
+    {
+      "id": 203,
+      "title": "移除链表元素",
+      "english": "Remove Linked List Elements",
+      "slug": "0203-remove-linked-list-elements",
+      "mainClass": "leetcode.linkedlist.LC0203RemoveLinkedListElements",
+      "algorithm": "    static class Solution {\n        public ListNode removeElements(ListNode head, int val) {\n            ListNode dummy = new ListNode(0, head);\n            ListNode cur = dummy;\n            while (cur.next != null) {\n                if (cur.next.val == val) {\n                    cur.next = cur.next.next; // 删除后，继续检查新的后继\n                } else {\n                    cur = cur.next; // 当前后继保留，才向前走\n                }\n            }\n            return dummy.next;\n        }\n    }",
+      "displayStart": 40,
+      "source": "LC0203RemoveLinkedListElements.java",
+      "expected": "[1]",
+      "input": "head=[6,6,1,6], val=6",
+      "example": {
+        "head": [
+          6,
+          6,
+          1,
+          6
+        ],
+        "val": 6,
+        "expected": [
+          1
+        ]
+      },
+      "javaFile": "src/main/java/leetcode/linkedlist/LC0203RemoveLinkedListElements.java",
+      "sourceHash": "46b66f383f385f6febc61a206f6871bca6015a2552e1b659d8397d00312d22c9"
+    },
+    {
+      "id": 707,
+      "title": "设计链表",
+      "english": "Design Linked List",
+      "slug": "0707-design-linked-list",
+      "mainClass": "leetcode.linkedlist.LC0707DesignLinkedList",
+      "algorithm": "    static class MyLinkedList {\n        private static class ListNode {\n            int val;\n            ListNode next;\n            ListNode(int val) {\n                this.val = val;\n            }\n        }\n\n        private final ListNode dummy;\n        private int size;\n\n        public MyLinkedList() {\n            dummy = new ListNode(0);\n            size = 0;\n        }\n\n        public int get(int index) {\n            if (index < 0 || index >= size) {\n                return -1;\n            }\n            ListNode cur = dummy.next;\n            for (int i = 0; i < index; i++) {\n                cur = cur.next;\n            }\n            return cur.val;\n        }\n\n        public void addAtHead(int val) {\n            addAtIndex(0, val);\n        }\n\n        public void addAtTail(int val) {\n            addAtIndex(size, val);\n        }\n\n        public void addAtIndex(int index, int val) {\n            if (index < 0 || index > size) {\n                return;\n            }\n            ListNode pre = dummy;\n            for (int i = 0; i < index; i++) {\n                pre = pre.next;\n            }\n            ListNode newNode = new ListNode(val);\n            newNode.next = pre.next; // 先保住后缀\n            pre.next = newNode;\n            size++;\n        }\n\n        public void deleteAtIndex(int index) {\n            if (index < 0 || index >= size) {\n                return;\n            }\n            ListNode pre = dummy;\n            for (int i = 0; i < index; i++) {\n                pre = pre.next;\n            }\n            pre.next = pre.next.next;\n            size--;\n        }\n    }",
+      "displayStart": 32,
+      "source": "LC0707DesignLinkedList.java",
+      "expected": "[2, 3]",
+      "input": "头插1 → 尾插3 → 下标1插2 → 读1 → 删1 → 读1",
+      "example": {
+        "operations": [
+          "addAtHead(1)",
+          "addAtTail(3)",
+          "addAtIndex(1,2)",
+          "get(1)",
+          "deleteAtIndex(1)",
+          "get(1)"
+        ],
+        "expected": [
+          2,
+          3
+        ]
+      },
+      "javaFile": "src/main/java/leetcode/linkedlist/LC0707DesignLinkedList.java",
+      "sourceHash": "36fd31308616fc8b48f5697469a2101557f8ea81f88a1cd33c2594a757e3a917"
+    },
+    {
+      "id": 206,
+      "title": "反转链表",
+      "english": "Reverse Linked List",
+      "slug": "0206-reverse-linked-list",
+      "mainClass": "leetcode.linkedlist.LC0206ReverseLinkedList",
+      "algorithm": "    static class Solution {\n        public ListNode reverseList(ListNode head) {\n            ListNode prev = null;\n            ListNode cur = head;\n            while (cur != null) {\n                ListNode next = cur.next; // 改线前保存原后继\n                cur.next = prev;\n                prev = cur;\n                cur = next;\n            }\n            return prev;\n        }\n    }",
+      "displayStart": 40,
+      "source": "LC0206ReverseLinkedList.java",
+      "expected": "[3, 2, 1]",
+      "input": "head=[1,2,3]",
+      "example": {
+        "head": [
+          1,
+          2,
+          3
+        ],
+        "expected": [
+          3,
+          2,
+          1
+        ]
+      },
+      "javaFile": "src/main/java/leetcode/linkedlist/LC0206ReverseLinkedList.java",
+      "sourceHash": "9b97e3c89a775ba3159bebb191b7e375298353df8e45473256c384970f573f94"
+    },
+    {
+      "id": 24,
+      "title": "两两交换链表中的节点",
+      "english": "Swap Nodes In Pairs",
+      "slug": "0024-swap-nodes-in-pairs",
+      "mainClass": "leetcode.linkedlist.LC0024SwapNodesInPairs",
+      "algorithm": "    static class Solution {\n        public ListNode swapPairs(ListNode head) {\n            ListNode dummy = new ListNode(0, head);\n            ListNode pre = dummy;\n            while (pre.next != null && pre.next.next != null) {\n                ListNode first = pre.next;\n                ListNode second = first.next;\n                pre.next = second;\n                first.next = second.next; // 在second改线前保住后缀\n                second.next = first;\n                pre = first; // 原first变为已交换部分的末尾\n            }\n            return dummy.next;\n        }\n    }",
+      "displayStart": 40,
+      "source": "LC0024SwapNodesInPairs.java",
+      "expected": "[2, 1, 4, 3, 5]",
+      "input": "head=[1,2,3,4,5]，pre=dummy",
+      "example": {
+        "head": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "expected": [
+          2,
+          1,
+          4,
+          3,
+          5
+        ]
+      },
+      "javaFile": "src/main/java/leetcode/linkedlist/LC0024SwapNodesInPairs.java",
+      "sourceHash": "28887f83deba9ae12ce795628c171ecdc6fd91c530d4b14661a42720c81e4d5f"
+    },
+    {
+      "id": 19,
+      "title": "删除链表的倒数第 N 个结点",
+      "english": "Remove Nth Node From End Of List",
+      "slug": "0019-remove-nth-node-from-end-of-list",
+      "mainClass": "leetcode.linkedlist.LC0019RemoveNthNodeFromEndOfList",
+      "algorithm": "    static class Solution {\n        public ListNode removeNthFromEnd(ListNode head, int n) {\n            ListNode dummy = new ListNode(0, head);\n            ListNode fast = dummy;\n            ListNode slow = dummy;\n            for (int i = 0; i <= n; i++) {\n                fast = fast.next; // 先拉开n+1条边\n            }\n            while (fast != null) {\n                fast = fast.next;\n                slow = slow.next;\n            }\n            slow.next = slow.next.next;\n            return dummy.next;\n        }\n    }",
+      "displayStart": 40,
+      "source": "LC0019RemoveNthNodeFromEndOfList.java",
+      "expected": "[1, 2, 3, 5]",
+      "input": "head=[1,2,3,4,5], n=2",
+      "example": {
+        "head": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "n": 2,
+        "expected": [
+          1,
+          2,
+          3,
+          5
+        ]
+      },
+      "javaFile": "src/main/java/leetcode/linkedlist/LC0019RemoveNthNodeFromEndOfList.java",
+      "sourceHash": "8a0e066d2a05f93fa4e0227ca0cbab2c8432778b165d169b031fc601e43a5f9c"
+    },
+    {
+      "id": 160,
+      "title": "相交链表",
+      "english": "Intersection Of Two Linked Lists",
+      "slug": "0160-intersection-of-two-linked-lists",
+      "mainClass": "leetcode.linkedlist.LC0160IntersectionOfTwoLinkedLists",
+      "algorithm": "    static class Solution {\n        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {\n            int lenA = getLength(headA);\n            int lenB = getLength(headB);\n            ListNode curA = headA;\n            ListNode curB = headB;\n            while (lenA > lenB) {\n                curA = curA.next;\n                lenA--;\n            }\n            while (lenB > lenA) {\n                curB = curB.next;\n                lenB--;\n            }\n            while (curA != curB) {\n                curA = curA.next;\n                curB = curB.next;\n            }\n            return curA;\n        }\n\n        private int getLength(ListNode head) {\n            int length = 0;\n            while (head != null) {\n                length++;\n                head = head.next;\n            }\n            return length;\n        }\n    }",
+      "displayStart": 41,
+      "source": "LC0160IntersectionOfTwoLinkedLists.java",
+      "expected": "8",
+      "input": "共享后缀C：8→4→5（这里的三个节点是真正共享的对象）",
+      "example": {
+        "prefixA": [
+          4,
+          1
+        ],
+        "prefixB": [
+          5,
+          6,
+          1
+        ],
+        "shared": [
+          8,
+          4,
+          5
+        ],
+        "expected": 8
+      },
+      "javaFile": "src/main/java/leetcode/linkedlist/LC0160IntersectionOfTwoLinkedLists.java",
+      "sourceHash": "8d99d2d7756d444bc31533784a489be7153111913e9da19fd270ab63692b0e31"
+    },
+    {
+      "id": 141,
+      "title": "环形链表",
+      "english": "Linked List Cycle",
+      "slug": "0141-linked-list-cycle",
+      "mainClass": "leetcode.linkedlist.LC0141LinkedListCycle",
+      "algorithm": "    static class Solution {\n        public boolean hasCycle(ListNode head) {\n            ListNode slow = head;\n            ListNode fast = head;\n            while (fast != null && fast.next != null) {\n                slow = slow.next;\n                fast = fast.next.next;\n                if (slow == fast) {\n                    return true;\n                }\n            }\n            return false;\n        }\n    }",
+      "displayStart": 39,
+      "source": "LC0141LinkedListCycle.java",
+      "expected": "true",
+      "input": "head=[3,2,0,-4], pos=1（尾部-4.next指回节点2）",
+      "example": {
+        "head": [
+          3,
+          2,
+          0,
+          -4
+        ],
+        "pos": 1,
+        "expected": true
+      },
+      "javaFile": "src/main/java/leetcode/linkedlist/LC0141LinkedListCycle.java",
+      "sourceHash": "bd645cee4bd44fd6bcbe37ceba63196e2dc135422c1eab860a730db30ec91b90"
+    },
+    {
+      "id": 142,
+      "title": "环形链表 II",
+      "english": "Linked List Cycle Ii",
+      "slug": "0142-linked-list-cycle-ii",
+      "mainClass": "leetcode.linkedlist.LC0142LinkedListCycleII",
+      "algorithm": "    static class Solution {\n        public ListNode detectCycle(ListNode head) {\n            ListNode slow = head;\n            ListNode fast = head;\n            while (fast != null && fast.next != null) {\n                slow = slow.next;\n                fast = fast.next.next;\n                if (slow == fast) {\n                    ListNode index1 = head;\n                    ListNode index2 = slow;\n                    while (index1 != index2) {\n                        index1 = index1.next;\n                        index2 = index2.next;\n                    }\n                    return index1;\n                }\n            }\n            return null;\n        }\n    }",
+      "displayStart": 41,
+      "source": "LC0142LinkedListCycleII.java",
+      "expected": "2",
+      "input": "head=[3,2,0,-4], pos=1（尾部连回节点2）",
+      "example": {
+        "head": [
+          3,
+          2,
+          0,
+          -4
+        ],
+        "pos": 1,
+        "expected": 2
+      },
+      "javaFile": "src/main/java/leetcode/linkedlist/LC0142LinkedListCycleII.java",
+      "sourceHash": "6bbd980d84961283f6787356a34503fbe009f85bcf08033bf5c94e1466870c3c"
+    }
+  ]
+}

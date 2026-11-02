@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "browser": "Microsoft Edge headless / Playwright",
+  "errors": [],
+  "reports": [
+    {
+      "id": 203,
+      "navigation": "PASS",
+      "fixedSnapshots": 17,
+      "graph": "PASS",
+      "final": "PASS",
+      "breakpoints": "PASS",
+      "playbackStopsAtBreakpoint": "PASS",
+      "mobile": "PASS",
+      "themes": "PASS",
+      "resize": "PASS"
+    },
+    {
+      "id": 707,
+      "navigation": "PASS",
+      "fixedSnapshots": 47,
+      "graph": "PASS",
+      "final": "PASS",
+      "breakpoints": "PASS",
+      "playbackStopsAtBreakpoint": "PASS",
+      "mobile": "PASS",
+      "themes": "PASS",
+      "resize": "PASS"
+    },
+    {
+      "id": 206,
+      "navigation": "PASS",
+      "fixedSnapshots": 20,
+      "graph": "PASS",
+      "final": "PASS",
+      "breakpoints": "PASS",
+      "playbackStopsAtBreakpoint": "PASS",
+      "mobile": "PASS",
+      "themes": "PASS",
+      "resize": "PASS"
+    },
+    {
+      "id": 24,
+      "navigation": "PASS",
+      "fixedSnapshots": 19,
+      "graph": "PASS",
+      "final": "PASS",
+      "breakpoints": "PASS",
+      "playbackStopsAtBreakpoint": "PASS",
+      "mobile": "PASS",
+      "themes": "PASS",
+      "resize": "PASS"
+    },
+    {
+      "id": 19,
+      "navigation": "PASS",
+      "fixedSnapshots": 23,
+      "graph": "PASS",
+      "final": "PASS",
+      "breakpoints": "PASS",
+      "playbackStopsAtBreakpoint": "PASS",
+      "mobile": "PASS",
+      "themes": "PASS",
+      "resize": "PASS"
+    },
+    {
+      "id": 160,
+      "navigation": "PASS",
+      "fixedSnapshots": 57,
+      "graph": "PASS",
+      "final": "PASS",
+      "breakpoints": "PASS",
+      "playbackStopsAtBreakpoint": "PASS",
+      "mobile": "PASS",
+      "themes": "PASS",
+      "resize": "PASS"
+    },
+    {
+      "id": 141,
+      "navigation": "PASS",
+      "fixedSnapshots": 16,
+      "graph": "PASS",
+      "final": "PASS",
+      "breakpoints": "PASS",
+      "playbackStopsAtBreakpoint": "PASS",
+      "mobile": "PASS",
+      "themes": "PASS",
+      "resize": "PASS"
+    },
+    {
+      "id": 142,
+      "navigation": "PASS",
+      "fixedSnapshots": 22,
+      "graph": "PASS",
+      "final": "PASS",
+      "breakpoints": "PASS",
+      "playbackStopsAtBreakpoint": "PASS",
+      "mobile": "PASS",
+      "themes": "PASS",
+      "resize": "PASS"
+    }
+  ]
+}

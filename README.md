@@ -429,3 +429,24 @@ VS Code图形界面的Java断点与变量面板未自动操作；可按本README
 复现代码检查：`py -3.11 .work/array/scripts/verify.py --jdk17 <JDK17目录> --jdk8 <JDK8目录>`。重新录制：`.work/array/scripts/capture.ps1 -JdkPath <JDK17目录>`，再执行 `node .work/array/scripts/build.mjs`。网页验收：通过 `CODEX_TEST_MODULES` 指定含Playwright的node_modules目录、`PREVIEW_URL` 指定站点根URL后，运行 `node .work/array/scripts/browser-test.cjs`。
 
 VS Code原生Java调试界面未自动操作；命令行运行、JDI记录和网页交互分别有实际校验记录。
+
+## 链表章节（2026-11-02）
+
+[飞书章节](https://acn581cm6pdd.feishu.cn/wiki/HPizwBkbkiEf0zks7jUcvs8En2b) · [完整笔记](docs/链表.md) · [在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=%E9%93%BE%E8%A1%A8) · [代码检查](outputs/链表-代码验收.json) · [飞书回读](outputs/链表-飞书验收.json)
+
+覆盖原有8题、17份独立解法，每题补齐第一思路、指针位置、实例推演和方法对比。飞书revision 115已逐段回读，原末尾52个顶层块保留。17份解法通过Java8独立编译与183,969次本地断言，检查节点身份、连线、环入口及707操作模型。
+
+8个Java17主程序使用笔记相同输入，JDI读取真实节点字段和局部变量，不修改算法；网页沿用现有主题、代码配色、调用栈和可拖动面板，增加对象编号与next箭头。高亮行尚未执行，变化显示在下一暂停位置。网页回放固定输入，不执行任意Java。
+
+| 题号 | Java | 独立调试器 |
+|---|---|---|
+| 203 | [移除链表元素](src/main/java/leetcode/linkedlist/LC0203RemoveLinkedListElements.java) | [打开](docs/problems/0203-remove-linked-list-elements/index.html) |
+| 707 | [设计链表](src/main/java/leetcode/linkedlist/LC0707DesignLinkedList.java) | [打开](docs/problems/0707-design-linked-list/index.html) |
+| 206 | [反转链表](src/main/java/leetcode/linkedlist/LC0206ReverseLinkedList.java) | [打开](docs/problems/0206-reverse-linked-list/index.html) |
+| 24 | [两两交换链表中的节点](src/main/java/leetcode/linkedlist/LC0024SwapNodesInPairs.java) | [打开](docs/problems/0024-swap-nodes-in-pairs/index.html) |
+| 19 | [删除链表的倒数第 N 个结点](src/main/java/leetcode/linkedlist/LC0019RemoveNthNodeFromEndOfList.java) | [打开](docs/problems/0019-remove-nth-node-from-end-of-list/index.html) |
+| 160 | [相交链表](src/main/java/leetcode/linkedlist/LC0160IntersectionOfTwoLinkedLists.java) | [打开](docs/problems/0160-intersection-of-two-linked-lists/index.html) |
+| 141 | [环形链表](src/main/java/leetcode/linkedlist/LC0141LinkedListCycle.java) | [打开](docs/problems/0141-linked-list-cycle/index.html) |
+| 142 | [环形链表 II](src/main/java/leetcode/linkedlist/LC0142LinkedListCycleII.java) | [打开](docs/problems/0142-linked-list-cycle-ii/index.html) |
+
+复现：使用`.work/linkedlist/scripts/capture.ps1 -JdkPath <JDK17目录>`重新录制，再执行`py -3.11 .work/linkedlist/scripts/build.py`构建页面。原题模板、原算法和适配元数据保存在imports中。未进行力扣在线提交，也未自动操作VS Code调试界面。

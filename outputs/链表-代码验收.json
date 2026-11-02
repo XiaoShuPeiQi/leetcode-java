@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "jdk": "C:\\Program Files\\Java\\jdk1.8.0_341",
+  "solutions": 17,
+  "assertions": 183969,
+  "checks": [
+    {
+      "id": 203,
+      "variant": 0,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 203,
+      "variant": 1,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 707,
+      "variant": 0,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 707,
+      "variant": 1,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 206,
+      "variant": 0,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 206,
+      "variant": 1,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 206,
+      "variant": 2,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 24,
+      "variant": 0,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 24,
+      "variant": 1,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 19,
+      "variant": 0,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 19,
+      "variant": 1,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 160,
+      "variant": 0,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 160,
+      "variant": 1,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 141,
+      "variant": 0,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 141,
+      "variant": 1,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 142,
+      "variant": 0,
+      "independentJava8Compilation": "PASS"
+    },
+    {
+      "id": 142,
+      "variant": 1,
+      "independentJava8Compilation": "PASS"
+    }
+  ],
+  "scope": [
+    "independent official signatures",
+    "node identity/order",
+    "values unchanged",
+    "empty/single/all-delete",
+    "all short cycle entries",
+    "shared tails and equal values without shared identity",
+    "707 randomized operations vs ArrayList"
+  ]
+}

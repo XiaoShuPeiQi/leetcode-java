@@ -49,3 +49,9 @@ Thumbs.db
 /.work/array/*
 !/.work/array/scripts/
 /.work/array/scripts/__pycache__/
+
+# 链表章节可复用录制与页面构建工具。
+!/.work/linkedlist/
+/.work/linkedlist/*
+!/.work/linkedlist/scripts/
+/.work/linkedlist/scripts/__pycache__/
