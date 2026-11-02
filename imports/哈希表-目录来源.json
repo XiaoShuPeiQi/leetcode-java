@@ -1,0 +1,52 @@
+[
+  {
+    "id": "theory",
+    "url": "https://programmercarl.com/algo/hash-table/hash-table-basics.html",
+    "bytes": 26268
+  },
+  {
+    "id": "242",
+    "url": "https://programmercarl.com/algo/hash-table/0242-valid-anagram.html",
+    "bytes": 97551
+  },
+  {
+    "id": "349",
+    "url": "https://programmercarl.com/algo/hash-table/0349-intersection-of-two-arrays.html",
+    "bytes": 122089
+  },
+  {
+    "id": "202",
+    "url": "https://programmercarl.com/algo/hash-table/0202-happy-number.html",
+    "bytes": 116278
+  },
+  {
+    "id": "1",
+    "url": "https://programmercarl.com/algo/hash-table/0001-two-sum.html",
+    "bytes": 124757
+  },
+  {
+    "id": "454",
+    "url": "https://programmercarl.com/algo/hash-table/0454-4sum-ii.html",
+    "bytes": 115574
+  },
+  {
+    "id": "383",
+    "url": "https://programmercarl.com/algo/hash-table/0383-ransom-note.html",
+    "bytes": 104599
+  },
+  {
+    "id": "15",
+    "url": "https://programmercarl.com/algo/hash-table/0015-3sum.html",
+    "bytes": 212450
+  },
+  {
+    "id": "18",
+    "url": "https://programmercarl.com/algo/hash-table/0018-4sum.html",
+    "bytes": 197678
+  },
+  {
+    "id": "summary",
+    "url": "https://programmercarl.com/algo/hash-table/hash-table-summary.html",
+    "bytes": 25386
+  }
+]

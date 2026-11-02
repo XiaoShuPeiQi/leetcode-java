@@ -1,0 +1,58 @@
+[
+  {
+    "id": 242,
+    "slug": "valid-anagram",
+    "title": "Valid Anagram",
+    "signature": "public boolean isAnagram(String s, String t)",
+    "template": "class Solution {\n    public boolean isAnagram(String s, String t) {\n        \n    }\n}"
+  },
+  {
+    "id": 349,
+    "slug": "intersection-of-two-arrays",
+    "title": "Intersection of Two Arrays",
+    "signature": "public int[] intersection(int[] nums1, int[] nums2)",
+    "template": "class Solution {\n    public int[] intersection(int[] nums1, int[] nums2) {\n        \n    }\n}"
+  },
+  {
+    "id": 202,
+    "slug": "happy-number",
+    "title": "Happy Number",
+    "signature": "public boolean isHappy(int n)",
+    "template": "class Solution {\n    public boolean isHappy(int n) {\n        \n    }\n}"
+  },
+  {
+    "id": 1,
+    "slug": "two-sum",
+    "title": "Two Sum",
+    "signature": "public int[] twoSum(int[] nums, int target)",
+    "template": "class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        \n    }\n}"
+  },
+  {
+    "id": 454,
+    "slug": "4sum-ii",
+    "title": "4Sum II",
+    "signature": "public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4)",
+    "template": "class Solution {\n    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {\n        \n    }\n}"
+  },
+  {
+    "id": 383,
+    "slug": "ransom-note",
+    "title": "Ransom Note",
+    "signature": "public boolean canConstruct(String ransomNote, String magazine)",
+    "template": "class Solution {\n    public boolean canConstruct(String ransomNote, String magazine) {\n        \n    }\n}"
+  },
+  {
+    "id": 15,
+    "slug": "3sum",
+    "title": "3Sum",
+    "signature": "public List<List<Integer>> threeSum(int[] nums)",
+    "template": "class Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        \n    }\n}"
+  },
+  {
+    "id": 18,
+    "slug": "4sum",
+    "title": "4Sum",
+    "signature": "public List<List<Integer>> fourSum(int[] nums, int target)",
+    "template": "class Solution {\n    public List<List<Integer>> fourSum(int[] nums, int target) {\n        \n    }\n}"
+  }
+]

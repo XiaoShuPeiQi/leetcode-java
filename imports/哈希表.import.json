@@ -1,0 +1,435 @@
+{
+  "source_url": "https://acn581cm6pdd.feishu.cn/wiki/F4qJw6Pr2if4LkkJBjBc8aM3nXd",
+  "source_catalog": "https://programmercarl.com/algo/hash-table/",
+  "problems": [
+    {
+      "id": 242,
+      "title": "有效的字母异位词",
+      "summary": "这道题本质是：比较两串字符的频率，而不是比较字符的位置。",
+      "intuition": "拿到题目，先看“重新排列后是否相同”。位置可以变，字符种类和每种字符的数量不能变。逐个配对需要反复查找；排序能让相同字符对齐，但还要 O(n log n)。题目只有26个小写字母，直接开26个计数格。",
+      "choice": "主解选数组计数：count[i]表示 s 中第 i 种字母的数量减去 t 中的数量。数组下标就是字符的编码差，例如 b - a = 1。Set只记有没有，会丢掉重复次数。",
+      "steps": [
+        "长度不同直接返回 false，异位词必须保留全部字符。",
+        "用 s 的字符加库存，再用 t 的字符减库存。",
+        "检查26个格子；全部为0才说明每种字符数量都相同。"
+      ],
+      "trace": [
+        "s=\"aab\"，t=\"aba\"；只列 a、b 两格。",
+        "遍历 s：a → [1,0]，a → [2,0]，b → [2,1]。",
+        "遍历 t：a → [1,1]，b → [1,0]，a → [0,0]；返回 true。",
+        "反例 s=\"aab\"、t=\"abb\"：最后是 [1,-1]，返回 false。"
+      ],
+      "pitfalls": [
+        "不能只比较不同字符的集合：aab 和 abb 的集合一样，次数不同。",
+        "c - 'a' 依赖小写英文字母的题设；换成一般字符时要重新选择键和容量。"
+      ],
+      "complexity": "时间 O(n+m+26)，辅助空间 O(26)=O(1)。代码用 charAt 遍历，避免 toCharArray 额外复制整个字符串。",
+      "code": "class Solution {\n    public boolean isAnagram(String s, String t) {\n        if (s.length() != t.length()) {\n            return false;\n        }\n\n        int[] count = new int[26];\n        for (int i = 0; i < s.length(); i++) {\n            count[s.charAt(i) - 'a']++;\n        }\n        for (int i = 0; i < t.length(); i++) {\n            count[t.charAt(i) - 'a']--;\n        }\n\n        // 每个格子都归零，才是每种字母数量相同。\n        for (int value : count) {\n            if (value != 0) {\n                return false;\n            }\n        }\n        return true;\n    }\n}",
+      "inputObject": {
+        "s": "aab",
+        "t": "aba"
+      },
+      "expectedValue": true,
+      "slug": "valid-anagram",
+      "signature": "public boolean isAnagram(String s, String t)",
+      "english": "Valid Anagram",
+      "slug_page": "0242-valid-anagram",
+      "input": "s = \"aab\", t = \"aba\"",
+      "mainClass": "leetcode.hashtable.LC0242ValidAnagram",
+      "solutionClass": "Solution",
+      "java_file": "src/main/java/leetcode/hashtable/LC0242ValidAnagram.java",
+      "adapted": "    static class Solution {\n        public boolean isAnagram(String s, String t) {\n            if (s.length() != t.length()) {\n                return false;\n            }\n\n            int[] count = new int[26];\n            for (int i = 0; i < s.length(); i++) {\n                count[s.charAt(i) - 'a']++;\n            }\n            for (int i = 0; i < t.length(); i++) {\n                count[t.charAt(i) - 'a']--;\n            }\n\n            // 每个格子都归零，才是每种字母数量相同。\n            for (int value : count) {\n                if (value != 0) {\n                    return false;\n                }\n            }\n            return true;\n        }\n    }",
+      "sourceHash": "25e62c6583f80b80ca4c47dd65f5c327eca983be12f965e6179e98ef8c120593",
+      "displayStart": 24,
+      "test_source": "与飞书本题“实例走过程”使用相同输入。",
+      "state": "主解选数组计数：count[i]表示 s 中第 i 种字母的数量减去 t 中的数量。数组下标就是字符的编码差，例如 b - a = 1。Set只记有没有，会丢掉重复次数。",
+      "transfer": "这道题本质是：比较两串字符的频率，而不是比较字符的位置。"
+    },
+    {
+      "id": 349,
+      "title": "两个数组的交集",
+      "summary": "这道题本质是：查询另一个数组中有没有这个数，并让答案中的数值只出现一次。",
+      "intuition": "最直接的办法是对 nums2 的每个数，扫描 nums1 查找，时间 O(nm)。重复查询的都是“nums1中有没有x”，所以先记录 nums1 的数值。答案要求去重，但不要求出现次数和顺序，两个 Set 正好分别完成查找和结果去重。",
+      "choice": "主解用 HashSet；题设的数值范围0～1000也允许数组标记，后面给出这一版。先根据要保存的信息选择结构，再比较范围带来的优化空间。",
+      "steps": [
+        "将 nums1 的元素加入 seen，忽略其内部重复值。",
+        "遍历 nums2；seen 中存在的数加入 result，result 自动去重。",
+        "把 result 逐个放入 int[] 返回，顺序任意。"
+      ],
+      "trace": [
+        "nums1=[1,2,2,1]，nums2=[2,2]。",
+        "建表后 seen={1,2}。第一次查询2命中，result={2}。",
+        "第二次查询2仍命中，再加入2不会增加集合大小。",
+        "把集合转为数组，得到 [2]；不能返回 [2,2]。"
+      ],
+      "pitfalls": [
+        "题目要求数值去重；如果要求保留重复次数，那是另一类计数题。",
+        "HashSet遍历顺序不固定，核对答案时按集合语义比较。"
+      ],
+      "complexity": "主解期望时间 O(n+m)，辅助空间 O(n+m) 的宽松上界；实际取决于两个集合中的不同值数。返回数组另占 O(k)，k为交集大小。",
+      "code": "import java.util.*;\n\nclass Solution {\n    public int[] intersection(int[] nums1, int[] nums2) {\n        Set<Integer> seen = new HashSet<>();\n        Set<Integer> result = new HashSet<>();\n        for (int value : nums1) {\n            seen.add(value);\n        }\n        for (int value : nums2) {\n            // seen 负责查找，result 负责答案去重。\n            if (seen.contains(value)) {\n                result.add(value);\n            }\n        }\n\n        int[] answer = new int[result.size()];\n        int index = 0;\n        for (int value : result) {\n            answer[index++] = value;\n        }\n        return answer;\n    }\n}",
+      "inputObject": {
+        "nums1": [
+          1,
+          2,
+          2,
+          1
+        ],
+        "nums2": [
+          2,
+          2
+        ]
+      },
+      "expectedValue": [
+        2
+      ],
+      "slug": "intersection-of-two-arrays",
+      "signature": "public int[] intersection(int[] nums1, int[] nums2)",
+      "english": "Intersection of Two Arrays",
+      "slug_page": "0349-intersection-of-two-arrays",
+      "input": "nums1 = [1, 2, 2, 1], nums2 = [2, 2]",
+      "mainClass": "leetcode.hashtable.LC0349IntersectionofTwoArrays",
+      "solutionClass": "Solution",
+      "java_file": "src/main/java/leetcode/hashtable/LC0349IntersectionofTwoArrays.java",
+      "adapted": "    static class Solution {\n        public int[] intersection(int[] nums1, int[] nums2) {\n            Set<Integer> seen = new HashSet<>();\n            Set<Integer> result = new HashSet<>();\n            for (int value : nums1) {\n                seen.add(value);\n            }\n            for (int value : nums2) {\n                // seen 负责查找，result 负责答案去重。\n                if (seen.contains(value)) {\n                    result.add(value);\n                }\n            }\n\n            int[] answer = new int[result.size()];\n            int index = 0;\n            for (int value : result) {\n                answer[index++] = value;\n            }\n            return answer;\n        }\n    }",
+      "sourceHash": "9529a69349b3c75634477fcd5e4fe59d4ff0143f65975a84b1e0aaa8ee54eac5",
+      "displayStart": 24,
+      "test_source": "与飞书本题“实例走过程”使用相同输入。",
+      "state": "主解用 HashSet；题设的数值范围0～1000也允许数组标记，后面给出这一版。先根据要保存的信息选择结构，再比较范围带来的优化空间。",
+      "transfer": "这道题本质是：查询另一个数组中有没有这个数，并让答案中的数值只出现一次。"
+    },
+    {
+      "id": 202,
+      "title": "快乐数",
+      "summary": "这道题本质是：反复生成下一个状态，判断最终到1，还是进入重复状态的环。",
+      "intuition": "按题意不断计算各位数字的平方和即可，难点是“什么时候停”。如果没到1却再次遇到同一个数，之后的变化也会完全重复，不必再算。把计算过的整个数存进 Set，就能发现环。",
+      "choice": "主解用 Set 保留历史状态，便于理解。这里记录的是每一轮的数，不是各个数位；getNext只负责把一个数变成下一个数。扩展用快慢指针检测同一条状态链，省掉集合。",
+      "steps": [
+        "当前 n 为1，成功结束。",
+        "若 seen 已包含 n，说明进入环，返回 false；否则记录 n。",
+        "调用 getNext(n)：不断用 %10 取末位、/10 去末位，将平方累加，然后回到第一步。"
+      ],
+      "trace": [
+        "n=19：先记录19；个位9贡献81，十位1贡献1，所以下一个数为82。",
+        "19 → 82 → 68 → 100 → 1；每轮先检查当前状态，遇到1返回 true。",
+        "非快乐数示例：2 → 4 → 16 → 37 → 58 → 89 → 145 → 42 → 20 → 4。",
+        "第二次遇到4时，seen中已经有4；后续还会走相同路线，所以返回 false。"
+      ],
+      "pitfalls": [
+        "seen记录的是轮次状态，例如19、82、68；记录9、1等单个数位不能判断整条链是否重复。",
+        "先把 sum 设为0；取完一位后必须 n /= 10，否则取位循环不会结束。"
+      ],
+      "complexity": "设首个数有 d 位、共经过 k 个不同状态：直观上界为 O(kd) 时间、O(k)空间。十进制平方和会迅速把大数压缩到有限范围，按整数n的位数可写为 O(log n) 时间，Set空间常用 O(log n) 上界；本题32位正整数下，状态范围有固定上界。",
+      "code": "import java.util.*;\n\nclass Solution {\n    public boolean isHappy(int n) {\n        Set<Integer> seen = new HashSet<>();\n        while (n != 1) {\n            if (seen.contains(n)) {\n                return false;\n            }\n            seen.add(n); // 保存本轮整个数，下一轮检查是否重复。\n            n = getNext(n);\n        }\n        return true;\n    }\n\n    private int getNext(int n) {\n        int sum = 0;\n        while (n > 0) {\n            int digit = n % 10;\n            sum += digit * digit;\n            n /= 10;\n        }\n        return sum;\n    }\n}",
+      "inputObject": {
+        "n": 19
+      },
+      "expectedValue": true,
+      "slug": "happy-number",
+      "signature": "public boolean isHappy(int n)",
+      "english": "Happy Number",
+      "slug_page": "0202-happy-number",
+      "input": "n = 19",
+      "mainClass": "leetcode.hashtable.LC0202HappyNumber",
+      "solutionClass": "Solution",
+      "java_file": "src/main/java/leetcode/hashtable/LC0202HappyNumber.java",
+      "adapted": "    static class Solution {\n        public boolean isHappy(int n) {\n            Set<Integer> seen = new HashSet<>();\n            while (n != 1) {\n                if (seen.contains(n)) {\n                    return false;\n                }\n                seen.add(n); // 保存本轮整个数，下一轮检查是否重复。\n                n = getNext(n);\n            }\n            return true;\n        }\n\n        private int getNext(int n) {\n            int sum = 0;\n            while (n > 0) {\n                int digit = n % 10;\n                sum += digit * digit;\n                n /= 10;\n            }\n            return sum;\n        }\n    }",
+      "sourceHash": "a098bb549040e95168f1d3d8e2df94b0f544331f44984f0fd138f1e699022331",
+      "displayStart": 23,
+      "test_source": "与飞书本题“实例走过程”使用相同输入。",
+      "state": "主解用 Set 保留历史状态，便于理解。这里记录的是每一轮的数，不是各个数位；getNext只负责把一个数变成下一个数。扩展用快慢指针检测同一条状态链，省掉集合。",
+      "transfer": "这道题本质是：反复生成下一个状态，判断最终到1，还是进入重复状态的环。"
+    },
+    {
+      "id": 1,
+      "title": "两数之和",
+      "summary": "这道题本质是：遍历当前数时，快速找到之前出现过的补数及其下标。",
+      "intuition": "先想枚举两个下标，时间 O(n²)。固定当前数x后，另一个数其实已经确定为 target-x，不必再枚举所有数。题目返回的是下标，所以只存数值的 Set 不够，要用 Map 将数值关联到下标。",
+      "choice": "map 的 key 是数值，value 是它之前出现的一个下标。循环开始时，map只包含下标小于i的元素。这个范围约定让当前元素不会和自己配对。",
+      "steps": [
+        "计算 need = target - nums[i]。",
+        "先查 need；如果存在，返回 map.get(need) 和 i。",
+        "查询失败后，才把 nums[i] → i 登记到 map。重复值覆盖旧下标也能保留一个可用位置。"
+      ],
+      "trace": [
+        "nums=[2,7,11,15]，target=9；初始 map={}。",
+        "i=0，当前2，需要7；没找到，登记 {2:0}。",
+        "i=1，当前7，需要2；命中下标0，返回 [0,1]。",
+        "再看 nums=[3,3]、target=6：第一个3先登记；第二个3查到第一个，返回 [0,1]。",
+        "如果先把当前3存进去再查询，会错误地把同一个下标当成两个元素。"
+      ],
+      "pitfalls": [
+        "不要写 map.containsValue(need)：补数存在于key，value保存下标；containsValue还需要线性扫描。",
+        "数组未排序，且要求原下标，不能直接套排序双指针而忽略原位置。"
+      ],
+      "complexity": "期望时间 O(n)，辅助空间 O(n)。题目保证恰有一组解；末尾空数组只是让方法返回路径完整。",
+      "code": "import java.util.*;\n\nclass Solution {\n    public int[] twoSum(int[] nums, int target) {\n        Map<Integer, Integer> map = new HashMap<>();\n        for (int i = 0; i < nums.length; i++) {\n            int need = target - nums[i];\n            // 此时 map 只含之前的元素，不会重复使用当前下标。\n            if (map.containsKey(need)) {\n                return new int[]{map.get(need), i};\n            }\n            map.put(nums[i], i);\n        }\n        return new int[0];\n    }\n}",
+      "inputObject": {
+        "nums": [
+          2,
+          7,
+          11,
+          15
+        ],
+        "target": 9
+      },
+      "expectedValue": [
+        0,
+        1
+      ],
+      "slug": "two-sum",
+      "signature": "public int[] twoSum(int[] nums, int target)",
+      "english": "Two Sum",
+      "slug_page": "0001-two-sum",
+      "input": "nums = [2, 7, 11, 15], target = 9",
+      "mainClass": "leetcode.hashtable.LC0001TwoSum",
+      "solutionClass": "Solution",
+      "java_file": "src/main/java/leetcode/hashtable/LC0001TwoSum.java",
+      "adapted": "    static class Solution {\n        public int[] twoSum(int[] nums, int target) {\n            Map<Integer, Integer> map = new HashMap<>();\n            for (int i = 0; i < nums.length; i++) {\n                int need = target - nums[i];\n                // 此时 map 只含之前的元素，不会重复使用当前下标。\n                if (map.containsKey(need)) {\n                    return new int[]{map.get(need), i};\n                }\n                map.put(nums[i], i);\n            }\n            return new int[0];\n        }\n    }",
+      "sourceHash": "29902f594ebfc1243b56c44525dd10a5b3c53d038ce57d8636e7bac34b5b9d58",
+      "displayStart": 24,
+      "test_source": "与飞书本题“实例走过程”使用相同输入。",
+      "state": "map 的 key 是数值，value 是它之前出现的一个下标。循环开始时，map只包含下标小于i的元素。这个范围约定让当前元素不会和自己配对。",
+      "transfer": "这道题本质是：遍历当前数时，快速找到之前出现过的补数及其下标。"
+    },
+    {
+      "id": 454,
+      "title": "四数相加 II",
+      "summary": "这道题本质是：把四层枚举拆成两组两数和，用“和 → 出现次数”统计互补组合。",
+      "intuition": "题目从四个数组中各取一个元素，直接枚举是 O(n⁴)。把等式 a+b+c+d=0 改写成 a+b=-(c+d)，先统计前两个数组所有下标对的和，后两个数组就能直接查询。注意题目数的是下标四元组的个数，相同数值来自不同下标也要分别计数。",
+      "choice": "count 的 key 是 nums1、nums2 的两数和，value 是得到这个和的下标对数量。Set只能告诉我们存在一个和，不能告诉我们它能配出几组答案。",
+      "steps": [
+        "两层循环遍历 nums1、nums2，用 getOrDefault(sum,0)+1 累加每种两数和。",
+        "两层循环遍历 nums3、nums4，计算 need=-(c+d)。",
+        "把 count.getOrDefault(need,0) 加到 result，而不是只加1。"
+      ],
+      "trace": [
+        "nums1=[1,2]，nums2=[-2,-1]，nums3=[-1,2]，nums4=[0,2]。",
+        "前两组得到 -1、0、0、1，因此 count={-1:1,0:2,1:1}。",
+        "c=-1,d=0，需要1，命中1次，result=1。",
+        "c=-1,d=2，需要-1，再命中1次，result=2；其余两对未命中。",
+        "返回2。反例四个数组都为[0,0]：前半有4对，后半有4对，共4×4=16，不能去重成1。"
+      ],
+      "pitfalls": [
+        "count.put(sum,1)会覆盖重复和的次数；必须累加。",
+        "18返回不重复数值组合，454统计下标组合；不要把三数／四数之和的去重搬过来。",
+        "原题n≤200、各元素绝对值≤2²⁸：两数和与最多200⁴个四元组均可用int。若扩大范围，要同时检查键、补数和答案是否改用long。"
+      ],
+      "complexity": "等长数组时，期望时间 O(n²)，辅助空间 O(n²)。一般长度a、b、c、d时为 O(ab+cd) 时间、O(ab)空间上界。",
+      "code": "import java.util.*;\n\nclass Solution {\n    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {\n        Map<Integer, Integer> count = new HashMap<>();\n        for (int a : nums1) {\n            for (int b : nums2) {\n                int sum = a + b;\n                count.put(sum, count.getOrDefault(sum, 0) + 1);\n            }\n        }\n\n        int result = 0;\n        for (int c : nums3) {\n            for (int d : nums4) {\n                int need = -(c + d);\n                // 一个补数可能对应多组下标对，要累加次数。\n                result += count.getOrDefault(need, 0);\n            }\n        }\n        return result;\n    }\n}",
+      "inputObject": {
+        "nums1": [
+          1,
+          2
+        ],
+        "nums2": [
+          -2,
+          -1
+        ],
+        "nums3": [
+          -1,
+          2
+        ],
+        "nums4": [
+          0,
+          2
+        ]
+      },
+      "expectedValue": 2,
+      "slug": "4sum-ii",
+      "signature": "public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4)",
+      "english": "4Sum II",
+      "slug_page": "0454-4sum-ii",
+      "input": "nums1 = [1, 2], nums2 = [-2, -1], nums3 = [-1, 2], nums4 = [0, 2]",
+      "mainClass": "leetcode.hashtable.LC04544SumII",
+      "solutionClass": "Solution",
+      "java_file": "src/main/java/leetcode/hashtable/LC04544SumII.java",
+      "adapted": "    static class Solution {\n        public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {\n            Map<Integer, Integer> count = new HashMap<>();\n            for (int a : nums1) {\n                for (int b : nums2) {\n                    int sum = a + b;\n                    count.put(sum, count.getOrDefault(sum, 0) + 1);\n                }\n            }\n\n            int result = 0;\n            for (int c : nums3) {\n                for (int d : nums4) {\n                    int need = -(c + d);\n                    // 一个补数可能对应多组下标对，要累加次数。\n                    result += count.getOrDefault(need, 0);\n                }\n            }\n            return result;\n        }\n    }",
+      "sourceHash": "1cd84a22dfae0d2390d885d0621e1512411e3e748ffc5d71aa734f07d1e63389",
+      "displayStart": 26,
+      "test_source": "与飞书本题“实例走过程”使用相同输入。",
+      "state": "count 的 key 是 nums1、nums2 的两数和，value 是得到这个和的下标对数量。Set只能告诉我们存在一个和，不能告诉我们它能配出几组答案。",
+      "transfer": "这道题本质是：把四层枚举拆成两组两数和，用“和 → 出现次数”统计互补组合。"
+    },
+    {
+      "id": 383,
+      "title": "赎金信",
+      "summary": "这道题本质是：magazine提供字符库存，ransomNote逐个消耗，任何库存不足就失败。",
+      "intuition": "先别急着比较两串是否相等。magazine允许有剩余，只要它能提供ransomNote需要的每一个字符即可。逐个查找再删除字符需要反复扫描；只有26个小写字母，直接记每种字母的库存。",
+      "choice": "沿用242的count命名和字符映射。区别在检查条件：242要求两边完全相等；383只要求提供方足够，结束时count可以为正。",
+      "steps": [
+        "若需求长度大于供给长度，直接返回 false。",
+        "遍历 magazine，增加对应字母的库存。",
+        "遍历 ransomNote，每次减1；某格变成负数就失败。全部消耗完成则成功。"
+      ],
+      "trace": [
+        "ransomNote=\"aa\"，magazine=\"aab\"；供给后 a=2、b=1。",
+        "消耗第一个a：a=1；消耗第二个a：a=0。",
+        "需求已全部满足，虽然 b=1 仍有剩余，也要返回 true。",
+        "若 magazine=\"ab\"：第一次消耗a后为0，第二次变成-1，立刻返回 false。"
+      ],
+      "pitfalls": [
+        "不能要求所有格子最后都归零，那会误判供给有剩余的情况。",
+        "需求每个字符只能消耗一次库存；Set无法区分一个a和两个a。"
+      ],
+      "complexity": "时间 O(n+m)，辅助空间 O(26)=O(1)，n、m为两串长度。使用charAt避免创建线性大小的临时字符数组。",
+      "code": "class Solution {\n    public boolean canConstruct(String ransomNote, String magazine) {\n        if (ransomNote.length() > magazine.length()) {\n            return false;\n        }\n\n        int[] count = new int[26];\n        for (int i = 0; i < magazine.length(); i++) {\n            count[magazine.charAt(i) - 'a']++;\n        }\n        for (int i = 0; i < ransomNote.length(); i++) {\n            int index = ransomNote.charAt(i) - 'a';\n            count[index]--;\n            // 可以有剩余，但不能出现欠缺。\n            if (count[index] < 0) {\n                return false;\n            }\n        }\n        return true;\n    }\n}",
+      "inputObject": {
+        "ransomNote": "aa",
+        "magazine": "aab"
+      },
+      "expectedValue": true,
+      "slug": "ransom-note",
+      "signature": "public boolean canConstruct(String ransomNote, String magazine)",
+      "english": "Ransom Note",
+      "slug_page": "0383-ransom-note",
+      "input": "ransomNote = \"aa\", magazine = \"aab\"",
+      "mainClass": "leetcode.hashtable.LC0383RansomNote",
+      "solutionClass": "Solution",
+      "java_file": "src/main/java/leetcode/hashtable/LC0383RansomNote.java",
+      "adapted": "    static class Solution {\n        public boolean canConstruct(String ransomNote, String magazine) {\n            if (ransomNote.length() > magazine.length()) {\n                return false;\n            }\n\n            int[] count = new int[26];\n            for (int i = 0; i < magazine.length(); i++) {\n                count[magazine.charAt(i) - 'a']++;\n            }\n            for (int i = 0; i < ransomNote.length(); i++) {\n                int index = ransomNote.charAt(i) - 'a';\n                count[index]--;\n                // 可以有剩余，但不能出现欠缺。\n                if (count[index] < 0) {\n                    return false;\n                }\n            }\n            return true;\n        }\n    }",
+      "sourceHash": "5314fc26f6b19e36db18972ba309a34d02a84441ce4964ae602ce0781b0fd0cb",
+      "displayStart": 24,
+      "test_source": "与飞书本题“实例走过程”使用相同输入。",
+      "state": "沿用242的count命名和字符映射。区别在检查条件：242要求两边完全相等；383只要求提供方足够，结束时count可以为正。",
+      "transfer": "这道题本质是：magazine提供字符库存，ransomNote逐个消耗，任何库存不足就失败。"
+    },
+    {
+      "id": 15,
+      "title": "三数之和",
+      "summary": "这道题本质是：排序后固定一个数，让另外两个数从两端夹逼，同时跳过重复数值组合。",
+      "intuition": "枚举三个位置是 O(n³)。固定一个数后，还要找两个数；可以哈希查询，但本题返回不重复数值组合，去重细节较多。题目不要求原下标，先排序：和小了就增大左端，和大了就减小右端，一次扫描解决固定i后的两数配对。",
+      "choice": "用排序+双指针作为主解。i、left、right严格递增排列为 i<left<right，保证三个下标不同；排序把相同值放在一起，才能按层去重。哈希不是不能做，而是这里双指针更便于统一移动、剪枝和去重。",
+      "steps": [
+        "排序数组，i从0枚举到n-3。若nums[i]>0，之后三个数都会大于0，可结束。",
+        "i>0且nums[i]==nums[i-1]时跳过当前i，避免重复的第一个值。",
+        "令left=i+1、right=n-1；和小于0则left++，大于0则right--。",
+        "和为0先保存答案，再跳过左右两端重复值，最后两个指针各走一步。"
+      ],
+      "trace": [
+        "nums=[-1,0,1,2,-1,-4]，排序得到 [-4,-1,-1,0,1,2]。",
+        "i=0固定-4：即使后两数取1、2，总和仍小于0；本轮没有答案。",
+        "i=1固定-1：left=2取-1，right=5取2，和为0，保存[-1,-1,2]。",
+        "跳过同值后两端向内移动：left=3取0，right=4取1，再得[-1,0,1]。",
+        "i=2也取-1，与上一轮固定值相同，直接跳过。",
+        "反例[-1,-1,2]说明两个-1可以同时入答案；不能因为nums[i]==nums[i+1]就跳过第一个-1。"
+      ],
+      "pitfalls": [
+        "固定值去重比较“本轮与上一轮”；左右指针去重发生在保存答案之后。",
+        "必须while(left<right)，相遇时只剩同一个位置，不能再取两次。",
+        "Arrays.sort会修改传入数组；若调用方要保留原顺序，应先复制，代价是O(n)空间。"
+      ],
+      "complexity": "时间 O(n²)，含排序O(n log n)。排除返回结果，Java原地基本类型排序通常计O(log n)栈空间；结果另占O(k)，k为返回的三元组数。",
+      "code": "import java.util.*;\n\nclass Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> result = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (nums[i] > 0) {\n                break;\n            }\n            // 同一层固定值只处理一次，仍允许一组中有相同数值。\n            if (i > 0 && nums[i] == nums[i - 1]) {\n                continue;\n            }\n\n            int left = i + 1;\n            int right = nums.length - 1;\n            while (left < right) {\n                long sum = (long) nums[i] + nums[left] + nums[right];\n                if (sum < 0) {\n                    left++;\n                } else if (sum > 0) {\n                    right--;\n                } else {\n                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    // 先保存，再跨过相同的左右值。\n                    while (left < right && nums[left] == nums[left + 1]) {\n                        left++;\n                    }\n                    while (left < right && nums[right] == nums[right - 1]) {\n                        right--;\n                    }\n                    left++;\n                    right--;\n                }\n            }\n        }\n        return result;\n    }\n}",
+      "inputObject": {
+        "nums": [
+          -1,
+          0,
+          1,
+          2,
+          -1,
+          -4
+        ]
+      },
+      "expectedValue": [
+        [
+          -1,
+          -1,
+          2
+        ],
+        [
+          -1,
+          0,
+          1
+        ]
+      ],
+      "slug": "3sum",
+      "signature": "public List<List<Integer>> threeSum(int[] nums)",
+      "english": "3Sum",
+      "slug_page": "0015-3sum",
+      "input": "nums = [-1, 0, 1, 2, -1, -4]",
+      "mainClass": "leetcode.hashtable.LC00153Sum",
+      "solutionClass": "Solution",
+      "java_file": "src/main/java/leetcode/hashtable/LC00153Sum.java",
+      "adapted": "    static class Solution {\n        public List<List<Integer>> threeSum(int[] nums) {\n            List<List<Integer>> result = new ArrayList<>();\n            Arrays.sort(nums);\n            for (int i = 0; i < nums.length - 2; i++) {\n                if (nums[i] > 0) {\n                    break;\n                }\n                // 同一层固定值只处理一次，仍允许一组中有相同数值。\n                if (i > 0 && nums[i] == nums[i - 1]) {\n                    continue;\n                }\n\n                int left = i + 1;\n                int right = nums.length - 1;\n                while (left < right) {\n                    long sum = (long) nums[i] + nums[left] + nums[right];\n                    if (sum < 0) {\n                        left++;\n                    } else if (sum > 0) {\n                        right--;\n                    } else {\n                        result.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                        // 先保存，再跨过相同的左右值。\n                        while (left < right && nums[left] == nums[left + 1]) {\n                            left++;\n                        }\n                        while (left < right && nums[right] == nums[right - 1]) {\n                            right--;\n                        }\n                        left++;\n                        right--;\n                    }\n                }\n            }\n            return result;\n        }\n    }",
+      "sourceHash": "336a7e33dc8b9a71e65ff6b4b23989f6b4eca8bdc0a97f82916a5640dfc507ff",
+      "displayStart": 23,
+      "test_source": "与飞书本题“实例走过程”使用相同输入。",
+      "state": "用排序+双指针作为主解。i、left、right严格递增排列为 i<left<right，保证三个下标不同；排序把相同值放在一起，才能按层去重。哈希不是不能做，而是这里双指针更便于统一移动、剪枝和去重。",
+      "transfer": "这道题本质是：排序后固定一个数，让另外两个数从两端夹逼，同时跳过重复数值组合。"
+    },
+    {
+      "id": 18,
+      "title": "四数之和",
+      "summary": "这道题本质是：在三数之和外再固定一个数，两层固定值去重，内部仍用双指针找目标和。",
+      "intuition": "四层枚举是 O(n⁴)。沿用15题，把k、i两个位置固定后，剩下两数仍能从两端查找，时间降为 O(n³)。题目目标可以是负数，四个数的和也可能超出int；不要机械照搬三数之和的“固定值>0就结束”。",
+      "choice": "k<i<left<right保证四个位置不同。k层去重与上一k比较，i层去重只在当前k内部比较。主解先保留最清楚的两层固定+双指针；范围剪枝在后面单独说明，先掌握正确骨架。",
+      "steps": [
+        "排序；k遍历到n-4，跳过与上一个k相同的数。",
+        "i从k+1遍历到n-3；只有i>k+1时才比较nums[i]和nums[i-1]。",
+        "left=i+1、right=n-1；用long求和，小了左移，大了右移。",
+        "相等时收集四元组，跳过左右重复值，再向内移动。"
+      ],
+      "trace": [
+        "nums=[1,0,-1,0,-2,2]，target=0；排序为[-2,-1,0,0,1,2]。",
+        "k=0取-2，i=1取-1；left=2取0，right=5取2，和=-1，left右移。",
+        "left=3仍取0，和仍为-1；left=4取1，和=0，保存[-2,-1,1,2]。",
+        "同一k下，i=2取0，left=3取0、right=5取2，保存[-2,0,0,2]。",
+        "i=3与本轮前一个i取值相同，跳过；之后k=1、i=2得到[-1,0,0,1]。",
+        "负数反例：[-5,-4,-3,-2]、target=-14。虽然-5>-14，四数仍能相加成-14，不能按“nums[k]>target”剪枝。"
+      ],
+      "pitfalls": [
+        "i的去重边界是i>k+1，不能写i>0，否则可能误删当前k下的第一个i。",
+        "必须先(long)nums[k]再加其余数；等int加完再强转已经来不及。四个10⁹会溢出int。",
+        "主解修改输入顺序；若复制后排序，另需O(n)空间。"
+      ],
+      "complexity": "时间 O(n³)，含排序。排除返回结果，Java排序通常计O(log n)栈空间；k个返回四元组另占O(k)。",
+      "code": "import java.util.*;\n\nclass Solution {\n    public List<List<Integer>> fourSum(int[] nums, int target) {\n        List<List<Integer>> result = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int k = 0; k < nums.length - 3; k++) {\n            if (k > 0 && nums[k] == nums[k - 1]) {\n                continue;\n            }\n            for (int i = k + 1; i < nums.length - 2; i++) {\n                // 只跳过当前 k 下面重复的第二个固定值。\n                if (i > k + 1 && nums[i] == nums[i - 1]) {\n                    continue;\n                }\n                int left = i + 1;\n                int right = nums.length - 1;\n                while (left < right) {\n                    long sum = (long) nums[k] + nums[i] + nums[left] + nums[right];\n                    if (sum < target) {\n                        left++;\n                    } else if (sum > target) {\n                        right--;\n                    } else {\n                        result.add(Arrays.asList(nums[k], nums[i], nums[left], nums[right]));\n                        while (left < right && nums[left] == nums[left + 1]) {\n                            left++;\n                        }\n                        while (left < right && nums[right] == nums[right - 1]) {\n                            right--;\n                        }\n                        left++;\n                        right--;\n                    }\n                }\n            }\n        }\n        return result;\n    }\n}",
+      "inputObject": {
+        "nums": [
+          1,
+          0,
+          -1,
+          0,
+          -2,
+          2
+        ],
+        "target": 0
+      },
+      "expectedValue": [
+        [
+          -2,
+          -1,
+          1,
+          2
+        ],
+        [
+          -2,
+          0,
+          0,
+          2
+        ],
+        [
+          -1,
+          0,
+          0,
+          1
+        ]
+      ],
+      "slug": "4sum",
+      "signature": "public List<List<Integer>> fourSum(int[] nums, int target)",
+      "english": "4Sum",
+      "slug_page": "0018-4sum",
+      "input": "nums = [1, 0, -1, 0, -2, 2], target = 0",
+      "mainClass": "leetcode.hashtable.LC00184Sum",
+      "solutionClass": "Solution",
+      "java_file": "src/main/java/leetcode/hashtable/LC00184Sum.java",
+      "adapted": "    static class Solution {\n        public List<List<Integer>> fourSum(int[] nums, int target) {\n            List<List<Integer>> result = new ArrayList<>();\n            Arrays.sort(nums);\n            for (int k = 0; k < nums.length - 3; k++) {\n                if (k > 0 && nums[k] == nums[k - 1]) {\n                    continue;\n                }\n                for (int i = k + 1; i < nums.length - 2; i++) {\n                    // 只跳过当前 k 下面重复的第二个固定值。\n                    if (i > k + 1 && nums[i] == nums[i - 1]) {\n                        continue;\n                    }\n                    int left = i + 1;\n                    int right = nums.length - 1;\n                    while (left < right) {\n                        long sum = (long) nums[k] + nums[i] + nums[left] + nums[right];\n                        if (sum < target) {\n                            left++;\n                        } else if (sum > target) {\n                            right--;\n                        } else {\n                            result.add(Arrays.asList(nums[k], nums[i], nums[left], nums[right]));\n                            while (left < right && nums[left] == nums[left + 1]) {\n                                left++;\n                            }\n                            while (left < right && nums[right] == nums[right - 1]) {\n                                right--;\n                            }\n                            left++;\n                            right--;\n                        }\n                    }\n                }\n            }\n            return result;\n        }\n    }",
+      "sourceHash": "92a0d708101f9dfe1ede9a32f6761fefdb47c08c5369f9bfa226686c9218476f",
+      "displayStart": 24,
+      "test_source": "与飞书本题“实例走过程”使用相同输入。",
+      "state": "k<i<left<right保证四个位置不同。k层去重与上一k比较，i层去重只在当前k内部比较。主解先保留最清楚的两层固定+双指针；范围剪枝在后面单独说明，先掌握正确骨架。",
+      "transfer": "这道题本质是：在三数之和外再固定一个数，两层固定值去重，内部仍用双指针找目标和。"
+    }
+  ]
+}

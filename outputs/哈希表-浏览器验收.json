@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "base": "http://127.0.0.1:8893",
+  "problems": [
+    {
+      "id": 242,
+      "steps": 71,
+      "changingStates": 15,
+      "hashCellsChecked": 1794,
+      "rewind": "PASS",
+      "themes": "PASS",
+      "resize": "PASS",
+      "playbackBreakpoint": "PASS",
+      "narrowViewport": "PASS"
+    },
+    {
+      "id": 349,
+      "steps": 24,
+      "changingStates": 14,
+      "hashCellsChecked": 48,
+      "rewind": "PASS",
+      "themes": "PASS",
+      "resize": "PASS",
+      "playbackBreakpoint": "PASS",
+      "narrowViewport": "PASS"
+    },
+    {
+      "id": 202,
+      "steps": 68,
+      "changingStates": 42,
+      "hashCellsChecked": 40,
+      "rewind": "PASS",
+      "themes": "PASS",
+      "resize": "PASS",
+      "playbackBreakpoint": "PASS",
+      "narrowViewport": "PASS"
+    },
+    {
+      "id": 1,
+      "steps": 10,
+      "changingStates": 7,
+      "hashCellsChecked": 5,
+      "rewind": "PASS",
+      "themes": "PASS",
+      "resize": "PASS",
+      "playbackBreakpoint": "PASS",
+      "narrowViewport": "PASS"
+    },
+    {
+      "id": 454,
+      "steps": 38,
+      "changingStates": 32,
+      "hashCellsChecked": 85,
+      "rewind": "PASS",
+      "themes": "PASS",
+      "resize": "PASS",
+      "playbackBreakpoint": "PASS",
+      "narrowViewport": "PASS"
+    },
+    {
+      "id": 383,
+      "steps": 20,
+      "changingStates": 18,
+      "hashCellsChecked": 468,
+      "rewind": "PASS",
+      "themes": "PASS",
+      "resize": "PASS",
+      "playbackBreakpoint": "PASS",
+      "narrowViewport": "PASS"
+    },
+    {
+      "id": 15,
+      "steps": 66,
+      "changingStates": 33,
+      "hashCellsChecked": 0,
+      "rewind": "PASS",
+      "themes": "PASS",
+      "resize": "PASS",
+      "playbackBreakpoint": "PASS",
+      "narrowViewport": "PASS"
+    },
+    {
+      "id": 18,
+      "steps": 85,
+      "changingStates": 46,
+      "hashCellsChecked": 0,
+      "rewind": "PASS",
+      "themes": "PASS",
+      "resize": "PASS",
+      "playbackBreakpoint": "PASS",
+      "narrowViewport": "PASS"
+    }
+  ],
+  "errors": [],
+  "bad": []
+}

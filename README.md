@@ -370,3 +370,27 @@ https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-
 在项目根目录重新校验：`py -3.11 .work/dp/scripts/verify.py --jdk <JDK17目录>`。重新录制：`.work/dp/scripts/capture.ps1 -JdkPath <JDK17目录>`，再执行 `node .work/dp/scripts/build.mjs`。浏览器验收使用Node 20及以上，并通过CODEX_TEST_MODULES指定包含Playwright的node_modules目录。
 
 VS Code图形界面的Java断点与变量面板未自动操作；可按本README的Debug步骤使用每题main。网页交互有独立浏览器验收记录。
+
+
+## 哈希表章节（2026-11-02）
+
+按用户要求读取项目历史对话后重构[飞书哈希表笔记](https://acn581cm6pdd.feishu.cn/wiki/F4qJw6Pr2if4LkkJBjBc8aM3nXd)，依据代码随想录哈希表主线覆盖8题。每题从第一思路、方法选择、实例、Java到易错点逐项说明；11份独立代码包含242排序、349数组标记、202快慢指针扩展。原有4个嵌入表格块保持原样；单元格内容因缺少读取权限未审计。
+
+[完整笔记](docs/哈希表.md) · [在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=%E5%93%88%E5%B8%8C%E8%A1%A8) · [代码验收](outputs/哈希表-代码验收.json) · [浏览器验收](outputs/哈希表-浏览器验收.json)
+
+8个独立页面使用与本章主解、实例一致的Java17/JDI轨迹，展示字符计数、Set/Map内容、补数、次数、状态环和双指针。固定实例可步进、回退、播放和设播放断点；网页不执行任意输入。改输入须在对应main修改后重新编译、运行和录制。保留公共配色、深浅主题、微软雅黑与可拖动面板，未改动其他题目实现。
+
+| 题号 | Java | 独立调试器 |
+|---|---|---|
+| 242 | [有效的字母异位词](src/main/java/leetcode/hashtable/LC0242ValidAnagram.java) | [打开](docs/problems/0242-valid-anagram/index.html) |
+| 349 | [两个数组的交集](src/main/java/leetcode/hashtable/LC0349IntersectionofTwoArrays.java) | [打开](docs/problems/0349-intersection-of-two-arrays/index.html) |
+| 202 | [快乐数](src/main/java/leetcode/hashtable/LC0202HappyNumber.java) | [打开](docs/problems/0202-happy-number/index.html) |
+| 1 | [两数之和](src/main/java/leetcode/hashtable/LC0001TwoSum.java) | [打开](docs/problems/0001-two-sum/index.html) |
+| 454 | [四数相加 II](src/main/java/leetcode/hashtable/LC04544SumII.java) | [打开](docs/problems/0454-4sum-ii/index.html) |
+| 383 | [赎金信](src/main/java/leetcode/hashtable/LC0383RansomNote.java) | [打开](docs/problems/0383-ransom-note/index.html) |
+| 15 | [三数之和](src/main/java/leetcode/hashtable/LC00153Sum.java) | [打开](docs/problems/0015-3sum/index.html) |
+| 18 | [四数之和](src/main/java/leetcode/hashtable/LC00184Sum.java) | [打开](docs/problems/0018-4sum/index.html) |
+
+验证：11份代码均通过Java8独立编译及2403组对照检查；8个main经Java17运行，轨迹最终返回与expected一致。组合核对保留重复结果数量，未在力扣在线提交，也未操作VS Code界面。
+
+复验：`py -3.11 .work/hashtable/scripts/verify.py --jdk <JDK目录>`；重录：`.work/hashtable/scripts/capture.ps1 -JdkPath <JDK17目录>`；构建：`node .work/hashtable/scripts/build.mjs`。浏览器复验先服务docs目录，设置PREVIEW_URL与CODEX_TEST_MODULES（含Playwright）后运行`.work/hashtable/scripts/browser.cjs`。main新增包、import、外层类与static，不改变笔记主解逻辑；原始力扣入口模板与目录来源保存在imports中。

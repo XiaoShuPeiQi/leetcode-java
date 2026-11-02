@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "checks": 2403,
+  "java8": "C:\\Program Files\\Java\\jdk1.8.0_341",
+  "variants": [
+    {
+      "id": 242,
+      "variant": "主解",
+      "cases": 225,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 242,
+      "variant": "排序后逐位比较",
+      "cases": 225,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 349,
+      "variant": "主解",
+      "cases": 181,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 349,
+      "variant": "固定范围数组标记",
+      "cases": 181,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 202,
+      "variant": "主解",
+      "cases": 302,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 202,
+      "variant": "快慢指针判环",
+      "cases": 302,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 1,
+      "variant": "主解",
+      "cases": 152,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 454,
+      "variant": "主解",
+      "cases": 162,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 383,
+      "variant": "主解",
+      "cases": 225,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 15,
+      "variant": "主解",
+      "cases": 223,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 18,
+      "variant": "主解",
+      "cases": 225,
+      "standaloneJava8": "PASS"
+    }
+  ],
+  "seed": 20261102,
+  "oracle": "frequency/sorted strings, set intersection, brute force index combinations; combination multiplicity is retained during result comparison"
+}

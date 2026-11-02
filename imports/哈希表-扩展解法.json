@@ -1,0 +1,29 @@
+{
+  "242": [
+    {
+      "name": "排序后逐位比较",
+      "why": "学习扩展：把同一种字符排在相邻位置，再逐位比较。比数组计数慢，但不依赖26个计数格；本实现比较Java char，不能直接当成任意Unicode字素的处理方案。",
+      "trace": "同样输入aab、aba，排序后都变成aab，每一位都相等。",
+      "complexity": "时间O(n log n+m log m)，char数组占O(n+m)辅助空间。",
+      "code": "import java.util.*;\n\nclass Solution {\n    public boolean isAnagram(String s, String t) {\n        if (s.length() != t.length()) {\n            return false;\n        }\n        char[] first = s.toCharArray();\n        char[] second = t.toCharArray();\n        Arrays.sort(first);\n        Arrays.sort(second);\n        return Arrays.equals(first, second);\n    }\n}"
+    }
+  ],
+  "349": [
+    {
+      "name": "固定范围数组标记",
+      "why": "对应原文Java数组思路：题设0≤nums[i]≤1000，直接用数值当下标。inFirst保存nums1中是否存在，inResult保存交集是否已记录。与Set的差别在键如何存储，查找和答案去重仍是两件事。",
+      "trace": "仍用[1,2,2,1]和[2,2]：inFirst[2]=true；两个2都把inResult[2]设为true，最后扫描只输出一次2。",
+      "complexity": "时间O(n+m+U)，辅助空间O(U)，U=1001；题设下为常量。范围扩大或有负数时不能原样套用。",
+      "code": "class Solution {\n    public int[] intersection(int[] nums1, int[] nums2) {\n        boolean[] inFirst = new boolean[1001];\n        boolean[] inResult = new boolean[1001];\n        for (int value : nums1) {\n            inFirst[value] = true;\n        }\n        int size = 0;\n        for (int value : nums2) {\n            if (inFirst[value] && !inResult[value]) {\n                inResult[value] = true;\n                size++;\n            }\n        }\n        int[] answer = new int[size];\n        int index = 0;\n        for (int value = 0; value < inResult.length; value++) {\n            if (inResult[value]) {\n                answer[index++] = value;\n            }\n        }\n        return answer;\n    }\n}"
+    }
+  ],
+  "202": [
+    {
+      "name": "快慢指针判环",
+      "why": "对应原文Java快慢指针版本：把getNext看作“下一节点”。慢指针每轮一步，快指针两步；有限状态链有环时两者会相遇。到1后getNext(1)仍为1，所以相遇于1代表成功，其他位置代表非快乐数环。",
+      "trace": "n=19：慢/快依次为82/68、68/1、100/1、1/1；相遇值为1。n=2最终在非1环内相遇，返回false。",
+      "complexity": "时间仍由状态链和取位计算决定，常用O(log n)上界；辅助空间O(1)，代价是每轮调用getNext更多次。",
+      "code": "class Solution {\n    public boolean isHappy(int n) {\n        int slow = n;\n        int fast = n;\n        // 初始相同也要先移动一次，不能一开始就判相遇。\n        do {\n            slow = getNext(slow);\n            fast = getNext(getNext(fast));\n        } while (slow != fast);\n        return slow == 1;\n    }\n\n    private int getNext(int n) {\n        int sum = 0;\n        while (n > 0) {\n            int digit = n % 10;\n            sum += digit * digit;\n            n /= 10;\n        }\n        return sum;\n    }\n}"
+    }
+  ]
+}
