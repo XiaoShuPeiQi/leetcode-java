@@ -39,6 +39,6 @@ for(const p of meta.problems){
 assert.equal(catalog.length,before+8);fs.writeFileSync('docs/assets/catalog.js','window.CATALOG = '+JSON.stringify(catalog).replace(/</g,'\\u003c')+';\n');
 let home=fs.readFileSync('docs/index.html','utf8');
 if(!home.includes('data-chapter="哈希表"'))home=home.replace('<button data-chapter="动态规划">动态规划</button>','<button data-chapter="动态规划">动态规划</button><button data-chapter="哈希表">哈希表</button>');
-home=home.replace(/id="problem-count">\d+/,`id="problem-count">${catalog.length}`).replace(/id="all-count">\d+/,`id="all-count">${catalog.length}`).replace(/id="chapter-count">\d+/,'id="chapter-count">05');
+home=home.replace(/id="problem-count">\d+/,`id="problem-count">${catalog.length}`).replace(/id="all-count">\d+/,`id="all-count">${catalog.length}`).replace(/id="chapter-count">\d+/,`id="chapter-count">${new Set(catalog.map(p=>p.chapter)).size}`);
 fs.writeFileSync('docs/index.html',home);fs.writeFileSync('outputs/哈希表-调试器验收.json',JSON.stringify({source:meta.source_url,problems:reports},null,2)+'\n');
 console.log('8 independent Java/JDI hash-table pages built.');

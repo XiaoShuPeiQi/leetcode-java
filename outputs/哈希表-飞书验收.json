@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "document": "https://acn581cm6pdd.feishu.cn/wiki/F4qJw6Pr2if4LkkJBjBc8aM3nXd",
+  "revision": 84,
+  "problems": 8,
+  "javaBlocks": 11,
+  "originalResourceBlocksPreserved": 4,
+  "fullTextAndCodeMatch": true,
+  "linksMatch": true,
+  "patches": 12,
+  "sheetCellData": "Not read: sheets:spreadsheet:read is not granted; original embedded sheet blocks remain untouched"
+}
