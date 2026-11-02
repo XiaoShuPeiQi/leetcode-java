@@ -1,0 +1,129 @@
+{
+  "status": "PASS",
+  "revision": 72,
+  "javaBlocks": 24,
+  "debuggers": 18,
+  "originalSummaryTable": "unchanged including block IDs",
+  "patches": [
+    {
+      "scope": "reading-guide",
+      "revision": 49,
+      "result": "success",
+      "updated_blocks_count": null
+    },
+    {
+      "scope": "group-1",
+      "revision": 50,
+      "result": "success",
+      "updated_blocks_count": null
+    },
+    {
+      "scope": "group-2",
+      "revision": 51,
+      "result": "success",
+      "updated_blocks_count": null
+    },
+    {
+      "scope": "group-3",
+      "revision": 52,
+      "result": "success",
+      "updated_blocks_count": null
+    },
+    {
+      "scope": "group-4",
+      "revision": 53,
+      "result": "success",
+      "updated_blocks_count": null
+    },
+    {
+      "scope": "group-5",
+      "revision": 54,
+      "result": "success",
+      "updated_blocks_count": null
+    },
+    {
+      "scope": "group-6",
+      "revision": 55,
+      "result": "success",
+      "updated_blocks_count": null
+    },
+    {
+      "scope": "group-7",
+      "revision": 56,
+      "result": "success",
+      "updated_blocks_count": null
+    },
+    {
+      "scope": "summary-heading",
+      "revision": 57,
+      "result": "success",
+      "updated_blocks_count": null
+    },
+    {
+      "scope": "summary-notes",
+      "revision": 58,
+      "result": "success",
+      "updated_blocks_count": null
+    }
+  ],
+  "commentPatches": [
+    {
+      "javaIndex": 0,
+      "revision": 59
+    },
+    {
+      "javaIndex": 2,
+      "revision": 60
+    },
+    {
+      "javaIndex": 4,
+      "revision": 61
+    },
+    {
+      "javaIndex": 5,
+      "revision": 62
+    },
+    {
+      "javaIndex": 6,
+      "revision": 63
+    },
+    {
+      "javaIndex": 8,
+      "revision": 64
+    },
+    {
+      "javaIndex": 11,
+      "revision": 65
+    },
+    {
+      "javaIndex": 13,
+      "revision": 66
+    },
+    {
+      "javaIndex": 15,
+      "revision": 67
+    },
+    {
+      "javaIndex": 17,
+      "revision": 68
+    },
+    {
+      "javaIndex": 18,
+      "revision": 69
+    },
+    {
+      "javaIndex": 19,
+      "revision": 70
+    },
+    {
+      "javaIndex": 20,
+      "revision": 71
+    },
+    {
+      "javaIndex": 21,
+      "revision": 72
+    }
+  ],
+  "commentOnlyBodyAudit": "PASS; non-Java document content unchanged",
+  "commentJava8Compile": "18 primary blocks PASS; all executable tokens unchanged"
+}

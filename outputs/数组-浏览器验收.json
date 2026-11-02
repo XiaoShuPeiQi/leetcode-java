@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "pages": 18,
+  "regressionPages": 5,
+  "catalogEntries": 133,
+  "checks": 924,
+  "base": "http://127.0.0.1:8892",
+  "errors": [],
+  "failed": []
+}

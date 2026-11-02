@@ -1,0 +1,1155 @@
+{
+  "source_url": "https://acn581cm6pdd.feishu.cn/wiki/SYdww8LbniCUBckZHRDcZ8QSnWb",
+  "problems": [
+    {
+      "id": 704,
+      "title": "二分查找",
+      "slug": "binary-search",
+      "group": 1,
+      "summary": "在有序数组中，用一次比较排除半个候选区间。",
+      "think": [
+        "先想到从头扫描，最多看n个数。题目给出升序，比较中点后，一整侧都能排除。",
+        "先约定候选区间为[left, right]，两端都可能是答案。left==right时还剩一个数，仍要检查。",
+        "nums[mid]偏小，连同mid一起排除左侧；偏大则排除右侧。相等直接返回下标；区间空了返回-1。"
+      ],
+      "state": "left、right是尚未排除的闭区间；mid是本轮被检查的下标。",
+      "walk": "nums=[-1,0,3,5,9,12], target=9\n[0,5] → mid=2，3<9 → left=3\n[3,5] → mid=4，9==9 → 返回4",
+      "pitfall": "闭区间必须配套right=n-1、left<=right、right=mid-1；不要把另一种区间写法混进来。mid用left+(right-left)/2。",
+      "cost": "时间O(log n)，额外空间O(1)。",
+      "code": "class Solution {\n    public int search(int[] nums, int target) {\n        int left = 0;\n        int right = nums.length - 1;\n        while (left <= right) { // 闭区间剩一个元素时仍要查\n            int mid = left + (right - left) / 2;\n            if (nums[mid] < target) {\n                left = mid + 1;\n            } else if (nums[mid] > target) {\n                right = mid - 1;\n            } else {\n                return mid;\n            }\n        }\n        return -1;\n    }\n}",
+      "inputs": {
+        "nums": [
+          -1,
+          0,
+          3,
+          5,
+          9,
+          12
+        ],
+        "target": 9
+      },
+      "expected": 4,
+      "call": "search(nums, target)",
+      "ret": "int",
+      "choice": "",
+      "variants": [
+        {
+          "name": "左闭右开区间",
+          "basis": "对应代码随想录的第二种区间定义。算法目标相同，边界约定不同。",
+          "steps": [
+            "候选为[left,right)，right初始化为n；left==right表示空区间，所以用left<right。",
+            "mid偏大时right=mid，mid已被排除；偏小时left=mid+1。两种写法任选一种整体记忆。"
+          ],
+          "walk": "同一输入，初始[0,6) → mid=3值5 → left=4；[4,6) → mid=5值12 → right=5；[4,5) → mid=4值9 → 返回4。",
+          "cost": "时间O(log n)，额外空间O(1)。",
+          "code": "class Solution {\n    public int search(int[] nums, int target) {\n        int left = 0;\n        int right = nums.length;\n        while (left < right) {\n            int mid = left + (right - left) / 2;\n            if (nums[mid] < target) {\n                left = mid + 1;\n            } else if (nums[mid] > target) {\n                right = mid;\n            } else {\n                return mid;\n            }\n        }\n        return -1;\n    }\n}"
+        }
+      ],
+      "url": "https://leetcode.cn/problems/binary-search/",
+      "page_slug": "0704-binary-search",
+      "english": "Binary Search",
+      "java_file": "src/main/java/leetcode/array/LC0704BinarySearch.java",
+      "mainClass": "leetcode.array.LC0704BinarySearch",
+      "sourceHash": "f38d72e30c7d849670c249d88d91bb1857ea6c75dee8c4bd703be60399afe4cc",
+      "adapted": "    static class Solution {\n        public int search(int[] nums, int target) {\n            int left = 0;\n            int right = nums.length - 1;\n            while (left <= right) { // 闭区间剩一个元素时仍要查\n                int mid = left + (right - left) / 2;\n                if (nums[mid] < target) {\n                    left = mid + 1;\n                } else if (nums[mid] > target) {\n                    right = mid - 1;\n                } else {\n                    return mid;\n                }\n            }\n            return -1;\n        }\n    }",
+      "displayStart": 24,
+      "input": "nums = [-1, 0, 3, 5, 9, 12], target = 9",
+      "inputObject": {
+        "nums": [
+          -1,
+          0,
+          3,
+          5,
+          9,
+          12
+        ],
+        "target": 9
+      },
+      "expectedValue": 4,
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/binary-search/"
+    },
+    {
+      "id": 35,
+      "title": "搜索插入位置",
+      "slug": "search-insert-position",
+      "group": 1,
+      "summary": "找第一个大于等于target的位置，允许答案等于数组长度。",
+      "think": [
+        "逐个找第一个不小于target的数可以做，但升序允许二分。",
+        "沿用704的闭区间：小于target的数全部放到left左侧；大于target的数全部放到right右侧。命中则直接返回。",
+        "若没命中，退出时left=right+1。left前面都小于target，left就是应插入的位置。"
+      ],
+      "state": "left是尚未排除的起点；退出后转为插入下标，可以是0或n。",
+      "walk": "nums=[1,3,5,6], target=2\n[0,3] → mid=1，3>2 → right=0\n[0,0] → mid=0，1<2 → left=1\nleft=1>right=0 → 在下标1插入2",
+      "pitfall": "本题原数组无重复。若推广为有重复时找最左插入位置，命中后不能立即返回，要继续找左边界。",
+      "cost": "时间O(log n)，额外空间O(1)。",
+      "code": "class Solution {\n    public int searchInsert(int[] nums, int target) {\n        int left = 0;\n        int right = nums.length - 1;\n        while (left <= right) {\n            int mid = left + (right - left) / 2;\n            if (nums[mid] < target) {\n                left = mid + 1;\n            } else if (nums[mid] > target) {\n                right = mid - 1;\n            } else {\n                return mid;\n            }\n        }\n        return left; // 未命中时，left就是插入位置\n    }\n}",
+      "inputs": {
+        "nums": [
+          1,
+          3,
+          5,
+          6
+        ],
+        "target": 2
+      },
+      "expected": 1,
+      "call": "searchInsert(nums, target)",
+      "ret": "int",
+      "choice": "",
+      "variants": [],
+      "url": "https://leetcode.cn/problems/search-insert-position/",
+      "page_slug": "0035-search-insert-position",
+      "english": "Search Insert Position",
+      "java_file": "src/main/java/leetcode/array/LC0035SearchInsertPosition.java",
+      "mainClass": "leetcode.array.LC0035SearchInsertPosition",
+      "sourceHash": "78366b85bf2784c3d84a5f1cdc4f1ea3aa07480aa105391205a284ede62a5199",
+      "adapted": "    static class Solution {\n        public int searchInsert(int[] nums, int target) {\n            int left = 0;\n            int right = nums.length - 1;\n            while (left <= right) {\n                int mid = left + (right - left) / 2;\n                if (nums[mid] < target) {\n                    left = mid + 1;\n                } else if (nums[mid] > target) {\n                    right = mid - 1;\n                } else {\n                    return mid;\n                }\n            }\n            return left; // 未命中时，left就是插入位置\n        }\n    }",
+      "displayStart": 24,
+      "input": "nums = [1, 3, 5, 6], target = 2",
+      "inputObject": {
+        "nums": [
+          1,
+          3,
+          5,
+          6
+        ],
+        "target": 2
+      },
+      "expectedValue": 1,
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/search-insert-position/"
+    },
+    {
+      "id": 34,
+      "title": "在排序数组中查找元素的第一个和最后一个位置",
+      "slug": "find-first-and-last-position-of-element-in-sorted-array",
+      "group": 1,
+      "summary": "命中target后先记下候选，再继续向所求边界逼近。",
+      "think": [
+        "704只能找一个下标；重复值可能横跨mid两边，命中不能结束。",
+        "找左边界：命中先记录answer，再令right=mid-1；找右边界：命中先记录answer，再令left=mid+1。",
+        "把两次搜索写成同一个辅助函数，用findLeft只控制相等时走哪边；未命中保持answer=-1。"
+      ],
+      "state": "answer是已见过的有效候选，不随区间缩小而丢失；findLeft表示本次搜索方向。",
+      "walk": "nums=[5,7,7,8,8,10], target=8\n找左：mid=2值7 → left=3；mid=4值8 → answer=4,right=3；mid=3值8 → answer=3\n找右：mid=2值7 → left=3；mid=4值8 → answer=4,left=5；mid=5值10 → right=4\n返回[3,4]",
+      "pitfall": "不能只在命中后线性向两边扩展，否则全相等时退化为O(n)。空数组两次搜索都返回-1。",
+      "cost": "两次二分，总时间O(log n)，额外空间O(1)。",
+      "code": "class Solution {\n    public int[] searchRange(int[] nums, int target) {\n        int first = findBoundary(nums, target, true);\n        int last = findBoundary(nums, target, false);\n        return new int[]{first, last};\n    }\n\n    private int findBoundary(int[] nums, int target, boolean findLeft) {\n        int left = 0;\n        int right = nums.length - 1;\n        int answer = -1;\n        while (left <= right) {\n            int mid = left + (right - left) / 2;\n            if (nums[mid] < target) {\n                left = mid + 1;\n            } else if (nums[mid] > target) {\n                right = mid - 1;\n            } else {\n                answer = mid; // 先保存命中，再继续找边界\n                if (findLeft) {\n                    right = mid - 1;\n                } else {\n                    left = mid + 1;\n                }\n            }\n        }\n        return answer;\n    }\n}",
+      "inputs": {
+        "nums": [
+          5,
+          7,
+          7,
+          8,
+          8,
+          10
+        ],
+        "target": 8
+      },
+      "expected": [
+        3,
+        4
+      ],
+      "call": "searchRange(nums, target)",
+      "ret": "int[]",
+      "choice": "",
+      "variants": [],
+      "url": "https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/",
+      "page_slug": "0034-find-first-and-last-position-of-element-in-sorted-array",
+      "english": "Find First And Last Position Of Element In Sorted Array",
+      "java_file": "src/main/java/leetcode/array/LC0034FindFirstAndLastPositionOfElementInSortedArray.java",
+      "mainClass": "leetcode.array.LC0034FindFirstAndLastPositionOfElementInSortedArray",
+      "sourceHash": "8a7a5192d9f198842f7bdaadd329033306d81747d0710fe55d66cab0dbd6d0c8",
+      "adapted": "    static class Solution {\n        public int[] searchRange(int[] nums, int target) {\n            int first = findBoundary(nums, target, true);\n            int last = findBoundary(nums, target, false);\n            return new int[]{first, last};\n        }\n\n        private int findBoundary(int[] nums, int target, boolean findLeft) {\n            int left = 0;\n            int right = nums.length - 1;\n            int answer = -1;\n            while (left <= right) {\n                int mid = left + (right - left) / 2;\n                if (nums[mid] < target) {\n                    left = mid + 1;\n                } else if (nums[mid] > target) {\n                    right = mid - 1;\n                } else {\n                    answer = mid; // 先保存命中，再继续找边界\n                    if (findLeft) {\n                        right = mid - 1;\n                    } else {\n                        left = mid + 1;\n                    }\n                }\n            }\n            return answer;\n        }\n    }",
+      "displayStart": 24,
+      "input": "nums = [5, 7, 7, 8, 8, 10], target = 8",
+      "inputObject": {
+        "nums": [
+          5,
+          7,
+          7,
+          8,
+          8,
+          10
+        ],
+        "target": 8
+      },
+      "expectedValue": [
+        3,
+        4
+      ],
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/"
+    },
+    {
+      "id": 69,
+      "title": "x 的平方根",
+      "slug": "sqrtx",
+      "group": 1,
+      "summary": "在整数答案空间里，找平方不超过x的最大整数。",
+      "think": [
+        "从0试到x能找到答案，但不必逐个试：非负整数的平方单调递增。",
+        "搜索[0,x]，mid²<=x说明mid可行，保存并向右找更大的；否则向左缩。",
+        "最后保存的answer就是向下取整的平方根。这里搜索的是答案，不是某个数组下标。"
+      ],
+      "state": "answer是目前最大的可行整数；square必须先把mid转long再相乘。",
+      "walk": "x=8\n[0,8] → mid=4，16>8 → right=3\n[0,3] → mid=1，1<=8 → answer=1,left=2\n[2,3] → mid=2，4<=8 → answer=2,left=3\nmid=3，9>8 → 结束，返回2",
+      "pitfall": "(long)(mid*mid)转换得太晚；应写(long)mid*mid。x=0答案是0。",
+      "cost": "时间O(log(x+1))，额外空间O(1)。",
+      "code": "class Solution {\n    public int mySqrt(int x) {\n        int left = 0;\n        int right = x;\n        int answer = 0;\n        while (left <= right) {\n            int mid = left + (right - left) / 2;\n            long square = (long) mid * mid; // 先转long，再乘\n            if (square <= x) {\n                answer = mid;\n                left = mid + 1;\n            } else {\n                right = mid - 1;\n            }\n        }\n        return answer;\n    }\n}",
+      "inputs": {
+        "x": 8
+      },
+      "expected": 2,
+      "call": "mySqrt(x)",
+      "ret": "int",
+      "choice": "",
+      "variants": [],
+      "url": "https://leetcode.cn/problems/sqrtx/",
+      "page_slug": "0069-sqrtx",
+      "english": "Sqrtx",
+      "java_file": "src/main/java/leetcode/array/LC0069Sqrtx.java",
+      "mainClass": "leetcode.array.LC0069Sqrtx",
+      "sourceHash": "c0ae0fb0e9fb15cf522ab3870a2689d99ccf76c7f67080f8d5ff10617b28f158",
+      "adapted": "    static class Solution {\n        public int mySqrt(int x) {\n            int left = 0;\n            int right = x;\n            int answer = 0;\n            while (left <= right) {\n                int mid = left + (right - left) / 2;\n                long square = (long) mid * mid; // 先转long，再乘\n                if (square <= x) {\n                    answer = mid;\n                    left = mid + 1;\n                } else {\n                    right = mid - 1;\n                }\n            }\n            return answer;\n        }\n    }",
+      "displayStart": 23,
+      "input": "x = 8",
+      "inputObject": {
+        "x": 8
+      },
+      "expectedValue": 2,
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/sqrtx/"
+    },
+    {
+      "id": 367,
+      "title": "有效的完全平方数",
+      "slug": "valid-perfect-square",
+      "group": 1,
+      "summary": "沿用平方根的单调性，但这次必须精确命中平方值。",
+      "think": [
+        "题目问是否存在整数r使r²=num，不需要浮点开方。",
+        "在[1,num]二分：平方偏小向右，偏大向左，等于立即返回true。",
+        "和69的区别在返回目标：69保留不超过x的最大候选，本题只认精确相等。"
+      ],
+      "state": "left、right是整数根的候选范围；square用long避免中间乘法溢出。",
+      "walk": "num=16\nmid=8 → 64偏大；mid=4 → 16恰好相等 → true\n同一写法在num=14时会缩成空区间 → false",
+      "pitfall": "不要用浮点数相等判断；题目保证num为正整数。",
+      "cost": "时间O(log num)，额外空间O(1)。",
+      "code": "class Solution {\n    public boolean isPerfectSquare(int num) {\n        int left = 1;\n        int right = num;\n        while (left <= right) {\n            int mid = left + (right - left) / 2;\n            long square = (long) mid * mid;\n            if (square < num) {\n                left = mid + 1;\n            } else if (square > num) {\n                right = mid - 1;\n            } else {\n                return true; // 本题只接受精确命中\n            }\n        }\n        return false;\n    }\n}",
+      "inputs": {
+        "num": 16
+      },
+      "expected": true,
+      "call": "isPerfectSquare(num)",
+      "ret": "boolean",
+      "choice": "",
+      "variants": [],
+      "url": "https://leetcode.cn/problems/valid-perfect-square/",
+      "page_slug": "0367-valid-perfect-square",
+      "english": "Valid Perfect Square",
+      "java_file": "src/main/java/leetcode/array/LC0367ValidPerfectSquare.java",
+      "mainClass": "leetcode.array.LC0367ValidPerfectSquare",
+      "sourceHash": "9a5f3bbd6caa6b89a68462109c8d92597cb528c3d048e92e33c2a80ca4c7f641",
+      "adapted": "    static class Solution {\n        public boolean isPerfectSquare(int num) {\n            int left = 1;\n            int right = num;\n            while (left <= right) {\n                int mid = left + (right - left) / 2;\n                long square = (long) mid * mid;\n                if (square < num) {\n                    left = mid + 1;\n                } else if (square > num) {\n                    right = mid - 1;\n                } else {\n                    return true; // 本题只接受精确命中\n                }\n            }\n            return false;\n        }\n    }",
+      "displayStart": 23,
+      "input": "num = 16",
+      "inputObject": {
+        "num": 16
+      },
+      "expectedValue": true,
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/valid-perfect-square/"
+    },
+    {
+      "id": 27,
+      "title": "移除元素",
+      "slug": "remove-element",
+      "group": 2,
+      "summary": "把要保留的元素依次写到前面，数组长度不变，只返回有效长度。",
+      "think": [
+        "遇到val就把后面整体左移，会反复搬运，最坏O(n²)。题目只检查前k项，不要求真的缩短数组。",
+        "fast负责读原数据，slow负责下一次写入。nums[fast]!=val才写入，随后slow前进。",
+        "始终slow<=fast，覆盖发生在已读区域，不会破坏后面尚未扫描的数据。最后slow就是有效元素数。"
+      ],
+      "state": "[0,slow)是已保留的有效前缀；fast是当前读下标；[slow,fast)不再关心。",
+      "walk": "nums=[3,2,2,3], val=3\nfast=0值3 → 跳过，slow=0\nfast=1值2 → 写nums[0]=2，slow=1\nfast=2值2 → 写nums[1]=2，slow=2\nfast=3值3 → 跳过；返回2，仅前缀[2,2]有效",
+      "pitfall": "返回slow，不是nums.length；不要把尾部残留值当成错误。本题允许改变顺序，主解额外保留了相对顺序。",
+      "cost": "时间O(n)，额外空间O(1)。",
+      "code": "class Solution {\n    public int removeElement(int[] nums, int val) {\n        int slow = 0; // 下次写入位置，也是有效长度\n        for (int fast = 0; fast < nums.length; fast++) {\n            if (nums[fast] != val) {\n                nums[slow] = nums[fast];\n                slow++;\n            }\n        }\n        return slow;\n    }\n}",
+      "inputs": {
+        "nums": [
+          3,
+          2,
+          2,
+          3
+        ],
+        "val": 3
+      },
+      "expected": [
+        2,
+        2
+      ],
+      "call": "removeElement(nums, val)",
+      "ret": "int",
+      "choice": "",
+      "variants": [
+        {
+          "name": "相向覆盖，不保序",
+          "basis": "对应代码随想录Java相向双指针版本，适用于题目允许改变元素顺序时。",
+          "steps": [
+            "left遇到val时，用right处的数覆盖，再right--。",
+            "覆盖进来的值还没检查，所以此时left不能前进；只有确认nums[left]!=val才left++。"
+          ],
+          "walk": "[3,2,2,3]：先用末尾3覆盖首位，right=2；首位仍为3，再用末尾2覆盖，right=1；依次确认两个2，返回2。",
+          "cost": "时间O(n)，额外空间O(1)；写入次数取决于遇到的待删除元素，不保证相对顺序。",
+          "code": "class Solution {\n    public int removeElement(int[] nums, int val) {\n        int left = 0;\n        int right = nums.length - 1;\n        while (left <= right) {\n            if (nums[left] == val) {\n                nums[left] = nums[right];\n                right--; // 新覆盖的值留待下一轮检查\n            } else {\n                left++;\n            }\n        }\n        return left;\n    }\n}"
+        }
+      ],
+      "url": "https://leetcode.cn/problems/remove-element/",
+      "page_slug": "0027-remove-element",
+      "english": "Remove Element",
+      "java_file": "src/main/java/leetcode/array/LC0027RemoveElement.java",
+      "mainClass": "leetcode.array.LC0027RemoveElement",
+      "sourceHash": "2c12c7e07084a2b26538bc4f285de51774a12aa7f38fb77f35833bf76f6ec203",
+      "adapted": "    static class Solution {\n        public int removeElement(int[] nums, int val) {\n            int slow = 0; // 下次写入位置，也是有效长度\n            for (int fast = 0; fast < nums.length; fast++) {\n                if (nums[fast] != val) {\n                    nums[slow] = nums[fast];\n                    slow++;\n                }\n            }\n            return slow;\n        }\n    }",
+      "displayStart": 25,
+      "input": "nums = [3, 2, 2, 3], val = 3",
+      "inputObject": {
+        "nums": [
+          3,
+          2,
+          2,
+          3
+        ],
+        "val": 3
+      },
+      "expectedValue": [
+        2,
+        2
+      ],
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/remove-element/"
+    },
+    {
+      "id": 26,
+      "title": "删除有序数组中的重复项",
+      "slug": "remove-duplicates-from-sorted-array",
+      "group": 2,
+      "summary": "有序让重复值相邻，只把与有效前缀末尾不同的数写进去。",
+      "think": [
+        "可以用集合去重，但题目要求原地。升序已经让相同值聚在一起，不必额外记住所有出现过的数。",
+        "非空时第一个数一定保留，所以slow=1，fast从1开始。",
+        "nums[fast]与nums[slow-1]不同，才把它写到slow。重复则只推进fast。"
+      ],
+      "state": "slow同时表示有效长度和下次写入位置；nums[slow-1]是上一个已保留的值。",
+      "walk": "nums=[0,0,1,1,2]\n初始前缀[0]，slow=1\nfast=1值0重复 → 跳过\nfast=2值1 → 写nums[1]=1，slow=2\nfast=3值1重复 → 跳过\nfast=4值2 → 写nums[2]=2，slow=3 → 返回3，有效前缀[0,1,2]",
+      "pitfall": "本题必须有序；无序数组只比较相邻有效值会漏掉不相邻的重复。空数组先返回0。",
+      "cost": "时间O(n)，额外空间O(1)。",
+      "code": "class Solution {\n    public int removeDuplicates(int[] nums) {\n        if (nums.length == 0) {\n            return 0;\n        }\n        int slow = 1; // 非空时，第一个数一定保留\n        for (int fast = 1; fast < nums.length; fast++) {\n            if (nums[fast] != nums[slow - 1]) {\n                nums[slow] = nums[fast];\n                slow++;\n            }\n        }\n        return slow;\n    }\n}",
+      "inputs": {
+        "nums": [
+          0,
+          0,
+          1,
+          1,
+          2
+        ]
+      },
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "call": "removeDuplicates(nums)",
+      "ret": "int",
+      "choice": "",
+      "variants": [],
+      "url": "https://leetcode.cn/problems/remove-duplicates-from-sorted-array/",
+      "page_slug": "0026-remove-duplicates-from-sorted-array",
+      "english": "Remove Duplicates From Sorted Array",
+      "java_file": "src/main/java/leetcode/array/LC0026RemoveDuplicatesFromSortedArray.java",
+      "mainClass": "leetcode.array.LC0026RemoveDuplicatesFromSortedArray",
+      "sourceHash": "e90326c60bfa43b9a44f76eee50891361da9ec30c1f605a437da7c8c8019393b",
+      "adapted": "    static class Solution {\n        public int removeDuplicates(int[] nums) {\n            if (nums.length == 0) {\n                return 0;\n            }\n            int slow = 1; // 非空时，第一个数一定保留\n            for (int fast = 1; fast < nums.length; fast++) {\n                if (nums[fast] != nums[slow - 1]) {\n                    nums[slow] = nums[fast];\n                    slow++;\n                }\n            }\n            return slow;\n        }\n    }",
+      "displayStart": 24,
+      "input": "nums = [0, 0, 1, 1, 2]",
+      "inputObject": {
+        "nums": [
+          0,
+          0,
+          1,
+          1,
+          2
+        ]
+      },
+      "expectedValue": [
+        0,
+        1,
+        2
+      ],
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/remove-duplicates-from-sorted-array/"
+    },
+    {
+      "id": 283,
+      "title": "移动零",
+      "slug": "move-zeroes",
+      "group": 2,
+      "summary": "先稳定收集非零数，再把剩余位置补零。",
+      "think": [
+        "和27一样，可以把非零数看成要保留的元素；区别是本题要求整个数组最终都正确。",
+        "第一趟用fast读、slow写，保持非零数相对顺序。此时[0,slow)已经是答案前缀。",
+        "第二趟把[slow,n)全部改成0。只收集不补零，会留下旧值。"
+      ],
+      "state": "slow是非零数个数，也是补零起点；方法返回void，答案就在nums里。",
+      "walk": "nums=[0,1,0,3,12]\n收集1 → [1,1,0,3,12]，slow=1\n收集3 → [1,3,0,3,12]，slow=2\n收集12 → [1,3,12,3,12]，slow=3\n从下标3补零 → [1,3,12,0,0]",
+      "pitfall": "必须保持非零数顺序，不能用末尾元素替换零；void方法不要返回新数组。",
+      "cost": "两趟仍为O(n)时间，额外空间O(1)。",
+      "code": "class Solution {\n    public void moveZeroes(int[] nums) {\n        int slow = 0;\n        for (int fast = 0; fast < nums.length; fast++) {\n            if (nums[fast] != 0) {\n                nums[slow] = nums[fast];\n                slow++;\n            }\n        }\n        // 有效前缀之外必须全部补零\n        for (int i = slow; i < nums.length; i++) {\n            nums[i] = 0;\n        }\n    }\n}",
+      "inputs": {
+        "nums": [
+          0,
+          1,
+          0,
+          3,
+          12
+        ]
+      },
+      "expected": [
+        1,
+        3,
+        12,
+        0,
+        0
+      ],
+      "call": "moveZeroes(nums)",
+      "ret": "void",
+      "choice": "",
+      "variants": [
+        {
+          "name": "交换非零数与前方空位",
+          "basis": "学习扩展：把稳定收集与补零合到一次扫描。",
+          "steps": [
+            "不变量：[0,slow)全是按原顺序收集的非零数，[slow,fast)全是零。",
+            "遇非零数，与slow交换，然后slow++。slow==fast时无需交换。"
+          ],
+          "walk": "[0,1,0,3,12]：交换下标0/1得到[1,0,0,3,12]；交换1/3得到[1,3,0,0,12]；交换2/4完成。",
+          "cost": "时间O(n)，额外空间O(1)；一趟但每次交换可能有两次数组写入，两趟版更直观。",
+          "code": "class Solution {\n    public void moveZeroes(int[] nums) {\n        int slow = 0;\n        for (int fast = 0; fast < nums.length; fast++) {\n            if (nums[fast] != 0) {\n                if (slow != fast) {\n                    int temp = nums[slow];\n                    nums[slow] = nums[fast];\n                    nums[fast] = temp;\n                }\n                slow++;\n            }\n        }\n    }\n}"
+        }
+      ],
+      "url": "https://leetcode.cn/problems/move-zeroes/",
+      "page_slug": "0283-move-zeroes",
+      "english": "Move Zeroes",
+      "java_file": "src/main/java/leetcode/array/LC0283MoveZeroes.java",
+      "mainClass": "leetcode.array.LC0283MoveZeroes",
+      "sourceHash": "1a2aa19b2839daf3189033373aa9c5f1cc8423cc2a2ca2485dd2e13b9a3c3837",
+      "adapted": "    static class Solution {\n        public void moveZeroes(int[] nums) {\n            int slow = 0;\n            for (int fast = 0; fast < nums.length; fast++) {\n                if (nums[fast] != 0) {\n                    nums[slow] = nums[fast];\n                    slow++;\n                }\n            }\n            // 有效前缀之外必须全部补零\n            for (int i = slow; i < nums.length; i++) {\n                nums[i] = 0;\n            }\n        }\n    }",
+      "displayStart": 24,
+      "input": "nums = [0, 1, 0, 3, 12]",
+      "inputObject": {
+        "nums": [
+          0,
+          1,
+          0,
+          3,
+          12
+        ]
+      },
+      "expectedValue": [
+        1,
+        3,
+        12,
+        0,
+        0
+      ],
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/move-zeroes/"
+    },
+    {
+      "id": 844,
+      "title": "比较含退格的字符串",
+      "slug": "backspace-string-compare",
+      "group": 2,
+      "summary": "从右往左统计待删除字符，跳过后再比较真正留下的字符。",
+      "think": [
+        "最直观是用栈模拟输入：普通字符入栈，#弹栈。这样需要O(n+m)额外空间。",
+        "从右往左看，#只会删除它左边的普通字符。遇#增加skip，遇普通字符且skip>0就消耗一次删除。",
+        "分别找到s、t当前最后一个有效字符：一边先耗尽则不相等；都没耗尽就比较，随后两边一起左移。"
+      ],
+      "state": "i、j是倒序读位置；skipS、skipT是各自尚未抵消的退格次数。",
+      "walk": "s=\"ab#c\", t=\"ad#c\"\ni=3,j=3：c==c，双双左移\n各自遇#，skip=1；跳过b/d，skip归零\n剩a==a，双双耗尽 → true",
+      "pitfall": "两边删除计数不能共用；字符耗尽后不能charAt(-1)。仅比较原字符串长度没有意义。",
+      "cost": "时间O(n+m)，额外空间O(1)。",
+      "code": "class Solution {\n    public boolean backspaceCompare(String s, String t) {\n        int i = s.length() - 1;\n        int j = t.length() - 1;\n        int skipS = 0;\n        int skipT = 0;\n        while (i >= 0 || j >= 0) {\n            while (i >= 0) { // 找s中最后一个未被退格删除的字符\n                if (s.charAt(i) == '#') {\n                    skipS++;\n                    i--;\n                } else if (skipS > 0) {\n                    skipS--;\n                    i--;\n                } else {\n                    break;\n                }\n            }\n            while (j >= 0) { // t独立计算自己的退格次数\n                if (t.charAt(j) == '#') {\n                    skipT++;\n                    j--;\n                } else if (skipT > 0) {\n                    skipT--;\n                    j--;\n                } else {\n                    break;\n                }\n            }\n            if (i < 0 || j < 0) {\n                return i == j; // 都耗尽才相等\n            }\n            if (s.charAt(i) != t.charAt(j)) {\n                return false;\n            }\n            i--;\n            j--;\n        }\n        return true;\n    }\n}",
+      "inputs": {
+        "s": "ab#c",
+        "t": "ad#c"
+      },
+      "expected": true,
+      "call": "backspaceCompare(s, t)",
+      "ret": "boolean",
+      "choice": "",
+      "variants": [
+        {
+          "name": "StringBuilder模拟栈",
+          "basis": "学习扩展：保留最直观的输入过程，用空间换更短的推理路径。",
+          "steps": [
+            "普通字符追加到末尾；遇#且非空时删除末尾。",
+            "分别处理s和t，再比较最终字符串；辅助函数包含在同一个Solution中。"
+          ],
+          "walk": "ab#c：空→a→ab→a→ac；ad#c：空→a→ad→a→ac，所以相等。",
+          "cost": "时间O(n+m)，额外空间O(n+m)；倒序主解无需构造新字符串。",
+          "code": "class Solution {\n    public boolean backspaceCompare(String s, String t) {\n        return build(s).equals(build(t));\n    }\n\n    private String build(String text) {\n        StringBuilder result = new StringBuilder();\n        for (int i = 0; i < text.length(); i++) {\n            char c = text.charAt(i);\n            if (c != '#') {\n                result.append(c);\n            } else if (result.length() > 0) {\n                result.deleteCharAt(result.length() - 1);\n            }\n        }\n        return result.toString();\n    }\n}"
+        }
+      ],
+      "url": "https://leetcode.cn/problems/backspace-string-compare/",
+      "page_slug": "0844-backspace-string-compare",
+      "english": "Backspace String Compare",
+      "java_file": "src/main/java/leetcode/array/LC0844BackspaceStringCompare.java",
+      "mainClass": "leetcode.array.LC0844BackspaceStringCompare",
+      "sourceHash": "aa8d7e29dd570f5b491cb2d39e9d1c5bf8275d9dbbd9b3f530dad5684c9a9efe",
+      "adapted": "    static class Solution {\n        public boolean backspaceCompare(String s, String t) {\n            int i = s.length() - 1;\n            int j = t.length() - 1;\n            int skipS = 0;\n            int skipT = 0;\n            while (i >= 0 || j >= 0) {\n                while (i >= 0) { // 找s中最后一个未被退格删除的字符\n                    if (s.charAt(i) == '#') {\n                        skipS++;\n                        i--;\n                    } else if (skipS > 0) {\n                        skipS--;\n                        i--;\n                    } else {\n                        break;\n                    }\n                }\n                while (j >= 0) { // t独立计算自己的退格次数\n                    if (t.charAt(j) == '#') {\n                        skipT++;\n                        j--;\n                    } else if (skipT > 0) {\n                        skipT--;\n                        j--;\n                    } else {\n                        break;\n                    }\n                }\n                if (i < 0 || j < 0) {\n                    return i == j; // 都耗尽才相等\n                }\n                if (s.charAt(i) != t.charAt(j)) {\n                    return false;\n                }\n                i--;\n                j--;\n            }\n            return true;\n        }\n    }",
+      "displayStart": 24,
+      "input": "s = \"ab#c\", t = \"ad#c\"",
+      "inputObject": {
+        "s": "ab#c",
+        "t": "ad#c"
+      },
+      "expectedValue": true,
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/backspace-string-compare/"
+    },
+    {
+      "id": 977,
+      "title": "有序数组的平方",
+      "slug": "squares-of-a-sorted-array",
+      "group": 3,
+      "summary": "平方后的最大值一定在当前两端，从结果末尾倒着填。",
+      "think": [
+        "直接平方再排序是O(n log n)。原数组有序，但负数平方会反转负半段的大小关系。",
+        "当前候选区间里，绝对值最大的数一定在两端；比较两端平方即可确定本轮最大值。",
+        "最大值应放结果的末尾write。放完移动对应端点并write--，直到所有位置填完。"
+      ],
+      "state": "[left,right]是未处理原区间；(write,n)是已经排好的较大平方值。",
+      "walk": "nums=[-4,-1,0,3,10]\n16与100 → result[4]=100，right--\n16与9 → result[3]=16，left++\n1与9 → result[2]=9，right--\n1与0 → result[1]=1；最后填0 → [0,1,9,16,100]",
+      "pitfall": "不能从结果开头写最大值；平方相等时取任一侧即可，只移动被取走的一侧。",
+      "cost": "时间O(n)，结果空间O(n)，除结果外额外空间O(1)。",
+      "code": "class Solution {\n    public int[] sortedSquares(int[] nums) {\n        int[] result = new int[nums.length];\n        int left = 0;\n        int right = nums.length - 1;\n        // 两端选最大平方，倒着填结果\n        for (int write = nums.length - 1; write >= 0; write--) {\n            int leftSquare = nums[left] * nums[left];\n            int rightSquare = nums[right] * nums[right];\n            if (leftSquare > rightSquare) {\n                result[write] = leftSquare;\n                left++;\n            } else {\n                result[write] = rightSquare;\n                right--;\n            }\n        }\n        return result;\n    }\n}",
+      "inputs": {
+        "nums": [
+          -4,
+          -1,
+          0,
+          3,
+          10
+        ]
+      },
+      "expected": [
+        0,
+        1,
+        9,
+        16,
+        100
+      ],
+      "call": "sortedSquares(nums)",
+      "ret": "int[]",
+      "choice": "",
+      "variants": [
+        {
+          "name": "平方后排序",
+          "basis": "对应代码随想录的直接方法，作为识别双指针优化前的基线。",
+          "steps": [
+            "先生成平方数组，再调用Arrays.sort。",
+            "没有利用原数组有序性，所以多花排序时间；适用于输入原本无序的推广场景。"
+          ],
+          "walk": "[-4,-1,0,3,10] → [16,1,0,9,100] → 排序为[0,1,9,16,100]。",
+          "cost": "时间O(n log n)，结果空间O(n)；另有排序实现自身的辅助空间。",
+          "code": "import java.util.*;\n\nclass Solution {\n    public int[] sortedSquares(int[] nums) {\n        int[] result = new int[nums.length];\n        for (int i = 0; i < nums.length; i++) {\n            result[i] = nums[i] * nums[i];\n        }\n        Arrays.sort(result);\n        return result;\n    }\n}"
+        }
+      ],
+      "url": "https://leetcode.cn/problems/squares-of-a-sorted-array/",
+      "page_slug": "0977-squares-of-a-sorted-array",
+      "english": "Squares Of A Sorted Array",
+      "java_file": "src/main/java/leetcode/array/LC0977SquaresOfASortedArray.java",
+      "mainClass": "leetcode.array.LC0977SquaresOfASortedArray",
+      "sourceHash": "f0b4c30dcaf0951fabf1d445209726eae7a1198baccacd5d1f4bacfb827c47f5",
+      "adapted": "    static class Solution {\n        public int[] sortedSquares(int[] nums) {\n            int[] result = new int[nums.length];\n            int left = 0;\n            int right = nums.length - 1;\n            // 两端选最大平方，倒着填结果\n            for (int write = nums.length - 1; write >= 0; write--) {\n                int leftSquare = nums[left] * nums[left];\n                int rightSquare = nums[right] * nums[right];\n                if (leftSquare > rightSquare) {\n                    result[write] = leftSquare;\n                    left++;\n                } else {\n                    result[write] = rightSquare;\n                    right--;\n                }\n            }\n            return result;\n        }\n    }",
+      "displayStart": 23,
+      "input": "nums = [-4, -1, 0, 3, 10]",
+      "inputObject": {
+        "nums": [
+          -4,
+          -1,
+          0,
+          3,
+          10
+        ]
+      },
+      "expectedValue": [
+        0,
+        1,
+        9,
+        16,
+        100
+      ],
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/squares-of-a-sorted-array/"
+    },
+    {
+      "id": 209,
+      "title": "长度最小的子数组",
+      "slug": "minimum-size-subarray-sum",
+      "group": 4,
+      "summary": "正数让窗口和随扩张增大；达标后连续收缩，寻找更短答案。",
+      "think": [
+        "枚举每个起点再向右累加是O(n²)。关键条件是所有元素都为正，移走左端只会减小和。",
+        "right每次加入一个数。sum>=target时窗口有效，先记录长度，再移走left尝试更短的。",
+        "必须用while持续缩，直到不满足；已经丢弃的起点不会在之后产生更短答案。每个数最多进出一次。"
+      ],
+      "state": "sum始终是闭区间[left,right]的和；result是已见过的最短有效长度。",
+      "walk": "target=7, nums=[2,3,1,2,4,3]\nright=0,1,2：sum=2,5,6，不足\nright=3：sum=8，记长度4；移走2 → sum=6,left=1\nright=4：sum=10，记4；移走3 → 7，记3；移走1 → 6,left=3\nright=5：sum=9，记3；移走2 → 7，记2；移走4 → 3\n最短为[4,3]，长度2",
+      "pitfall": "更新答案在移走左端之前；收缩用while而非if。含负数时该单调性失效，例如target=5、nums=[1,-1,5]会漏掉长度1的[5]。",
+      "cost": "时间O(n)，额外空间O(1)。sum用long可承受较大累计和。",
+      "code": "class Solution {\n    public int minSubArrayLen(int target, int[] nums) {\n        int left = 0;\n        int result = Integer.MAX_VALUE;\n        long sum = 0;\n        for (int right = 0; right < nums.length; right++) {\n            sum += nums[right];\n            while (sum >= target) { // 达标后，先记答案再尝试缩短\n                result = Math.min(result, right - left + 1);\n                sum -= nums[left];\n                left++;\n            }\n        }\n        return result == Integer.MAX_VALUE ? 0 : result;\n    }\n}",
+      "inputs": {
+        "target": 7,
+        "nums": [
+          2,
+          3,
+          1,
+          2,
+          4,
+          3
+        ]
+      },
+      "expected": 2,
+      "call": "minSubArrayLen(target, nums)",
+      "ret": "int",
+      "choice": "",
+      "variants": [
+        {
+          "name": "前缀和＋二分",
+          "basis": "学习扩展：把区间和条件改写成有序前缀上的边界查找，串起本章两种方法。",
+          "steps": [
+            "prefix[i]是前i项和，固定起点left后，要求prefix[end]>=prefix[left]+target，end为右开端点。",
+            "正数让prefix严格递增；在[left+1,n]二分第一个达标end，长度为end-left。"
+          ],
+          "walk": "同一输入prefix=[0,2,5,6,8,12,15]；left=4时要找>=prefix[4]+7=15，首个end=6，长度2，对应[4,3]。",
+          "cost": "时间O(n log n)，额外空间O(n)；滑动窗口能复用相邻起点的右端位置，更省时间和空间。",
+          "code": "class Solution {\n    public int minSubArrayLen(int target, int[] nums) {\n        int n = nums.length;\n        long[] prefix = new long[n + 1];\n        for (int i = 0; i < n; i++) {\n            prefix[i + 1] = prefix[i] + nums[i];\n        }\n        int result = Integer.MAX_VALUE;\n        for (int start = 0; start < n; start++) {\n            long required = prefix[start] + target;\n            int left = start + 1;\n            int right = n;\n            int end = -1;\n            while (left <= right) {\n                int mid = left + (right - left) / 2;\n                if (prefix[mid] >= required) {\n                    end = mid;\n                    right = mid - 1;\n                } else {\n                    left = mid + 1;\n                }\n            }\n            if (end != -1) {\n                result = Math.min(result, end - start);\n            }\n        }\n        return result == Integer.MAX_VALUE ? 0 : result;\n    }\n}"
+        }
+      ],
+      "url": "https://leetcode.cn/problems/minimum-size-subarray-sum/",
+      "page_slug": "0209-minimum-size-subarray-sum",
+      "english": "Minimum Size Subarray Sum",
+      "java_file": "src/main/java/leetcode/array/LC0209MinimumSizeSubarraySum.java",
+      "mainClass": "leetcode.array.LC0209MinimumSizeSubarraySum",
+      "sourceHash": "f8258b5850cc52b974f9c3aa93c30c153f35afaaa6bb14c285925c68b10252af",
+      "adapted": "    static class Solution {\n        public int minSubArrayLen(int target, int[] nums) {\n            int left = 0;\n            int result = Integer.MAX_VALUE;\n            long sum = 0;\n            for (int right = 0; right < nums.length; right++) {\n                sum += nums[right];\n                while (sum >= target) { // 达标后，先记答案再尝试缩短\n                    result = Math.min(result, right - left + 1);\n                    sum -= nums[left];\n                    left++;\n                }\n            }\n            return result == Integer.MAX_VALUE ? 0 : result;\n        }\n    }",
+      "displayStart": 24,
+      "input": "target = 7, nums = [2, 3, 1, 2, 4, 3]",
+      "inputObject": {
+        "target": 7,
+        "nums": [
+          2,
+          3,
+          1,
+          2,
+          4,
+          3
+        ]
+      },
+      "expectedValue": 2,
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/minimum-size-subarray-sum/"
+    },
+    {
+      "id": 904,
+      "title": "水果成篮",
+      "slug": "fruit-into-baskets",
+      "group": 4,
+      "summary": "找至多两种值的最长连续区间，超限才收缩。",
+      "think": [
+        "两只篮子各装一种水果，翻译成数组条件就是连续区间最多两种值。枚举所有区间会重复统计。",
+        "right加入水果并增加频次；种类数>2时，从left移走水果，频次变0再删除键。",
+        "while结束时窗口重新有效，此时更新最长长度。和209不同，本题追求最长，所以有效时保留窗口继续扩张。"
+      ],
+      "state": "count记录窗口内各水果出现次数，count.size()才是种类数；result记录最长有效长度。",
+      "walk": "fruits=[1,2,3,2,2]\n加入1、2 → count={1:1,2:1}，长度2\n加入3 → 三种，移走1并删键 → 窗口[2,3]，两种\n继续加入2、2 → 窗口[2,3,2,2]，长度4",
+      "pitfall": "不能只用Set：移走一个水果后，窗口可能还留着同类。map里计数为0必须删键。",
+      "cost": "时间O(n)，额外空间O(1)：窗口收缩前最多暂存3种水果。",
+      "code": "import java.util.*;\n\nclass Solution {\n    public int totalFruit(int[] fruits) {\n        Map<Integer, Integer> count = new HashMap<>();\n        int left = 0;\n        int result = 0;\n        for (int right = 0; right < fruits.length; right++) {\n            int fruit = fruits[right];\n            count.put(fruit, count.getOrDefault(fruit, 0) + 1);\n            while (count.size() > 2) { // 超过两种才缩，缩到有效再记最长\n                int removed = fruits[left];\n                count.put(removed, count.get(removed) - 1);\n                if (count.get(removed) == 0) {\n                    count.remove(removed);\n                }\n                left++;\n            }\n            result = Math.max(result, right - left + 1);\n        }\n        return result;\n    }\n}",
+      "inputs": {
+        "fruits": [
+          1,
+          2,
+          3,
+          2,
+          2
+        ]
+      },
+      "expected": 4,
+      "call": "totalFruit(fruits)",
+      "ret": "int",
+      "choice": "",
+      "variants": [],
+      "url": "https://leetcode.cn/problems/fruit-into-baskets/",
+      "page_slug": "0904-fruit-into-baskets",
+      "english": "Fruit Into Baskets",
+      "java_file": "src/main/java/leetcode/array/LC0904FruitIntoBaskets.java",
+      "mainClass": "leetcode.array.LC0904FruitIntoBaskets",
+      "sourceHash": "0eb0364dede3ab00bc5af205badb788f1ce4dcfb4fc5dce41b4eeadbbb256c96",
+      "adapted": "    static class Solution {\n        public int totalFruit(int[] fruits) {\n            Map<Integer, Integer> count = new HashMap<>();\n            int left = 0;\n            int result = 0;\n            for (int right = 0; right < fruits.length; right++) {\n                int fruit = fruits[right];\n                count.put(fruit, count.getOrDefault(fruit, 0) + 1);\n                while (count.size() > 2) { // 超过两种才缩，缩到有效再记最长\n                    int removed = fruits[left];\n                    count.put(removed, count.get(removed) - 1);\n                    if (count.get(removed) == 0) {\n                        count.remove(removed);\n                    }\n                    left++;\n                }\n                result = Math.max(result, right - left + 1);\n            }\n            return result;\n        }\n    }",
+      "displayStart": 23,
+      "input": "fruits = [1, 2, 3, 2, 2]",
+      "inputObject": {
+        "fruits": [
+          1,
+          2,
+          3,
+          2,
+          2
+        ]
+      },
+      "expectedValue": 4,
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/fruit-into-baskets/"
+    },
+    {
+      "id": 76,
+      "title": "最小覆盖子串",
+      "slug": "minimum-window-substring",
+      "group": 4,
+      "summary": "用欠账数组记录还缺多少字符，全部还清后收缩窗口。",
+      "think": [
+        "要覆盖t的所有字符，重复次数也要够；只检查有没有这些字符不够。",
+        "need[c]初始化为t中频次，missing=t.length()。加入c之前若need[c]>0，它能补一个缺口，missing--；随后need[c]--，负数表示多余。",
+        "missing==0时先记答案，再移走左端字符并need[c]++；若变成正数，说明欠了一个必要字符，missing++，停止收缩。"
+      ],
+      "state": "need是相对t的字符欠账，可为负；missing是总共还缺几个字符，不是缺几种。bestStart、bestLength记录最短窗口。",
+      "walk": "s=\"ADOBECODEBANC\", t=\"ABC\"\n初始欠A/B/C各1，missing=3\nright=5读到C → 首次还清，窗口ADOBEC长6；移走A后又缺A\nright=10读到A → 还清；连续收缩至移走下标5的C，再次失效\nright=12读到C → 还清；移走O、D、E后得到BANC，长4\n再移走B会失效，最终返回BANC",
+      "pitfall": "t有重复字符时missing仍按总次数计算；与t无关的字符也允许进入窗口。128数组适用于本题英文字母范围，不是通用Unicode方案。",
+      "cost": "时间O(|s|+|t|)，字符表额外空间O(128)=O(1)。",
+      "code": "class Solution {\n    public String minWindow(String s, String t) {\n        if (t.length() == 0 || s.length() < t.length()) {\n            return \"\";\n        }\n        int[] need = new int[128];\n        for (int i = 0; i < t.length(); i++) {\n            need[t.charAt(i)]++;\n        }\n        int missing = t.length();\n        int left = 0;\n        int bestStart = 0;\n        int bestLength = Integer.MAX_VALUE;\n        for (int right = 0; right < s.length(); right++) {\n            char added = s.charAt(right);\n            if (need[added] > 0) { // 加入前仍欠这个字符，才补掉缺口\n                missing--;\n            }\n            need[added]--;\n            while (missing == 0) {\n                int length = right - left + 1;\n                if (length < bestLength) {\n                    bestStart = left;\n                    bestLength = length;\n                }\n                char removed = s.charAt(left);\n                need[removed]++;\n                if (need[removed] > 0) { // 移走后变成正数，窗口重新欠字符\n                    missing++;\n                }\n                left++;\n            }\n        }\n        return bestLength == Integer.MAX_VALUE\n                ? \"\" : s.substring(bestStart, bestStart + bestLength);\n    }\n}",
+      "inputs": {
+        "s": "ADOBECODEBANC",
+        "t": "ABC"
+      },
+      "expected": "BANC",
+      "call": "minWindow(s, t)",
+      "ret": "String",
+      "choice": "",
+      "variants": [],
+      "url": "https://leetcode.cn/problems/minimum-window-substring/",
+      "page_slug": "0076-minimum-window-substring",
+      "english": "Minimum Window Substring",
+      "java_file": "src/main/java/leetcode/array/LC0076MinimumWindowSubstring.java",
+      "mainClass": "leetcode.array.LC0076MinimumWindowSubstring",
+      "sourceHash": "8803a645f6068e654f4159637b0d82ed6b75c70ce93ba0534f69bf7e92b519bb",
+      "adapted": "    static class Solution {\n        public String minWindow(String s, String t) {\n            if (t.length() == 0 || s.length() < t.length()) {\n                return \"\";\n            }\n            int[] need = new int[128];\n            for (int i = 0; i < t.length(); i++) {\n                need[t.charAt(i)]++;\n            }\n            int missing = t.length();\n            int left = 0;\n            int bestStart = 0;\n            int bestLength = Integer.MAX_VALUE;\n            for (int right = 0; right < s.length(); right++) {\n                char added = s.charAt(right);\n                if (need[added] > 0) { // 加入前仍欠这个字符，才补掉缺口\n                    missing--;\n                }\n                need[added]--;\n                while (missing == 0) {\n                    int length = right - left + 1;\n                    if (length < bestLength) {\n                        bestStart = left;\n                        bestLength = length;\n                    }\n                    char removed = s.charAt(left);\n                    need[removed]++;\n                    if (need[removed] > 0) { // 移走后变成正数，窗口重新欠字符\n                        missing++;\n                    }\n                    left++;\n                }\n            }\n            return bestLength == Integer.MAX_VALUE\n                    ? \"\" : s.substring(bestStart, bestStart + bestLength);\n        }\n    }",
+      "displayStart": 24,
+      "input": "s = \"ADOBECODEBANC\", t = \"ABC\"",
+      "inputObject": {
+        "s": "ADOBECODEBANC",
+        "t": "ABC"
+      },
+      "expectedValue": "BANC",
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/minimum-window-substring/"
+    },
+    {
+      "id": 59,
+      "title": "螺旋矩阵 II",
+      "slug": "spiral-matrix-ii",
+      "group": 5,
+      "summary": "按上、右、下、左填一圈，每条边把终点留给下一条边。",
+      "think": [
+        "题目没有要求找最优，只要把顺时针路线模拟准确。先画n=3，确定四个角由哪条边负责。",
+        "一圈用start和end界定，四条边都包含起点、不包含终点：上边不填右上角，右边不填右下角，依次类推。",
+        "完整一圈后start++、end--。奇数阶最后剩一个中心点，单独填写；偶数阶直接结束。"
+      ],
+      "state": "start、end是当前圈的两个角坐标；value是下一次要填的数。每轮只处理完整外圈。",
+      "walk": "n=3，start=0,end=2\n上边(0,0),(0,1)填1,2\n右边(0,2),(1,2)填3,4\n下边(2,2),(2,1)填5,6\n左边(2,0),(1,0)填7,8\n收缩至start=end=1，中心填9",
+      "pitfall": "四边规则必须一致。n=1没有完整外圈，只填中心；不要让四个for都包含两个端点。",
+      "cost": "时间O(n²)，返回矩阵占O(n²)，除结果外额外空间O(1)。",
+      "code": "class Solution {\n    public int[][] generateMatrix(int n) {\n        int[][] result = new int[n][n];\n        int start = 0;\n        int end = n - 1;\n        int value = 1;\n        while (start < end) { // 四条边都把终点留给下一条边\n            for (int col = start; col < end; col++) {\n                result[start][col] = value++;\n            }\n            for (int row = start; row < end; row++) {\n                result[row][end] = value++;\n            }\n            for (int col = end; col > start; col--) {\n                result[end][col] = value++;\n            }\n            for (int row = end; row > start; row--) {\n                result[row][start] = value++;\n            }\n            start++;\n            end--;\n        }\n        if (start == end) {\n            result[start][start] = value; // 奇数阶剩下中心\n        }\n        return result;\n    }\n}",
+      "inputs": {
+        "n": 3
+      },
+      "expected": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          8,
+          9,
+          4
+        ],
+        [
+          7,
+          6,
+          5
+        ]
+      ],
+      "call": "generateMatrix(n)",
+      "ret": "int[][]",
+      "choice": "",
+      "variants": [],
+      "url": "https://leetcode.cn/problems/spiral-matrix-ii/",
+      "page_slug": "0059-spiral-matrix-ii",
+      "english": "Spiral Matrix Ii",
+      "java_file": "src/main/java/leetcode/array/LC0059SpiralMatrixIi.java",
+      "mainClass": "leetcode.array.LC0059SpiralMatrixIi",
+      "sourceHash": "2053f29449e558c5926f2cb463d7f473ba11f17dd029a2dbb4fe8609780e8172",
+      "adapted": "    static class Solution {\n        public int[][] generateMatrix(int n) {\n            int[][] result = new int[n][n];\n            int start = 0;\n            int end = n - 1;\n            int value = 1;\n            while (start < end) { // 四条边都把终点留给下一条边\n                for (int col = start; col < end; col++) {\n                    result[start][col] = value++;\n                }\n                for (int row = start; row < end; row++) {\n                    result[row][end] = value++;\n                }\n                for (int col = end; col > start; col--) {\n                    result[end][col] = value++;\n                }\n                for (int row = end; row > start; row--) {\n                    result[row][start] = value++;\n                }\n                start++;\n                end--;\n            }\n            if (start == end) {\n                result[start][start] = value; // 奇数阶剩下中心\n            }\n            return result;\n        }\n    }",
+      "displayStart": 23,
+      "input": "n = 3",
+      "inputObject": {
+        "n": 3
+      },
+      "expectedValue": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          8,
+          9,
+          4
+        ],
+        [
+          7,
+          6,
+          5
+        ]
+      ],
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/spiral-matrix-ii/"
+    },
+    {
+      "id": 54,
+      "title": "螺旋矩阵",
+      "slug": "spiral-matrix",
+      "group": 5,
+      "summary": "维护尚未读取的矩形，读完一条边就收掉对应边界。",
+      "think": [
+        "59是填正方形，本题是读任意长方形；只剩一行或一列时，不能再按完整圈重复读。",
+        "top、bottom、left、right围住未读区域，依次读上边、右边，再判断还有没有下边和左边。",
+        "读上边后top++，读右边后right--；只有top<=bottom才读下边，只有left<=right才读左边。"
+      ],
+      "state": "四个边界表示未访问矩形；result按实际访问顺序收集元素。",
+      "walk": "matrix=[[1,2,3],[4,5,6],[7,8,9]]\n上边读1,2,3，top=1\n右边读6,9，right=1\n下边读8,7，bottom=1\n左边读4，left=1\n剩中心读5 → [1,2,3,6,9,8,7,4,5]",
+      "pitfall": "单行时读完上边就没有下边；单列时读完右边就没有左边。两个内层判断防止重复。",
+      "cost": "时间O(mn)，结果空间O(mn)，除结果外额外空间O(1)。",
+      "code": "import java.util.*;\n\nclass Solution {\n    public List<Integer> spiralOrder(int[][] matrix) {\n        List<Integer> result = new ArrayList<>();\n        if (matrix.length == 0 || matrix[0].length == 0) {\n            return result;\n        }\n        int top = 0;\n        int bottom = matrix.length - 1;\n        int left = 0;\n        int right = matrix[0].length - 1;\n        while (top <= bottom && left <= right) {\n            for (int col = left; col <= right; col++) {\n                result.add(matrix[top][col]);\n            }\n            top++;\n            for (int row = top; row <= bottom; row++) {\n                result.add(matrix[row][right]);\n            }\n            right--;\n            if (top <= bottom) { // 仍有未读行，才走下边\n                for (int col = right; col >= left; col--) {\n                    result.add(matrix[bottom][col]);\n                }\n                bottom--;\n            }\n            if (left <= right) { // 仍有未读列，才走左边\n                for (int row = bottom; row >= top; row--) {\n                    result.add(matrix[row][left]);\n                }\n                left++;\n            }\n        }\n        return result;\n    }\n}",
+      "inputs": {
+        "matrix": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ],
+          [
+            7,
+            8,
+            9
+          ]
+        ]
+      },
+      "expected": [
+        1,
+        2,
+        3,
+        6,
+        9,
+        8,
+        7,
+        4,
+        5
+      ],
+      "call": "spiralOrder(matrix)",
+      "ret": "List<Integer>",
+      "choice": "",
+      "variants": [],
+      "url": "https://leetcode.cn/problems/spiral-matrix/",
+      "page_slug": "0054-spiral-matrix",
+      "english": "Spiral Matrix",
+      "java_file": "src/main/java/leetcode/array/LC0054SpiralMatrix.java",
+      "mainClass": "leetcode.array.LC0054SpiralMatrix",
+      "sourceHash": "6f9960b9479bab6a4d4780370933e886f5226622706639f9ac818988803884d5",
+      "adapted": "    static class Solution {\n        public List<Integer> spiralOrder(int[][] matrix) {\n            List<Integer> result = new ArrayList<>();\n            if (matrix.length == 0 || matrix[0].length == 0) {\n                return result;\n            }\n            int top = 0;\n            int bottom = matrix.length - 1;\n            int left = 0;\n            int right = matrix[0].length - 1;\n            while (top <= bottom && left <= right) {\n                for (int col = left; col <= right; col++) {\n                    result.add(matrix[top][col]);\n                }\n                top++;\n                for (int row = top; row <= bottom; row++) {\n                    result.add(matrix[row][right]);\n                }\n                right--;\n                if (top <= bottom) { // 仍有未读行，才走下边\n                    for (int col = right; col >= left; col--) {\n                        result.add(matrix[bottom][col]);\n                    }\n                    bottom--;\n                }\n                if (left <= right) { // 仍有未读列，才走左边\n                    for (int row = bottom; row >= top; row--) {\n                        result.add(matrix[row][left]);\n                    }\n                    left++;\n                }\n            }\n            return result;\n        }\n    }",
+      "displayStart": 23,
+      "input": "matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]",
+      "inputObject": {
+        "matrix": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ],
+          [
+            7,
+            8,
+            9
+          ]
+        ]
+      },
+      "expectedValue": [
+        1,
+        2,
+        3,
+        6,
+        9,
+        8,
+        7,
+        4,
+        5
+      ],
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/spiral-matrix/"
+    },
+    {
+      "id": "LCR146",
+      "title": "LCR 146. 螺旋遍历二维数组（原剑指 Offer 29）",
+      "slug": "shun-shi-zhen-da-yin-ju-zhen-lcof",
+      "group": 5,
+      "summary": "复用54的边界收缩规则，改为把访问结果直接写进int[]。",
+      "think": [
+        "原Offer 29链接当前对应LCR 146。算法与54相同，但官方方法名和返回类型不同。",
+        "四边界仍表示尚未访问区域；使用write记录结果数组的下次写入下标。",
+        "单行、单列的判断保留在当前方法中，不能跨题调用54的Solution。空矩阵返回new int[0]。"
+      ],
+      "state": "write是已经访问的元素数；top、bottom、left、right含义与54完全一致。",
+      "walk": "array=[[1,2,3],[4,5,6],[7,8,9]]\n上1,2,3 → 右6,9 → 下8,7 → 左4 → 中心5\nwrite从0增至9，返回[1,2,3,6,9,8,7,4,5]",
+      "pitfall": "本题当前签名为int[] spiralArray(int[][] array)，不是List<Integer> spiralOrder；不要复制错题入口。",
+      "cost": "时间O(mn)，结果空间O(mn)，除结果外额外空间O(1)。",
+      "code": "class Solution {\n    public int[] spiralArray(int[][] array) {\n        if (array.length == 0 || array[0].length == 0) {\n            return new int[0];\n        }\n        int[] result = new int[array.length * array[0].length];\n        int write = 0;\n        int top = 0;\n        int bottom = array.length - 1;\n        int left = 0;\n        int right = array[0].length - 1;\n        while (top <= bottom && left <= right) {\n            for (int col = left; col <= right; col++) {\n                result[write++] = array[top][col];\n            }\n            top++;\n            for (int row = top; row <= bottom; row++) {\n                result[write++] = array[row][right];\n            }\n            right--;\n            if (top <= bottom) { // 防止只剩一行时重复读取\n                for (int col = right; col >= left; col--) {\n                    result[write++] = array[bottom][col];\n                }\n                bottom--;\n            }\n            if (left <= right) { // 防止只剩一列时重复读取\n                for (int row = bottom; row >= top; row--) {\n                    result[write++] = array[row][left];\n                }\n                left++;\n            }\n        }\n        return result;\n    }\n}",
+      "inputs": {
+        "array": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ],
+          [
+            7,
+            8,
+            9
+          ]
+        ]
+      },
+      "expected": [
+        1,
+        2,
+        3,
+        6,
+        9,
+        8,
+        7,
+        4,
+        5
+      ],
+      "call": "spiralArray(array)",
+      "ret": "int[]",
+      "choice": "",
+      "variants": [],
+      "url": "https://leetcode.cn/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/",
+      "page_slug": "LCR146-shun-shi-zhen-da-yin-ju-zhen-lcof",
+      "english": "Shun Shi Zhen Da Yin Ju Zhen Lcof",
+      "java_file": "src/main/java/leetcode/array/LCR0146SpiralArray.java",
+      "mainClass": "leetcode.array.LCR0146SpiralArray",
+      "sourceHash": "67cca4f913d0aaefdbdb580e00a09aa2136a84c1562f744bd88275d495c77f66",
+      "adapted": "    static class Solution {\n        public int[] spiralArray(int[][] array) {\n            if (array.length == 0 || array[0].length == 0) {\n                return new int[0];\n            }\n            int[] result = new int[array.length * array[0].length];\n            int write = 0;\n            int top = 0;\n            int bottom = array.length - 1;\n            int left = 0;\n            int right = array[0].length - 1;\n            while (top <= bottom && left <= right) {\n                for (int col = left; col <= right; col++) {\n                    result[write++] = array[top][col];\n                }\n                top++;\n                for (int row = top; row <= bottom; row++) {\n                    result[write++] = array[row][right];\n                }\n                right--;\n                if (top <= bottom) { // 防止只剩一行时重复读取\n                    for (int col = right; col >= left; col--) {\n                        result[write++] = array[bottom][col];\n                    }\n                    bottom--;\n                }\n                if (left <= right) { // 防止只剩一列时重复读取\n                    for (int row = bottom; row >= top; row--) {\n                        result[write++] = array[row][left];\n                    }\n                    left++;\n                }\n            }\n            return result;\n        }\n    }",
+      "displayStart": 23,
+      "input": "array = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]",
+      "inputObject": {
+        "array": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ],
+          [
+            7,
+            8,
+            9
+          ]
+        ]
+      },
+      "expectedValue": [
+        1,
+        2,
+        3,
+        6,
+        9,
+        8,
+        7,
+        4,
+        5
+      ],
+      "test_source": "本次数组章节实例走过程；题目链接 https://leetcode.cn/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/"
+    },
+    {
+      "id": "K58",
+      "title": "卡码网 58. 区间和",
+      "slug": "",
+      "group": 6,
+      "summary": "prefix[i]记前i个数之和，闭区间[left,right]用两个前缀相减。",
+      "think": [
+        "每次询问都重新累加，q次最坏O(nq)。数组不变，多次求和可以复用之前的累计结果。",
+        "开n+1个位置，prefix[0]=0；读到nums[i]时写prefix[i+1]=prefix[i]+nums[i]。",
+        "[left,right]共有right-left+1项，取前right+1项再减去前left项，得到prefix[right+1]-prefix[left]。"
+      ],
+      "state": "prefix[i]覆盖[0,i)，不包含下标i；程序按题意持续读取查询直到EOF。",
+      "walk": "nums=[1,2,3,4,5]\nprefix=[0,1,3,6,10,15]\n查询[0,1] → prefix[2]-prefix[0]=3\n查询[1,3] → prefix[4]-prefix[1]=10-1=9",
+      "pitfall": "不要把前i项和与下标0到i的和混用。左端为0时也按同一公式算；用long存累计和。",
+      "cost": "预处理O(n)，q次查询O(q)，总时间O(n+q)。原数组与prefix占O(n)，批量输出缓冲另占O(q)空间（按定长整数计）。",
+      "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        int n = scanner.nextInt();\n        int[] nums = new int[n];\n        for (int i = 0; i < n; i++) {\n            nums[i] = scanner.nextInt();\n        }\n        long[] prefix = buildPrefix(nums);\n        StringBuilder result = new StringBuilder();\n        while (scanner.hasNextInt()) {\n            int left = scanner.nextInt();\n            int right = scanner.nextInt();\n            result.append(rangeSum(prefix, left, right)).append('\\n');\n        }\n        System.out.print(result);\n        scanner.close();\n    }\n\n    static long[] buildPrefix(int[] nums) {\n        long[] prefix = new long[nums.length + 1];\n        for (int i = 0; i < nums.length; i++) {\n            prefix[i + 1] = prefix[i] + nums[i];\n        }\n        return prefix;\n    }\n\n    static long rangeSum(long[] prefix, int left, int right) {\n        return prefix[right + 1] - prefix[left];\n    }\n}",
+      "inputs": {
+        "nums": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "queries": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      "expected": [
+        3,
+        9
+      ],
+      "call": "",
+      "ret": "long[]",
+      "choice": "",
+      "variants": [],
+      "url": "https://kamacoder.com/problempage.php?pid=1070",
+      "page_slug": "kama-0058-range-sum",
+      "english": "Range Sum",
+      "java_file": "src/main/java/leetcode/array/Kama0058RangeSum.java",
+      "mainClass": "leetcode.array.Kama0058RangeSum",
+      "sourceHash": "80b19747b5c5b904138b0ebc5dc059404edeb4e228db307a3b276ce582b067f4",
+      "adapted": "    static class Solution {\n        static long[] buildPrefix(int[] nums) {\n            long[] prefix = new long[nums.length + 1];\n            for (int i = 0; i < nums.length; i++) {\n                prefix[i + 1] = prefix[i] + nums[i];\n            }\n            return prefix;\n        }\n\n        static long rangeSum(long[] prefix, int left, int right) {\n            return prefix[right + 1] - prefix[left];\n        }\n    }",
+      "displayStart": 33,
+      "input": "nums = [1, 2, 3, 4, 5], queries = [[0, 1], [1, 3]]",
+      "inputObject": {
+        "nums": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "queries": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      "expectedValue": [
+        3,
+        9
+      ],
+      "test_source": "本次数组章节实例走过程；题目链接 https://kamacoder.com/problempage.php?pid=1070"
+    },
+    {
+      "id": "K44",
+      "title": "卡码网 44. 开发商购买土地",
+      "slug": "",
+      "group": 7,
+      "summary": "把矩阵压成行和、列和，再枚举两边都非空的切线。",
+      "think": [
+        "每条切线都重扫矩阵，会反复求和。只能横切或竖切，所以每行、每列都可以先压成一个总值。",
+        "读入时同时累计rowSum、colSum、total，不必保存原矩阵。",
+        "横切只需累计上半部分part，下半部分为total-part；比较abs(part-(total-part))。竖切同理。只枚举n-1条横线、m-1条竖线。"
+      ],
+      "state": "rowSum、colSum是压缩后的一维数组；part是切线一侧累计和，result是最小差值。",
+      "walk": "land=[[1,2,3],[2,1,3],[1,2,3]]，total=18\nrowSum=[6,6,6]：横切后上方6/12，下方12/6，差均6\ncolSum=[4,5,9]：第一条竖线左4右14，差10；第二条左9右9，差0\n最小差为0",
+      "pitfall": "不能切在最后一行或最后一列之后，那会让一边为空。题目保证n、m不同时为1；一行时只枚举竖切。",
+      "cost": "读入O(nm)，枚举O(n+m)，总时间O(nm)，额外空间O(n+m)。",
+      "code": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        int n = scanner.nextInt();\n        int m = scanner.nextInt();\n        long[] rowSum = new long[n];\n        long[] colSum = new long[m];\n        long total = 0;\n        for (int row = 0; row < n; row++) {\n            for (int col = 0; col < m; col++) {\n                int value = scanner.nextInt();\n                rowSum[row] += value;\n                colSum[col] += value;\n                total += value;\n            }\n        }\n        System.out.println(minDifference(rowSum, colSum, total));\n        scanner.close();\n    }\n\n    static long minDifference(long[] rowSum, long[] colSum, long total) {\n        long result = Long.MAX_VALUE;\n        long part = 0;\n        // 最后一行之后不是合法切线，两边必须非空\n        for (int row = 0; row < rowSum.length - 1; row++) {\n            part += rowSum[row];\n            result = Math.min(result, Math.abs(part - (total - part)));\n        }\n        part = 0;\n        for (int col = 0; col < colSum.length - 1; col++) {\n            part += colSum[col];\n            result = Math.min(result, Math.abs(part - (total - part)));\n        }\n        return result;\n    }\n}",
+      "inputs": {
+        "land": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            2,
+            1,
+            3
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ]
+      },
+      "expected": 0,
+      "call": "",
+      "ret": "long",
+      "choice": "",
+      "variants": [],
+      "url": "https://kamacoder.com/problempage.php?pid=1044",
+      "page_slug": "kama-0044-land-purchase",
+      "english": "Land Purchase",
+      "java_file": "src/main/java/leetcode/array/Kama0044LandPurchase.java",
+      "mainClass": "leetcode.array.Kama0044LandPurchase",
+      "sourceHash": "d8b8db0a3185259cc7439763d38b12e23bc0c4df0917033813c55ae67e915815",
+      "adapted": "    static class Solution {\n        static long minDifference(long[] rowSum, long[] colSum, long total) {\n            long result = Long.MAX_VALUE;\n            long part = 0;\n            // 最后一行之后不是合法切线，两边必须非空\n            for (int row = 0; row < rowSum.length - 1; row++) {\n                part += rowSum[row];\n                result = Math.min(result, Math.abs(part - (total - part)));\n            }\n            part = 0;\n            for (int col = 0; col < colSum.length - 1; col++) {\n                part += colSum[col];\n                result = Math.min(result, Math.abs(part - (total - part)));\n            }\n            return result;\n        }\n    }",
+      "displayStart": 37,
+      "input": "land = [[1, 2, 3], [2, 1, 3], [1, 2, 3]]",
+      "inputObject": {
+        "land": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            2,
+            1,
+            3
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ]
+      },
+      "expectedValue": 0,
+      "test_source": "本次数组章节实例走过程；题目链接 https://kamacoder.com/problempage.php?pid=1044"
+    }
+  ],
+  "revision_id": 72,
+  "readback": "全文、24份Java、18个调试器链接及原速查表已逐批读回核验"
+}

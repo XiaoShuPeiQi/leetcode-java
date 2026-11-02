@@ -1,0 +1,1362 @@
+{
+  "binary-search": {
+    "questionFrontendId": "704",
+    "title": "Binary Search",
+    "translatedTitle": "二分查找",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    int search(vector<int>& nums, int target) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public int search(int[] nums, int target) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def search(self, nums: list[int], target: int) -> int:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def search(self, nums, target):\n        \"\"\"\n        :type nums: List[int]\n        :type target: int\n        :rtype: int\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar search = function(nums, target) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function search(nums: number[], target: number): number {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public int Search(int[] nums, int target) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "int search(int* nums, int numsSize, int target) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func search(nums []int, target int) int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun search(nums: IntArray, target: Int): Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func search(_ nums: [Int], _ target: Int) -> Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn search(nums: Vec<i32>, target: i32) -> i32 {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer[]} nums\n# @param {Integer} target\n# @return {Integer}\ndef search(nums, target)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @param Integer $target\n     * @return Integer\n     */\n    function search($nums, $target) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  int search(List<int> nums, int target) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def search(nums: Array[Int], target: Int): Int = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec search(nums :: [integer], target :: integer) :: integer\n  def search(nums, target) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec search(Nums :: [integer()], Target :: integer()) -> integer().\nsearch(Nums, Target) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (search nums target)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func search(nums: Array<Int64>, target: Int64): Int64 {\n\n    }\n}"
+      }
+    ]
+  },
+  "search-insert-position": {
+    "questionFrontendId": "35",
+    "title": "Search Insert Position",
+    "translatedTitle": "搜索插入位置",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    int searchInsert(vector<int>& nums, int target) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public int searchInsert(int[] nums, int target) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def searchInsert(self, nums: list[int], target: int) -> int:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def searchInsert(self, nums, target):\n        \"\"\"\n        :type nums: List[int]\n        :type target: int\n        :rtype: int\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number}\n */\nvar searchInsert = function(nums, target) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function searchInsert(nums: number[], target: number): number {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public int SearchInsert(int[] nums, int target) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "int searchInsert(int* nums, int numsSize, int target) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func searchInsert(nums []int, target int) int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun searchInsert(nums: IntArray, target: Int): Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func searchInsert(_ nums: [Int], _ target: Int) -> Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn search_insert(nums: Vec<i32>, target: i32) -> i32 {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer[]} nums\n# @param {Integer} target\n# @return {Integer}\ndef search_insert(nums, target)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @param Integer $target\n     * @return Integer\n     */\n    function searchInsert($nums, $target) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  int searchInsert(List<int> nums, int target) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def searchInsert(nums: Array[Int], target: Int): Int = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec search_insert(nums :: [integer], target :: integer) :: integer\n  def search_insert(nums, target) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec search_insert(Nums :: [integer()], Target :: integer()) -> integer().\nsearch_insert(Nums, Target) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (search-insert nums target)\n  (-> (listof exact-integer?) exact-integer? exact-integer?)\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func searchInsert(nums: Array<Int64>, target: Int64): Int64 {\n\n    }\n}"
+      }
+    ]
+  },
+  "find-first-and-last-position-of-element-in-sorted-array": {
+    "questionFrontendId": "34",
+    "title": "Find First and Last Position of Element in Sorted Array",
+    "translatedTitle": "在排序数组中查找元素的第一个和最后一个位置",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    vector<int> searchRange(vector<int>& nums, int target) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public int[] searchRange(int[] nums, int target) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def searchRange(self, nums: list[int], target: int) -> list[int]:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def searchRange(self, nums, target):\n        \"\"\"\n        :type nums: List[int]\n        :type target: int\n        :rtype: List[int]\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number[]}\n */\nvar searchRange = function(nums, target) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function searchRange(nums: number[], target: number): number[] {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public int[] SearchRange(int[] nums, int target) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "/**\n * Note: The returned array must be malloced, assume caller calls free().\n */\nint* searchRange(int* nums, int numsSize, int target, int* returnSize) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func searchRange(nums []int, target int) []int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun searchRange(nums: IntArray, target: Int): IntArray {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func searchRange(_ nums: [Int], _ target: Int) -> [Int] {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn search_range(nums: Vec<i32>, target: i32) -> Vec<i32> {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer[]} nums\n# @param {Integer} target\n# @return {Integer[]}\ndef search_range(nums, target)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @param Integer $target\n     * @return Integer[]\n     */\n    function searchRange($nums, $target) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  List<int> searchRange(List<int> nums, int target) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def searchRange(nums: Array[Int], target: Int): Array[Int] = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec search_range(nums :: [integer], target :: integer) :: [integer]\n  def search_range(nums, target) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec search_range(Nums :: [integer()], Target :: integer()) -> [integer()].\nsearch_range(Nums, Target) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (search-range nums target)\n  (-> (listof exact-integer?) exact-integer? (listof exact-integer?))\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func searchRange(nums: Array<Int64>, target: Int64): Array<Int64> {\n\n    }\n}"
+      }
+    ]
+  },
+  "sqrtx": {
+    "questionFrontendId": "69",
+    "title": "Sqrt(x)",
+    "translatedTitle": "x 的平方根 ",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    int mySqrt(int x) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public int mySqrt(int x) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def mySqrt(self, x: int) -> int:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def mySqrt(self, x):\n        \"\"\"\n        :type x: int\n        :rtype: int\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number} x\n * @return {number}\n */\nvar mySqrt = function(x) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function mySqrt(x: number): number {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public int MySqrt(int x) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "int mySqrt(int x) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func mySqrt(x int) int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun mySqrt(x: Int): Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func mySqrt(_ x: Int) -> Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn my_sqrt(x: i32) -> i32 {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer} x\n# @return {Integer}\ndef my_sqrt(x)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer $x\n     * @return Integer\n     */\n    function mySqrt($x) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  int mySqrt(int x) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def mySqrt(x: Int): Int = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec my_sqrt(x :: integer) :: integer\n  def my_sqrt(x) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec my_sqrt(X :: integer()) -> integer().\nmy_sqrt(X) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (my-sqrt x)\n  (-> exact-integer? exact-integer?)\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func mySqrt(x: Int64): Int64 {\n\n    }\n}"
+      }
+    ]
+  },
+  "valid-perfect-square": {
+    "questionFrontendId": "367",
+    "title": "Valid Perfect Square",
+    "translatedTitle": "有效的完全平方数",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    bool isPerfectSquare(int num) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public boolean isPerfectSquare(int num) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def isPerfectSquare(self, num: int) -> bool:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def isPerfectSquare(self, num):\n        \"\"\"\n        :type num: int\n        :rtype: bool\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number} num\n * @return {boolean}\n */\nvar isPerfectSquare = function(num) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function isPerfectSquare(num: number): boolean {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public bool IsPerfectSquare(int num) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "bool isPerfectSquare(int num) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func isPerfectSquare(num int) bool {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun isPerfectSquare(num: Int): Boolean {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func isPerfectSquare(_ num: Int) -> Bool {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn is_perfect_square(num: i32) -> bool {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer} num\n# @return {Boolean}\ndef is_perfect_square(num)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer $num\n     * @return Boolean\n     */\n    function isPerfectSquare($num) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  bool isPerfectSquare(int num) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def isPerfectSquare(num: Int): Boolean = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec is_perfect_square(num :: integer) :: boolean\n  def is_perfect_square(num) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec is_perfect_square(Num :: integer()) -> boolean().\nis_perfect_square(Num) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (is-perfect-square num)\n  (-> exact-integer? boolean?)\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func isPerfectSquare(num: Int64): Bool {\n\n    }\n}"
+      }
+    ]
+  },
+  "remove-element": {
+    "questionFrontendId": "27",
+    "title": "Remove Element",
+    "translatedTitle": "移除元素",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    int removeElement(vector<int>& nums, int val) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public int removeElement(int[] nums, int val) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def removeElement(self, nums: list[int], val: int) -> int:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def removeElement(self, nums, val):\n        \"\"\"\n        :type nums: List[int]\n        :type val: int\n        :rtype: int\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number[]} nums\n * @param {number} val\n * @return {number}\n */\nvar removeElement = function(nums, val) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function removeElement(nums: number[], val: number): number {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public int RemoveElement(int[] nums, int val) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "int removeElement(int* nums, int numsSize, int val) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func removeElement(nums []int, val int) int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun removeElement(nums: IntArray, `val`: Int): Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func removeElement(_ nums: inout [Int], _ val: Int) -> Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn remove_element(nums: &mut Vec<i32>, val: i32) -> i32 {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer[]} nums\n# @param {Integer} val\n# @return {Integer}\ndef remove_element(nums, val)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @param Integer $val\n     * @return Integer\n     */\n    function removeElement(&$nums, $val) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  int removeElement(List<int> nums, int val) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def removeElement(nums: Array[Int], `val`: Int): Int = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func removeElement(nums: Array<Int64>, val: Int64): Int64 {\n\n    }\n}"
+      }
+    ]
+  },
+  "remove-duplicates-from-sorted-array": {
+    "questionFrontendId": "26",
+    "title": "Remove Duplicates from Sorted Array",
+    "translatedTitle": "删除有序数组中的重复项",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    int removeDuplicates(vector<int>& nums) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public int removeDuplicates(int[] nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def removeDuplicates(self, nums: list[int]) -> int:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def removeDuplicates(self, nums):\n        \"\"\"\n        :type nums: List[int]\n        :rtype: int\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar removeDuplicates = function(nums) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function removeDuplicates(nums: number[]): number {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public int RemoveDuplicates(int[] nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "int removeDuplicates(int* nums, int numsSize) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func removeDuplicates(nums []int) int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun removeDuplicates(nums: IntArray): Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func removeDuplicates(_ nums: inout [Int]) -> Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer[]} nums\n# @return {Integer}\ndef remove_duplicates(nums)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @return Integer\n     */\n    function removeDuplicates(&$nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  int removeDuplicates(List<int> nums) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def removeDuplicates(nums: Array[Int]): Int = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (remove-duplicates nums)\n  (-> (listof exact-integer?) exact-integer?)\n\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func removeDuplicates(nums: Array<Int64>): Int64 {\n\n    }\n}"
+      }
+    ]
+  },
+  "move-zeroes": {
+    "questionFrontendId": "283",
+    "title": "Move Zeroes",
+    "translatedTitle": "移动零",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    void moveZeroes(vector<int>& nums) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public void moveZeroes(int[] nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def moveZeroes(self, nums: list[int]) -> None:\n        \"\"\"\n        Do not return anything, modify nums in-place instead.\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def moveZeroes(self, nums):\n        \"\"\"\n        :type nums: List[int]\n        :rtype: None Do not return anything, modify nums in-place instead.\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number[]} nums\n * @return {void} Do not return anything, modify nums in-place instead.\n */\nvar moveZeroes = function(nums) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "/**\n Do not return anything, modify nums in-place instead.\n */\nfunction moveZeroes(nums: number[]): void {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public void MoveZeroes(int[] nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "void moveZeroes(int* nums, int numsSize) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func moveZeroes(nums []int)  {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun moveZeroes(nums: IntArray): Unit {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func moveZeroes(_ nums: inout [Int]) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn move_zeroes(nums: &mut Vec<i32>) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer[]} nums\n# @return {Void} Do not return anything, modify nums in-place instead.\ndef move_zeroes(nums)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @return NULL\n     */\n    function moveZeroes(&$nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  void moveZeroes(List<int> nums) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def moveZeroes(nums: Array[Int]): Unit = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func moveZeroes(nums: Array<Int64>): Unit {\n\n    }\n}"
+      }
+    ]
+  },
+  "backspace-string-compare": {
+    "questionFrontendId": "844",
+    "title": "Backspace String Compare",
+    "translatedTitle": "比较含退格的字符串",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    bool backspaceCompare(string s, string t) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public boolean backspaceCompare(String s, String t) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def backspaceCompare(self, s: str, t: str) -> bool:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def backspaceCompare(self, s, t):\n        \"\"\"\n        :type s: str\n        :type t: str\n        :rtype: bool\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {string} s\n * @param {string} t\n * @return {boolean}\n */\nvar backspaceCompare = function(s, t) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function backspaceCompare(s: string, t: string): boolean {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public bool BackspaceCompare(string s, string t) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "bool backspaceCompare(char* s, char* t) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func backspaceCompare(s string, t string) bool {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun backspaceCompare(s: String, t: String): Boolean {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func backspaceCompare(_ s: String, _ t: String) -> Bool {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn backspace_compare(s: String, t: String) -> bool {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {String} s\n# @param {String} t\n# @return {Boolean}\ndef backspace_compare(s, t)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param String $s\n     * @param String $t\n     * @return Boolean\n     */\n    function backspaceCompare($s, $t) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  bool backspaceCompare(String s, String t) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def backspaceCompare(s: String, t: String): Boolean = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec backspace_compare(s :: String.t, t :: String.t) :: boolean\n  def backspace_compare(s, t) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec backspace_compare(S :: unicode:unicode_binary(), T :: unicode:unicode_binary()) -> boolean().\nbackspace_compare(S, T) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (backspace-compare s t)\n  (-> string? string? boolean?)\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func backspaceCompare(s: String, t: String): Bool {\n\n    }\n}"
+      }
+    ]
+  },
+  "squares-of-a-sorted-array": {
+    "questionFrontendId": "977",
+    "title": "Squares of a Sorted Array",
+    "translatedTitle": "有序数组的平方",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    vector<int> sortedSquares(vector<int>& nums) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public int[] sortedSquares(int[] nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def sortedSquares(self, nums: List[int]) -> List[int]:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def sortedSquares(self, nums):\n        \"\"\"\n        :type nums: List[int]\n        :rtype: List[int]\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number[]} nums\n * @return {number[]}\n */\nvar sortedSquares = function(nums) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function sortedSquares(nums: number[]): number[] {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public int[] SortedSquares(int[] nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "/**\n * Note: The returned array must be malloced, assume caller calls free().\n */\nint* sortedSquares(int* nums, int numsSize, int* returnSize) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func sortedSquares(nums []int) []int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun sortedSquares(nums: IntArray): IntArray {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func sortedSquares(_ nums: [Int]) -> [Int] {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn sorted_squares(nums: Vec<i32>) -> Vec<i32> {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer[]} nums\n# @return {Integer[]}\ndef sorted_squares(nums)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer[] $nums\n     * @return Integer[]\n     */\n    function sortedSquares($nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  List<int> sortedSquares(List<int> nums) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def sortedSquares(nums: Array[Int]): Array[Int] = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec sorted_squares(nums :: [integer]) :: [integer]\n  def sorted_squares(nums) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec sorted_squares(Nums :: [integer()]) -> [integer()].\nsorted_squares(Nums) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (sorted-squares nums)\n  (-> (listof exact-integer?) (listof exact-integer?))\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func sortedSquares(nums: Array<Int64>): Array<Int64> {\n\n    }\n}"
+      }
+    ]
+  },
+  "minimum-size-subarray-sum": {
+    "questionFrontendId": "209",
+    "title": "Minimum Size Subarray Sum",
+    "translatedTitle": "长度最小的子数组",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    int minSubArrayLen(int target, vector<int>& nums) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public int minSubArrayLen(int target, int[] nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def minSubArrayLen(self, target: int, nums: list[int]) -> int:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def minSubArrayLen(self, target, nums):\n        \"\"\"\n        :type target: int\n        :type nums: List[int]\n        :rtype: int\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number} target\n * @param {number[]} nums\n * @return {number}\n */\nvar minSubArrayLen = function(target, nums) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function minSubArrayLen(target: number, nums: number[]): number {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public int MinSubArrayLen(int target, int[] nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "int minSubArrayLen(int target, int* nums, int numsSize) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func minSubArrayLen(target int, nums []int) int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun minSubArrayLen(target: Int, nums: IntArray): Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func minSubArrayLen(_ target: Int, _ nums: [Int]) -> Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn min_sub_array_len(target: i32, nums: Vec<i32>) -> i32 {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer} target\n# @param {Integer[]} nums\n# @return {Integer}\ndef min_sub_array_len(target, nums)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer $target\n     * @param Integer[] $nums\n     * @return Integer\n     */\n    function minSubArrayLen($target, $nums) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  int minSubArrayLen(int target, List<int> nums) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def minSubArrayLen(target: Int, nums: Array[Int]): Int = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec min_sub_array_len(target :: integer, nums :: [integer]) :: integer\n  def min_sub_array_len(target, nums) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec min_sub_array_len(Target :: integer(), Nums :: [integer()]) -> integer().\nmin_sub_array_len(Target, Nums) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (min-sub-array-len target nums)\n  (-> exact-integer? (listof exact-integer?) exact-integer?)\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func minSubArrayLen(target: Int64, nums: Array<Int64>): Int64 {\n\n    }\n}"
+      }
+    ]
+  },
+  "fruit-into-baskets": {
+    "questionFrontendId": "904",
+    "title": "Fruit Into Baskets",
+    "translatedTitle": "水果成篮",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    int totalFruit(vector<int>& fruits) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public int totalFruit(int[] fruits) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def totalFruit(self, fruits: list[int]) -> int:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def totalFruit(self, fruits):\n        \"\"\"\n        :type fruits: List[int]\n        :rtype: int\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number[]} fruits\n * @return {number}\n */\nvar totalFruit = function(fruits) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function totalFruit(fruits: number[]): number {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public int TotalFruit(int[] fruits) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "int totalFruit(int* fruits, int fruitsSize) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func totalFruit(fruits []int) int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun totalFruit(fruits: IntArray): Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func totalFruit(_ fruits: [Int]) -> Int {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn total_fruit(fruits: Vec<i32>) -> i32 {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer[]} fruits\n# @return {Integer}\ndef total_fruit(fruits)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer[] $fruits\n     * @return Integer\n     */\n    function totalFruit($fruits) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  int totalFruit(List<int> fruits) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def totalFruit(fruits: Array[Int]): Int = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec total_fruit(fruits :: [integer]) :: integer\n  def total_fruit(fruits) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec total_fruit(Fruits :: [integer()]) -> integer().\ntotal_fruit(Fruits) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (total-fruit fruits)\n  (-> (listof exact-integer?) exact-integer?)\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func totalFruit(fruits: Array<Int64>): Int64 {\n\n    }\n}"
+      }
+    ]
+  },
+  "minimum-window-substring": {
+    "questionFrontendId": "76",
+    "title": "Minimum Window Substring",
+    "translatedTitle": "最小覆盖子串",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    string minWindow(string s, string t) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public String minWindow(String s, String t) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def minWindow(self, s: str, t: str) -> str:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def minWindow(self, s, t):\n        \"\"\"\n        :type s: str\n        :type t: str\n        :rtype: str\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {string} s\n * @param {string} t\n * @return {string}\n */\nvar minWindow = function(s, t) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function minWindow(s: string, t: string): string {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public string MinWindow(string s, string t) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "char* minWindow(char* s, char* t) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func minWindow(s string, t string) string {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun minWindow(s: String, t: String): String {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func minWindow(_ s: String, _ t: String) -> String {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn min_window(s: String, t: String) -> String {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {String} s\n# @param {String} t\n# @return {String}\ndef min_window(s, t)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param String $s\n     * @param String $t\n     * @return String\n     */\n    function minWindow($s, $t) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  String minWindow(String s, String t) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def minWindow(s: String, t: String): String = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec min_window(s :: String.t, t :: String.t) :: String.t\n  def min_window(s, t) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec min_window(S :: unicode:unicode_binary(), T :: unicode:unicode_binary()) -> unicode:unicode_binary().\nmin_window(S, T) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (min-window s t)\n  (-> string? string? string?)\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func minWindow(s: String, t: String): String {\n\n    }\n}"
+      }
+    ]
+  },
+  "spiral-matrix-ii": {
+    "questionFrontendId": "59",
+    "title": "Spiral Matrix II",
+    "translatedTitle": "螺旋矩阵 II",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    vector<vector<int>> generateMatrix(int n) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public int[][] generateMatrix(int n) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def generateMatrix(self, n: int) -> list[list[int]]:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def generateMatrix(self, n):\n        \"\"\"\n        :type n: int\n        :rtype: List[List[int]]\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number} n\n * @return {number[][]}\n */\nvar generateMatrix = function(n) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function generateMatrix(n: number): number[][] {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public int[][] GenerateMatrix(int n) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "/**\n * Return an array of arrays of size *returnSize.\n * The sizes of the arrays are returned as *returnColumnSizes array.\n * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().\n */\nint** generateMatrix(int n, int* returnSize, int** returnColumnSizes) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func generateMatrix(n int) [][]int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun generateMatrix(n: Int): Array<IntArray> {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func generateMatrix(_ n: Int) -> [[Int]] {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn generate_matrix(n: i32) -> Vec<Vec<i32>> {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer} n\n# @return {Integer[][]}\ndef generate_matrix(n)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer $n\n     * @return Integer[][]\n     */\n    function generateMatrix($n) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  List<List<int>> generateMatrix(int n) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def generateMatrix(n: Int): Array[Array[Int]] = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec generate_matrix(n :: integer) :: [[integer]]\n  def generate_matrix(n) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec generate_matrix(N :: integer()) -> [[integer()]].\ngenerate_matrix(N) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (generate-matrix n)\n  (-> exact-integer? (listof (listof exact-integer?)))\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func generateMatrix(n: Int64): Array<Array<Int64>> {\n\n    }\n}"
+      }
+    ]
+  },
+  "spiral-matrix": {
+    "questionFrontendId": "54",
+    "title": "Spiral Matrix",
+    "translatedTitle": "螺旋矩阵",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    vector<int> spiralOrder(vector<vector<int>>& matrix) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public List<Integer> spiralOrder(int[][] matrix) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def spiralOrder(self, matrix: list[list[int]]) -> list[int]:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def spiralOrder(self, matrix):\n        \"\"\"\n        :type matrix: List[List[int]]\n        :rtype: List[int]\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number[][]} matrix\n * @return {number[]}\n */\nvar spiralOrder = function(matrix) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function spiralOrder(matrix: number[][]): number[] {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public IList<int> SpiralOrder(int[][] matrix) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "/**\n * Note: The returned array must be malloced, assume caller calls free().\n */\nint* spiralOrder(int** matrix, int matrixSize, int* matrixColSize, int* returnSize) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func spiralOrder(matrix [][]int) []int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun spiralOrder(matrix: Array<IntArray>): List<Int> {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func spiralOrder(_ matrix: [[Int]]) -> [Int] {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn spiral_order(matrix: Vec<Vec<i32>>) -> Vec<i32> {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer[][]} matrix\n# @return {Integer[]}\ndef spiral_order(matrix)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer[][] $matrix\n     * @return Integer[]\n     */\n    function spiralOrder($matrix) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  List<int> spiralOrder(List<List<int>> matrix) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def spiralOrder(matrix: Array[Array[Int]]): List[Int] = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec spiral_order(matrix :: [[integer]]) :: [integer]\n  def spiral_order(matrix) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec spiral_order(Matrix :: [[integer()]]) -> [integer()].\nspiral_order(Matrix) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (spiral-order matrix)\n  (-> (listof (listof exact-integer?)) (listof exact-integer?))\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func spiralOrder(matrix: Array<Array<Int64>>): ArrayList<Int64> {\n\n    }\n}"
+      }
+    ]
+  },
+  "shun-shi-zhen-da-yin-ju-zhen-lcof": {
+    "questionFrontendId": "LCR 146",
+    "title": "螺旋遍历二维数组",
+    "translatedTitle": "螺旋遍历二维数组",
+    "codeSnippets": [
+      {
+        "langSlug": "cpp",
+        "code": "class Solution {\npublic:\n    vector<int> spiralArray(vector<vector<int>>& array) {\n        \n    }\n};"
+      },
+      {
+        "langSlug": "java",
+        "code": "class Solution {\n    public int[] spiralArray(int[][] array) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "python3",
+        "code": "class Solution:\n    def spiralArray(self, array: List[List[int]]) -> List[int]:\n        "
+      },
+      {
+        "langSlug": "python",
+        "code": "class Solution(object):\n    def spiralArray(self, array):\n        \"\"\"\n        :type array: List[List[int]]\n        :rtype: List[int]\n        \"\"\"\n        "
+      },
+      {
+        "langSlug": "javascript",
+        "code": "/**\n * @param {number[][]} array\n * @return {number[]}\n */\nvar spiralArray = function(array) {\n    \n};"
+      },
+      {
+        "langSlug": "typescript",
+        "code": "function spiralArray(array: number[][]): number[] {\n    \n};"
+      },
+      {
+        "langSlug": "csharp",
+        "code": "public class Solution {\n    public int[] SpiralArray(int[][] array) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "c",
+        "code": "/**\n * Note: The returned array must be malloced, assume caller calls free().\n */\nint* spiralArray(int** array, int arraySize, int* arrayColSize, int* returnSize) {\n    \n}"
+      },
+      {
+        "langSlug": "golang",
+        "code": "func spiralArray(array [][]int) []int {\n    \n}"
+      },
+      {
+        "langSlug": "kotlin",
+        "code": "class Solution {\n    fun spiralArray(array: Array<IntArray>): IntArray {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "swift",
+        "code": "class Solution {\n    func spiralArray(_ array: [[Int]]) -> [Int] {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "rust",
+        "code": "impl Solution {\n    pub fn spiral_array(array: Vec<Vec<i32>>) -> Vec<i32> {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "ruby",
+        "code": "# @param {Integer[][]} array\n# @return {Integer[]}\ndef spiral_array(array)\n    \nend"
+      },
+      {
+        "langSlug": "php",
+        "code": "class Solution {\n\n    /**\n     * @param Integer[][] $array\n     * @return Integer[]\n     */\n    function spiralArray($array) {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "dart",
+        "code": "class Solution {\n  List<int> spiralArray(List<List<int>> array) {\n    \n  }\n}"
+      },
+      {
+        "langSlug": "scala",
+        "code": "object Solution {\n    def spiralArray(array: Array[Array[Int]]): Array[Int] = {\n        \n    }\n}"
+      },
+      {
+        "langSlug": "elixir",
+        "code": "defmodule Solution do\n  @spec spiral_array(array :: [[integer]]) :: [integer]\n  def spiral_array(array) do\n    \n  end\nend"
+      },
+      {
+        "langSlug": "erlang",
+        "code": "-spec spiral_array(Array :: [[integer()]]) -> [integer()].\nspiral_array(Array) ->\n  ."
+      },
+      {
+        "langSlug": "racket",
+        "code": "(define/contract (spiral-array array)\n  (-> (listof (listof exact-integer?)) (listof exact-integer?))\n  )"
+      },
+      {
+        "langSlug": "cangjie",
+        "code": "class Solution {\n    func spiralArray(array: Array<Array<Int64>>): Array<Int64> {\n\n    }\n}"
+      }
+    ]
+  }
+}

@@ -24,7 +24,7 @@ LeetCode-Java/（当前工作区）
 └── .gitignore
 ```
 
-当前有回溯、二叉树、贪心与动态规划四个真实来源章节。其他章节在提供实际题目或文档后再创建；没有实际来源时，不批量生成题解。
+当前有数组、哈希表、回溯、二叉树、贪心与动态规划六个真实来源章节。其他章节在提供实际题目或文档后再创建；没有实际来源时，不批量生成题解。
 
 ## 环境与 Java 17 配置
 
@@ -394,3 +394,38 @@ VS Code图形界面的Java断点与变量面板未自动操作；可按本README
 验证：11份代码均通过Java8独立编译及2403组对照检查；8个main经Java17运行，轨迹最终返回与expected一致。组合核对保留重复结果数量，未在力扣在线提交，也未操作VS Code界面。
 
 复验：`py -3.11 .work/hashtable/scripts/verify.py --jdk <JDK目录>`；重录：`.work/hashtable/scripts/capture.ps1 -JdkPath <JDK17目录>`；构建：`node .work/hashtable/scripts/build.mjs`。浏览器复验先服务docs目录，设置PREVIEW_URL与CODEX_TEST_MODULES（含Playwright）后运行`.work/hashtable/scripts/browser.cjs`。main新增包、import、外层类与static，不改变笔记主解逻辑；原始力扣入口模板与目录来源保存在imports中。
+
+## 数组章节（2026-11-02）
+
+对照[代码随想录数组目录](https://programmercarl.com/algo/array/)及用户项目中最后确定的笔记规范，重构原有18个题目条目：15道数字编号力扣题、LCR146（原Offer29）和2道卡码网题。保留原题范围、分组顺序和飞书末尾原速查表。
+
+[飞书章节](https://acn581cm6pdd.feishu.cn/wiki/SYdww8LbniCUBckZHRDcZ8QSnWb) · [本地完整笔记](docs/数组.md) · [在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=%E6%95%B0%E7%BB%84) · [代码检查](outputs/数组-代码验收.json) · [飞书读回](outputs/数组-飞书验收.json) · [浏览器检查](outputs/数组-浏览器验收.json)
+
+每题从第一思路开始，解释变量、不变量与边界，用同一输入推演再对照代码。24个独立Java块通过Java8编译和2,496组语义检查；力扣当前官方签名单独核对。LCR146使用spiralArray(int[][] array)。卡码网提供完整Main，网页仅回放同名计算函数，Scanner输入输出在录制范围外。
+
+18个独立Java17程序实际执行并录制JDI快照，代码与笔记主解一致。页面复用既有主题、微软雅黑、600字重、面板拖动、调用栈与播放断点；增加数组指针、窗口频次/欠账、矩阵和前缀和显示。网页是固定实例的真实执行回放。
+
+| 题号 | 题目 | Java | 独立调试器 |
+|---|---|---|---|
+| 704 | 二分查找 | [LC0704BinarySearch.java](src/main/java/leetcode/array/LC0704BinarySearch.java) | [打开](docs/problems/0704-binary-search/index.html) |
+| 35 | 搜索插入位置 | [LC0035SearchInsertPosition.java](src/main/java/leetcode/array/LC0035SearchInsertPosition.java) | [打开](docs/problems/0035-search-insert-position/index.html) |
+| 34 | 在排序数组中查找元素的第一个和最后一个位置 | [LC0034FindFirstAndLastPositionOfElementInSortedArray.java](src/main/java/leetcode/array/LC0034FindFirstAndLastPositionOfElementInSortedArray.java) | [打开](docs/problems/0034-find-first-and-last-position-of-element-in-sorted-array/index.html) |
+| 69 | x 的平方根 | [LC0069Sqrtx.java](src/main/java/leetcode/array/LC0069Sqrtx.java) | [打开](docs/problems/0069-sqrtx/index.html) |
+| 367 | 有效的完全平方数 | [LC0367ValidPerfectSquare.java](src/main/java/leetcode/array/LC0367ValidPerfectSquare.java) | [打开](docs/problems/0367-valid-perfect-square/index.html) |
+| 27 | 移除元素 | [LC0027RemoveElement.java](src/main/java/leetcode/array/LC0027RemoveElement.java) | [打开](docs/problems/0027-remove-element/index.html) |
+| 26 | 删除有序数组中的重复项 | [LC0026RemoveDuplicatesFromSortedArray.java](src/main/java/leetcode/array/LC0026RemoveDuplicatesFromSortedArray.java) | [打开](docs/problems/0026-remove-duplicates-from-sorted-array/index.html) |
+| 283 | 移动零 | [LC0283MoveZeroes.java](src/main/java/leetcode/array/LC0283MoveZeroes.java) | [打开](docs/problems/0283-move-zeroes/index.html) |
+| 844 | 比较含退格的字符串 | [LC0844BackspaceStringCompare.java](src/main/java/leetcode/array/LC0844BackspaceStringCompare.java) | [打开](docs/problems/0844-backspace-string-compare/index.html) |
+| 977 | 有序数组的平方 | [LC0977SquaresOfASortedArray.java](src/main/java/leetcode/array/LC0977SquaresOfASortedArray.java) | [打开](docs/problems/0977-squares-of-a-sorted-array/index.html) |
+| 209 | 长度最小的子数组 | [LC0209MinimumSizeSubarraySum.java](src/main/java/leetcode/array/LC0209MinimumSizeSubarraySum.java) | [打开](docs/problems/0209-minimum-size-subarray-sum/index.html) |
+| 904 | 水果成篮 | [LC0904FruitIntoBaskets.java](src/main/java/leetcode/array/LC0904FruitIntoBaskets.java) | [打开](docs/problems/0904-fruit-into-baskets/index.html) |
+| 76 | 最小覆盖子串 | [LC0076MinimumWindowSubstring.java](src/main/java/leetcode/array/LC0076MinimumWindowSubstring.java) | [打开](docs/problems/0076-minimum-window-substring/index.html) |
+| 59 | 螺旋矩阵 II | [LC0059SpiralMatrixIi.java](src/main/java/leetcode/array/LC0059SpiralMatrixIi.java) | [打开](docs/problems/0059-spiral-matrix-ii/index.html) |
+| 54 | 螺旋矩阵 | [LC0054SpiralMatrix.java](src/main/java/leetcode/array/LC0054SpiralMatrix.java) | [打开](docs/problems/0054-spiral-matrix/index.html) |
+| LCR146 | LCR 146. 螺旋遍历二维数组（原剑指 Offer 29） | [LCR0146SpiralArray.java](src/main/java/leetcode/array/LCR0146SpiralArray.java) | [打开](docs/problems/LCR146-shun-shi-zhen-da-yin-ju-zhen-lcof/index.html) |
+| K58 | 卡码网 58. 区间和 | [Kama0058RangeSum.java](src/main/java/leetcode/array/Kama0058RangeSum.java) | [打开](docs/problems/kama-0058-range-sum/index.html) |
+| K44 | 卡码网 44. 开发商购买土地 | [Kama0044LandPurchase.java](src/main/java/leetcode/array/Kama0044LandPurchase.java) | [打开](docs/problems/kama-0044-land-purchase/index.html) |
+
+复现代码检查：`py -3.11 .work/array/scripts/verify.py --jdk17 <JDK17目录> --jdk8 <JDK8目录>`。重新录制：`.work/array/scripts/capture.ps1 -JdkPath <JDK17目录>`，再执行 `node .work/array/scripts/build.mjs`。网页验收：通过 `CODEX_TEST_MODULES` 指定含Playwright的node_modules目录、`PREVIEW_URL` 指定站点根URL后，运行 `node .work/array/scripts/browser-test.cjs`。
+
+VS Code原生Java调试界面未自动操作；命令行运行、JDI记录和网页交互分别有实际校验记录。

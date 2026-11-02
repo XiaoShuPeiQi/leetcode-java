@@ -43,3 +43,9 @@ Thumbs.db
 !/.work/dp/
 /.work/dp/*
 !/.work/dp/scripts/
+
+# 数组章节可复用工具；临时轨迹不提交。
+!/.work/array/
+/.work/array/*
+!/.work/array/scripts/
+/.work/array/scripts/__pycache__/

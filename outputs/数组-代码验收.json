@@ -1,0 +1,157 @@
+{
+  "jdk8": "C:\\Program Files\\Java\\jdk1.8.0_341",
+  "jdk17": "C:\\Users\\Mr Zhan.LAPTOP-UGL39RSK\\Desktop\\实习\\代码随想录\\work\\greedy\\tools\\jdk17\\jdk-17.0.20.1+1",
+  "javaBlocks": 24,
+  "checks": 2496,
+  "results": [
+    {
+      "id": 704,
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 704,
+      "method": "左闭右开区间",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 35,
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 34,
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 69,
+      "method": "主解",
+      "cases": 119,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 367,
+      "method": "主解",
+      "cases": 118,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 27,
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 27,
+      "method": "相向覆盖，不保序",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 26,
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 283,
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 283,
+      "method": "交换非零数与前方空位",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 844,
+      "method": "主解",
+      "cases": 113,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 844,
+      "method": "StringBuilder模拟栈",
+      "cases": 113,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 977,
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 977,
+      "method": "平方后排序",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 209,
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 209,
+      "method": "前缀和＋二分",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 904,
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 76,
+      "method": "主解",
+      "cases": 114,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 59,
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": 54,
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": "LCR146",
+      "method": "主解",
+      "cases": 111,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": "K58",
+      "method": "完整Main",
+      "cases": 16,
+      "standaloneJava8": "PASS"
+    },
+    {
+      "id": "K44",
+      "method": "完整Main",
+      "cases": 16,
+      "standaloneJava8": "PASS"
+    }
+  ],
+  "finalCommentOnlyCheck": {
+    "executableTokens": "unchanged across all 24 blocks",
+    "java8PrimaryCompile": "18 blocks recompiled PASS",
+    "java17PrimaryRun": "18 independent runners recompiled, executed and rerecorded PASS"
+  }
+}
