@@ -493,3 +493,5 @@ node .work/hot100/scripts/build.mjs
 # Node 20+；CODEX_TEST_MODULES指向安装了Playwright的node_modules目录。
 node .work/hot100/scripts/browser-test.cjs
 ```
+
+线上验收：[GitHub Pages部署](https://github.com/XiaoShuPeiQi/leetcode-java/actions/runs/41562588298)成功，20/20页面通过浏览器交互检查，[49个线上文件](outputs/Hot100-线上资源验收.json)与部署源码逐字节一致；[线上浏览器记录](outputs/Hot100-线上浏览器验收.json)覆盖全部页面。
