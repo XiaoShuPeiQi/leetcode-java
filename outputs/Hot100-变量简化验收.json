@@ -173,5 +173,9 @@
   "java17AndJdi": "20/20 PASS",
   "localBrowser": "20/20 PASS",
   "longestConsecutive": "num advances directly; set is unchanged; final length and result are 4.",
-  "feishuRevision": 93
+  "feishuRevision": 93,
+  "onlineBrowser": "20/20 PASS",
+  "onlineResources": "49/49 byte-for-byte MATCH",
+  "deploymentCommit": "a87843478d267e18f968e2686562f7c77d05c921",
+  "debuggerUrl": "https://xiaoshupeiqi.github.io/leetcode-java/?chapter=Hot100"
 }
