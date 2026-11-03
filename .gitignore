@@ -55,3 +55,9 @@ Thumbs.db
 /.work/linkedlist/*
 !/.work/linkedlist/scripts/
 /.work/linkedlist/scripts/__pycache__/
+
+# Hot100复用工具；原始录制与截图留在本机。
+!/.work/hot100/
+/.work/hot100/*
+!/.work/hot100/scripts/
+/.work/hot100/scripts/__pycache__/

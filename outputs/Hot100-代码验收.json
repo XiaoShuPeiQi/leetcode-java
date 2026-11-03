@@ -1,0 +1,169 @@
+{
+  "status": "PASS",
+  "java8": "C:\\Program Files\\Java\\jdk1.8.0_341",
+  "problems": [
+    {
+      "id": 1,
+      "cases": 141,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "2bea723747c83819fc0a72ec3cc593be8996568d5bd8479d85e50050675f099c"
+    },
+    {
+      "id": 49,
+      "cases": 141,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "4b056bdfb7dfff85c4e7dd5d79286ede28a8d8759c28b868b7abaef4fbac725f"
+    },
+    {
+      "id": 128,
+      "cases": 144,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "45899cf22afe9d224e03aab9d76a02b9c1219e02b2240061c81b6e7f966ea401"
+    },
+    {
+      "id": 283,
+      "cases": 141,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "26a9165f9f172ea08b67152894d4b0802b39ca40b6f0405200ff94acbba82fcc"
+    },
+    {
+      "id": 11,
+      "cases": 141,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "417b43203570fa8266575f6d4f74c0d75b6a3eb2e7f4cb830b9cc6a7b5379fe4"
+    },
+    {
+      "id": 15,
+      "cases": 142,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "60fe1823050932bc934619ffaff7b49c22851544bc3afa067c9215f4b77d352f"
+    },
+    {
+      "id": 42,
+      "cases": 141,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "59022b75eb5986af26ab81e4af12c19b5a6867c9fcfd8043d4821a712c37c142"
+    },
+    {
+      "id": 3,
+      "cases": 143,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "e462032d662c6510aca4328cee1405809d34b6b4fd09f6119d538a70b487468a"
+    },
+    {
+      "id": 438,
+      "cases": 141,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "2ae3a3b8e342da968f639f41a36ace40487f3c46c07b76b41dd584fffe332304"
+    },
+    {
+      "id": 560,
+      "cases": 143,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "6e538f6a24a8d85279688d9cf8dd21df862688a304d5577e51dd9d76ece6eb3e"
+    },
+    {
+      "id": 239,
+      "cases": 142,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "d22706e3cc2fcab543dc99bbab98324ea13dbd5677ae3fed7d8a4b0004f592da"
+    },
+    {
+      "id": 76,
+      "cases": 143,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "352b5f5a6d1793f77fdff28c32668a1b21b5c3c742ab69033b8a6bfa48897eae"
+    },
+    {
+      "id": 53,
+      "cases": 142,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "2efadd29d60f1b53075eb4657c5d9f50d73c39b1c846c24bc2c7657ed33bd1a9"
+    },
+    {
+      "id": 56,
+      "cases": 141,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "70cded324f2a181f1701ce4dec6ba7cdf2b29fa64802efbdd05ad6d15089a924"
+    },
+    {
+      "id": 189,
+      "cases": 141,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "d4129a17f6f53204239935041c8e351377751c1c9427c891f3ab11e01bfc8f6a"
+    },
+    {
+      "id": 238,
+      "cases": 143,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "fc98866b44c4d791cbcc99f3c260e83fb33c2f73551a66d25e3c5b9e17c5b348"
+    },
+    {
+      "id": 41,
+      "cases": 145,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "7fbc7c9de8e11a09defc0c2ab0ede35e68cb1a77ac5452910fdb2443622b7167"
+    },
+    {
+      "id": 73,
+      "cases": 144,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "cd668a3b4ca38f43932f2eaa61a10c94d893aa32c3fece89916b42de9d117634"
+    },
+    {
+      "id": 54,
+      "cases": 144,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "eff19b46531a660bce6a8c0c9f8f4e45d3098a12e1099b78a161270c48c933e2"
+    },
+    {
+      "id": 48,
+      "cases": 142,
+      "compile": "PASS",
+      "independentOracle": "PASS",
+      "officialSignature": "PASS",
+      "code_sha256": "3465e088865f1c15192890d93ee96fd3e269d5b641c206e9970b53b5782f483f"
+    }
+  ],
+  "totalCases": 2845,
+  "seed": 1103,
+  "oracle": "Python brute-force enumeration, direct coordinate formulas, or independent baseline; compared against actual Java execution."
+}

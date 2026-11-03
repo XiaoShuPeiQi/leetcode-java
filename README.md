@@ -450,3 +450,46 @@ VS Code原生Java调试界面未自动操作；命令行运行、JDI记录和网
 | 142 | [环形链表 II](src/main/java/leetcode/linkedlist/LC0142LinkedListCycleII.java) | [打开](docs/problems/0142-linked-list-cycle-ii/index.html) |
 
 复现：使用`.work/linkedlist/scripts/capture.ps1 -JdkPath <JDK17目录>`重新录制，再执行`py -3.11 .work/linkedlist/scripts/build.py`构建页面。原题模板、原算法和适配元数据保存在imports中。未进行力扣在线提交，也未自动操作VS Code调试界面。
+
+## Hot100前20题（2026-11-03）
+
+[飞书题解](https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf) · [完整笔记](docs/Hot100前20题.md) · [在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=Hot100) · [Java检查](outputs/Hot100-代码验收.json) · [飞书回读](outputs/Hot100-飞书验收.json)
+
+按[力扣热题100学习计划](https://leetcode.cn/studyplan/top-100-liked/)的分类顺序整理前20题，优先参考[算法学习总笔记](https://acn581cm6pdd.feishu.cn/wiki/DDeAw4NaKigky8kz1RUcYEOIndf)。8题沿用原笔记主解，12题为基于原有方法的学习扩展；每题说明第一思路、变量、实例、必要注释、易错点与复杂度。20份独立`class Solution`代码核对官方Java签名，并以JDK8编译和运行2,845组样例、边界及随机对照测试。
+
+复用7个已有Java主文件，新增13个主文件，题号不重复。20个独立Hot100调试页面沿用展老师小课堂主题、字体、播放、断点、调用栈和可拖动面板，基于同组输入的真实Java17/JDI快照；增加柱形高度视图、哈希键值与字符频次视图，复用数组指针及矩阵变化视图。网页版回放固定代表用例，可在本地main中修改输入后重新录制。
+
+飞书revision 8的20节、20个Java代码块和全部正文已逐批回读一致。[本地浏览器检查](outputs/Hot100-浏览器验收.json)覆盖全部页面的执行停点、结果、断点、双主题、拖动和手机布局。未进行力扣在线提交或自动操作VS Code界面。
+
+| 顺序 | 题号 | Java | 调试器 |
+|---|---|---|---|
+| 1 | 1 | [两数之和](src/main/java/leetcode/hashtable/LC0001TwoSum.java) | [打开](docs/problems/hot100-0001-two-sum/index.html) |
+| 2 | 49 | [字母异位词分组](src/main/java/leetcode/hashtable/LC0049GroupAnagrams.java) | [打开](docs/problems/hot100-0049-group-anagrams/index.html) |
+| 3 | 128 | [最长连续序列](src/main/java/leetcode/hashtable/LC0128LongestConsecutiveSequence.java) | [打开](docs/problems/hot100-0128-longest-consecutive-sequence/index.html) |
+| 4 | 283 | [移动零](src/main/java/leetcode/array/LC0283MoveZeroes.java) | [打开](docs/problems/hot100-0283-move-zeroes/index.html) |
+| 5 | 11 | [盛最多水的容器](src/main/java/leetcode/array/LC0011ContainerWithMostWater.java) | [打开](docs/problems/hot100-0011-container-with-most-water/index.html) |
+| 6 | 15 | [三数之和](src/main/java/leetcode/hashtable/LC00153Sum.java) | [打开](docs/problems/hot100-0015-3sum/index.html) |
+| 7 | 42 | [接雨水](src/main/java/leetcode/array/LC0042TrappingRainWater.java) | [打开](docs/problems/hot100-0042-trapping-rain-water/index.html) |
+| 8 | 3 | [无重复字符的最长子串](src/main/java/leetcode/string/LC0003LongestSubstringWithoutRepeatingCharacters.java) | [打开](docs/problems/hot100-0003-longest-substring-without-repeating-characters/index.html) |
+| 9 | 438 | [找到字符串中所有字母异位词](src/main/java/leetcode/string/LC0438FindAllAnagramsInAString.java) | [打开](docs/problems/hot100-0438-find-all-anagrams-in-a-string/index.html) |
+| 10 | 560 | [和为 K 的子数组](src/main/java/leetcode/hashtable/LC0560SubarraySumEqualsK.java) | [打开](docs/problems/hot100-0560-subarray-sum-equals-k/index.html) |
+| 11 | 239 | [滑动窗口最大值](src/main/java/leetcode/stackqueue/LC0239SlidingWindowMaximum.java) | [打开](docs/problems/hot100-0239-sliding-window-maximum/index.html) |
+| 12 | 76 | [最小覆盖子串](src/main/java/leetcode/array/LC0076MinimumWindowSubstring.java) | [打开](docs/problems/hot100-0076-minimum-window-substring/index.html) |
+| 13 | 53 | [最大子数组和](src/main/java/leetcode/greedy/LC0053MaximumSubarray.java) | [打开](docs/problems/hot100-0053-maximum-subarray/index.html) |
+| 14 | 56 | [合并区间](src/main/java/leetcode/greedy/LC0056MergeIntervals.java) | [打开](docs/problems/hot100-0056-merge-intervals/index.html) |
+| 15 | 189 | [轮转数组](src/main/java/leetcode/array/LC0189RotateArray.java) | [打开](docs/problems/hot100-0189-rotate-array/index.html) |
+| 16 | 238 | [除了自身以外数组的乘积](src/main/java/leetcode/array/LC0238ProductOfArrayExceptSelf.java) | [打开](docs/problems/hot100-0238-product-of-array-except-self/index.html) |
+| 17 | 41 | [缺失的第一个正数](src/main/java/leetcode/array/LC0041FirstMissingPositive.java) | [打开](docs/problems/hot100-0041-first-missing-positive/index.html) |
+| 18 | 73 | [矩阵置零](src/main/java/leetcode/array/LC0073SetMatrixZeroes.java) | [打开](docs/problems/hot100-0073-set-matrix-zeroes/index.html) |
+| 19 | 54 | [螺旋矩阵](src/main/java/leetcode/array/LC0054SpiralMatrix.java) | [打开](docs/problems/hot100-0054-spiral-matrix/index.html) |
+| 20 | 48 | [旋转图像](src/main/java/leetcode/array/LC0048RotateImage.java) | [打开](docs/problems/hot100-0048-rotate-image/index.html) |
+
+复现（项目根目录；独立JDK路径通过参数传入）：
+
+```powershell
+py -3.11 .work/hot100/scripts/verify.py <JDK8目录>
+& .work/hot100/scripts/capture.ps1 -JdkPath <JDK17目录>
+node .work/hot100/scripts/build.mjs
+# Node 20+；CODEX_TEST_MODULES指向安装了Playwright的node_modules目录。
+node .work/hot100/scripts/browser-test.cjs
+```

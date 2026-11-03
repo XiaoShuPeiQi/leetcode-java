@@ -1,0 +1,105 @@
+{
+  "java17": "C:\\Users\\Mr Zhan.LAPTOP-UGL39RSK\\Desktop\\实习\\代码随想录\\work\\greedy\\tools\\jdk17\\jdk-17.0.20.1+1",
+  "problems": [
+    {
+      "id": 1,
+      "main": "PASS",
+      "traceEvents": 11
+    },
+    {
+      "id": 49,
+      "main": "PASS",
+      "traceEvents": 44
+    },
+    {
+      "id": 128,
+      "main": "PASS",
+      "traceEvents": 52
+    },
+    {
+      "id": 283,
+      "main": "PASS",
+      "traceEvents": 26
+    },
+    {
+      "id": 11,
+      "main": "PASS",
+      "traceEvents": 55
+    },
+    {
+      "id": 15,
+      "main": "PASS",
+      "traceEvents": 74
+    },
+    {
+      "id": 42,
+      "main": "PASS",
+      "traceEvents": 81
+    },
+    {
+      "id": 3,
+      "main": "PASS",
+      "traceEvents": 68
+    },
+    {
+      "id": 438,
+      "main": "PASS",
+      "traceEvents": 71
+    },
+    {
+      "id": 560,
+      "main": "PASS",
+      "traceEvents": 20
+    },
+    {
+      "id": 239,
+      "main": "PASS",
+      "traceEvents": 75
+    },
+    {
+      "id": 76,
+      "main": "PASS",
+      "traceEvents": 177
+    },
+    {
+      "id": 53,
+      "main": "PASS",
+      "traceEvents": 34
+    },
+    {
+      "id": 56,
+      "main": "PASS",
+      "traceEvents": 29
+    },
+    {
+      "id": 189,
+      "main": "PASS",
+      "traceEvents": 61
+    },
+    {
+      "id": 238,
+      "main": "PASS",
+      "traceEvents": 32
+    },
+    {
+      "id": 41,
+      "main": "PASS",
+      "traceEvents": 35
+    },
+    {
+      "id": 73,
+      "main": "PASS",
+      "traceEvents": 54
+    },
+    {
+      "id": 54,
+      "main": "PASS",
+      "traceEvents": 46
+    },
+    {
+      "id": 48,
+      "main": "PASS",
+      "traceEvents": 57
+    }
+  ]
+}
