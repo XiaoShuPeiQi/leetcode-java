@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "java8": "C:\\Program Files\\Java\\jdk1.8.0_341",
+  "java8": "E:\\myApps\\java\\jdk1.8.0_201",
   "problems": [
     {
       "id": 1,
@@ -16,7 +16,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "6cf6a833f792050685ed4296e95eb31ead93656254e07aaec7d75ddc80999eb6"
+      "code_sha256": "574e018e88a88a52b383648a47aac7fecad2050b256acf168bd8caf903ef09c0"
     },
     {
       "id": 128,
@@ -24,7 +24,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "3199d7d654f83168aeac571e9aa2a2afa6c4780c838c12b3da7e9eb2e85da08d"
+      "code_sha256": "01a955323e451e01ab90f916dc1e47fa54f0ca826fc830b9aff53a8e2baf02cd"
     },
     {
       "id": 283,
@@ -40,7 +40,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "e26509803c1efcfddc4bcb5a607dec07005203ca3f0397517d328cacfafdff91"
+      "code_sha256": "d659b336bbd4a5c0a9e7ee832a822e2655f8007b66f4b72e3348a40193fe0112"
     },
     {
       "id": 15,
@@ -56,7 +56,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "7164911fd4888e397950ba2fbb9dadbe399b61ba345e0b8dd26781d30895d1c0"
+      "code_sha256": "1a5dda8673a6454787c6c389ec3c389235759b9c9915fafae11cc4c45f921d63"
     },
     {
       "id": 3,
@@ -64,7 +64,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "99db73f7b800de9a4bbf10c2af90bf97e5f38d2c27aee85b795c1abf2841ef80"
+      "code_sha256": "92f2890cbe5a14f804632d81c5aa620e8b5aa902d439897d58610d2885eaeccd"
     },
     {
       "id": 438,
@@ -72,7 +72,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "e3949825272a290dd6ed7b5576fc9029c12afdfc6ce0359f716ab0a193dd87ee"
+      "code_sha256": "bc39a706ef61efae3104ad256ae17b28dcfc5773191edb4f187e6cce2e4d2564"
     },
     {
       "id": 560,
@@ -80,7 +80,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "faad1784cfcf721f3fb7b074e289844093fc618a984ca509ca52ae197bc9ff2b"
+      "code_sha256": "d3bf9a5ef2fa816570316380501f2829ef8c9e0c754306c6c25fe579dd86c9f1"
     },
     {
       "id": 239,
@@ -88,7 +88,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "9171efec147cf92d9ada0f17337ec3ba1a676329fc3b351110a0c1dadaeb64f2"
+      "code_sha256": "d4528d312bf4f8b392fa5eeebf32ac8c40e59cc632038affd54d24fa346f50dd"
     },
     {
       "id": 76,
@@ -96,7 +96,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "4440d410b5de99648ae42cfe8fba32e4c107190aac5badda89e5ec31ee652c67"
+      "code_sha256": "6ed983dee49037ae90accee80753297eca4fd35f7be09bb6ddbeac1570243d74"
     },
     {
       "id": 53,
@@ -112,7 +112,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "40fc819332b46e707df5e53fe0c60ce15db761062fd6e1db78a1d68c6144c681"
+      "code_sha256": "b36c0f11a136b08a4088f42f14cde9bcc0330f114ec05a58a21c6098a9d4965f"
     },
     {
       "id": 189,

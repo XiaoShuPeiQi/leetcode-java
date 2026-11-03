@@ -1,5 +1,5 @@
 {
-  "java17": "C:\\Users\\Mr Zhan.LAPTOP-UGL39RSK\\Desktop\\实习\\代码随想录\\work\\greedy\\tools\\jdk17\\jdk-17.0.20.1+1",
+  "java17": "E:\\Leetcode(Java)\\.tools\\jdk-17",
   "problems": [
     {
       "id": 1,
@@ -10,14 +10,14 @@
     {
       "id": 49,
       "main": "PASS",
-      "traceEvents": 61,
-      "sourceHash": "15c623072d345460e69d4c0f5d300666519e791bf6c231ae5efe90b783c855fa"
+      "traceEvents": 55,
+      "sourceHash": "79c44841bdb358dfdf3dd635441bdb5563e0dbb3af20810df1f6586ccc535fd1"
     },
     {
       "id": 128,
       "main": "PASS",
-      "traceEvents": 53,
-      "sourceHash": "3355263c1dc5fa15dcb9433b9937b471641511a580338225bb2ae503b017a3e8"
+      "traceEvents": 50,
+      "sourceHash": "3fbdd224c4bde657e79438cc2d120afa3f9e83d1dd3f5b62be29267b5222c332"
     },
     {
       "id": 283,
@@ -28,8 +28,8 @@
     {
       "id": 11,
       "main": "PASS",
-      "traceEvents": 73,
-      "sourceHash": "a28b32cce9d01280a6edde199caaf1e0dd33b3f79dfef1e6a40dcb2d23c7f831"
+      "traceEvents": 57,
+      "sourceHash": "1915ef0957f1286f61e3cdf0ba991c54232a999b98a0d0ecec0ac31e343f0332"
     },
     {
       "id": 15,
@@ -40,38 +40,38 @@
     {
       "id": 42,
       "main": "PASS",
-      "traceEvents": 105,
-      "sourceHash": "ea29988296287b3658b9f33e0a59c05cca92ad761fb35d00774612ae83707484"
+      "traceEvents": 81,
+      "sourceHash": "87fe7d3cfad3fd73ea24f3b9880f99c3fcc476095e16bddde6199f868b2576ad"
     },
     {
       "id": 3,
       "main": "PASS",
-      "traceEvents": 93,
-      "sourceHash": "77dcb6ff0c740feab67958d6959bbb997fb5e71616d1c7a88ca62f44591ceda8"
+      "traceEvents": 79,
+      "sourceHash": "2c4f9cf3101967b9f062beaeb4432d523ad376e5f2b4c55f8ae9d6060ff55468"
     },
     {
       "id": 438,
       "main": "PASS",
-      "traceEvents": 81,
-      "sourceHash": "995c03b6d7d11ab456a3d275776eca458976b3c52776f5d3622b6b2bb209c4c1"
+      "traceEvents": 71,
+      "sourceHash": "1df3202117f0bce81b43cf18a2fd2204e66ccf50dccf1c3ae7158b1f6aaeefa8"
     },
     {
       "id": 560,
       "main": "PASS",
-      "traceEvents": 29,
-      "sourceHash": "b0f028639ea6f8f77d661753acbb58ff94a32818306889a04e358a94ac0e7c53"
+      "traceEvents": 20,
+      "sourceHash": "c09e98d795e14dc03041751eea60661cac32fb0918c92df032c741da8ecba0ff"
     },
     {
       "id": 239,
       "main": "PASS",
-      "traceEvents": 87,
-      "sourceHash": "8553b11c6ded6faeb3efae875e70a519fc65d07e7c6574181cadd8312b934ed5"
+      "traceEvents": 81,
+      "sourceHash": "d4a551d3842b48283179c34a3a4d66ea60b07807130522e592e8f935ffa74903"
     },
     {
       "id": 76,
       "main": "PASS",
-      "traceEvents": 180,
-      "sourceHash": "8a019657a68a4b531fc3cd24db2aef487840f194bb6c76f2ed71bd1bf801befe"
+      "traceEvents": 179,
+      "sourceHash": "4fe17a9ffd981a02626e248e2de96ff3fd3b32ada2fda20f538dd282a8047ce9"
     },
     {
       "id": 53,
@@ -82,8 +82,8 @@
     {
       "id": 56,
       "main": "PASS",
-      "traceEvents": 38,
-      "sourceHash": "9d0b6168417bf830fbc639b881deee2a04dd432bd49889441481224c5eeb5edf"
+      "traceEvents": 37,
+      "sourceHash": "961d74dbdeb3caab47cfdc7a7c93968481f57dc1fe9d63c38ea49a8610515da1"
     },
     {
       "id": 189,

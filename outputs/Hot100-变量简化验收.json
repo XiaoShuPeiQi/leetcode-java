@@ -1,0 +1,177 @@
+{
+  "status": "PASS",
+  "checkedProblems": 20,
+  "changedProblems": 10,
+  "removedDeclarations": 14,
+  "problems": [
+    {
+      "order": 1,
+      "id": 1,
+      "title": "两数之和",
+      "changed": false,
+      "removedTemporaryVariables": []
+    },
+    {
+      "order": 2,
+      "id": 49,
+      "title": "字母异位词分组",
+      "changed": true,
+      "removedTemporaryVariables": [
+        "group"
+      ]
+    },
+    {
+      "order": 3,
+      "id": 128,
+      "title": "最长连续序列",
+      "changed": true,
+      "removedTemporaryVariables": [
+        "current"
+      ]
+    },
+    {
+      "order": 4,
+      "id": 283,
+      "title": "移动零",
+      "changed": false,
+      "removedTemporaryVariables": []
+    },
+    {
+      "order": 5,
+      "id": 11,
+      "title": "盛最多水的容器",
+      "changed": true,
+      "removedTemporaryVariables": [
+        "shorterHeight",
+        "width"
+      ]
+    },
+    {
+      "order": 6,
+      "id": 15,
+      "title": "三数之和",
+      "changed": false,
+      "removedTemporaryVariables": []
+    },
+    {
+      "order": 7,
+      "id": 42,
+      "title": "接雨水",
+      "changed": true,
+      "removedTemporaryVariables": [
+        "water",
+        "water"
+      ]
+    },
+    {
+      "order": 8,
+      "id": 3,
+      "title": "无重复字符的最长子串",
+      "changed": true,
+      "removedTemporaryVariables": [
+        "removed"
+      ]
+    },
+    {
+      "order": 9,
+      "id": 438,
+      "title": "找到字符串中所有字母异位词",
+      "changed": true,
+      "removedTemporaryVariables": [
+        "sameCounts"
+      ]
+    },
+    {
+      "order": 10,
+      "id": 560,
+      "title": "和为 K 的子数组",
+      "changed": true,
+      "removedTemporaryVariables": [
+        "neededPrefix",
+        "matchedCount",
+        "oldCount"
+      ]
+    },
+    {
+      "order": 11,
+      "id": 239,
+      "title": "滑动窗口最大值",
+      "changed": true,
+      "removedTemporaryVariables": [
+        "maxIndex"
+      ]
+    },
+    {
+      "order": 12,
+      "id": 76,
+      "title": "最小覆盖子串",
+      "changed": true,
+      "removedTemporaryVariables": [
+        "end"
+      ]
+    },
+    {
+      "order": 13,
+      "id": 53,
+      "title": "最大子数组和",
+      "changed": false,
+      "removedTemporaryVariables": []
+    },
+    {
+      "order": 14,
+      "id": 56,
+      "title": "合并区间",
+      "changed": true,
+      "removedTemporaryVariables": [
+        "lastEnd"
+      ]
+    },
+    {
+      "order": 15,
+      "id": 189,
+      "title": "轮转数组",
+      "changed": false,
+      "removedTemporaryVariables": []
+    },
+    {
+      "order": 16,
+      "id": 238,
+      "title": "除了自身以外数组的乘积",
+      "changed": false,
+      "removedTemporaryVariables": []
+    },
+    {
+      "order": 17,
+      "id": 41,
+      "title": "缺失的第一个正数",
+      "changed": false,
+      "removedTemporaryVariables": []
+    },
+    {
+      "order": 18,
+      "id": 73,
+      "title": "矩阵置零",
+      "changed": false,
+      "removedTemporaryVariables": []
+    },
+    {
+      "order": 19,
+      "id": 54,
+      "title": "螺旋矩阵",
+      "changed": false,
+      "removedTemporaryVariables": []
+    },
+    {
+      "order": 20,
+      "id": 48,
+      "title": "旋转图像",
+      "changed": false,
+      "removedTemporaryVariables": []
+    }
+  ],
+  "java8Cases": 2845,
+  "java17AndJdi": "20/20 PASS",
+  "localBrowser": "20/20 PASS",
+  "longestConsecutive": "num advances directly; set is unchanged; final length and result are 4.",
+  "feishuRevision": 93
+}

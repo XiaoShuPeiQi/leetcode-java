@@ -60,8 +60,7 @@ public class LC0438FindAllAnagramsInAString {
                     window[s.charAt(left) - 'a']--;
                     left++;
                 }
-                boolean sameCounts = Arrays.equals(need, window);
-                if (right - left + 1 == p.length() && sameCounts) {
+                if (right - left + 1 == p.length() && Arrays.equals(need, window)) {
                     res.add(left); // 当前窗口的左端就是一个答案下标
                 }
             }

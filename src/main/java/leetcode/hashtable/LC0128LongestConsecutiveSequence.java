@@ -57,11 +57,10 @@ public class LC0128LongestConsecutiveSequence {
                     continue;
                 }
 
-                int current = num;
                 int length = 1;
-                while (set.contains(current + 1)) {
-                    current++;
+                while (set.contains(num + 1)) {
                     length++;
+                    num++;
                 }
                 if (length > res) {
                     res = length;

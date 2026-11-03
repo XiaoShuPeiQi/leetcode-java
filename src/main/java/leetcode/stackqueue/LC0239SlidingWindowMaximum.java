@@ -65,8 +65,7 @@ public class LC0239SlidingWindowMaximum {
                 deque.offerLast(right);
 
                 if (left >= 0) { // 窗口凑满k个元素后，才向结果数组写入
-                    int maxIndex = deque.peekFirst();
-                    res[write] = nums[maxIndex];
+                    res[write] = nums[deque.peekFirst()];
                     write++;
                 }
             }

@@ -57,12 +57,10 @@ public class LC0042TrappingRainWater {
                 rightMax = Math.max(rightMax, height[right]);
 
                 if (leftMax <= rightMax) { // 右侧足够高，可以确定左侧这一列的水量
-                    int water = leftMax - height[left];
-                    res += water;
+                    res += leftMax - height[left];
                     left++;
                 } else {
-                    int water = rightMax - height[right];
-                    res += water;
+                    res += rightMax - height[right];
                     right--;
                 }
             }

@@ -35,8 +35,7 @@ public class LC0056MergeIntervals {
                     res[count][1] = current[1];
                     count++;
                 } else {
-                    int lastEnd = res[count - 1][1];
-                    if (current[1] > lastEnd) { // 有重叠，只需要延长最后一段的右端
+                    if (current[1] > res[count - 1][1]) { // 有重叠，只需要延长最后一段的右端
                         res[count - 1][1] = current[1];
                     }
                 }

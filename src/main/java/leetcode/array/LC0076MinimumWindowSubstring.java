@@ -61,8 +61,7 @@ public class LC0076MinimumWindowSubstring {
             }
 
             if (bestLength != Integer.MAX_VALUE) {
-                int end = bestStart + bestLength;
-                res = s.substring(bestStart, end); // substring右端不包含end
+                res = s.substring(bestStart, bestStart + bestLength); // substring不包含右端位置
             }
             return res;
         }

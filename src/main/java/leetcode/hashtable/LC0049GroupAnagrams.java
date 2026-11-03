@@ -58,8 +58,7 @@ public class LC0049GroupAnagrams {
                     List<String> group = new ArrayList<>();
                     map.put(key, group);
                 }
-                List<String> group = map.get(key);
-                group.add(str); // 把原单词放入对应分组
+                map.get(key).add(str); // 把原单词放入对应分组
             }
 
             for (List<String> group : map.values()) {

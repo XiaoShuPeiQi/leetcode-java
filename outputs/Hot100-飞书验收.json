@@ -1,295 +1,78 @@
 {
   "status": "PASS",
   "url": "https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf",
-  "revision": 79,
-  "baseline_revision": 32,
+  "revision": 93,
+  "baseline_revision": 82,
   "problems": 20,
   "javaBlocks": 20,
   "fullContent": "MATCH",
-  "userEdits": "Preserved shortened headings, removed boilerplate and all untouched blocks from revision 32.",
+  "userEdits": "All untouched blocks preserved byte-for-byte after XML parsing; only 10 Java blocks and the longest-consecutive variable description changed.",
   "patches": [
     {
       "patch": 1,
-      "id": 1,
-      "revision": 33,
+      "id": 49,
+      "revision": 83,
       "readback": "MATCH"
     },
     {
       "patch": 2,
-      "id": 1,
-      "revision": 34,
+      "id": 128,
+      "revision": 84,
       "readback": "MATCH"
     },
     {
       "patch": 3,
-      "id": 1,
-      "revision": 35,
+      "id": 11,
+      "revision": 85,
       "readback": "MATCH"
     },
     {
       "patch": 4,
-      "id": 1,
-      "revision": 36,
+      "id": 42,
+      "revision": 86,
       "readback": "MATCH"
     },
     {
       "patch": 5,
-      "id": 1,
-      "revision": 37,
+      "id": 3,
+      "revision": 87,
       "readback": "MATCH"
     },
     {
       "patch": 6,
-      "id": 49,
-      "revision": 38,
+      "id": 438,
+      "revision": 88,
       "readback": "MATCH"
     },
     {
       "patch": 7,
-      "id": 49,
-      "revision": 39,
+      "id": 560,
+      "revision": 89,
       "readback": "MATCH"
     },
     {
       "patch": 8,
-      "id": 128,
-      "revision": 40,
+      "id": 239,
+      "revision": 90,
       "readback": "MATCH"
     },
     {
       "patch": 9,
-      "id": 128,
-      "revision": 41,
+      "id": 76,
+      "revision": 91,
       "readback": "MATCH"
     },
     {
       "patch": 10,
-      "id": 283,
-      "revision": 42,
+      "id": 56,
+      "revision": 92,
       "readback": "MATCH"
     },
     {
       "patch": 11,
-      "id": 11,
-      "revision": 43,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 12,
-      "id": 11,
-      "revision": 44,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 13,
-      "id": 15,
-      "revision": 45,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 14,
-      "id": 15,
-      "revision": 46,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 15,
-      "id": 42,
-      "revision": 47,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 16,
-      "id": 42,
-      "revision": 48,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 17,
-      "id": 3,
-      "revision": 49,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 18,
-      "id": 3,
-      "revision": 50,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 19,
-      "id": 3,
-      "revision": 51,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 20,
-      "id": 438,
-      "revision": 52,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 21,
-      "id": 560,
-      "revision": 53,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 22,
-      "id": 560,
-      "revision": 54,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 23,
-      "id": 560,
-      "revision": 55,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 24,
-      "id": 239,
-      "revision": 56,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 25,
-      "id": 76,
-      "revision": 57,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 26,
-      "id": 53,
-      "revision": 58,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 27,
-      "id": 53,
-      "revision": 59,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 28,
-      "id": 53,
-      "revision": 60,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 29,
-      "id": 53,
-      "revision": 61,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 30,
-      "id": 53,
-      "revision": 62,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 31,
-      "id": 53,
-      "revision": 63,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 32,
-      "id": 56,
-      "revision": 64,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 33,
-      "id": 56,
-      "revision": 65,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 34,
-      "id": 56,
-      "revision": 66,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 35,
-      "id": 56,
-      "revision": 67,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 36,
-      "id": 189,
-      "revision": 68,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 37,
-      "id": 238,
-      "revision": 69,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 38,
-      "id": 238,
-      "revision": 70,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 39,
-      "id": 238,
-      "revision": 71,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 40,
-      "id": 238,
-      "revision": 72,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 41,
-      "id": 238,
-      "revision": 73,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 42,
-      "id": 41,
-      "revision": 74,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 43,
-      "id": 41,
-      "revision": 75,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 44,
-      "id": 73,
-      "revision": 76,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 45,
-      "id": 54,
-      "revision": 77,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 46,
-      "id": 54,
-      "revision": 78,
-      "readback": "MATCH"
-    },
-    {
-      "patch": 47,
-      "id": 48,
-      "revision": 79,
+      "id": 128,
+      "revision": 93,
       "readback": "MATCH"
     }
-  ],
-  "content_sha256": "30550c3dfd0df8185e77730ddb77d7f2579e4d2ef1fd8301df80d5530e771c5f"
+  ]
 }

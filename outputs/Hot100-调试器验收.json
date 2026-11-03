@@ -15,9 +15,9 @@
     {
       "id": 49,
       "title": "字母异位词分组",
-      "steps": 61,
+      "steps": 55,
       "calls": 1,
-      "bytes": 21613,
+      "bytes": 19460,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -26,9 +26,9 @@
     {
       "id": 128,
       "title": "最长连续序列",
-      "steps": 53,
+      "steps": 50,
       "calls": 1,
-      "bytes": 15448,
+      "bytes": 14498,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -48,9 +48,9 @@
     {
       "id": 11,
       "title": "盛最多水的容器",
-      "steps": 73,
+      "steps": 57,
       "calls": 1,
-      "bytes": 19799,
+      "bytes": 14939,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -70,9 +70,9 @@
     {
       "id": 42,
       "title": "接雨水",
-      "steps": 105,
+      "steps": 81,
       "calls": 1,
-      "bytes": 28581,
+      "bytes": 22139,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -81,9 +81,9 @@
     {
       "id": 3,
       "title": "无重复字符的最长子串",
-      "steps": 93,
+      "steps": 79,
       "calls": 1,
-      "bytes": 27155,
+      "bytes": 23094,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -92,9 +92,9 @@
     {
       "id": 438,
       "title": "找到字符串中所有字母异位词",
-      "steps": 81,
+      "steps": 71,
       "calls": 1,
-      "bytes": 30773,
+      "bytes": 26869,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -103,9 +103,9 @@
     {
       "id": 560,
       "title": "和为 K 的子数组",
-      "steps": 29,
+      "steps": 20,
       "calls": 1,
-      "bytes": 9455,
+      "bytes": 6597,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -114,9 +114,9 @@
     {
       "id": 239,
       "title": "滑动窗口最大值",
-      "steps": 87,
+      "steps": 81,
       "calls": 1,
-      "bytes": 26751,
+      "bytes": 24830,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -125,9 +125,9 @@
     {
       "id": 76,
       "title": "最小覆盖子串",
-      "steps": 180,
+      "steps": 179,
       "calls": 1,
-      "bytes": 101351,
+      "bytes": 100778,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -147,9 +147,9 @@
     {
       "id": 56,
       "title": "合并区间",
-      "steps": 38,
+      "steps": 37,
       "calls": 4,
-      "bytes": 11707,
+      "bytes": 11370,
       "java": "PASS",
       "trace": "PASS",
       "enter": 4,
@@ -222,5 +222,5 @@
       "exit": 1
     }
   ],
-  "totalEvents": 1259
+  "totalEvents": 1169
 }

@@ -51,9 +51,7 @@ public class LC0011ContainerWithMostWater {
             int right = height.length - 1;
 
             while (left < right) {
-                int shorterHeight = Math.min(height[left], height[right]);
-                int width = right - left;
-                int area = shorterHeight * width;
+                int area = Math.min(height[left], height[right]) * (right - left);
                 if (area > res) {
                     res = area;
                 }

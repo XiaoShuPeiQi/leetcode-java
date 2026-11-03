@@ -54,13 +54,10 @@ public class LC0560SubarraySumEqualsK {
 
             for (int num : nums) {
                 sum += num;
-                int neededPrefix = sum - k;
-                int matchedCount = count.getOrDefault(neededPrefix, 0);
-                res += matchedCount; // 每一个匹配的旧前缀，都对应一个合法区间
+                res += count.getOrDefault(sum - k, 0); // 每一个匹配的旧前缀，都对应一个合法区间
 
                 // 先统计答案，再记录当前前缀，避免k=0时把空区间计入
-                int oldCount = count.getOrDefault(sum, 0);
-                count.put(sum, oldCount + 1);
+                count.put(sum, count.getOrDefault(sum, 0) + 1);
             }
             return res;
         }

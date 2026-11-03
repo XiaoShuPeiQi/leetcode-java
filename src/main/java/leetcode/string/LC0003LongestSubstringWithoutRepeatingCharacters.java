@@ -53,8 +53,7 @@ public class LC0003LongestSubstringWithoutRepeatingCharacters {
             for (int right = 0; right < s.length(); right++) {
                 char c = s.charAt(right);
                 while (set.contains(c)) { // 一直缩到旧的同字符离开窗口
-                    char removed = s.charAt(left);
-                    set.remove(removed);
+                    set.remove(s.charAt(left));
                     left++;
                 }
                 set.add(c);
