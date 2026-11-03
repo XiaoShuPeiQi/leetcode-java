@@ -455,11 +455,11 @@ VS Code原生Java调试界面未自动操作；命令行运行、JDI记录和网
 
 [飞书题解](https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf) · [完整笔记](docs/Hot100前20题.md) · [在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=Hot100) · [Java检查](outputs/Hot100-代码验收.json) · [飞书回读](outputs/Hot100-飞书验收.json)
 
-按[力扣热题100学习计划](https://leetcode.cn/studyplan/top-100-liked/)的分类顺序整理前20题，优先参考[算法学习总笔记](https://acn581cm6pdd.feishu.cn/wiki/DDeAw4NaKigky8kz1RUcYEOIndf)。8题沿用原笔记主解，12题为基于原有方法的学习扩展；每题说明第一思路、变量、实例、必要注释、易错点与复杂度。20份独立`class Solution`代码核对官方Java签名，并以JDK8编译和运行2,845组样例、边界及随机对照测试。
+按[力扣热题100学习计划](https://leetcode.cn/studyplan/top-100-liked/)的分类顺序整理前20题，优先参考[算法学习总笔记](https://acn581cm6pdd.feishu.cn/wiki/DDeAw4NaKigky8kz1RUcYEOIndf)。8题沿用原笔记算法思路，12题为基于原有方法的学习扩展；每题说明第一思路、变量、实例、必要注释、易错点与复杂度。20份独立`class Solution`代码核对官方Java签名，并以JDK8编译和运行2,845组样例、边界及随机对照测试。
 
 复用7个已有Java主文件，新增13个主文件，题号不重复。20个独立Hot100调试页面沿用展老师小课堂主题、字体、播放、断点、调用栈和可拖动面板，基于同组输入的真实Java17/JDI快照；增加柱形高度视图、哈希键值与字符频次视图，复用数组指针及矩阵变化视图。网页版回放固定代表用例，可在本地main中修改输入后重新录制。
 
-飞书revision 8的20节、20个Java代码块和全部正文已逐批回读一致。[本地浏览器检查](outputs/Hot100-浏览器验收.json)覆盖全部页面的执行停点、结果、断点、双主题、拖动和手机布局。未进行力扣在线提交或自动操作VS Code界面。
+飞书revision 79的20节、20个Java代码块和全部正文已逐块回读一致，保留用户已精简的标题和说明。[本地浏览器检查](outputs/Hot100-浏览器验收.json)覆盖全部页面的执行停点、结果、断点、双主题、拖动和手机布局。未进行力扣在线提交或自动操作VS Code界面。
 
 | 顺序 | 题号 | Java | 调试器 |
 |---|---|---|---|
@@ -495,3 +495,5 @@ node .work/hot100/scripts/browser-test.cjs
 ```
 
 线上验收：[GitHub Pages部署](https://github.com/XiaoShuPeiQi/leetcode-java/actions/runs/41562588298)成功，20/20页面通过浏览器交互检查，[49个线上文件](outputs/Hot100-线上资源验收.json)与部署源码逐字节一致；[线上浏览器记录](outputs/Hot100-线上浏览器验收.json)覆盖全部页面。
+
+本轮按用户给出的第一题示例统一展开结果流程：先定义`res`，再逐步填入，最后返回；原地修改题说明结果写回输入。分组创建、二维结果裁剪、写入下标与下标递增分别书写，并重新录制20题的Java轨迹。项目主程序默认使用新写法，旧实现保留为`SolutionOriginal`，便于对照。

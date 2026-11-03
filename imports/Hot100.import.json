@@ -10,11 +10,11 @@
       "thinking": [
         "最直接是固定一个数，再扫描后面有没有target-nums[i]，时间O(n²)。",
         "第二层循环只是在查找一个值，可以用Map把“值→下标”存起来。",
-        "先查need，再放当前数；map只包含之前的元素，因此不会把一个下标用两次。"
+        "先查temp；找到时分别写入res[0]和res[1]，没找到才把当前数及下标放进map。循环结束统一返回res。题目保证恰好一个答案。"
       ],
-      "state": "i是当前下标；need=target-nums[i]；map只保存[0,i)出现的值和下标。",
-      "walk": "nums=[2,7,11,15], target=9\ni=0：need=7，没找到，保存2→0\ni=1：need=2，找到0，返回[0,1]",
-      "pitfall": "[3,3]能返回两个不同下标；不能先put再查，否则target=2*nums[i]时可能配到自己。",
+      "state": "res长度为2，res[0]保存之前那个数的下标，res[1]保存当前下标；temp=target-nums[i]；map只包含已经处理过的元素。",
+      "walk": "nums=[2,7,11,15], target=9\n初始res=[0,0]，map为空\ni=0：temp=7，没找到，保存2→0\ni=1：temp=2，找到下标0，写入res[0]=0、res[1]=1\ni=2、3继续检查，没有其他配对；循环结束返回res=[0,1]。",
+      "pitfall": "res保存下标，不是数值。找到配对时写res，只有没找到时才执行map.put，避免用当前下标和自己配对。此写法利用题目保证恰好一个答案；无解情况不属于本题输入范围。",
       "complexity": "平均时间O(n)，额外空间O(n)。",
       "example": {
         "nums": [
@@ -30,7 +30,7 @@
         1
       ],
       "call": "twoSum(nums, target)",
-      "code": "import java.util.*;\n\nclass Solution {\n    public int[] twoSum(int[] nums, int target) {\n        Map<Integer, Integer> map = new HashMap<>();\n        for (int i = 0; i < nums.length; i++) {\n            int need = target - nums[i];\n            // 此时 map 只含之前的元素，不会重复使用当前下标。\n            if (map.containsKey(need)) {\n                return new int[]{map.get(need), i};\n            }\n            map.put(nums[i], i);\n        }\n        return new int[0];\n    }\n}",
+      "code": "import java.util.*;\n\nclass Solution {\n    public int[] twoSum(int[] nums, int target) {\n        int[] res = new int[2]; // res[0]和res[1]分别保存两个数的下标\n        Map<Integer, Integer> map = new HashMap<>();\n\n        for (int i = 0; i < nums.length; i++) {\n            int temp = target - nums[i];\n            if (map.containsKey(temp)) {\n                res[0] = map.get(temp); // 之前那个数的下标\n                res[1] = i;            // 当前数的下标\n            } else {\n                map.put(nums[i], i); // 没找到配对时，记录当前数供后面查询\n            }\n        }\n\n        return res;\n    }\n}",
       "compare": "",
       "title": "两数之和",
       "english": "Two Sum",
@@ -38,14 +38,15 @@
       "group": "哈希",
       "order": 1,
       "page_slug": "hot100-0001-two-sum",
-      "provenance": "沿用总笔记中本题的主解。",
+      "provenance": "沿用总笔记中本题的算法思路，代码按结果先定义、逐步填入的方式展开。",
       "input": "nums=[2,7,11,15]; target=9",
       "test_source": "总笔记同题实例",
       "javaFile": "src/main/java/leetcode/hashtable/LC0001TwoSum.java",
       "mainClass": "leetcode.hashtable.LC0001TwoSum",
-      "adapted": "    static class Solution {\n        public int[] twoSum(int[] nums, int target) {\n            Map<Integer, Integer> map = new HashMap<>();\n            for (int i = 0; i < nums.length; i++) {\n                int need = target - nums[i];\n                // 此时 map 只含之前的元素，不会重复使用当前下标。\n                if (map.containsKey(need)) {\n                    return new int[]{map.get(need), i};\n                }\n                map.put(nums[i], i);\n            }\n            return new int[0];\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int[] twoSum(int[] nums, int target) {\n            int[] res = new int[2]; // res[0]和res[1]分别保存两个数的下标\n            Map<Integer, Integer> map = new HashMap<>();\n\n            for (int i = 0; i < nums.length; i++) {\n                int temp = target - nums[i];\n                if (map.containsKey(temp)) {\n                    res[0] = map.get(temp); // 之前那个数的下标\n                    res[1] = i;            // 当前数的下标\n                } else {\n                    map.put(nums[i], i); // 没找到配对时，记录当前数供后面查询\n                }\n            }\n\n            return res;\n        }\n    }",
       "displayStart": 24,
-      "sourceHash": "29902f594ebfc1243b56c44525dd10a5b3c53d038ce57d8636e7bac34b5b9d58"
+      "sourceHash": "e18de303a2e2a0e614eb1281a902e020886641647adedcf4bc0e4fc0fa0b59a0",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 49,
@@ -55,7 +56,7 @@
         "沿用哈希表章节“把不方便比较的对象转成key”的思路：排序后的字符串作为key，Map的value保存一组原单词。",
         "每个单词只归入自己的key，最后收集所有分组；组间与组内顺序均不影响答案。"
       ],
-      "state": "key是排序后的字符序列；map[key]保存已经处理、且拥有相同key的原字符串。",
+      "state": "res保存最终的分组列表；key是排序后的字符序列；map[key]保存拥有相同key的一组原字符串。先创建组、再加入单词，最后把各组放入res。",
       "walk": "strs=[\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]\neat→aet：[eat]；tea→aet：[eat,tea]\ntan→ant：[tan]；ate→aet：[eat,tea,ate]\nnat→ant：[tan,nat]；bat→abt：[bat]\n得到三组，返回顺序不固定。",
       "pitfall": "不能直接用char[]作内容相等的key；必须new String(chars)。空字符串和重复字符串都要保留。",
       "complexity": "设单词数n、最长长度L：时间O(nL log(L+1))，保存key和分组共O(nL+n)空间。",
@@ -84,7 +85,7 @@
         ]
       ],
       "call": "groupAnagrams(strs)",
-      "code": "import java.util.*;\n\nclass Solution {\n    public List<List<String>> groupAnagrams(String[] strs) {\n        Map<String, List<String>> map = new HashMap<>();\n        for (String str : strs) {\n            char[] chars = str.toCharArray();\n            Arrays.sort(chars);\n            String key = new String(chars); // 相同字符组成的单词共用一个key\n            map.computeIfAbsent(key, k -> new ArrayList<>()).add(str);\n        }\n        return new ArrayList<>(map.values());\n    }\n}",
+      "code": "import java.util.*;\n\nclass Solution {\n    public List<List<String>> groupAnagrams(String[] strs) {\n        List<List<String>> res = new ArrayList<>(); // 保存最终的各组单词\n        Map<String, List<String>> map = new HashMap<>();\n\n        for (String str : strs) {\n            char[] chars = str.toCharArray();\n            Arrays.sort(chars);\n            String key = new String(chars);\n\n            if (!map.containsKey(key)) { // 第一次遇到这个key，先创建一组\n                List<String> group = new ArrayList<>();\n                map.put(key, group);\n            }\n            List<String> group = map.get(key);\n            group.add(str); // 把原单词放入对应分组\n        }\n\n        for (List<String> group : map.values()) {\n            res.add(group);\n        }\n        return res;\n    }\n}",
       "compare": "计数签名也可做key，时间可降到O(nL)，但必须用分隔符编码26个计数，避免不同计数组合拼成同一个字符串。排序key更直观。",
       "title": "字母异位词分组",
       "english": "Group Anagrams",
@@ -97,9 +98,10 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/hashtable/LC0049GroupAnagrams.java",
       "mainClass": "leetcode.hashtable.LC0049GroupAnagrams",
-      "adapted": "    static class Solution {\n        public List<List<String>> groupAnagrams(String[] strs) {\n            Map<String, List<String>> map = new HashMap<>();\n            for (String str : strs) {\n                char[] chars = str.toCharArray();\n                Arrays.sort(chars);\n                String key = new String(chars); // 相同字符组成的单词共用一个key\n                map.computeIfAbsent(key, k -> new ArrayList<>()).add(str);\n            }\n            return new ArrayList<>(map.values());\n        }\n    }",
+      "adapted": "    static class Solution {\n        public List<List<String>> groupAnagrams(String[] strs) {\n            List<List<String>> res = new ArrayList<>(); // 保存最终的各组单词\n            Map<String, List<String>> map = new HashMap<>();\n\n            for (String str : strs) {\n                char[] chars = str.toCharArray();\n                Arrays.sort(chars);\n                String key = new String(chars);\n\n                if (!map.containsKey(key)) { // 第一次遇到这个key，先创建一组\n                    List<String> group = new ArrayList<>();\n                    map.put(key, group);\n                }\n                List<String> group = map.get(key);\n                group.add(str); // 把原单词放入对应分组\n            }\n\n            for (List<String> group : map.values()) {\n                res.add(group);\n            }\n            return res;\n        }\n    }",
       "displayStart": 47,
-      "sourceHash": "613220aa395eeaa0e23970f5cf28a3272e039912345a6009855dad04acf505ee"
+      "sourceHash": "15c623072d345460e69d4c0f5d300666519e791bf6c231ae5efe90b783c855fa",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 128,
@@ -109,7 +111,7 @@
         "如果每个数都向右找，长连续段会被重复扫描。一个数的前驱num-1存在，说明它不是段起点，跳过。",
         "只有段起点向右扩展，各段互不重叠，累计扩展次数为不同数的数量。"
       ],
-      "state": "set存不同数；num是候选起点；current是本段末尾；length是本段长度；result是最长长度。",
+      "state": "set存不同数；num是候选起点；current是本段末尾；length是本段长度；res是最长长度。",
       "walk": "nums=[100,4,200,1,3,2]\nset={1,2,3,4,100,200}，遍历顺序不作保证\n1无前驱：1→2→3→4，长度4\n2、3、4有前驱，跳过；100和200各为1\n返回4。",
       "pitfall": "遍历去重后的set；若遍历原数组且起点大量重复，会反复扩展同一段。题目数值范围内num±1不会溢出。",
       "complexity": "平均时间O(n)，额外空间O(n)。",
@@ -125,7 +127,7 @@
       },
       "expectedValue": 4,
       "call": "longestConsecutive(nums)",
-      "code": "import java.util.*;\n\nclass Solution {\n    public int longestConsecutive(int[] nums) {\n        Set<Integer> set = new HashSet<>();\n        for (int num : nums) {\n            set.add(num);\n        }\n        int result = 0;\n        for (int num : set) {\n            if (set.contains(num - 1)) { // 只从每段的起点开始，避免重复扫描\n                continue;\n            }\n            int current = num;\n            int length = 1;\n            while (set.contains(current + 1)) {\n                current++;\n                length++;\n            }\n            result = Math.max(result, length);\n        }\n        return result;\n    }\n}",
+      "code": "import java.util.*;\n\nclass Solution {\n    public int longestConsecutive(int[] nums) {\n        int res = 0; // 保存已经找到的最长连续段长度\n        Set<Integer> set = new HashSet<>();\n        for (int num : nums) {\n            set.add(num);\n        }\n\n        for (int num : set) {\n            if (set.contains(num - 1)) { // 有前驱就不是起点，避免重复扫描同一段\n                continue;\n            }\n\n            int current = num;\n            int length = 1;\n            while (set.contains(current + 1)) {\n                current++;\n                length++;\n            }\n            if (length > res) {\n                res = length;\n            }\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "最长连续序列",
       "english": "Longest Consecutive Sequence",
@@ -138,9 +140,10 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/hashtable/LC0128LongestConsecutiveSequence.java",
       "mainClass": "leetcode.hashtable.LC0128LongestConsecutiveSequence",
-      "adapted": "    static class Solution {\n        public int longestConsecutive(int[] nums) {\n            Set<Integer> set = new HashSet<>();\n            for (int num : nums) {\n                set.add(num);\n            }\n            int result = 0;\n            for (int num : set) {\n                if (set.contains(num - 1)) { // 只从每段的起点开始，避免重复扫描\n                    continue;\n                }\n                int current = num;\n                int length = 1;\n                while (set.contains(current + 1)) {\n                    current++;\n                    length++;\n                }\n                result = Math.max(result, length);\n            }\n            return result;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int longestConsecutive(int[] nums) {\n            int res = 0; // 保存已经找到的最长连续段长度\n            Set<Integer> set = new HashSet<>();\n            for (int num : nums) {\n                set.add(num);\n            }\n\n            for (int num : set) {\n                if (set.contains(num - 1)) { // 有前驱就不是起点，避免重复扫描同一段\n                    continue;\n                }\n\n                int current = num;\n                int length = 1;\n                while (set.contains(current + 1)) {\n                    current++;\n                    length++;\n                }\n                if (length > res) {\n                    res = length;\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 47,
-      "sourceHash": "0da33691f918f0c72af044ab5cd8549af14ecc6387214058d7072bec468eb3fb"
+      "sourceHash": "3355263c1dc5fa15dcb9433b9937b471641511a580338225bb2ae503b017a3e8",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 283,
@@ -171,7 +174,7 @@
         0
       ],
       "call": "moveZeroes(nums)",
-      "code": "class Solution {\n    public void moveZeroes(int[] nums) {\n        int slow = 0;\n        for (int fast = 0; fast < nums.length; fast++) {\n            if (nums[fast] != 0) {\n                nums[slow] = nums[fast];\n                slow++;\n            }\n        }\n        // 有效前缀之外必须全部补零\n        for (int i = slow; i < nums.length; i++) {\n            nums[i] = 0;\n        }\n    }\n}",
+      "code": "class Solution {\n    public void moveZeroes(int[] nums) {\n        // 结果直接写回nums：先收集非零元素，再在剩余位置补零\n        int slow = 0;\n        for (int fast = 0; fast < nums.length; fast++) {\n            if (nums[fast] != 0) {\n                nums[slow] = nums[fast];\n                slow++;\n            }\n        }\n        // 有效前缀之外必须全部补零\n        for (int i = slow; i < nums.length; i++) {\n            nums[i] = 0;\n        }\n    }\n}",
       "compare": "",
       "title": "移动零",
       "english": "Move Zeroes",
@@ -179,14 +182,15 @@
       "group": "双指针",
       "order": 4,
       "page_slug": "hot100-0283-move-zeroes",
-      "provenance": "沿用总笔记中本题的主解。",
+      "provenance": "沿用总笔记中本题的算法思路，代码按结果先定义、逐步填入的方式展开。",
       "input": "nums=[0,1,0,3,12]",
       "test_source": "总笔记同题实例",
       "javaFile": "src/main/java/leetcode/array/LC0283MoveZeroes.java",
       "mainClass": "leetcode.array.LC0283MoveZeroes",
-      "adapted": "    static class Solution {\n        public void moveZeroes(int[] nums) {\n            int slow = 0;\n            for (int fast = 0; fast < nums.length; fast++) {\n                if (nums[fast] != 0) {\n                    nums[slow] = nums[fast];\n                    slow++;\n                }\n            }\n            // 有效前缀之外必须全部补零\n            for (int i = slow; i < nums.length; i++) {\n                nums[i] = 0;\n            }\n        }\n    }",
+      "adapted": "    static class Solution {\n        public void moveZeroes(int[] nums) {\n            // 结果直接写回nums：先收集非零元素，再在剩余位置补零\n            int slow = 0;\n            for (int fast = 0; fast < nums.length; fast++) {\n                if (nums[fast] != 0) {\n                    nums[slow] = nums[fast];\n                    slow++;\n                }\n            }\n            // 有效前缀之外必须全部补零\n            for (int i = slow; i < nums.length; i++) {\n                nums[i] = 0;\n            }\n        }\n    }",
       "displayStart": 24,
-      "sourceHash": "1a2aa19b2839daf3189033373aa9c5f1cc8423cc2a2ca2485dd2e13b9a3c3837"
+      "sourceHash": "4230f48c28a8dc5d333c1103698a6575374050b8381726c70eb5eace898c81d0",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 11,
@@ -196,7 +200,7 @@
         "从最宽的两端开始。若保留短板只移动高板，宽度减少、有效高度又不能增加，面积不可能更大。",
         "因此移动短板，尝试找到更高的板；每次先更新面积，再缩边界。两端相等时移动任一侧都可以。"
       ],
-      "state": "left、right是两块板的下标；result保存已经检查过的最大面积。",
+      "state": "left、right是两块板的下标；res保存已经检查过的最大面积。",
       "walk": "height=[1,8,6,2,5,4,8,3,7]\n[0,8]：min(1,7)*8=8，移动left\n[1,8]：min(8,7)*7=49，移动right\n[1,7]：min(8,3)*6=18，继续移动right\n后续面积都不超过49，返回49。",
       "pitfall": "宽度是right-left；题目是两块板形成的容器，不能把中间柱子的高度从面积里扣掉。",
       "complexity": "时间O(n)，额外空间O(1)。",
@@ -215,7 +219,7 @@
       },
       "expectedValue": 49,
       "call": "maxArea(height)",
-      "code": "class Solution {\n    public int maxArea(int[] height) {\n        int left = 0;\n        int right = height.length - 1;\n        int result = 0;\n        while (left < right) {\n            int area = Math.min(height[left], height[right]) * (right - left);\n            result = Math.max(result, area);\n            if (height[left] <= height[right]) { // 保留短板只会让宽度变小，移动短板才可能改善\n                left++;\n            } else {\n                right--;\n            }\n        }\n        return result;\n    }\n}",
+      "code": "class Solution {\n    public int maxArea(int[] height) {\n        int res = 0; // 保存最大容积\n        int left = 0;\n        int right = height.length - 1;\n\n        while (left < right) {\n            int shorterHeight = Math.min(height[left], height[right]);\n            int width = right - left;\n            int area = shorterHeight * width;\n            if (area > res) {\n                res = area;\n            }\n\n            // 面积受短板限制，移动短板才可能找到更大容积\n            if (height[left] <= height[right]) {\n                left++;\n            } else {\n                right--;\n            }\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "盛最多水的容器",
       "english": "Container With Most Water",
@@ -228,9 +232,10 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/array/LC0011ContainerWithMostWater.java",
       "mainClass": "leetcode.array.LC0011ContainerWithMostWater",
-      "adapted": "    static class Solution {\n        public int maxArea(int[] height) {\n            int left = 0;\n            int right = height.length - 1;\n            int result = 0;\n            while (left < right) {\n                int area = Math.min(height[left], height[right]) * (right - left);\n                result = Math.max(result, area);\n                if (height[left] <= height[right]) { // 保留短板只会让宽度变小，移动短板才可能改善\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n            return result;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int maxArea(int[] height) {\n            int res = 0; // 保存最大容积\n            int left = 0;\n            int right = height.length - 1;\n\n            while (left < right) {\n                int shorterHeight = Math.min(height[left], height[right]);\n                int width = right - left;\n                int area = shorterHeight * width;\n                if (area > res) {\n                    res = area;\n                }\n\n                // 面积受短板限制，移动短板才可能找到更大容积\n                if (height[left] <= height[right]) {\n                    left++;\n                } else {\n                    right--;\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 47,
-      "sourceHash": "b81d8f54e8451d044d9a7c02944f56ef5f50d5007006fc4858c899f7b0bd7f43"
+      "sourceHash": "a28b32cce9d01280a6edde199caaf1e0dd33b3f79dfef1e6a40dcb2d23c7f831",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 15,
@@ -240,7 +245,7 @@
         "排序后，sum<0就增大left，sum>0就减小right；固定值已经大于0时可以停止。",
         "i层先去重；命中三元组后，左右指针分别跨过相同值，再向内走。"
       ],
-      "state": "i固定第一个数；left、right搜索后面的两个数，始终i<left<right；result存不同数值三元组。",
+      "state": "i固定第一个数；left、right搜索后面的两个数，始终i<left<right；res存不同数值三元组。",
       "walk": "nums=[-1,0,1,2,-1,-4]，排序[-4,-1,-1,0,1,2]\ni=0固定-4，找不到\ni=1固定-1：left=2,right=5，和0→[-1,-1,2]\n向内后left=3,right=4，和0→[-1,0,1]\ni=2的-1与前一个相同，跳过，最终两组。",
       "pitfall": "去重按数值，不能禁止同组三个数中出现重复值；例如[-1,-1,2]合法。Arrays.sort会修改输入。",
       "complexity": "时间O(n²)，排序辅助空间O(log n)，另计答案空间。",
@@ -267,7 +272,7 @@
         ]
       ],
       "call": "threeSum(nums)",
-      "code": "import java.util.*;\n\nclass Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> result = new ArrayList<>();\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (nums[i] > 0) {\n                break;\n            }\n            // 同一层固定值只处理一次，仍允许一组中有相同数值。\n            if (i > 0 && nums[i] == nums[i - 1]) {\n                continue;\n            }\n\n            int left = i + 1;\n            int right = nums.length - 1;\n            while (left < right) {\n                long sum = (long) nums[i] + nums[left] + nums[right];\n                if (sum < 0) {\n                    left++;\n                } else if (sum > 0) {\n                    right--;\n                } else {\n                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                    // 先保存，再跨过相同的左右值。\n                    while (left < right && nums[left] == nums[left + 1]) {\n                        left++;\n                    }\n                    while (left < right && nums[right] == nums[right - 1]) {\n                        right--;\n                    }\n                    left++;\n                    right--;\n                }\n            }\n        }\n        return result;\n    }\n}",
+      "code": "import java.util.*;\n\nclass Solution {\n    public List<List<Integer>> threeSum(int[] nums) {\n        List<List<Integer>> res = new ArrayList<>(); // 每个内部列表保存一个三元组\n        Arrays.sort(nums);\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (nums[i] > 0) {\n                break;\n            }\n            // 同一层固定值只处理一次，仍允许一组中有相同数值。\n            if (i > 0 && nums[i] == nums[i - 1]) {\n                continue;\n            }\n\n            int left = i + 1;\n            int right = nums.length - 1;\n            while (left < right) {\n                long sum = (long) nums[i] + nums[left] + nums[right];\n                if (sum < 0) {\n                    left++;\n                } else if (sum > 0) {\n                    right--;\n                } else {\n                    List<Integer> triple = new ArrayList<>();\n                    triple.add(nums[i]);\n                    triple.add(nums[left]);\n                    triple.add(nums[right]);\n                    res.add(triple);\n                    // 先保存，再跨过相同的左右值。\n                    while (left < right && nums[left] == nums[left + 1]) {\n                        left++;\n                    }\n                    while (left < right && nums[right] == nums[right - 1]) {\n                        right--;\n                    }\n                    left++;\n                    right--;\n                }\n            }\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "三数之和",
       "english": "3Sum",
@@ -275,14 +280,15 @@
       "group": "双指针",
       "order": 6,
       "page_slug": "hot100-0015-3sum",
-      "provenance": "沿用总笔记中本题的主解。",
+      "provenance": "沿用总笔记中本题的算法思路，代码按结果先定义、逐步填入的方式展开。",
       "input": "nums=[-1,0,1,2,-1,-4]",
       "test_source": "总笔记同题实例",
       "javaFile": "src/main/java/leetcode/hashtable/LC00153Sum.java",
       "mainClass": "leetcode.hashtable.LC00153Sum",
-      "adapted": "    static class Solution {\n        public List<List<Integer>> threeSum(int[] nums) {\n            List<List<Integer>> result = new ArrayList<>();\n            Arrays.sort(nums);\n            for (int i = 0; i < nums.length - 2; i++) {\n                if (nums[i] > 0) {\n                    break;\n                }\n                // 同一层固定值只处理一次，仍允许一组中有相同数值。\n                if (i > 0 && nums[i] == nums[i - 1]) {\n                    continue;\n                }\n\n                int left = i + 1;\n                int right = nums.length - 1;\n                while (left < right) {\n                    long sum = (long) nums[i] + nums[left] + nums[right];\n                    if (sum < 0) {\n                        left++;\n                    } else if (sum > 0) {\n                        right--;\n                    } else {\n                        result.add(Arrays.asList(nums[i], nums[left], nums[right]));\n                        // 先保存，再跨过相同的左右值。\n                        while (left < right && nums[left] == nums[left + 1]) {\n                            left++;\n                        }\n                        while (left < right && nums[right] == nums[right - 1]) {\n                            right--;\n                        }\n                        left++;\n                        right--;\n                    }\n                }\n            }\n            return result;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public List<List<Integer>> threeSum(int[] nums) {\n            List<List<Integer>> res = new ArrayList<>(); // 每个内部列表保存一个三元组\n            Arrays.sort(nums);\n            for (int i = 0; i < nums.length - 2; i++) {\n                if (nums[i] > 0) {\n                    break;\n                }\n                // 同一层固定值只处理一次，仍允许一组中有相同数值。\n                if (i > 0 && nums[i] == nums[i - 1]) {\n                    continue;\n                }\n\n                int left = i + 1;\n                int right = nums.length - 1;\n                while (left < right) {\n                    long sum = (long) nums[i] + nums[left] + nums[right];\n                    if (sum < 0) {\n                        left++;\n                    } else if (sum > 0) {\n                        right--;\n                    } else {\n                        List<Integer> triple = new ArrayList<>();\n                        triple.add(nums[i]);\n                        triple.add(nums[left]);\n                        triple.add(nums[right]);\n                        res.add(triple);\n                        // 先保存，再跨过相同的左右值。\n                        while (left < right && nums[left] == nums[left + 1]) {\n                            left++;\n                        }\n                        while (left < right && nums[right] == nums[right - 1]) {\n                            right--;\n                        }\n                        left++;\n                        right--;\n                    }\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 23,
-      "sourceHash": "336a7e33dc8b9a71e65ff6b4b23989f6b4eca8bdc0a97f82916a5640dfc507ff"
+      "sourceHash": "ed4f0ab2a28ef08bc16e9e95118a90c46181ad3bd586bcb036bc6cdddea0d3de",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 42,
@@ -292,7 +298,7 @@
         "可先做左右最大值数组理解，再省空间：leftMax、rightMax记录两侧已经见过的最高板。",
         "更新两侧最大值后，较小的一侧已经有足够高的对岸保证，当前位置水量可确定；结算后移动对应指针。"
       ],
-      "state": "left、right围住尚未结算的列；leftMax、rightMax包含当前端点；result是已结算水量之和。",
+      "state": "left、right围住尚未结算的列；leftMax、rightMax包含当前端点；res是已结算水量之和。",
       "walk": "height=[0,1,0,2,1,0,1,3,2,1,2,1]\n下标2：左右最高至少1和3，接1\n下标4、5、6：左最高2，右最高3，分别接1、2、1\n下标9：两边最高至少3和2，接1\n累计1+1+2+1+1=6。调试器按实际左右结算顺序显示。",
       "pitfall": "容器题只算两端面积，本题必须逐列累加水量；比较两边最大值之前先更新它们。",
       "complexity": "时间O(n)，额外空间O(1)。",
@@ -314,7 +320,7 @@
       },
       "expectedValue": 6,
       "call": "trap(height)",
-      "code": "class Solution {\n    public int trap(int[] height) {\n        int left = 0;\n        int right = height.length - 1;\n        int leftMax = 0;\n        int rightMax = 0;\n        int result = 0;\n        while (left <= right) {\n            leftMax = Math.max(leftMax, height[left]);\n            rightMax = Math.max(rightMax, height[right]);\n            if (leftMax <= rightMax) { // 右侧已有足够高的板，本列只受leftMax限制\n                result += leftMax - height[left];\n                left++;\n            } else {\n                result += rightMax - height[right];\n                right--;\n            }\n        }\n        return result;\n    }\n}",
+      "code": "class Solution {\n    public int trap(int[] height) {\n        int res = 0; // 累加每一列的接水量\n        int left = 0;\n        int right = height.length - 1;\n        int leftMax = 0;\n        int rightMax = 0;\n\n        while (left <= right) {\n            leftMax = Math.max(leftMax, height[left]);\n            rightMax = Math.max(rightMax, height[right]);\n\n            if (leftMax <= rightMax) { // 右侧足够高，可以确定左侧这一列的水量\n                int water = leftMax - height[left];\n                res += water;\n                left++;\n            } else {\n                int water = rightMax - height[right];\n                res += water;\n                right--;\n            }\n        }\n        return res;\n    }\n}",
       "compare": "左右最大值数组更适合初次手算：两趟预处理后逐列计算，O(n)时间、O(n)空间；主解保留相同的按列思路，把辅助数组压缩为两个最大值。",
       "title": "接雨水",
       "english": "Trapping Rain Water",
@@ -327,9 +333,10 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/array/LC0042TrappingRainWater.java",
       "mainClass": "leetcode.array.LC0042TrappingRainWater",
-      "adapted": "    static class Solution {\n        public int trap(int[] height) {\n            int left = 0;\n            int right = height.length - 1;\n            int leftMax = 0;\n            int rightMax = 0;\n            int result = 0;\n            while (left <= right) {\n                leftMax = Math.max(leftMax, height[left]);\n                rightMax = Math.max(rightMax, height[right]);\n                if (leftMax <= rightMax) { // 右侧已有足够高的板，本列只受leftMax限制\n                    result += leftMax - height[left];\n                    left++;\n                } else {\n                    result += rightMax - height[right];\n                    right--;\n                }\n            }\n            return result;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int trap(int[] height) {\n            int res = 0; // 累加每一列的接水量\n            int left = 0;\n            int right = height.length - 1;\n            int leftMax = 0;\n            int rightMax = 0;\n\n            while (left <= right) {\n                leftMax = Math.max(leftMax, height[left]);\n                rightMax = Math.max(rightMax, height[right]);\n\n                if (leftMax <= rightMax) { // 右侧足够高，可以确定左侧这一列的水量\n                    int water = leftMax - height[left];\n                    res += water;\n                    left++;\n                } else {\n                    int water = rightMax - height[right];\n                    res += water;\n                    right--;\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 47,
-      "sourceHash": "e792eabd341c8421cc8499f9d257b0450733f9d8d1fe5123bcf959967a8977c8"
+      "sourceHash": "ea29988296287b3658b9f33e0a59c05cca92ad761fb35d00774612ae83707484",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 3,
@@ -339,8 +346,8 @@
         "用Set保存窗口内字符。加入c前，如果它已经在窗口中，就不断移走最左字符，直到旧c也离开。",
         "加入c后窗口无重复，此时用right-left+1更新最长长度。"
       ],
-      "state": "窗口是[left,right]；set与当前窗口包含相同字符，且没有重复；result是最长合法长度。",
-      "walk": "s=\"abcabcbb\"\nright=0..2：窗口a→ab→abc，result=3\nright=3遇a：删旧a，left=1，加入新a，窗口bca\n继续遇b/c也先删除各自旧位置\n末尾b会连续收缩，最长仍为3。",
+      "state": "窗口是[left,right]；set与当前窗口包含相同字符，且没有重复；res是最长合法长度。",
+      "walk": "s=\"abcabcbb\"\nright=0..2：窗口a→ab→abc，res=3\nright=3遇a：删旧a，left=1，加入新a，窗口bca\n继续遇b/c也先删除各自旧位置\n末尾b会连续收缩，最长仍为3。",
       "pitfall": "缩窗必须用while而非if；例如abba第二个b出现时，要移走a和旧b。空串返回0。",
       "complexity": "平均时间O(n)，额外空间O(min(n,字符集大小))。",
       "example": {
@@ -348,7 +355,7 @@
       },
       "expectedValue": 3,
       "call": "lengthOfLongestSubstring(s)",
-      "code": "import java.util.*;\n\nclass Solution {\n    public int lengthOfLongestSubstring(String s) {\n        Set<Character> set = new HashSet<>();\n        int left = 0;\n        int result = 0;\n        for (int right = 0; right < s.length(); right++) {\n            char c = s.charAt(right);\n            while (set.contains(c)) { // 一直缩到旧的同字符离开窗口\n                set.remove(s.charAt(left));\n                left++;\n            }\n            set.add(c);\n            result = Math.max(result, right - left + 1);\n        }\n        return result;\n    }\n}",
+      "code": "import java.util.*;\n\nclass Solution {\n    public int lengthOfLongestSubstring(String s) {\n        int res = 0; // 保存最长无重复子串的长度\n        Set<Character> set = new HashSet<>();\n        int left = 0;\n\n        for (int right = 0; right < s.length(); right++) {\n            char c = s.charAt(right);\n            while (set.contains(c)) { // 一直缩到旧的同字符离开窗口\n                char removed = s.charAt(left);\n                set.remove(removed);\n                left++;\n            }\n            set.add(c);\n\n            int length = right - left + 1; // 此时窗口已经没有重复字符\n            if (length > res) {\n                res = length;\n            }\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "无重复字符的最长子串",
       "english": "Longest Substring Without Repeating Characters",
@@ -361,9 +368,10 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/string/LC0003LongestSubstringWithoutRepeatingCharacters.java",
       "mainClass": "leetcode.string.LC0003LongestSubstringWithoutRepeatingCharacters",
-      "adapted": "    static class Solution {\n        public int lengthOfLongestSubstring(String s) {\n            Set<Character> set = new HashSet<>();\n            int left = 0;\n            int result = 0;\n            for (int right = 0; right < s.length(); right++) {\n                char c = s.charAt(right);\n                while (set.contains(c)) { // 一直缩到旧的同字符离开窗口\n                    set.remove(s.charAt(left));\n                    left++;\n                }\n                set.add(c);\n                result = Math.max(result, right - left + 1);\n            }\n            return result;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int lengthOfLongestSubstring(String s) {\n            int res = 0; // 保存最长无重复子串的长度\n            Set<Character> set = new HashSet<>();\n            int left = 0;\n\n            for (int right = 0; right < s.length(); right++) {\n                char c = s.charAt(right);\n                while (set.contains(c)) { // 一直缩到旧的同字符离开窗口\n                    char removed = s.charAt(left);\n                    set.remove(removed);\n                    left++;\n                }\n                set.add(c);\n\n                int length = right - left + 1; // 此时窗口已经没有重复字符\n                if (length > res) {\n                    res = length;\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 47,
-      "sourceHash": "30848a7bb6d65754e97accefb038850d9fa5150ab225a9df6f2ba949bb6a9a99"
+      "sourceHash": "77dcb6ff0c740feab67958d6959bbb997fb5e71616d1c7a88ca62f44591ceda8",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 438,
@@ -386,7 +394,7 @@
         6
       ],
       "call": "findAnagrams(s, p)",
-      "code": "import java.util.*;\n\nclass Solution {\n    public List<Integer> findAnagrams(String s, String p) {\n        List<Integer> result = new ArrayList<>();\n        int[] need = new int[26];\n        int[] window = new int[26];\n        for (int i = 0; i < p.length(); i++) {\n            need[p.charAt(i) - 'a']++;\n        }\n        int left = 0;\n        for (int right = 0; right < s.length(); right++) {\n            window[s.charAt(right) - 'a']++;\n            if (right - left + 1 > p.length()) { // 固定窗口只移走一个最左字符\n                window[s.charAt(left) - 'a']--;\n                left++;\n            }\n            if (right - left + 1 == p.length() && Arrays.equals(need, window)) {\n                result.add(left);\n            }\n        }\n        return result;\n    }\n}",
+      "code": "import java.util.*;\n\nclass Solution {\n    public List<Integer> findAnagrams(String s, String p) {\n        List<Integer> res = new ArrayList<>(); // 保存每个匹配窗口的起始下标\n        int[] need = new int[26];\n        int[] window = new int[26];\n        for (int i = 0; i < p.length(); i++) {\n            need[p.charAt(i) - 'a']++;\n        }\n        int left = 0;\n        for (int right = 0; right < s.length(); right++) {\n            window[s.charAt(right) - 'a']++;\n            if (right - left + 1 > p.length()) { // 固定窗口只移走一个最左字符\n                window[s.charAt(left) - 'a']--;\n                left++;\n            }\n            boolean sameCounts = Arrays.equals(need, window);\n            if (right - left + 1 == p.length() && sameCounts) {\n                res.add(left); // 当前窗口的左端就是一个答案下标\n            }\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "找到字符串中所有字母异位词",
       "english": "Find All Anagrams in a String",
@@ -399,9 +407,10 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/string/LC0438FindAllAnagramsInAString.java",
       "mainClass": "leetcode.string.LC0438FindAllAnagramsInAString",
-      "adapted": "    static class Solution {\n        public List<Integer> findAnagrams(String s, String p) {\n            List<Integer> result = new ArrayList<>();\n            int[] need = new int[26];\n            int[] window = new int[26];\n            for (int i = 0; i < p.length(); i++) {\n                need[p.charAt(i) - 'a']++;\n            }\n            int left = 0;\n            for (int right = 0; right < s.length(); right++) {\n                window[s.charAt(right) - 'a']++;\n                if (right - left + 1 > p.length()) { // 固定窗口只移走一个最左字符\n                    window[s.charAt(left) - 'a']--;\n                    left++;\n                }\n                if (right - left + 1 == p.length() && Arrays.equals(need, window)) {\n                    result.add(left);\n                }\n            }\n            return result;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public List<Integer> findAnagrams(String s, String p) {\n            List<Integer> res = new ArrayList<>(); // 保存每个匹配窗口的起始下标\n            int[] need = new int[26];\n            int[] window = new int[26];\n            for (int i = 0; i < p.length(); i++) {\n                need[p.charAt(i) - 'a']++;\n            }\n            int left = 0;\n            for (int right = 0; right < s.length(); right++) {\n                window[s.charAt(right) - 'a']++;\n                if (right - left + 1 > p.length()) { // 固定窗口只移走一个最左字符\n                    window[s.charAt(left) - 'a']--;\n                    left++;\n                }\n                boolean sameCounts = Arrays.equals(need, window);\n                if (right - left + 1 == p.length() && sameCounts) {\n                    res.add(left); // 当前窗口的左端就是一个答案下标\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 48,
-      "sourceHash": "41cd2e74c988f01fb4e91d0b90719117204df08fe881769015313bc8328b7c9d"
+      "sourceHash": "995c03b6d7d11ab456a3d275776eca458976b3c52776f5d3622b6b2bb209c4c1",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 560,
@@ -411,8 +420,8 @@
         "本题含负数，窗口扩大时和不一定增大，不能照搬正数数组的缩窗条件。",
         "扫描右端，查询之前sum-k出现次数，加到答案，再记录当前sum；次数而非是否存在决定有多少个区间。"
       ],
-      "state": "sum是当前前缀和；count[prefix]是此前该前缀和出现次数；result统计已找到的非空子数组。",
-      "walk": "nums=[1,1,1], k=2\n初始count={0:1}，表示空前缀\n读第1个1：sum=1，找-1为0，记录1→1\n读第2个1：sum=2，找0为1，result=1，记录2→1\n读第3个1：sum=3，找1为1，result=2\n返回2，对应下标[0,1]和[1,2]。",
+      "state": "sum是当前前缀和；count[prefix]是此前该前缀和出现次数；res统计已找到的非空子数组。",
+      "walk": "nums=[1,1,1], k=2\n初始count={0:1}，表示空前缀\n读第1个1：sum=1，找-1为0，记录1→1\n读第2个1：sum=2，找0为1，res=1，记录2→1\n读第3个1：sum=3，找1为1，res=2\n返回2，对应下标[0,1]和[1,2]。",
       "pitfall": "必须count.put(0,1)，否则漏掉从下标0开始的区间；先查询再记录，k=0时才不会多算空区间。",
       "complexity": "平均时间O(n)，额外空间O(n)。",
       "example": {
@@ -425,7 +434,7 @@
       },
       "expectedValue": 2,
       "call": "subarraySum(nums, k)",
-      "code": "import java.util.*;\n\nclass Solution {\n    public int subarraySum(int[] nums, int k) {\n        Map<Integer, Integer> count = new HashMap<>();\n        count.put(0, 1); // 空前缀，让从下标0开始的区间也能被统计\n        int sum = 0;\n        int result = 0;\n        for (int num : nums) {\n            sum += num;\n            result += count.getOrDefault(sum - k, 0); // 先查之前的前缀，避免把空区间计入\n            count.put(sum, count.getOrDefault(sum, 0) + 1);\n        }\n        return result;\n    }\n}",
+      "code": "import java.util.*;\n\nclass Solution {\n    public int subarraySum(int[] nums, int k) {\n        int res = 0; // 保存和为k的非空子数组个数\n        Map<Integer, Integer> count = new HashMap<>();\n        count.put(0, 1); // 空前缀出现一次，使从下标0开始的区间也能被统计\n        int sum = 0;\n\n        for (int num : nums) {\n            sum += num;\n            int neededPrefix = sum - k;\n            int matchedCount = count.getOrDefault(neededPrefix, 0);\n            res += matchedCount; // 每一个匹配的旧前缀，都对应一个合法区间\n\n            // 先统计答案，再记录当前前缀，避免k=0时把空区间计入\n            int oldCount = count.getOrDefault(sum, 0);\n            count.put(sum, oldCount + 1);\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "和为 K 的子数组",
       "english": "Subarray Sum Equals K",
@@ -438,9 +447,10 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/hashtable/LC0560SubarraySumEqualsK.java",
       "mainClass": "leetcode.hashtable.LC0560SubarraySumEqualsK",
-      "adapted": "    static class Solution {\n        public int subarraySum(int[] nums, int k) {\n            Map<Integer, Integer> count = new HashMap<>();\n            count.put(0, 1); // 空前缀，让从下标0开始的区间也能被统计\n            int sum = 0;\n            int result = 0;\n            for (int num : nums) {\n                sum += num;\n                result += count.getOrDefault(sum - k, 0); // 先查之前的前缀，避免把空区间计入\n                count.put(sum, count.getOrDefault(sum, 0) + 1);\n            }\n            return result;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int subarraySum(int[] nums, int k) {\n            int res = 0; // 保存和为k的非空子数组个数\n            Map<Integer, Integer> count = new HashMap<>();\n            count.put(0, 1); // 空前缀出现一次，使从下标0开始的区间也能被统计\n            int sum = 0;\n\n            for (int num : nums) {\n                sum += num;\n                int neededPrefix = sum - k;\n                int matchedCount = count.getOrDefault(neededPrefix, 0);\n                res += matchedCount; // 每一个匹配的旧前缀，都对应一个合法区间\n\n                // 先统计答案，再记录当前前缀，避免k=0时把空区间计入\n                int oldCount = count.getOrDefault(sum, 0);\n                count.put(sum, oldCount + 1);\n            }\n            return res;\n        }\n    }",
       "displayStart": 48,
-      "sourceHash": "1ac60f32a13467d931ee55fe0a5b44f04ef36a6495f6b705c876eb132a9edc24"
+      "sourceHash": "b0f028639ea6f8f77d661753acbb58ff94a32818306889a04e358a94ac0e7c53",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 239,
@@ -476,7 +486,7 @@
         7
       ],
       "call": "maxSlidingWindow(nums, k)",
-      "code": "import java.util.ArrayDeque;\nimport java.util.Deque;\n\nclass Solution {\n    public int[] maxSlidingWindow(int[] nums, int k) {\n        int[] result = new int[nums.length - k + 1];\n        Deque<Integer> deque = new ArrayDeque<>();\n\n        int write = 0;\n\n        for (int right = 0; right < nums.length; right++) {\n            int left = right - k + 1;\n\n            // 先从队首删除已经离开窗口的下标。\n            while (!deque.isEmpty() && deque.peekFirst() < left) {\n                deque.pollFirst();\n            }\n\n            // 新值更大或相等，旧下标以后也不可能更优。\n            while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[right]) {\n                deque.pollLast();\n            }\n\n            deque.offerLast(right);\n\n            // 窗口凑满 k 个元素后，队首才写入答案。\n            if (left >= 0) {\n                result[write++] = nums[deque.peekFirst()];\n            }\n        }\n\n        return result;\n    }\n}",
+      "code": "import java.util.*;\n\nclass Solution {\n    public int[] maxSlidingWindow(int[] nums, int k) {\n        int[] res = new int[nums.length - k + 1]; // 每个完整窗口对应一个答案\n        int write = 0;\n        Deque<Integer> deque = new ArrayDeque<>();\n\n        for (int right = 0; right < nums.length; right++) {\n            int left = right - k + 1;\n\n            // 队首按下标判断是否已经离开窗口\n            while (!deque.isEmpty() && deque.peekFirst() < left) {\n                deque.pollFirst();\n            }\n            // 队尾按数值淘汰旧候选：新数更大或相等，且过期更晚\n            while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[right]) {\n                deque.pollLast();\n            }\n            deque.offerLast(right);\n\n            if (left >= 0) { // 窗口凑满k个元素后，才向结果数组写入\n                int maxIndex = deque.peekFirst();\n                res[write] = nums[maxIndex];\n                write++;\n            }\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "滑动窗口最大值",
       "english": "Sliding Window Maximum",
@@ -484,14 +494,15 @@
       "group": "子串",
       "order": 11,
       "page_slug": "hot100-0239-sliding-window-maximum",
-      "provenance": "沿用总笔记中本题的下标单调队列解法。",
+      "provenance": "沿用总笔记中本题的下标单调队列思路，写入结果与移动写指针分开表达。",
       "input": "nums=[1,3,-1,-3,5,3,6,7]; k=3",
       "test_source": "总笔记同题实例",
       "javaFile": "src/main/java/leetcode/stackqueue/LC0239SlidingWindowMaximum.java",
       "mainClass": "leetcode.stackqueue.LC0239SlidingWindowMaximum",
-      "adapted": "    static class Solution {\n        public int[] maxSlidingWindow(int[] nums, int k) {\n            int[] result = new int[nums.length - k + 1];\n            Deque<Integer> deque = new ArrayDeque<>();\n\n            int write = 0;\n\n            for (int right = 0; right < nums.length; right++) {\n                int left = right - k + 1;\n\n                // 先从队首删除已经离开窗口的下标。\n                while (!deque.isEmpty() && deque.peekFirst() < left) {\n                    deque.pollFirst();\n                }\n\n                // 新值更大或相等，旧下标以后也不可能更优。\n                while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[right]) {\n                    deque.pollLast();\n                }\n\n                deque.offerLast(right);\n\n                // 窗口凑满 k 个元素后，队首才写入答案。\n                if (left >= 0) {\n                    result[write++] = nums[deque.peekFirst()];\n                }\n            }\n\n            return result;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int[] maxSlidingWindow(int[] nums, int k) {\n            int[] res = new int[nums.length - k + 1]; // 每个完整窗口对应一个答案\n            int write = 0;\n            Deque<Integer> deque = new ArrayDeque<>();\n\n            for (int right = 0; right < nums.length; right++) {\n                int left = right - k + 1;\n\n                // 队首按下标判断是否已经离开窗口\n                while (!deque.isEmpty() && deque.peekFirst() < left) {\n                    deque.pollFirst();\n                }\n                // 队尾按数值淘汰旧候选：新数更大或相等，且过期更晚\n                while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[right]) {\n                    deque.pollLast();\n                }\n                deque.offerLast(right);\n\n                if (left >= 0) { // 窗口凑满k个元素后，才向结果数组写入\n                    int maxIndex = deque.peekFirst();\n                    res[write] = nums[maxIndex];\n                    write++;\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 48,
-      "sourceHash": "3fc583995ed2ba9a77e6161aeb20f33247cf33641d00553226aac5d8dba3d5f4"
+      "sourceHash": "8553b11c6ded6faeb3efae875e70a519fc65d07e7c6574181cadd8312b934ed5",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 76,
@@ -511,7 +522,7 @@
       },
       "expectedValue": "BANC",
       "call": "minWindow(s, t)",
-      "code": "class Solution {\n    public String minWindow(String s, String t) {\n        if (t.length() == 0 || s.length() < t.length()) {\n            return \"\";\n        }\n        int[] need = new int[128];\n        for (int i = 0; i < t.length(); i++) {\n            need[t.charAt(i)]++;\n        }\n        int missing = t.length();\n        int left = 0;\n        int bestStart = 0;\n        int bestLength = Integer.MAX_VALUE;\n        for (int right = 0; right < s.length(); right++) {\n            char added = s.charAt(right);\n            if (need[added] > 0) { // 加入前仍欠这个字符，才补掉缺口\n                missing--;\n            }\n            need[added]--;\n            while (missing == 0) {\n                int length = right - left + 1;\n                if (length < bestLength) {\n                    bestStart = left;\n                    bestLength = length;\n                }\n                char removed = s.charAt(left);\n                need[removed]++;\n                if (need[removed] > 0) { // 移走后变成正数，窗口重新欠字符\n                    missing++;\n                }\n                left++;\n            }\n        }\n        return bestLength == Integer.MAX_VALUE\n                ? \"\" : s.substring(bestStart, bestStart + bestLength);\n    }\n}",
+      "code": "class Solution {\n    public String minWindow(String s, String t) {\n        String res = \"\"; // 没有找到覆盖窗口时，答案就是空字符串\n        if (t.length() == 0 || s.length() < t.length()) {\n            return res;\n        }\n\n        int[] need = new int[128];\n        for (int i = 0; i < t.length(); i++) {\n            need[t.charAt(i)]++;\n        }\n        int missing = t.length();\n        int left = 0;\n        int bestStart = 0;\n        int bestLength = Integer.MAX_VALUE;\n\n        for (int right = 0; right < s.length(); right++) {\n            char added = s.charAt(right);\n            if (need[added] > 0) { // 加入前仍欠这个字符，才补掉一个缺口\n                missing--;\n            }\n            need[added]--;\n\n            while (missing == 0) {\n                int length = right - left + 1;\n                if (length < bestLength) {\n                    bestStart = left;\n                    bestLength = length;\n                }\n\n                char removed = s.charAt(left);\n                need[removed]++;\n                if (need[removed] > 0) { // 移走后重新欠字符，窗口变为无效\n                    missing++;\n                }\n                left++;\n            }\n        }\n\n        if (bestLength != Integer.MAX_VALUE) {\n            int end = bestStart + bestLength;\n            res = s.substring(bestStart, end); // substring右端不包含end\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "最小覆盖子串",
       "english": "Minimum Window Substring",
@@ -519,26 +530,27 @@
       "group": "子串",
       "order": 12,
       "page_slug": "hot100-0076-minimum-window-substring",
-      "provenance": "沿用总笔记中本题的主解。",
+      "provenance": "沿用总笔记中本题的算法思路，代码按结果先定义、逐步填入的方式展开。",
       "input": "s=\"ADOBECODEBANC\"; t=\"ABC\"",
       "test_source": "总笔记同题实例",
       "javaFile": "src/main/java/leetcode/array/LC0076MinimumWindowSubstring.java",
       "mainClass": "leetcode.array.LC0076MinimumWindowSubstring",
-      "adapted": "    static class Solution {\n        public String minWindow(String s, String t) {\n            if (t.length() == 0 || s.length() < t.length()) {\n                return \"\";\n            }\n            int[] need = new int[128];\n            for (int i = 0; i < t.length(); i++) {\n                need[t.charAt(i)]++;\n            }\n            int missing = t.length();\n            int left = 0;\n            int bestStart = 0;\n            int bestLength = Integer.MAX_VALUE;\n            for (int right = 0; right < s.length(); right++) {\n                char added = s.charAt(right);\n                if (need[added] > 0) { // 加入前仍欠这个字符，才补掉缺口\n                    missing--;\n                }\n                need[added]--;\n                while (missing == 0) {\n                    int length = right - left + 1;\n                    if (length < bestLength) {\n                        bestStart = left;\n                        bestLength = length;\n                    }\n                    char removed = s.charAt(left);\n                    need[removed]++;\n                    if (need[removed] > 0) { // 移走后变成正数，窗口重新欠字符\n                        missing++;\n                    }\n                    left++;\n                }\n            }\n            return bestLength == Integer.MAX_VALUE\n                    ? \"\" : s.substring(bestStart, bestStart + bestLength);\n        }\n    }",
+      "adapted": "    static class Solution {\n        public String minWindow(String s, String t) {\n            String res = \"\"; // 没有找到覆盖窗口时，答案就是空字符串\n            if (t.length() == 0 || s.length() < t.length()) {\n                return res;\n            }\n\n            int[] need = new int[128];\n            for (int i = 0; i < t.length(); i++) {\n                need[t.charAt(i)]++;\n            }\n            int missing = t.length();\n            int left = 0;\n            int bestStart = 0;\n            int bestLength = Integer.MAX_VALUE;\n\n            for (int right = 0; right < s.length(); right++) {\n                char added = s.charAt(right);\n                if (need[added] > 0) { // 加入前仍欠这个字符，才补掉一个缺口\n                    missing--;\n                }\n                need[added]--;\n\n                while (missing == 0) {\n                    int length = right - left + 1;\n                    if (length < bestLength) {\n                        bestStart = left;\n                        bestLength = length;\n                    }\n\n                    char removed = s.charAt(left);\n                    need[removed]++;\n                    if (need[removed] > 0) { // 移走后重新欠字符，窗口变为无效\n                        missing++;\n                    }\n                    left++;\n                }\n            }\n\n            if (bestLength != Integer.MAX_VALUE) {\n                int end = bestStart + bestLength;\n                res = s.substring(bestStart, end); // substring右端不包含end\n            }\n            return res;\n        }\n    }",
       "displayStart": 24,
-      "sourceHash": "8803a645f6068e654f4159637b0d82ed6b75c70ce93ba0534f69bf7e92b519bb"
+      "sourceHash": "8a019657a68a4b531fc3cd24db2aef487840f194bb6c76f2ed71bd1bf801befe",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 53,
       "summary": "负的累计和只会拖累后面的段，更新答案后再丢掉它。",
       "thinking": [
         "直接沿用贪心章节主解。连续子数组不能跳着选，当前累计和若为负，加到未来段前面只会更差。",
-        "每读一个数，先累加，再用sum更新result；然后sum<0时归零，从后一个数重新起段。",
-        "result从nums[0]初始化，保证全负数组也能返回最大负数，而不是空数组的0。"
+        "每读一个数，先累加，再用sum更新res；然后sum<0时归零，从后一个数重新起段。",
+        "res从nums[0]初始化，保证全负数组也能返回最大负数，而不是空数组的0。"
       ],
-      "state": "sum是当前保留段的累计和；result是已经遇到的最大非空子数组和。sum置0只用于后续，不把空段记入答案。",
-      "walk": "nums=[-2,1,-3,4,-1,2,1]\n-2：先更新result=-2，再把sum清零\n1：result=1；接-3后sum=-2，清零\n从4重新开始：4→3→5→6\n返回6，对应[4,-1,2,1]。",
-      "pitfall": "必须先更新result再把负sum归零；全负数组例如[-3,-2]应返回-2。",
+      "state": "sum是当前保留段的累计和；res是已经遇到的最大非空子数组和。sum置0只用于后续，不把空段记入答案。",
+      "walk": "nums=[-2,1,-3,4,-1,2,1]\n-2：先更新res=-2，再把sum清零\n1：res=1；接-3后sum=-2，清零\n从4重新开始：4→3→5→6\n返回6，对应[4,-1,2,1]。",
+      "pitfall": "必须先更新res再把负sum归零；全负数组例如[-3,-2]应返回-2。",
       "complexity": "时间O(n)，额外空间O(1)。",
       "example": {
         "nums": [
@@ -553,7 +565,7 @@
       },
       "expectedValue": 6,
       "call": "maxSubArray(nums)",
-      "code": "class Solution {\n    public int maxSubArray(int[] nums) {\n        int sum = 0;\n        int result = nums[0];\n        for (int num : nums) {\n            sum += num;\n            result = Math.max(result, sum);\n            if (sum < 0) sum = 0; // 负前缀不带到下一段\n        }\n        return result;\n    }\n}",
+      "code": "class Solution {\n    public int maxSubArray(int[] nums) {\n        int res = nums[0]; // 必须选非空子数组，全负数组也能得到正确答案\n        int sum = 0;\n\n        for (int num : nums) {\n            sum += num;\n            if (sum > res) {\n                res = sum;\n            }\n            if (sum < 0) { // 先记录答案，再丢掉会拖累后面元素的负前缀\n                sum = 0;\n            }\n        }\n        return res;\n    }\n}",
       "compare": "原笔记也给出DP：dp[i]表示以i结尾的最大和，dp[i]=max(nums[i],dp[i-1]+nums[i])；初始化dp[0]=nums[0]，从左向右，最后取全局最大。例4→max(-1,4-1)=3→5→6。与主解的区别是DP允许状态为负，贪心把负前缀直接丢弃。",
       "title": "最大子数组和",
       "english": "Maximum Subarray",
@@ -561,14 +573,15 @@
       "group": "普通数组",
       "order": 13,
       "page_slug": "hot100-0053-maximum-subarray",
-      "provenance": "沿用总笔记中本题的主解。",
+      "provenance": "沿用总笔记中本题的算法思路，代码按结果先定义、逐步填入的方式展开。",
       "input": "nums=[-2,1,-3,4,-1,2,1]",
       "test_source": "总笔记同题实例",
       "javaFile": "src/main/java/leetcode/greedy/LC0053MaximumSubarray.java",
       "mainClass": "leetcode.greedy.LC0053MaximumSubarray",
-      "adapted": "    static class Solution {\n        public int maxSubArray(int[] nums) {\n            int sum = 0;\n            int result = nums[0];\n            for (int num : nums) {\n                sum += num;\n                result = Math.max(result, sum);\n                if (sum < 0) sum = 0; // 负前缀不带到下一段\n            }\n            return result;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int maxSubArray(int[] nums) {\n            int res = nums[0]; // 必须选非空子数组，全负数组也能得到正确答案\n            int sum = 0;\n\n            for (int num : nums) {\n                sum += num;\n                if (sum > res) {\n                    res = sum;\n                }\n                if (sum < 0) { // 先记录答案，再丢掉会拖累后面元素的负前缀\n                    sum = 0;\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 29,
-      "sourceHash": "f7160ac83fa2b77afff1252534a9a67a06b3402ef939276cdf40aa4df06d7d2d"
+      "sourceHash": "b29b80e5e1dafbaa00401f216173bb28a1d27d30af57c18534d350a8497fb5ec",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 56,
@@ -576,11 +589,11 @@
       "thinking": [
         "沿用贪心章节原主解。区间没排序时，重叠关系不好判断，先按左端升序排列。",
         "若current[0]大于最后一段右端，说明中间有空隙，新增一段。",
-        "否则重叠，合并段的右端取两者最大；左端已经由排序保证最小。"
+        "否则重叠，只延长最后一段的右端。res先预留n行，count记录有效段数；循环结束裁剪到count行，再统一返回res。"
       ],
-      "state": "result保存已经合并、彼此不重叠的区间；last是最后一段；current是当前处理的区间。",
+      "state": "res先分配n行，count表示其中已经写好的区间个数；只有[0,count)有效。current是当前区间，重叠时更新res[count-1]的右端，最后把res裁剪为count行。",
       "walk": "intervals=[[1,3],[2,6],[8,10],[15,18]]\n[1,3]加入结果；[2,6]与它重叠→[1,6]\n8>6，新段[8,10]；15>10，新段[15,18]\n返回[[1,6],[8,10],[15,18]]。",
-      "pitfall": "端点相等也算重叠，只有current[0]>last[1]才新开段；原解克隆外层数组和写入段，保留输入。",
+      "pitfall": "端点相等也算重叠，只有current[0]>res[count-1][1]才新开段。返回前要裁剪结果，避免带上未使用的[0,0]行；外层克隆后排序，不改变原输入的区间顺序或端点。",
       "complexity": "时间O(n log n)；克隆、排序与结果需要O(n)空间。",
       "example": {
         "intervals": [
@@ -617,7 +630,7 @@
         ]
       ],
       "call": "merge(intervals)",
-      "code": "import java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.List;\n\nclass Solution {\n    public int[][] merge(int[][] intervals) {\n        intervals = intervals.clone();\n        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n        List<int[]> result = new ArrayList<>();\n        for (int[] current : intervals) {\n            if (result.isEmpty() || current[0] > result.get(result.size() - 1)[1]) {\n                result.add(current.clone());\n            } else {\n                int[] last = result.get(result.size() - 1);\n                last[1] = Math.max(last[1], current[1]);\n            }\n        }\n        return result.toArray(new int[result.size()][]);\n    }\n}",
+      "code": "import java.util.*;\n\nclass Solution {\n    public int[][] merge(int[][] intervals) {\n        int[][] res = new int[intervals.length][2]; // 最多产生n段，先分配足够的结果位置\n        int count = 0; // res中已经写好的区间个数\n        intervals = intervals.clone();\n        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n\n        for (int[] current : intervals) {\n            if (count == 0 || current[0] > res[count - 1][1]) {\n                res[count][0] = current[0]; // 没有重叠，写入一段新的区间\n                res[count][1] = current[1];\n                count++;\n            } else {\n                int lastEnd = res[count - 1][1];\n                if (current[1] > lastEnd) { // 有重叠，只需要延长最后一段的右端\n                    res[count - 1][1] = current[1];\n                }\n            }\n        }\n\n        res = Arrays.copyOf(res, count); // 只保留已经写入的count段，去掉未使用的位置\n        return res;\n    }\n}",
       "compare": "",
       "title": "合并区间",
       "english": "Merge Intervals",
@@ -625,14 +638,15 @@
       "group": "普通数组",
       "order": 14,
       "page_slug": "hot100-0056-merge-intervals",
-      "provenance": "沿用总笔记中本题的主解。",
+      "provenance": "沿用总笔记中本题的算法思路，代码按结果先定义、逐步填入的方式展开。",
       "input": "intervals=[[1,3],[2,6],[8,10],[15,18]]",
       "test_source": "总笔记同题实例",
       "javaFile": "src/main/java/leetcode/greedy/LC0056MergeIntervals.java",
       "mainClass": "leetcode.greedy.LC0056MergeIntervals",
-      "adapted": "    static class Solution {\n        public int[][] merge(int[][] intervals) {\n            intervals = intervals.clone();\n            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n            List<int[]> result = new ArrayList<>();\n            for (int[] current : intervals) {\n                if (result.isEmpty() || current[0] > result.get(result.size() - 1)[1]) {\n                    result.add(current.clone());\n                } else {\n                    int[] last = result.get(result.size() - 1);\n                    last[1] = Math.max(last[1], current[1]);\n                }\n            }\n            return result.toArray(new int[result.size()][]);\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int[][] merge(int[][] intervals) {\n            int[][] res = new int[intervals.length][2]; // 最多产生n段，先分配足够的结果位置\n            int count = 0; // res中已经写好的区间个数\n            intervals = intervals.clone();\n            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n\n            for (int[] current : intervals) {\n                if (count == 0 || current[0] > res[count - 1][1]) {\n                    res[count][0] = current[0]; // 没有重叠，写入一段新的区间\n                    res[count][1] = current[1];\n                    count++;\n                } else {\n                    int lastEnd = res[count - 1][1];\n                    if (current[1] > lastEnd) { // 有重叠，只需要延长最后一段的右端\n                        res[count - 1][1] = current[1];\n                    }\n                }\n            }\n\n            res = Arrays.copyOf(res, count); // 只保留已经写入的count段，去掉未使用的位置\n            return res;\n        }\n    }",
       "displayStart": 25,
-      "sourceHash": "501efd5511e999cad92869c1fa4d179939d53929d72d44d4ffbce0dcb093d058"
+      "sourceHash": "9d0b6168417bf830fbc639b881deee2a04dd432bd49889441481224c5eeb5edf",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 189,
@@ -668,7 +682,7 @@
         4
       ],
       "call": "rotate(nums, k)",
-      "code": "class Solution {\n    public void rotate(int[] nums, int k) {\n        k %= nums.length;\n        // 整体反转后分别恢复两段内部顺序，AB变成BA\n        reverse(nums, 0, nums.length - 1);\n        reverse(nums, 0, k - 1);\n        reverse(nums, k, nums.length - 1);\n    }\n\n    private void reverse(int[] nums, int left, int right) {\n        while (left < right) {\n            int temp = nums[left];\n            nums[left] = nums[right];\n            nums[right] = temp;\n            left++;\n            right--;\n        }\n    }\n}",
+      "code": "class Solution {\n    public void rotate(int[] nums, int k) {\n        // 结果直接写回nums，三次反转完成右移\n        k %= nums.length;\n        // 整体反转后分别恢复两段内部顺序，AB变成BA\n        reverse(nums, 0, nums.length - 1); // 先反转整个数组\n        reverse(nums, 0, k - 1); // 恢复前k个元素的顺序\n        reverse(nums, k, nums.length - 1); // 恢复剩余元素的顺序\n    }\n\n    private void reverse(int[] nums, int left, int right) {\n        while (left < right) {\n            int temp = nums[left];\n            nums[left] = nums[right];\n            nums[right] = temp;\n            left++;\n            right--;\n        }\n    }\n}",
       "compare": "",
       "title": "轮转数组",
       "english": "Rotate Array",
@@ -681,20 +695,21 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/array/LC0189RotateArray.java",
       "mainClass": "leetcode.array.LC0189RotateArray",
-      "adapted": "    static class Solution {\n        public void rotate(int[] nums, int k) {\n            k %= nums.length;\n            // 整体反转后分别恢复两段内部顺序，AB变成BA\n            reverse(nums, 0, nums.length - 1);\n            reverse(nums, 0, k - 1);\n            reverse(nums, k, nums.length - 1);\n        }\n\n        private void reverse(int[] nums, int left, int right) {\n            while (left < right) {\n                int temp = nums[left];\n                nums[left] = nums[right];\n                nums[right] = temp;\n                left++;\n                right--;\n            }\n        }\n    }",
+      "adapted": "    static class Solution {\n        public void rotate(int[] nums, int k) {\n            // 结果直接写回nums，三次反转完成右移\n            k %= nums.length;\n            // 整体反转后分别恢复两段内部顺序，AB变成BA\n            reverse(nums, 0, nums.length - 1); // 先反转整个数组\n            reverse(nums, 0, k - 1); // 恢复前k个元素的顺序\n            reverse(nums, k, nums.length - 1); // 恢复剩余元素的顺序\n        }\n\n        private void reverse(int[] nums, int left, int right) {\n            while (left < right) {\n                int temp = nums[left];\n                nums[left] = nums[right];\n                nums[right] = temp;\n                left++;\n                right--;\n            }\n        }\n    }",
       "displayStart": 49,
-      "sourceHash": "0f9ecb317beab18b1e7af5647f98e9a9fddd463ca772c60b233c016944900d5d"
+      "sourceHash": "4882f2644aab59cb764d938104c80a022aca71ea2b88629659d131d6830159c8",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 238,
       "summary": "答案等于左边所有数的乘积，再乘右边所有数的乘积。",
       "thinking": [
         "不能用除法，而且0会让总乘积失去信息；改用数组章节“累计信息”的思路，只把加法前缀改成乘法。",
-        "第一趟令result[i]等于i左侧乘积，不包含nums[i]。",
-        "第二趟从右向左，用right保存右侧乘积；先乘入答案，再把nums[i]纳入right。"
+        "第一趟令res[i]等于i左侧乘积，不包含nums[i]。",
+        "第二趟从右向左，用rightProduct保存右侧乘积；先乘入答案，再把nums[i]纳入rightProduct。"
       ],
-      "state": "left始终不含当前数；第二趟right也不含当前数；result数组先存左乘积，再变成左右乘积。",
-      "walk": "nums=[1,2,3,4]\n第一趟result=[1,1,2,6]\n从右向左：i=3乘1得6，right变4\ni=2乘4得8，right变12\ni=1乘12得12；i=0乘24得24\n返回[24,12,8,6]。",
+      "state": "leftProduct始终不含当前数；第二趟rightProduct也不含当前数；res数组先存左乘积，再变成左右乘积。",
+      "walk": "nums=[1,2,3,4]\n第一趟res=[1,1,2,6]\n从右向左：i=3乘1得6，rightProduct变4\ni=2乘4得8，rightProduct变12\ni=1乘12得12；i=0乘24得24\n返回[24,12,8,6]。",
       "pitfall": "累计乘积的更新必须放在使用之后，否则会把自身乘入答案；空的一侧乘积取1。0无需特判。",
       "complexity": "时间O(n)，除返回数组外额外空间O(1)。",
       "example": {
@@ -712,7 +727,7 @@
         6
       ],
       "call": "productExceptSelf(nums)",
-      "code": "class Solution {\n    public int[] productExceptSelf(int[] nums) {\n        int[] result = new int[nums.length];\n        int left = 1;\n        for (int i = 0; i < nums.length; i++) {\n            result[i] = left; // 先存左侧乘积，再纳入当前数\n            left *= nums[i];\n        }\n        int right = 1;\n        for (int i = nums.length - 1; i >= 0; i--) {\n            result[i] *= right;\n            right *= nums[i];\n        }\n        return result;\n    }\n}",
+      "code": "class Solution {\n    public int[] productExceptSelf(int[] nums) {\n        int[] res = new int[nums.length]; // res[i]最终保存除nums[i]外的全部元素乘积\n        int leftProduct = 1;\n        for (int i = 0; i < nums.length; i++) {\n            res[i] = leftProduct; // 先写入左侧乘积，此时不包含nums[i]\n            leftProduct *= nums[i];\n        }\n\n        int rightProduct = 1;\n        for (int i = nums.length - 1; i >= 0; i--) {\n            res[i] = res[i] * rightProduct; // 左侧乘积再乘右侧乘积\n            rightProduct *= nums[i];\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "除了自身以外数组的乘积",
       "english": "Product of Array Except Self",
@@ -725,9 +740,10 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/array/LC0238ProductOfArrayExceptSelf.java",
       "mainClass": "leetcode.array.LC0238ProductOfArrayExceptSelf",
-      "adapted": "    static class Solution {\n        public int[] productExceptSelf(int[] nums) {\n            int[] result = new int[nums.length];\n            int left = 1;\n            for (int i = 0; i < nums.length; i++) {\n                result[i] = left; // 先存左侧乘积，再纳入当前数\n                left *= nums[i];\n            }\n            int right = 1;\n            for (int i = nums.length - 1; i >= 0; i--) {\n                result[i] *= right;\n                right *= nums[i];\n            }\n            return result;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int[] productExceptSelf(int[] nums) {\n            int[] res = new int[nums.length]; // res[i]最终保存除nums[i]外的全部元素乘积\n            int leftProduct = 1;\n            for (int i = 0; i < nums.length; i++) {\n                res[i] = leftProduct; // 先写入左侧乘积，此时不包含nums[i]\n                leftProduct *= nums[i];\n            }\n\n            int rightProduct = 1;\n            for (int i = nums.length - 1; i >= 0; i--) {\n                res[i] = res[i] * rightProduct; // 左侧乘积再乘右侧乘积\n                rightProduct *= nums[i];\n            }\n            return res;\n        }\n    }",
       "displayStart": 47,
-      "sourceHash": "5ed3895862bcc7a904b40d7c63e73696eaa21c8ea7fb8cfde755f03cb13b79ca"
+      "sourceHash": "f42246637598f88087d59f30c04043c6cd36f2dfb8e38b25a460b8dd0e4115d1",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 41,
@@ -737,7 +753,7 @@
         "把输入数组本身当成存在性表：合法值x应该放在下标x-1，反复交换直到当前位置无需处理。",
         "归位后从左向右检查，nums[i]!=i+1时返回i+1；全对就返回n+1。"
       ],
-      "state": "i是当前归位位置；target=nums[i]-1是该值应去的位置；只处理[1,n]内且尚未就位的值。",
+      "state": "i是当前归位位置；target=nums[i]-1是该值应去的位置；只处理[1,n]内且尚未就位的值。 res先设为n+1，扫描到第一个错位位置时更新res并结束检查，最后统一返回。",
       "walk": "nums=[3,4,-1,1]\ni=0：3换到下标2→[-1,4,3,1]\ni=1：4换到下标3→[-1,1,3,4]\n当前1继续换到下标0→[1,-1,3,4]\n检查下标1应为2却是-1，返回2。",
       "pitfall": "交换后新来的数还需继续处理，所以用while；先检查范围再访问nums[nums[i]-1]；重复值必须停止交换，防止死循环。",
       "complexity": "时间O(n)，每次有效交换至少把一个值放到正确位置；额外空间O(1)。",
@@ -751,7 +767,7 @@
       },
       "expectedValue": 2,
       "call": "firstMissingPositive(nums)",
-      "code": "class Solution {\n    public int firstMissingPositive(int[] nums) {\n        int n = nums.length;\n        for (int i = 0; i < n; i++) {\n            while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {\n                int target = nums[i] - 1; // 重复值已就位时不再交换，避免死循环\n                int temp = nums[target];\n                nums[target] = nums[i];\n                nums[i] = temp;\n            }\n        }\n        for (int i = 0; i < n; i++) {\n            if (nums[i] != i + 1) {\n                return i + 1;\n            }\n        }\n        return n + 1;\n    }\n}",
+      "code": "class Solution {\n    public int firstMissingPositive(int[] nums) {\n        int n = nums.length;\n        int res = n + 1; // 1到n都存在时，答案就是n+1\n\n        for (int i = 0; i < n; i++) {\n            while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {\n                int target = nums[i] - 1; // 值x应该放到下标x-1；重复值已就位时停止\n                int temp = nums[target];\n                nums[target] = nums[i];\n                nums[i] = temp;\n            }\n        }\n\n        for (int i = 0; i < n; i++) {\n            if (nums[i] != i + 1) {\n                res = i + 1;\n                break; // 第一个错位的位置，就是最小缺失正数\n            }\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "缺失的第一个正数",
       "english": "First Missing Positive",
@@ -764,9 +780,10 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/array/LC0041FirstMissingPositive.java",
       "mainClass": "leetcode.array.LC0041FirstMissingPositive",
-      "adapted": "    static class Solution {\n        public int firstMissingPositive(int[] nums) {\n            int n = nums.length;\n            for (int i = 0; i < n; i++) {\n                while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {\n                    int target = nums[i] - 1; // 重复值已就位时不再交换，避免死循环\n                    int temp = nums[target];\n                    nums[target] = nums[i];\n                    nums[i] = temp;\n                }\n            }\n            for (int i = 0; i < n; i++) {\n                if (nums[i] != i + 1) {\n                    return i + 1;\n                }\n            }\n            return n + 1;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int firstMissingPositive(int[] nums) {\n            int n = nums.length;\n            int res = n + 1; // 1到n都存在时，答案就是n+1\n\n            for (int i = 0; i < n; i++) {\n                while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {\n                    int target = nums[i] - 1; // 值x应该放到下标x-1；重复值已就位时停止\n                    int temp = nums[target];\n                    nums[target] = nums[i];\n                    nums[i] = temp;\n                }\n            }\n\n            for (int i = 0; i < n; i++) {\n                if (nums[i] != i + 1) {\n                    res = i + 1;\n                    break; // 第一个错位的位置，就是最小缺失正数\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 47,
-      "sourceHash": "1f6b55d44cbdba2c793ee6ed3fce05a1b53e96e4005c9004256d0b8d3f16c86c"
+      "sourceHash": "11690dcaf29e6a1d2bee9d23ed87855d3c7f27ef39a103b419f327b7b3ab3d7e",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 73,
@@ -817,7 +834,7 @@
         ]
       ],
       "call": "setZeroes(matrix)",
-      "code": "class Solution {\n    public void setZeroes(int[][] matrix) {\n        int m = matrix.length;\n        int n = matrix[0].length;\n        boolean firstRow = false;\n        boolean firstCol = false;\n        for (int j = 0; j < n; j++) {\n            if (matrix[0][j] == 0) {\n                firstRow = true;\n            }\n        }\n        for (int i = 0; i < m; i++) {\n            if (matrix[i][0] == 0) {\n                firstCol = true;\n            }\n        }\n        for (int i = 1; i < m; i++) {\n            for (int j = 1; j < n; j++) {\n                if (matrix[i][j] == 0) { // 标记阶段只写第一行、第一列\n                    matrix[i][0] = 0;\n                    matrix[0][j] = 0;\n                }\n            }\n        }\n        for (int i = 1; i < m; i++) {\n            for (int j = 1; j < n; j++) {\n                if (matrix[i][0] == 0 || matrix[0][j] == 0) {\n                    matrix[i][j] = 0;\n                }\n            }\n        }\n        if (firstRow) {\n            for (int j = 0; j < n; j++) {\n                matrix[0][j] = 0;\n            }\n        }\n        if (firstCol) {\n            for (int i = 0; i < m; i++) {\n                matrix[i][0] = 0;\n            }\n        }\n    }\n}",
+      "code": "class Solution {\n    public void setZeroes(int[][] matrix) {\n        // 结果直接写回matrix，先标记原有的0，再统一清零\n        int m = matrix.length;\n        int n = matrix[0].length;\n        boolean firstRow = false;\n        boolean firstCol = false;\n        for (int j = 0; j < n; j++) {\n            if (matrix[0][j] == 0) {\n                firstRow = true;\n            }\n        }\n        for (int i = 0; i < m; i++) {\n            if (matrix[i][0] == 0) {\n                firstCol = true;\n            }\n        }\n        for (int i = 1; i < m; i++) {\n            for (int j = 1; j < n; j++) {\n                if (matrix[i][j] == 0) { // 标记阶段只写第一行、第一列\n                    matrix[i][0] = 0;\n                    matrix[0][j] = 0;\n                }\n            }\n        }\n        for (int i = 1; i < m; i++) {\n            for (int j = 1; j < n; j++) {\n                if (matrix[i][0] == 0 || matrix[0][j] == 0) {\n                    matrix[i][j] = 0;\n                }\n            }\n        }\n        if (firstRow) {\n            for (int j = 0; j < n; j++) {\n                matrix[0][j] = 0;\n            }\n        }\n        if (firstCol) {\n            for (int i = 0; i < m; i++) {\n                matrix[i][0] = 0;\n            }\n        }\n    }\n}",
       "compare": "初次理解可用row[m]和col[n]两个标记数组，O(m+n)额外空间；主解只是把标记借放到矩阵边界，并用两个布尔值保留边界原状态。",
       "title": "矩阵置零",
       "english": "Set Matrix Zeroes",
@@ -830,9 +847,10 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/array/LC0073SetMatrixZeroes.java",
       "mainClass": "leetcode.array.LC0073SetMatrixZeroes",
-      "adapted": "    static class Solution {\n        public void setZeroes(int[][] matrix) {\n            int m = matrix.length;\n            int n = matrix[0].length;\n            boolean firstRow = false;\n            boolean firstCol = false;\n            for (int j = 0; j < n; j++) {\n                if (matrix[0][j] == 0) {\n                    firstRow = true;\n                }\n            }\n            for (int i = 0; i < m; i++) {\n                if (matrix[i][0] == 0) {\n                    firstCol = true;\n                }\n            }\n            for (int i = 1; i < m; i++) {\n                for (int j = 1; j < n; j++) {\n                    if (matrix[i][j] == 0) { // 标记阶段只写第一行、第一列\n                        matrix[i][0] = 0;\n                        matrix[0][j] = 0;\n                    }\n                }\n            }\n            for (int i = 1; i < m; i++) {\n                for (int j = 1; j < n; j++) {\n                    if (matrix[i][0] == 0 || matrix[0][j] == 0) {\n                        matrix[i][j] = 0;\n                    }\n                }\n            }\n            if (firstRow) {\n                for (int j = 0; j < n; j++) {\n                    matrix[0][j] = 0;\n                }\n            }\n            if (firstCol) {\n                for (int i = 0; i < m; i++) {\n                    matrix[i][0] = 0;\n                }\n            }\n        }\n    }",
+      "adapted": "    static class Solution {\n        public void setZeroes(int[][] matrix) {\n            // 结果直接写回matrix，先标记原有的0，再统一清零\n            int m = matrix.length;\n            int n = matrix[0].length;\n            boolean firstRow = false;\n            boolean firstCol = false;\n            for (int j = 0; j < n; j++) {\n                if (matrix[0][j] == 0) {\n                    firstRow = true;\n                }\n            }\n            for (int i = 0; i < m; i++) {\n                if (matrix[i][0] == 0) {\n                    firstCol = true;\n                }\n            }\n            for (int i = 1; i < m; i++) {\n                for (int j = 1; j < n; j++) {\n                    if (matrix[i][j] == 0) { // 标记阶段只写第一行、第一列\n                        matrix[i][0] = 0;\n                        matrix[0][j] = 0;\n                    }\n                }\n            }\n            for (int i = 1; i < m; i++) {\n                for (int j = 1; j < n; j++) {\n                    if (matrix[i][0] == 0 || matrix[0][j] == 0) {\n                        matrix[i][j] = 0;\n                    }\n                }\n            }\n            if (firstRow) {\n                for (int j = 0; j < n; j++) {\n                    matrix[0][j] = 0;\n                }\n            }\n            if (firstCol) {\n                for (int i = 0; i < m; i++) {\n                    matrix[i][0] = 0;\n                }\n            }\n        }\n    }",
       "displayStart": 48,
-      "sourceHash": "f97fa0e35cb50013c7291f4b599872cbb52506fe1df2e00bde9b8bf4adce4bc9"
+      "sourceHash": "ae524c043c0aa843c49ac2770fe14be5b65a42d9af0de7d176020e5af196d426",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 54,
@@ -842,7 +860,7 @@
         "读上边后top++，读右边后right--；接着读下边前检查是否还有行，读左边前检查是否还有列。",
         "每个角点在前一条边读过后就被边界收缩排除，剩余单行或单列不会重复访问。"
       ],
-      "state": "top、bottom、left、right都是闭区间边界；result依次保存已经访问的元素。",
+      "state": "top、bottom、left、right都是闭区间边界；res依次保存已经访问的元素。",
       "walk": "matrix=[[1,2,3],[4,5,6],[7,8,9]]\n上边1,2,3，top=1；右边6,9，right=1\n下边8,7，bottom=1；左边4，left=1\n剩中心5，返回[1,2,3,6,9,8,7,4,5]。",
       "pitfall": "读下边和左边之前需要重新检查边界，尤其是1×n、m×1矩阵；矩阵不一定是正方形。",
       "complexity": "时间O(mn)，额外空间O(1)，另计O(mn)结果列表。",
@@ -877,7 +895,7 @@
         5
       ],
       "call": "spiralOrder(matrix)",
-      "code": "import java.util.*;\n\nclass Solution {\n    public List<Integer> spiralOrder(int[][] matrix) {\n        List<Integer> result = new ArrayList<>();\n        if (matrix.length == 0 || matrix[0].length == 0) {\n            return result;\n        }\n        int top = 0;\n        int bottom = matrix.length - 1;\n        int left = 0;\n        int right = matrix[0].length - 1;\n        while (top <= bottom && left <= right) {\n            for (int col = left; col <= right; col++) {\n                result.add(matrix[top][col]);\n            }\n            top++;\n            for (int row = top; row <= bottom; row++) {\n                result.add(matrix[row][right]);\n            }\n            right--;\n            if (top <= bottom) { // 仍有未读行，才走下边\n                for (int col = right; col >= left; col--) {\n                    result.add(matrix[bottom][col]);\n                }\n                bottom--;\n            }\n            if (left <= right) { // 仍有未读列，才走左边\n                for (int row = bottom; row >= top; row--) {\n                    result.add(matrix[row][left]);\n                }\n                left++;\n            }\n        }\n        return result;\n    }\n}",
+      "code": "import java.util.*;\n\nclass Solution {\n    public List<Integer> spiralOrder(int[][] matrix) {\n        List<Integer> res = new ArrayList<>(); // 按螺旋访问顺序依次加入元素\n        if (matrix.length == 0 || matrix[0].length == 0) {\n            return res;\n        }\n        int top = 0;\n        int bottom = matrix.length - 1;\n        int left = 0;\n        int right = matrix[0].length - 1;\n        while (top <= bottom && left <= right) {\n            for (int col = left; col <= right; col++) {\n                res.add(matrix[top][col]);\n            }\n            top++;\n            for (int row = top; row <= bottom; row++) {\n                res.add(matrix[row][right]);\n            }\n            right--;\n            if (top <= bottom) { // 仍有未读行，才走下边\n                for (int col = right; col >= left; col--) {\n                    res.add(matrix[bottom][col]);\n                }\n                bottom--;\n            }\n            if (left <= right) { // 仍有未读列，才走左边\n                for (int row = bottom; row >= top; row--) {\n                    res.add(matrix[row][left]);\n                }\n                left++;\n            }\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "螺旋矩阵",
       "english": "Spiral Matrix",
@@ -885,14 +903,15 @@
       "group": "矩阵",
       "order": 19,
       "page_slug": "hot100-0054-spiral-matrix",
-      "provenance": "沿用总笔记中本题的主解。",
+      "provenance": "沿用总笔记中本题的算法思路，代码按结果先定义、逐步填入的方式展开。",
       "input": "matrix=[[1,2,3],[4,5,6],[7,8,9]]",
       "test_source": "总笔记同题实例",
       "javaFile": "src/main/java/leetcode/array/LC0054SpiralMatrix.java",
       "mainClass": "leetcode.array.LC0054SpiralMatrix",
-      "adapted": "    static class Solution {\n        public List<Integer> spiralOrder(int[][] matrix) {\n            List<Integer> result = new ArrayList<>();\n            if (matrix.length == 0 || matrix[0].length == 0) {\n                return result;\n            }\n            int top = 0;\n            int bottom = matrix.length - 1;\n            int left = 0;\n            int right = matrix[0].length - 1;\n            while (top <= bottom && left <= right) {\n                for (int col = left; col <= right; col++) {\n                    result.add(matrix[top][col]);\n                }\n                top++;\n                for (int row = top; row <= bottom; row++) {\n                    result.add(matrix[row][right]);\n                }\n                right--;\n                if (top <= bottom) { // 仍有未读行，才走下边\n                    for (int col = right; col >= left; col--) {\n                        result.add(matrix[bottom][col]);\n                    }\n                    bottom--;\n                }\n                if (left <= right) { // 仍有未读列，才走左边\n                    for (int row = bottom; row >= top; row--) {\n                        result.add(matrix[row][left]);\n                    }\n                    left++;\n                }\n            }\n            return result;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public List<Integer> spiralOrder(int[][] matrix) {\n            List<Integer> res = new ArrayList<>(); // 按螺旋访问顺序依次加入元素\n            if (matrix.length == 0 || matrix[0].length == 0) {\n                return res;\n            }\n            int top = 0;\n            int bottom = matrix.length - 1;\n            int left = 0;\n            int right = matrix[0].length - 1;\n            while (top <= bottom && left <= right) {\n                for (int col = left; col <= right; col++) {\n                    res.add(matrix[top][col]);\n                }\n                top++;\n                for (int row = top; row <= bottom; row++) {\n                    res.add(matrix[row][right]);\n                }\n                right--;\n                if (top <= bottom) { // 仍有未读行，才走下边\n                    for (int col = right; col >= left; col--) {\n                        res.add(matrix[bottom][col]);\n                    }\n                    bottom--;\n                }\n                if (left <= right) { // 仍有未读列，才走左边\n                    for (int row = bottom; row >= top; row--) {\n                        res.add(matrix[row][left]);\n                    }\n                    left++;\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 23,
-      "sourceHash": "6f9960b9479bab6a4d4780370933e886f5226622706639f9ac818988803884d5"
+      "sourceHash": "4637a7a7f267914dc6cd8d730abcc092648628f0291f2b8565164ee6da808a5d",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 48,
@@ -943,7 +962,7 @@
         ]
       ],
       "call": "rotate(matrix)",
-      "code": "class Solution {\n    public void rotate(int[][] matrix) {\n        int n = matrix.length;\n        for (int i = 0; i < n; i++) {\n            for (int j = i + 1; j < n; j++) { // 每对对称位置只交换一次\n                int temp = matrix[i][j];\n                matrix[i][j] = matrix[j][i];\n                matrix[j][i] = temp;\n            }\n        }\n        for (int row = 0; row < n; row++) {\n            int left = 0;\n            int right = n - 1;\n            while (left < right) {\n                int temp = matrix[row][left];\n                matrix[row][left] = matrix[row][right];\n                matrix[row][right] = temp;\n                left++;\n                right--;\n            }\n        }\n    }\n}",
+      "code": "class Solution {\n    public void rotate(int[][] matrix) {\n        // 结果直接写回matrix：先转置，再左右反转每一行\n        int n = matrix.length;\n        for (int i = 0; i < n; i++) {\n            for (int j = i + 1; j < n; j++) { // 每对对称位置只交换一次\n                int temp = matrix[i][j];\n                matrix[i][j] = matrix[j][i];\n                matrix[j][i] = temp;\n            }\n        }\n        // 转置完成后，逐行交换左右两端\n        for (int row = 0; row < n; row++) {\n            int left = 0;\n            int right = n - 1;\n            while (left < right) {\n                int temp = matrix[row][left];\n                matrix[row][left] = matrix[row][right];\n                matrix[row][right] = temp;\n                left++;\n                right--;\n            }\n        }\n    }\n}",
       "compare": "",
       "title": "旋转图像",
       "english": "Rotate Image",
@@ -956,10 +975,12 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/array/LC0048RotateImage.java",
       "mainClass": "leetcode.array.LC0048RotateImage",
-      "adapted": "    static class Solution {\n        public void rotate(int[][] matrix) {\n            int n = matrix.length;\n            for (int i = 0; i < n; i++) {\n                for (int j = i + 1; j < n; j++) { // 每对对称位置只交换一次\n                    int temp = matrix[i][j];\n                    matrix[i][j] = matrix[j][i];\n                    matrix[j][i] = temp;\n                }\n            }\n            for (int row = 0; row < n; row++) {\n                int left = 0;\n                int right = n - 1;\n                while (left < right) {\n                    int temp = matrix[row][left];\n                    matrix[row][left] = matrix[row][right];\n                    matrix[row][right] = temp;\n                    left++;\n                    right--;\n                }\n            }\n        }\n    }",
+      "adapted": "    static class Solution {\n        public void rotate(int[][] matrix) {\n            // 结果直接写回matrix：先转置，再左右反转每一行\n            int n = matrix.length;\n            for (int i = 0; i < n; i++) {\n                for (int j = i + 1; j < n; j++) { // 每对对称位置只交换一次\n                    int temp = matrix[i][j];\n                    matrix[i][j] = matrix[j][i];\n                    matrix[j][i] = temp;\n                }\n            }\n            // 转置完成后，逐行交换左右两端\n            for (int row = 0; row < n; row++) {\n                int left = 0;\n                int right = n - 1;\n                while (left < right) {\n                    int temp = matrix[row][left];\n                    matrix[row][left] = matrix[row][right];\n                    matrix[row][right] = temp;\n                    left++;\n                    right--;\n                }\n            }\n        }\n    }",
       "displayStart": 48,
-      "sourceHash": "536923e51bf2967d73060d2217ee4d401b2285d75fc20e3ad3ab612ca7cd83cb"
+      "sourceHash": "b5142354b354d7f0c98791abcb314f4baa8ab43583634a5b976fbe9b3c55ac6c",
+      "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     }
   ],
-  "target_revision": 8
+  "target_revision": 79,
+  "style_revision": "2026-11-03 explicit result flow"
 }

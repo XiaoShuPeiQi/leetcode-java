@@ -22,6 +22,43 @@ public class LC0054SpiralMatrix {
 
     static class Solution {
         public List<Integer> spiralOrder(int[][] matrix) {
+            List<Integer> res = new ArrayList<>(); // 按螺旋访问顺序依次加入元素
+            if (matrix.length == 0 || matrix[0].length == 0) {
+                return res;
+            }
+            int top = 0;
+            int bottom = matrix.length - 1;
+            int left = 0;
+            int right = matrix[0].length - 1;
+            while (top <= bottom && left <= right) {
+                for (int col = left; col <= right; col++) {
+                    res.add(matrix[top][col]);
+                }
+                top++;
+                for (int row = top; row <= bottom; row++) {
+                    res.add(matrix[row][right]);
+                }
+                right--;
+                if (top <= bottom) { // 仍有未读行，才走下边
+                    for (int col = right; col >= left; col--) {
+                        res.add(matrix[bottom][col]);
+                    }
+                    bottom--;
+                }
+                if (left <= right) { // 仍有未读列，才走左边
+                    for (int row = bottom; row >= top; row--) {
+                        res.add(matrix[row][left]);
+                    }
+                    left++;
+                }
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public List<Integer> spiralOrder(int[][] matrix) {
             List<Integer> result = new ArrayList<>();
             if (matrix.length == 0 || matrix[0].length == 0) {
                 return result;

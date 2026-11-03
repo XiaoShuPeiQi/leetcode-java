@@ -46,6 +46,31 @@ public class LC0003LongestSubstringWithoutRepeatingCharacters {
 
     static class Solution {
         public int lengthOfLongestSubstring(String s) {
+            int res = 0; // 保存最长无重复子串的长度
+            Set<Character> set = new HashSet<>();
+            int left = 0;
+
+            for (int right = 0; right < s.length(); right++) {
+                char c = s.charAt(right);
+                while (set.contains(c)) { // 一直缩到旧的同字符离开窗口
+                    char removed = s.charAt(left);
+                    set.remove(removed);
+                    left++;
+                }
+                set.add(c);
+
+                int length = right - left + 1; // 此时窗口已经没有重复字符
+                if (length > res) {
+                    res = length;
+                }
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public int lengthOfLongestSubstring(String s) {
             Set<Character> set = new HashSet<>();
             int left = 0;
             int result = 0;

@@ -47,6 +47,52 @@ public class LC0073SetMatrixZeroes {
 
     static class Solution {
         public void setZeroes(int[][] matrix) {
+            // 结果直接写回matrix，先标记原有的0，再统一清零
+            int m = matrix.length;
+            int n = matrix[0].length;
+            boolean firstRow = false;
+            boolean firstCol = false;
+            for (int j = 0; j < n; j++) {
+                if (matrix[0][j] == 0) {
+                    firstRow = true;
+                }
+            }
+            for (int i = 0; i < m; i++) {
+                if (matrix[i][0] == 0) {
+                    firstCol = true;
+                }
+            }
+            for (int i = 1; i < m; i++) {
+                for (int j = 1; j < n; j++) {
+                    if (matrix[i][j] == 0) { // 标记阶段只写第一行、第一列
+                        matrix[i][0] = 0;
+                        matrix[0][j] = 0;
+                    }
+                }
+            }
+            for (int i = 1; i < m; i++) {
+                for (int j = 1; j < n; j++) {
+                    if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                        matrix[i][j] = 0;
+                    }
+                }
+            }
+            if (firstRow) {
+                for (int j = 0; j < n; j++) {
+                    matrix[0][j] = 0;
+                }
+            }
+            if (firstCol) {
+                for (int i = 0; i < m; i++) {
+                    matrix[i][0] = 0;
+                }
+            }
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public void setZeroes(int[][] matrix) {
             int m = matrix.length;
             int n = matrix[0].length;
             boolean firstRow = false;

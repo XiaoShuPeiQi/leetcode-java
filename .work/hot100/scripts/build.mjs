@@ -52,6 +52,7 @@ if(!home.includes('data-chapter="Hot100"'))home=home.replace('<button data-chapt
 home=home.replace(/id="problem-count">\d+/,`id="problem-count">${catalog.length}`).replace(/id="all-count">\d+/,`id="all-count">${catalog.length}`).replace(/id="chapter-count">\d+/,`id="chapter-count">${String(new Set(catalog.map(p=>p.chapter)).size).padStart(2,'0')}`);
 fs.writeFileSync('docs/index.html',home);
 let player=fs.readFileSync('docs/assets/array-player.js','utf8').replaceAll('window.ARRAY_TRACE','window.HOT100_TRACE').replaceAll("encodeURIComponent('数组')","encodeURIComponent('Hot100')").replace('ARRAY / ${String(data.id).padStart(4,\'0\')} · 数组','HOT100 / ${String(data.order).padStart(2,\'0\')} / 20 · ${esc(data.group)} · ${String(data.id).padStart(4,\'0\')}');
+player=player.replace('result=event.complete?ret:vars.result','result=event.complete?ret:vars.res??vars.result');
 player=player.replace("let keys=['left','right','mid','slow','fast','write','i','j','start','end'];","let keys=['left','right','mid','slow','fast','write','i','j','start','end','target'];\n if(data.id===238)keys=['i'];");
 player=player.replace("const chars=[...new Set(Array.from(data.inputObject.t||''))];","const chars=[...new Set(Array.from(data.inputObject.t||data.inputObject.p||''))];");
 player=player.replace("value[c.charCodeAt(0)]","value[c.charCodeAt(0)-(data.id===438?97:0)]");

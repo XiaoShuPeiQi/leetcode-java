@@ -47,6 +47,31 @@ public class LC0438FindAllAnagramsInAString {
 
     static class Solution {
         public List<Integer> findAnagrams(String s, String p) {
+            List<Integer> res = new ArrayList<>(); // 保存每个匹配窗口的起始下标
+            int[] need = new int[26];
+            int[] window = new int[26];
+            for (int i = 0; i < p.length(); i++) {
+                need[p.charAt(i) - 'a']++;
+            }
+            int left = 0;
+            for (int right = 0; right < s.length(); right++) {
+                window[s.charAt(right) - 'a']++;
+                if (right - left + 1 > p.length()) { // 固定窗口只移走一个最左字符
+                    window[s.charAt(left) - 'a']--;
+                    left++;
+                }
+                boolean sameCounts = Arrays.equals(need, window);
+                if (right - left + 1 == p.length() && sameCounts) {
+                    res.add(left); // 当前窗口的左端就是一个答案下标
+                }
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public List<Integer> findAnagrams(String s, String p) {
             List<Integer> result = new ArrayList<>();
             int[] need = new int[26];
             int[] window = new int[26];

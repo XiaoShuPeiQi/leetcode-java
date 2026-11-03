@@ -46,6 +46,25 @@ public class LC0238ProductOfArrayExceptSelf {
 
     static class Solution {
         public int[] productExceptSelf(int[] nums) {
+            int[] res = new int[nums.length]; // res[i]最终保存除nums[i]外的全部元素乘积
+            int leftProduct = 1;
+            for (int i = 0; i < nums.length; i++) {
+                res[i] = leftProduct; // 先写入左侧乘积，此时不包含nums[i]
+                leftProduct *= nums[i];
+            }
+
+            int rightProduct = 1;
+            for (int i = nums.length - 1; i >= 0; i--) {
+                res[i] = res[i] * rightProduct; // 左侧乘积再乘右侧乘积
+                rightProduct *= nums[i];
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public int[] productExceptSelf(int[] nums) {
             int[] result = new int[nums.length];
             int left = 1;
             for (int i = 0; i < nums.length; i++) {

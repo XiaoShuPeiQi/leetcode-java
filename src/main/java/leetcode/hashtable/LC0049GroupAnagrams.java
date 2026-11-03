@@ -46,6 +46,32 @@ public class LC0049GroupAnagrams {
 
     static class Solution {
         public List<List<String>> groupAnagrams(String[] strs) {
+            List<List<String>> res = new ArrayList<>(); // 保存最终的各组单词
+            Map<String, List<String>> map = new HashMap<>();
+
+            for (String str : strs) {
+                char[] chars = str.toCharArray();
+                Arrays.sort(chars);
+                String key = new String(chars);
+
+                if (!map.containsKey(key)) { // 第一次遇到这个key，先创建一组
+                    List<String> group = new ArrayList<>();
+                    map.put(key, group);
+                }
+                List<String> group = map.get(key);
+                group.add(str); // 把原单词放入对应分组
+            }
+
+            for (List<String> group : map.values()) {
+                res.add(group);
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public List<List<String>> groupAnagrams(String[] strs) {
             Map<String, List<String>> map = new HashMap<>();
             for (String str : strs) {
                 char[] chars = str.toCharArray();

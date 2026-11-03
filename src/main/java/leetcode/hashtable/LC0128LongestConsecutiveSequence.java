@@ -46,6 +46,34 @@ public class LC0128LongestConsecutiveSequence {
 
     static class Solution {
         public int longestConsecutive(int[] nums) {
+            int res = 0; // 保存已经找到的最长连续段长度
+            Set<Integer> set = new HashSet<>();
+            for (int num : nums) {
+                set.add(num);
+            }
+
+            for (int num : set) {
+                if (set.contains(num - 1)) { // 有前驱就不是起点，避免重复扫描同一段
+                    continue;
+                }
+
+                int current = num;
+                int length = 1;
+                while (set.contains(current + 1)) {
+                    current++;
+                    length++;
+                }
+                if (length > res) {
+                    res = length;
+                }
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public int longestConsecutive(int[] nums) {
             Set<Integer> set = new HashSet<>();
             for (int num : nums) {
                 set.add(num);

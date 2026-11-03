@@ -47,6 +47,36 @@ public class LC0239SlidingWindowMaximum {
 
     static class Solution {
         public int[] maxSlidingWindow(int[] nums, int k) {
+            int[] res = new int[nums.length - k + 1]; // 每个完整窗口对应一个答案
+            int write = 0;
+            Deque<Integer> deque = new ArrayDeque<>();
+
+            for (int right = 0; right < nums.length; right++) {
+                int left = right - k + 1;
+
+                // 队首按下标判断是否已经离开窗口
+                while (!deque.isEmpty() && deque.peekFirst() < left) {
+                    deque.pollFirst();
+                }
+                // 队尾按数值淘汰旧候选：新数更大或相等，且过期更晚
+                while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[right]) {
+                    deque.pollLast();
+                }
+                deque.offerLast(right);
+
+                if (left >= 0) { // 窗口凑满k个元素后，才向结果数组写入
+                    int maxIndex = deque.peekFirst();
+                    res[write] = nums[maxIndex];
+                    write++;
+                }
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public int[] maxSlidingWindow(int[] nums, int k) {
             int[] result = new int[nums.length - k + 1];
             Deque<Integer> deque = new ArrayDeque<>();
 

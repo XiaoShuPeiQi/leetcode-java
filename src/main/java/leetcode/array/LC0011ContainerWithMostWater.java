@@ -46,6 +46,32 @@ public class LC0011ContainerWithMostWater {
 
     static class Solution {
         public int maxArea(int[] height) {
+            int res = 0; // 保存最大容积
+            int left = 0;
+            int right = height.length - 1;
+
+            while (left < right) {
+                int shorterHeight = Math.min(height[left], height[right]);
+                int width = right - left;
+                int area = shorterHeight * width;
+                if (area > res) {
+                    res = area;
+                }
+
+                // 面积受短板限制，移动短板才可能找到更大容积
+                if (height[left] <= height[right]) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public int maxArea(int[] height) {
             int left = 0;
             int right = height.length - 1;
             int result = 0;

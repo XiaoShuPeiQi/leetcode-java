@@ -23,6 +23,54 @@ public class LC0076MinimumWindowSubstring {
 
     static class Solution {
         public String minWindow(String s, String t) {
+            String res = ""; // 没有找到覆盖窗口时，答案就是空字符串
+            if (t.length() == 0 || s.length() < t.length()) {
+                return res;
+            }
+
+            int[] need = new int[128];
+            for (int i = 0; i < t.length(); i++) {
+                need[t.charAt(i)]++;
+            }
+            int missing = t.length();
+            int left = 0;
+            int bestStart = 0;
+            int bestLength = Integer.MAX_VALUE;
+
+            for (int right = 0; right < s.length(); right++) {
+                char added = s.charAt(right);
+                if (need[added] > 0) { // 加入前仍欠这个字符，才补掉一个缺口
+                    missing--;
+                }
+                need[added]--;
+
+                while (missing == 0) {
+                    int length = right - left + 1;
+                    if (length < bestLength) {
+                        bestStart = left;
+                        bestLength = length;
+                    }
+
+                    char removed = s.charAt(left);
+                    need[removed]++;
+                    if (need[removed] > 0) { // 移走后重新欠字符，窗口变为无效
+                        missing++;
+                    }
+                    left++;
+                }
+            }
+
+            if (bestLength != Integer.MAX_VALUE) {
+                int end = bestStart + bestLength;
+                res = s.substring(bestStart, end); // substring右端不包含end
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public String minWindow(String s, String t) {
             if (t.length() == 0 || s.length() < t.length()) {
                 return "";
             }

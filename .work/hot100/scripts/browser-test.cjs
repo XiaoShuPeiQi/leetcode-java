@@ -21,17 +21,19 @@ const url=p=>base?base+'/'+p:pathToFileURL(path.join(R,'docs',p)).href;
    const seek=async i=>page.locator('#progress').evaluate((el,i)=>{el.value=i;el.dispatchEvent(new Event('input',{bubbles:true}));},i);
    const snapshot=()=>page.evaluate(()=>['state','variables','stack'].map(id=>document.getElementById(id).innerHTML));
    const initial=await snapshot();await page.locator('#next').click();await page.locator('#prev').click();assert.deepEqual(await snapshot(),initial);
-   const max=Number(await page.locator('#progress').getAttribute('max'));let matrix=0,pointers=0,changed=0,hash=0;
+   const max=Number(await page.locator('#progress').getAttribute('max'));let matrix=0,pointers=0,changed=0,hash=0,resultStates=0;
    for(let i=0;i<=max;i++){
     await seek(i);assert.equal(await page.locator('.code-line.current').count(),1);
-    const n=await page.evaluate(()=>({matrix:document.querySelectorAll('.matrix').length,pointers:document.querySelectorAll('.pointer').length,changed:document.querySelectorAll('.changed').length,hash:document.getElementById('state').innerText.includes('键 → 值')}));
+    const n=await page.evaluate(()=>{const p=ExecutionSteps.create(HOT100_TRACE),step=HOT100_TRACE.steps[p.stops[Number(document.getElementById('progress').value)]],vars=HOT100_TRACE.pool[step.frames].at(-1).vars;return {matrix:document.querySelectorAll('.matrix').length,pointers:document.querySelectorAll('.pointer').length,changed:document.querySelectorAll('.changed').length,hash:document.getElementById('state').innerText.includes('键 → 值'),hasRes:Object.hasOwn(vars,'res'),result:document.getElementById('result').innerText};});
     matrix+=n.matrix;pointers+=n.pointers;changed+=n.changed;hash+=n.hash;
+    if(n.hasRes){assert.notEqual(n.result.trim(),'—',p.id+' result state should show res');resultStates++;}
    }
    assert((await page.locator('#result').innerText()).includes('PASS'));
    if([48,54,73].includes(p.id))assert(matrix>0,p.id+' missing matrix');
    if([283,189,41,48,73].includes(p.id))assert(changed>0,p.id+' missing mutation');
    if([1,49,560].includes(p.id))assert(hash>0,p.id+' missing map');
    if([11,42].includes(p.id))assert.equal(await page.locator('.height-chart rect').count(),p.example.height.length);
+   if(![283,189,73,48].includes(p.id))assert(resultStates>0,p.id+' missing explicit result variable');
    for(const theme of ['light','dark']){
     await page.evaluate(t=>{localStorage.setItem('zhan-classroom-theme',t);location.reload();},theme);await page.locator('.code-line.current').waitFor();
     const font=await page.locator('.code-line code').first().evaluate(el=>({family:getComputedStyle(el).fontFamily,weight:getComputedStyle(el).fontWeight}));assert(Number(font.weight)>=600);assert(font.family.includes('Microsoft YaHei'));
@@ -52,7 +54,7 @@ const url=p=>base?base+'/'+p:pathToFileURL(path.join(R,'docs',p)).href;
    await page.setViewportSize({width:390,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),p.id+' mobile overflow');
    if(p.id===73)await page.screenshot({path:path.join(previews,'preview-mobile.png'),fullPage:true});
    await page.setViewportSize({width:1440,height:1050});
-   reports.push({id:p.id,stops:max+1,matrix,pointers,changed,hash,playback:'PASS',breakpoint:'PASS',themes:'PASS',resize:'PASS',mobile:'PASS'});console.log(p.id+' PASS '+(max+1)+' visible stops');
+   reports.push({id:p.id,stops:max+1,matrix,pointers,changed,hash,resultStates,playback:'PASS',breakpoint:'PASS',themes:'PASS',resize:'PASS',mobile:'PASS'});console.log(p.id+' PASS '+(max+1)+' visible stops');
   }
   assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);
   const result={status:'PASS',base:base||'local files',problems:reports,pageErrors:errors,httpFailures:failed};

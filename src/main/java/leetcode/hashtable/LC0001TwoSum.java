@@ -23,6 +23,26 @@ public class LC0001TwoSum {
 
     static class Solution {
         public int[] twoSum(int[] nums, int target) {
+            int[] res = new int[2]; // res[0]和res[1]分别保存两个数的下标
+            Map<Integer, Integer> map = new HashMap<>();
+
+            for (int i = 0; i < nums.length; i++) {
+                int temp = target - nums[i];
+                if (map.containsKey(temp)) {
+                    res[0] = map.get(temp); // 之前那个数的下标
+                    res[1] = i;            // 当前数的下标
+                } else {
+                    map.put(nums[i], i); // 没找到配对时，记录当前数供后面查询
+                }
+            }
+
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public int[] twoSum(int[] nums, int target) {
             Map<Integer, Integer> map = new HashMap<>();
             for (int i = 0; i < nums.length; i++) {
                 int need = target - nums[i];

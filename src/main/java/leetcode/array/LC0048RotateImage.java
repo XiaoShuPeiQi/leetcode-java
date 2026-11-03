@@ -47,6 +47,33 @@ public class LC0048RotateImage {
 
     static class Solution {
         public void rotate(int[][] matrix) {
+            // 结果直接写回matrix：先转置，再左右反转每一行
+            int n = matrix.length;
+            for (int i = 0; i < n; i++) {
+                for (int j = i + 1; j < n; j++) { // 每对对称位置只交换一次
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
+                }
+            }
+            // 转置完成后，逐行交换左右两端
+            for (int row = 0; row < n; row++) {
+                int left = 0;
+                int right = n - 1;
+                while (left < right) {
+                    int temp = matrix[row][left];
+                    matrix[row][left] = matrix[row][right];
+                    matrix[row][right] = temp;
+                    left++;
+                    right--;
+                }
+            }
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public void rotate(int[][] matrix) {
             int n = matrix.length;
             for (int i = 0; i < n; i++) {
                 for (int j = i + 1; j < n; j++) { // 每对对称位置只交换一次

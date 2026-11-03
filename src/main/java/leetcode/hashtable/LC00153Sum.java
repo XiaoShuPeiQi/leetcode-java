@@ -22,6 +22,50 @@ public class LC00153Sum {
 
     static class Solution {
         public List<List<Integer>> threeSum(int[] nums) {
+            List<List<Integer>> res = new ArrayList<>(); // 每个内部列表保存一个三元组
+            Arrays.sort(nums);
+            for (int i = 0; i < nums.length - 2; i++) {
+                if (nums[i] > 0) {
+                    break;
+                }
+                // 同一层固定值只处理一次，仍允许一组中有相同数值。
+                if (i > 0 && nums[i] == nums[i - 1]) {
+                    continue;
+                }
+
+                int left = i + 1;
+                int right = nums.length - 1;
+                while (left < right) {
+                    long sum = (long) nums[i] + nums[left] + nums[right];
+                    if (sum < 0) {
+                        left++;
+                    } else if (sum > 0) {
+                        right--;
+                    } else {
+                        List<Integer> triple = new ArrayList<>();
+                        triple.add(nums[i]);
+                        triple.add(nums[left]);
+                        triple.add(nums[right]);
+                        res.add(triple);
+                        // 先保存，再跨过相同的左右值。
+                        while (left < right && nums[left] == nums[left + 1]) {
+                            left++;
+                        }
+                        while (left < right && nums[right] == nums[right - 1]) {
+                            right--;
+                        }
+                        left++;
+                        right--;
+                    }
+                }
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public List<List<Integer>> threeSum(int[] nums) {
             List<List<Integer>> result = new ArrayList<>();
             Arrays.sort(nums);
             for (int i = 0; i < nums.length - 2; i++) {

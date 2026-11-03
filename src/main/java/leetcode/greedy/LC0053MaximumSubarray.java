@@ -28,6 +28,25 @@ public class LC0053MaximumSubarray {
     // 保留飞书当前Solution类体，只增加static和一层缩进。
     static class Solution {
         public int maxSubArray(int[] nums) {
+            int res = nums[0]; // 必须选非空子数组，全负数组也能得到正确答案
+            int sum = 0;
+
+            for (int num : nums) {
+                sum += num;
+                if (sum > res) {
+                    res = sum;
+                }
+                if (sum < 0) { // 先记录答案，再丢掉会拖累后面元素的负前缀
+                    sum = 0;
+                }
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public int maxSubArray(int[] nums) {
             int sum = 0;
             int result = nums[0];
             for (int num : nums) {

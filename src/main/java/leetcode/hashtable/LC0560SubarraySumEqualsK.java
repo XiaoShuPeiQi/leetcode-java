@@ -47,6 +47,28 @@ public class LC0560SubarraySumEqualsK {
 
     static class Solution {
         public int subarraySum(int[] nums, int k) {
+            int res = 0; // 保存和为k的非空子数组个数
+            Map<Integer, Integer> count = new HashMap<>();
+            count.put(0, 1); // 空前缀出现一次，使从下标0开始的区间也能被统计
+            int sum = 0;
+
+            for (int num : nums) {
+                sum += num;
+                int neededPrefix = sum - k;
+                int matchedCount = count.getOrDefault(neededPrefix, 0);
+                res += matchedCount; // 每一个匹配的旧前缀，都对应一个合法区间
+
+                // 先统计答案，再记录当前前缀，避免k=0时把空区间计入
+                int oldCount = count.getOrDefault(sum, 0);
+                count.put(sum, oldCount + 1);
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public int subarraySum(int[] nums, int k) {
             Map<Integer, Integer> count = new HashMap<>();
             count.put(0, 1); // 空前缀，让从下标0开始的区间也能被统计
             int sum = 0;

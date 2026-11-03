@@ -48,6 +48,28 @@ public class LC0189RotateArray {
 
     static class Solution {
         public void rotate(int[] nums, int k) {
+            // 结果直接写回nums，三次反转完成右移
+            k %= nums.length;
+            // 整体反转后分别恢复两段内部顺序，AB变成BA
+            reverse(nums, 0, nums.length - 1); // 先反转整个数组
+            reverse(nums, 0, k - 1); // 恢复前k个元素的顺序
+            reverse(nums, k, nums.length - 1); // 恢复剩余元素的顺序
+        }
+
+        private void reverse(int[] nums, int left, int right) {
+            while (left < right) {
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public void rotate(int[] nums, int k) {
             k %= nums.length;
             // 整体反转后分别恢复两段内部顺序，AB变成BA
             reverse(nums, 0, nums.length - 1);

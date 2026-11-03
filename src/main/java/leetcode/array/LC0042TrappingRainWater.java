@@ -46,6 +46,33 @@ public class LC0042TrappingRainWater {
 
     static class Solution {
         public int trap(int[] height) {
+            int res = 0; // 累加每一列的接水量
+            int left = 0;
+            int right = height.length - 1;
+            int leftMax = 0;
+            int rightMax = 0;
+
+            while (left <= right) {
+                leftMax = Math.max(leftMax, height[left]);
+                rightMax = Math.max(rightMax, height[right]);
+
+                if (leftMax <= rightMax) { // 右侧足够高，可以确定左侧这一列的水量
+                    int water = leftMax - height[left];
+                    res += water;
+                    left++;
+                } else {
+                    int water = rightMax - height[right];
+                    res += water;
+                    right--;
+                }
+            }
+            return res;
+        }
+    }
+
+    // 保留此前版本，便于对照；main和Hot100调试器使用上方的清晰写法。
+    static class SolutionOriginal {
+        public int trap(int[] height) {
             int left = 0;
             int right = height.length - 1;
             int leftMax = 0;
