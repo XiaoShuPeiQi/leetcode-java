@@ -494,6 +494,6 @@ node .work/hot100/scripts/build.mjs
 node .work/hot100/scripts/browser-test.cjs
 ```
 
-线上验收：[GitHub Pages部署](https://github.com/XiaoShuPeiQi/leetcode-java/actions/runs/41562588298)成功，20/20页面通过浏览器交互检查，[49个线上文件](outputs/Hot100-线上资源验收.json)与部署源码逐字节一致；[线上浏览器记录](outputs/Hot100-线上浏览器验收.json)覆盖全部页面。
+线上验收：[GitHub Pages部署](https://github.com/XiaoShuPeiQi/leetcode-java/actions/runs/41565371093)成功，20/20页面通过浏览器交互检查，[49个线上文件](outputs/Hot100-线上资源验收.json)与部署源码逐字节一致；[线上浏览器记录](outputs/Hot100-线上浏览器验收.json)覆盖全部页面。
 
 本轮按用户给出的第一题示例统一展开结果流程：先定义`res`，再逐步填入，最后返回；原地修改题说明结果写回输入。分组创建、二维结果裁剪、写入下标与下标递增分别书写，并重新录制20题的Java轨迹。项目主程序默认使用新写法，旧实现保留为`SolutionOriginal`，便于对照。
