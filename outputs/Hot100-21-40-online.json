@@ -1,0 +1,165 @@
+{
+  "base": "https://xiaoshupeiqi.github.io/leetcode-java",
+  "problems": [
+    {
+      "id": 240,
+      "visibleStops": 27,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 160,
+      "visibleStops": 57,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 206,
+      "visibleStops": 20,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 234,
+      "visibleStops": 48,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 141,
+      "visibleStops": 16,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 142,
+      "visibleStops": 22,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 21,
+      "visibleStops": 31,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 2,
+      "visibleStops": 39,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 19,
+      "visibleStops": 23,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 24,
+      "visibleStops": 19,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 25,
+      "visibleStops": 61,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 138,
+      "visibleStops": 17,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 148,
+      "visibleStops": 79,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 23,
+      "visibleStops": 74,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 146,
+      "visibleStops": 90,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 94,
+      "visibleStops": 48,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 104,
+      "visibleStops": 45,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 226,
+      "visibleStops": 66,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 101,
+      "visibleStops": 26,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 543,
+      "visibleStops": 41,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    }
+  ]
+}

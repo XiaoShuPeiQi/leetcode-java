@@ -502,10 +502,12 @@ node .work/hot100/scripts/browser-test.cjs
 
 ## Hot100 第 21–40 题（2026-11-09）
 
-[飞书题解](https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcn0QDBbVZVsTIdPnnCnlExQb) · [Markdown 笔记](docs/Hot100第21至40题.md) · [在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=Hot100)
+[飞书题解](https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcni4DI46nt3UoYGbGr1jmOEi) · [Markdown 笔记](docs/Hot100第21至40题.md) · [在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=Hot100)
 
 从「搜索二维矩阵 II」到「二叉树的直径」。沿用 10 道已有主解，新增 10 个 Java 入口。每道题都带可独立复制到力扣的 Java、数据结构说明和文字推演。20 个独立调试页使用与笔记相同的代表用例，展示矩阵位置、节点引用、堆内容和调用栈。
 
 [Java 编译与 JDI 录制](outputs/Hot100-21-40-capture.json) · [本地网页验收](outputs/Hot100-21-40-browser.json) · [飞书回读验收](outputs/Hot100-21-40-feishu.json)
+
+[GitHub Pages 部署](https://github.com/XiaoShuPeiQi/leetcode-java/actions/runs/42581281010) · [线上逐题验收](outputs/Hot100-21-40-online.json)
 
 在仓库根目录执行 `py -3.11 .work/hot100/scripts/capture-next.py <JDK17目录>` 录制，再用 `py -3.11 .work/hot100/scripts/build-next.py` 生成网页。
