@@ -9,7 +9,9 @@ const R=path.resolve(B,'../../..');
 process.chdir(R);
 const meta=JSON.parse(fs.readFileSync('imports/Hot100.import.json','utf8'));
 const context={window:{}};vm.runInNewContext(fs.readFileSync('docs/assets/catalog.js','utf8'),context);
-const original=context.window.CATALOG.filter(p=>p.chapter!=='Hot100'),catalog=[...original],reports=[];
+const original=context.window.CATALOG.filter(p=>p.chapter!=='Hot100');
+const later=context.window.CATALOG.filter(p=>p.chapter==='Hot100'&&p.order>20);
+const catalog=[...original],reports=[];
 function canonical(value,unordered){
  if(!Array.isArray(value))return JSON.stringify(value);
  const parts=value.map(x=>canonical(x,unordered));if(unordered)parts.sort();return '['+parts.join(',')+']';
@@ -45,13 +47,15 @@ for(const p of meta.problems){
  catalog.push({id:p.id,title:p.title,english:p.english,chapter:'Hot100',order:p.order,input:p.input,source:meta.target_url,url:'problems/'+p.page_slug+'/',complete:true});
  reports.push({id:p.id,title:p.title,steps:steps.length,calls:calls.length,bytes:fs.statSync(dir+'/trace.js').size,...data.validation});
 }
-assert.equal(catalog.length,original.length+20);assert.equal(new Set(catalog.map(p=>p.url)).size,catalog.length);
+assert.equal(catalog.length,original.length+20);
+catalog.push(...later);
+assert.equal(new Set(catalog.map(p=>p.url)).size,catalog.length);
 fs.writeFileSync('docs/assets/catalog.js','window.CATALOG = '+JSON.stringify(catalog).replace(/</g,'\\u003c')+';\n');
 let home=fs.readFileSync('docs/index.html','utf8');
 if(!home.includes('data-chapter="Hot100"'))home=home.replace('<button data-chapter="数组">','<button data-chapter="Hot100">Hot100 · 前20题</button><button data-chapter="数组">');
 home=home.replace(/id="problem-count">\d+/,`id="problem-count">${catalog.length}`).replace(/id="all-count">\d+/,`id="all-count">${catalog.length}`).replace(/id="chapter-count">\d+/,`id="chapter-count">${String(new Set(catalog.map(p=>p.chapter)).size).padStart(2,'0')}`);
 fs.writeFileSync('docs/index.html',home);
-let player=fs.readFileSync('docs/assets/array-player.js','utf8').replaceAll('window.ARRAY_TRACE','window.HOT100_TRACE').replaceAll("encodeURIComponent('数组')","encodeURIComponent('Hot100')").replace('ARRAY / ${String(data.id).padStart(4,\'0\')} · 数组','HOT100 / ${String(data.order).padStart(2,\'0\')} / 20 · ${esc(data.group)} · ${String(data.id).padStart(4,\'0\')}');
+let player=fs.readFileSync('docs/assets/array-player.js','utf8').replaceAll('window.ARRAY_TRACE','window.HOT100_TRACE').replaceAll("encodeURIComponent('数组')","encodeURIComponent('Hot100')").replace('ARRAY / ${String(data.id).padStart(4,\'0\')} · 数组','HOT100 / ${String(data.order).padStart(2,\'0\')} / ${data.order>20?40:20} · ${esc(data.group)} · ${String(data.id).padStart(4,\'0\')}');
 player=player.replace('result=event.complete?ret:vars.result','result=event.complete?ret:vars.res??vars.result');
 player=player.replace("let keys=['left','right','mid','slow','fast','write','i','j','start','end'];","let keys=['left','right','mid','slow','fast','write','i','j','start','end','target'];\n if(data.id===238)keys=['i'];");
 player=player.replace("const chars=[...new Set(Array.from(data.inputObject.t||''))];","const chars=[...new Set(Array.from(data.inputObject.t||data.inputObject.p||''))];");
@@ -70,6 +74,8 @@ player=player.replace("function drawState(step,vars){",`function heightChart(val
 function drawState(step,vars){`);
 player=player.replace("function view(name,value,original=false){","if([11,42].includes(data.id))html+=heightChart(data.inputObject.height,vars);\n function view(name,value,original=false){");
 player=player.replace("let html='<p class=\"state-caption array-meaning\">'", "let html='<p class=\"state-caption array-meaning\">'");
+player=player.replace('function drawState(step,vars){', "function drawState(step,vars){\n if(window.Hot100Structures?.draw($('state'), data, heap, vars, data.pool[step.roots]))return;");
+player=player.replace('const active=refs.some(([row,col])=>row===i&&col===j);','const active=refs.some(([row,col])=>row===i&&col===j)||(data.id===240&&vars.row===i&&vars.col===j);');
 fs.writeFileSync('docs/assets/hot100-player.js',player);
 fs.writeFileSync('docs/assets/hot100-player.css','.height-chart{display:block;width:100%;max-height:250px;margin:12px 0 20px;font:11px "Microsoft YaHei",sans-serif;fill:var(--ink)}.state-cell small{overflow-wrap:anywhere;max-width:140px}.state-array{row-gap:30px}\n');
 let homeCss=fs.readFileSync('docs/assets/home.css','utf8');

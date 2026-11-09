@@ -499,3 +499,13 @@ node .work/hot100/scripts/browser-test.cjs
 本轮按用户给出的第一题示例统一展开结果流程：先定义`res`，再逐步填入，最后返回；原地修改题说明结果写回输入。分组创建、二维结果裁剪、写入下标与下标递增分别书写，并重新录制20题的Java轨迹。项目主程序默认使用新写法，旧实现保留为`SolutionOriginal`，便于对照。
 
 按用户的直接用值写法复查前20题：简化10题中只用于转存的临时变量，最长连续序列直接递增`num`；保留交换、累计、窗口边界和结果写入所需变量。同步更新Java、笔记与飞书代码块，重新录制真实JDI轨迹；2,845组Java对照测试及20页本地、线上交互验收通过。逐题检查记录见[变量简化验收](outputs/Hot100-变量简化验收.json)。
+
+## Hot100 第 21–40 题（2026-11-09）
+
+[飞书题解](https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcn0QDBbVZVsTIdPnnCnlExQb) · [Markdown 笔记](docs/Hot100第21至40题.md) · [在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=Hot100)
+
+从「搜索二维矩阵 II」到「二叉树的直径」。沿用 10 道已有主解，新增 10 个 Java 入口。每道题都带可独立复制到力扣的 Java、数据结构说明和文字推演。20 个独立调试页使用与笔记相同的代表用例，展示矩阵位置、节点引用、堆内容和调用栈。
+
+[Java 编译与 JDI 录制](outputs/Hot100-21-40-capture.json) · [本地网页验收](outputs/Hot100-21-40-browser.json) · [飞书回读验收](outputs/Hot100-21-40-feishu.json)
+
+在仓库根目录执行 `py -3.11 .work/hot100/scripts/capture-next.py <JDK17目录>` 录制，再用 `py -3.11 .work/hot100/scripts/build-next.py` 生成网页。

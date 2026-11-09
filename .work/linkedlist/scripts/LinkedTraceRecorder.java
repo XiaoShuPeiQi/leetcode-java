@@ -26,7 +26,9 @@ public class LinkedTraceRecorder {
         Thread out = new Thread(() -> copy(process.getInputStream(), stdout));
         Thread err = new Thread(() -> copy(process.getErrorStream(), stderr));
         out.start(); err.start();
-        String filter = className + (className.endsWith("DesignLinkedList") ? "$MyLinkedList" : "$Solution");
+        String solution = args.length > 3 ? args[3]
+                : className.endsWith("DesignLinkedList") ? "MyLinkedList" : "Solution";
+        String filter = className + "$" + solution;
         EventRequestManager requests = vm.eventRequestManager();
         ClassPrepareRequest prepare = requests.createClassPrepareRequest();
         prepare.addClassFilter(filter); prepare.setSuspendPolicy(EventRequest.SUSPEND_ALL); prepare.enable();
@@ -76,7 +78,7 @@ public class LinkedTraceRecorder {
                             if (!frame.location().declaringType().name().equals(className)
                                     || !frame.location().method().name().equals("runSolution")) continue;
                             for (LocalVariable local : frame.visibleVariables()) {
-                                if (!local.name().equals("actual"))
+                                if (!Set.of("actual", "expected", "solution").contains(local.name()))
                                     roots.put(local.name(), value(frame.getValue(local), 0));
                             }
                         }
@@ -149,6 +151,14 @@ public class LinkedTraceRecorder {
             byte[] bytes = new byte[count << coder];
             for (int i = 0; i < bytes.length; i++) bytes[i] = ((ByteValue) array.getValue(i)).value();
             result = new String(bytes, coder == 0 ? StandardCharsets.ISO_8859_1 : StandardCharsets.UTF_16LE);
+        } else if (type.equals("java.util.PriorityQueue")) {
+            List<Object> values = new ArrayList<>();
+            cache.put(id, values);
+            ArrayReference array = (ArrayReference) field(object, "queue");
+            for (Value item : array.getValues(0, integer(field(object, "size")))) {
+                values.add(value(item, depth + 1));
+            }
+            result = values;
         } else if (type.equals("java.util.ArrayDeque")) {
             List<Object> values = new ArrayList<>(); cache.put(id, values);
             ArrayReference array = (ArrayReference) field(object, "elements");
@@ -171,7 +181,8 @@ public class LinkedTraceRecorder {
             result = value(field(object, "map"), depth + 1);
         } else if (Set.of("java.lang.Integer", "java.lang.Long", "java.lang.Boolean", "java.lang.Character", "java.lang.Double").contains(type)) {
             result = value(field(object, "value"), depth + 1);
-        } else if (type.equals("common.ListNode") || type.startsWith("leetcode.linkedlist.")) {
+        } else if (type.equals("common.ListNode") || type.equals("common.TreeNode")
+                || type.startsWith("leetcode.linkedlist.")) {
             result = Map.of("$ref", id); cache.put(id, result);
             Map<String, Object> fields = new LinkedHashMap<>();
             fields.put("$type", type); heap.put(Long.toString(id), fields);

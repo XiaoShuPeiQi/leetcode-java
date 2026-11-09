@@ -10,8 +10,8 @@ const url=p=>base?base+'/'+p:pathToFileURL(path.join(R,'docs',p)).href;
  const page=await browser.newPage({viewport:{width:1440,height:1050}}),errors=[],failed=[],reports=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)failed.push(r.url());});
  try{
-  await page.goto(url('index.html')+'?chapter=Hot100');assert.equal(await page.locator('.card').count(),20);
-  const titles=await page.locator('.card h3').allTextContents();assert.deepEqual(titles,meta.problems.map(p=>p.title));
+  await page.goto(url('index.html')+'?chapter=Hot100');assert.ok(await page.locator('.card').count() >= meta.problems.length);
+  const titles=await page.locator('.card h3').allTextContents();assert.deepEqual(titles.slice(0,meta.problems.length),meta.problems.map(p=>p.title));
   await page.locator('#search').fill('438');assert.equal(await page.locator('.card').count(),1);await page.locator('#search').fill('');
   await page.setViewportSize({width:390,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.setViewportSize({width:1440,height:1050});
   for(const p of meta.problems){
