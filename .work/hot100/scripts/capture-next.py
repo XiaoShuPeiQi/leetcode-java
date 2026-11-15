@@ -8,11 +8,12 @@ import sys
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parents[3]
 JDK = Path(sys.argv[1])
-TMP = ROOT / ".work/hot100/next-tmp"
+SECTION = sys.argv[2] if len(sys.argv) > 2 else "21-40"
+TMP = ROOT / (".work/hot100/next-tmp" if SECTION == "21-40" else f".work/hot100/{SECTION}-tmp")
 TMP.mkdir(parents=True, exist_ok=True)
 BIN = ROOT / "bin"
 BIN.mkdir(exist_ok=True)
-problems = json.loads((ROOT / "imports/Hot100-21-40.import.json").read_text(encoding="utf8"))["problems"]
+problems = json.loads((ROOT / f"imports/Hot100-{SECTION}.import.json").read_text(encoding="utf8"))["problems"]
 
 
 def run(args, cwd=ROOT):
@@ -38,7 +39,7 @@ def capture(p):
     if "ListNode" in p["code"]:
         stub = "class ListNode { int val; ListNode next; ListNode(int v){val=v;} ListNode(int v,ListNode n){val=v;next=n;} }"
     elif "TreeNode" in p["code"]:
-        stub = "class TreeNode { int val; TreeNode left,right; }"
+        stub = "class TreeNode { int val; TreeNode left,right; TreeNode(int v){val=v;} }"
     elif id == 138:
         stub = "class Node { int val; Node next,random; Node(int v){val=v;} }"
     solution.write_text(p["code"]+"\n"+stub+"\n", encoding="utf8")

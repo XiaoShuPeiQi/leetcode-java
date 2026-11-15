@@ -10,8 +10,10 @@ import sys
 sys.stdout.reconfigure(encoding="utf-8")
 R = Path(__file__).resolve().parents[3]
 D = R / "docs"
-T = R / ".work/hot100/next-tmp"
-meta = json.loads((R / "imports/Hot100-21-40.import.json").read_text(encoding="utf8"))
+SECTION = sys.argv[1] if len(sys.argv) > 1 else "21-40"
+first, last = map(int, SECTION.split("-"))
+T = R / (".work/hot100/next-tmp" if SECTION == "21-40" else f".work/hot100/{SECTION}-tmp")
+meta = json.loads((R / f"imports/Hot100-{SECTION}.import.json").read_text(encoding="utf8"))
 checks = {p["id"]: p for p in json.loads((T / "capture.json").read_text(encoding="utf8"))}
 catalog_path = D / "assets/catalog.js"
 
@@ -28,7 +30,8 @@ def write_js(path, name, data):
     write(path, f"window.{name} = " + json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c") + ";\n")
 
 
-catalog = [p for p in read_js(catalog_path) if not (p["chapter"] == "Hot100" and p.get("order", 0) > 20)]
+catalog = [p for p in read_js(catalog_path)
+           if not (p["chapter"] == "Hot100" and first <= p.get("order", 0) <= last)]
 template = (D / "problems/hot100-0001-two-sum/index.html").read_text(encoding="utf8")
 for p in meta["problems"]:
     id = p["id"]
@@ -70,12 +73,12 @@ for p in meta["problems"]:
         kind = ("enter" if phase == "enter" else "return" if phase == "exit" or "return " in statement
                 else "condition" if re.search(r"\b(if|while)\b", statement) else "loop" if "for (" in statement
                 else "modify" if re.search(r"\+\+|--|\s=\s|\.add\(|\.put\(", statement) else "statement")
-        node_ids.update(k for k, v in event["heap"].items() if "val" in v)
+        node_ids.update(k for k, v in event["heap"].items() if "val" in v or "children" in v)
         steps.append(dict(line=line, kind=kind, phase=phase, method=event["method"],
                           frames=intern(stack), heap=intern(event["heap"]), roots=intern(event["roots"]),
                           active=active, returnValue=intern(event["returnValue"]) if "returnValue" in event else -1))
     assert raw[-1]["kind"] == "exit" and all("returned" in c for c in calls)
-    assert bool(node_ids) == (id != 240)
+    assert bool(node_ids) == (p["group"] in {"链表", "二叉树"} or id == 208)
     assert len(steps) == checks[id]["events"]
     data = dict(id=id, title=p["title"], english=p["english"], chapter="Hot100", order=p["order"],
                 group=p["group"], slug=p["page_slug"], input=p["input"], inputObject={}, source=meta["target_url"],
@@ -94,13 +97,14 @@ for p in meta["problems"]:
     catalog.append(dict(id=id, title=p["title"], english=p["english"], chapter="Hot100", order=p["order"],
                         input=p["input"], source=meta["target_url"], url="problems/"+p["page_slug"]+"/", complete=True))
 
-hot100 = [p for p in catalog if p["chapter"] == "Hot100"]
-assert [p["order"] for p in hot100] == list(range(1,41))
+hot100 = sorted((p for p in catalog if p["chapter"] == "Hot100"), key=lambda p: p["order"])
+assert [p["order"] for p in hot100] == list(range(1,len(hot100)+1))
+catalog = [p for p in catalog if p["chapter"] != "Hot100"] + hot100
 assert len({p["url"] for p in catalog}) == len(catalog)
 write_js(catalog_path, "CATALOG", catalog)
-home = (D / "index.html").read_text(encoding="utf8").replace("Hot100 · 前20题", "Hot100 · 前40题")
+home = re.sub(r"Hot100 · 前\d+题", f"Hot100 · 前{len(hot100)}题", (D / "index.html").read_text(encoding="utf8"))
 for id in ("problem-count", "all-count"):
     home = re.sub(f'(id="{id}">)\\d+', lambda m: m[1]+str(len(catalog)), home)
 write(D / "index.html", home)
-write(R / "outputs/Hot100-21-40-capture.json", json.dumps(list(checks.values()), ensure_ascii=False, indent=2)+"\n")
+write(R / f"outputs/Hot100-{SECTION}-capture.json", json.dumps(list(checks.values()), ensure_ascii=False, indent=2)+"\n")
 print("Built 20 debugger pages.", sum(p["events"] for p in checks.values()), "JDI events.")

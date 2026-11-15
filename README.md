@@ -511,3 +511,13 @@ node .work/hot100/scripts/browser-test.cjs
 [GitHub Pages 部署](https://github.com/XiaoShuPeiQi/leetcode-java/actions/runs/42581281010) · [线上逐题验收](outputs/Hot100-21-40-online.json)
 
 在仓库根目录执行 `py -3.11 .work/hot100/scripts/capture-next.py <JDK17目录>` 录制，再用 `py -3.11 .work/hot100/scripts/build-next.py` 生成网页。
+
+## Hot100 第 41–60 题
+
+从「二叉树的层序遍历」到「单词搜索」。沿用 10 道已有主解，新增 10 个 Java 入口。中序遍历统一按左、根、右处理。岛屿数量和腐烂的橘子沿用相同的四方向坐标和入队标记。括号生成沿用电话号码字母组合的选择、递归和撤销写法。
+
+[飞书题解](https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcntqhap9kh4Bib4NWqWSKP7f) · [Markdown 笔记](docs/Hot100第41至60题.md) · [在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=Hot100)
+
+20 个调试页回放与笔记一致的 Java 示例。可查看树节点引用、Trie 词尾、网格状态、队列和回溯路径。[Java 编译与 JDI 录制](outputs/Hot100-41-60-capture.json) · [本地浏览器验收](outputs/Hot100-41-60-browser.json) · [飞书回读验收](outputs/Hot100-41-60-feishu.json)
+
+在仓库根目录执行 `py -3.11 .work/hot100/scripts/capture-next.py <JDK17目录> 41-60` 录制，再执行 `py -3.11 .work/hot100/scripts/build-next.py 41-60` 生成网页。

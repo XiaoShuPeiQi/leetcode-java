@@ -5,7 +5,11 @@ const {pathToFileURL} = require('node:url');
 const {chromium} = require(path.join(process.env.CODEX_TEST_MODULES, 'playwright'));
 
 const root = path.resolve(__dirname, '../../..');
-const problems = JSON.parse(fs.readFileSync(path.join(root, 'imports/Hot100-21-40.import.json'), 'utf8')).problems;
+const section = process.argv[2] || '21-40';
+const problems = JSON.parse(fs.readFileSync(path.join(root, 'imports/Hot100-'+section+'.import.json'), 'utf8')).problems;
+const catalog = {window:{}};
+require('node:vm').runInNewContext(fs.readFileSync(path.join(root,'docs/assets/catalog.js'),'utf8'),catalog);
+const hot100 = catalog.window.CATALOG.filter(p=>p.chapter==='Hot100');
 const base = process.env.PREVIEW_URL;
 const url = rel => base ? base + '/' + rel : pathToFileURL(path.join(root, 'docs', rel)).href;
 
@@ -18,11 +22,14 @@ const url = rel => base ? base + '/' + rel : pathToFileURL(path.join(root, 'docs
  page.on('response', response => {if(response.status() >= 400) errors.push(response.status() + ' ' + response.url());});
  try {
   await page.goto(url('index.html') + '?chapter=Hot100');
-  assert.equal(await page.locator('.card').count(), 40);
-  assert.deepEqual((await page.locator('.card h3').allTextContents()).slice(20), problems.map(p => p.title));
+  assert.equal(await page.locator('.card').count(), hot100.length);
+  assert.deepEqual((await page.locator('.card h3').allTextContents()).slice(problems[0].order-1,problems.at(-1).order),problems.map(p=>p.title));
   for (const p of problems) {
    await page.goto(url('problems/' + p.page_slug + '/index.html'));
    await page.locator('.code-line.current').waitFor();
+   const traceFile=fs.readFileSync(path.join(root,'docs/problems',p.page_slug,'trace.js'),'utf8');
+   const trace=JSON.parse(traceFile.slice(traceFile.indexOf('=')+1).trim().replace(/;$/,''));
+   assert.deepEqual(await page.evaluate(()=>window.HOT100_TRACE),trace);
    assert.match(await page.locator('.eyebrow').textContent(), new RegExp(String(p.order)));
    const progress = page.locator('#progress');
    const max = Number(await progress.getAttribute('max'));
@@ -51,11 +58,12 @@ const url = rel => base ? base + '/' + rel : pathToFileURL(path.join(root, 'docs
    await seek(max);
    assert.match(await page.locator('#result').textContent(), /PASS/);
    assert.ok((await page.locator('#result').textContent()).includes(p.expected), p.id);
-   if (p.id === 240) assert.ok(await page.locator('#state .matrix-cell').count() > 0);
-   else assert.ok(await page.locator('#state [data-node]').count() > 0, p.id);
+   if ([240,200,994,79].includes(p.id)) assert.ok(await page.locator('#state .matrix-cell').count() > 0);
+   if (trace.nodeIds.length) assert.ok(await page.locator('#state [data-node]').count() > 0, p.id);
    if (p.id === 138) assert.ok(await page.locator('[data-edge=random]').count() > 0);
    if (p.id === 146) assert.ok(await page.locator('[data-edge=prev]').count() > 0);
-   if (p.id === 240 || p.id === 146 || p.id === 543) {
+   if (p.id === 208) assert.ok(await page.locator('[data-word-end=true]').count() >= 2);
+   if ([240,146,543,105,208,79].includes(p.id)) {
     await page.setViewportSize({width:390,height:844});
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth+1), p.id);
     await page.setViewportSize({width:1440,height:1000});
@@ -67,6 +75,6 @@ const url = rel => base ? base + '/' + rel : pathToFileURL(path.join(root, 'docs
  } finally {
   await browser.close();
  }
- const file = path.join(root, 'outputs', base ? 'Hot100-21-40-online.json' : 'Hot100-21-40-browser.json');
+ const file = path.join(root, 'outputs', 'Hot100-'+section+(base ? '-online.json' : '-browser.json'));
  fs.writeFileSync(file, JSON.stringify({base:base||'local', problems:report},null,2)+'\n');
 })().catch(error => {console.error(error); process.exitCode=1;});

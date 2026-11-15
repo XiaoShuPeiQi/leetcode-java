@@ -78,7 +78,7 @@ public class LinkedTraceRecorder {
                             if (!frame.location().declaringType().name().equals(className)
                                     || !frame.location().method().name().equals("runSolution")) continue;
                             for (LocalVariable local : frame.visibleVariables()) {
-                                if (!Set.of("actual", "expected", "solution").contains(local.name()))
+                                if (!Set.of("actual", "expected", "solution", "trie").contains(local.name()))
                                     roots.put(local.name(), value(frame.getValue(local), 0));
                             }
                         }
@@ -182,7 +182,8 @@ public class LinkedTraceRecorder {
         } else if (Set.of("java.lang.Integer", "java.lang.Long", "java.lang.Boolean", "java.lang.Character", "java.lang.Double").contains(type)) {
             result = value(field(object, "value"), depth + 1);
         } else if (type.equals("common.ListNode") || type.equals("common.TreeNode")
-                || type.startsWith("leetcode.linkedlist.")) {
+                || type.startsWith("leetcode.linkedlist.")
+                || type.equals("leetcode.graph.LC0208ImplementTriePrefixTree$Trie$Node")) {
             result = Map.of("$ref", id); cache.put(id, result);
             Map<String, Object> fields = new LinkedHashMap<>();
             fields.put("$type", type); heap.put(Long.toString(id), fields);

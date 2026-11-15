@@ -48,7 +48,44 @@
   return `M${a} ${b} Q${(x + tx)/2} ${(y + ty)/2 + lift} ${c} ${d}`;
  }
 
+ function drawTrie(container, data, heap, vars) {
+  const nodes = [], edges = [];
+  let leaf = 0;
+  function visit(id, depth, letter) {
+   const entry = heap[id];
+   if (!entry) return null;
+   const children = entry.children.flatMap((child, index) => {
+    const target = ref(child);
+    if (!target) return [];
+    const position = visit(target, depth + 1, String.fromCharCode(97 + index));
+    return position ? [position] : [];
+   });
+   const x = children.length ? (children[0].x + children.at(-1).x) / 2 : 70 + leaf++ * 100;
+   const y = 35 + depth * 60;
+   const position = {id, letter, x, y, end:entry.end};
+   nodes.push(position);
+   children.forEach(child=>edges.push([position,child]));
+   return position;
+  }
+  visit(ref(vars.root),0,'根');
+  if (!nodes.length) return false;
+  const width = Math.max(230,...nodes.map(node=>node.x+70));
+  const height = Math.max(...nodes.map(node=>node.y+40));
+  const lines = edges.map(([a,b])=>`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="var(--muted)" stroke-width="2"/>`).join('');
+  const marks = nodes.map(node=>{
+   const active = node.id === ref(vars.node);
+   return `<g data-node="${node.id}"${node.end?' data-word-end="true"':''}><circle cx="${node.x}" cy="${node.y}" r="19" fill="${active?'var(--canvas-active)':'var(--canvas-fill)'}" stroke="var(--accent)" stroke-width="${node.end?4:1}"/><text x="${node.x}" y="${node.y+5}" text-anchor="middle">${node.letter}</text></g>`;
+  }).join('');
+  const query = vars.word ?? vars.text ?? vars.prefix;
+  container.innerHTML = '<p class="state-caption">'+esc(data.stateMeaning)+'</p>'+
+   `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="前缀树和词尾标记">${lines}${marks}</svg>`+
+   '<p class="state-caption">粗边框表示完整单词在该节点结束。高亮表示当前节点。'+
+   (query===undefined?'':' 当前字符串 '+esc(query)+'。')+'</p>';
+  return true;
+ }
+
  function draw(container, data, heap, vars, roots = {}) {
+  if (data.id === 208) return drawTrie(container, data, heap, vars);
   if (!data.nodeIds?.length) return false;
   const ids = data.nodeIds.filter(id => heap[id] && Object.hasOwn(heap[id], 'val'));
   if (!ids.length) return false;
