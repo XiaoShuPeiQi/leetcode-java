@@ -196,7 +196,9 @@
       },
       "expectedValue": 6,
       "test_source": "飞书贪心章节实例走过程（revision 87）",
-      "sourceHash": "0a4c7c75f9eedc990c716f2f31246273e4a604fae581c07f9d36f688e15c4775"
+      "sourceHash": "a26cb5440f5909535b79c8d925836ff64ed98c6add94cbed8891137440b5365b",
+      "trace_java": "class Solution {\n    public int maxSubArray(int[] nums) {\n        int res = nums[0]; // 必须选非空子数组，全负数组也能得到正确答案\n        int sum = 0;\n\n        for (int num : nums) {\n            sum += num;\n            if (sum > res) {//注意顺序，这个先记录答案必须放在第一个\n                res = sum;\n            }\n            if (sum < 0) { // 先记录答案，再丢掉会拖累后面元素的负前缀\n                sum = 0;\n            }\n        }\n        return res;\n    }\n}",
+      "sourceStatus": "同题主解按 Hot100 飞书最新版录制。"
     },
     {
       "id": 122,
@@ -1122,7 +1124,9 @@
         ]
       ],
       "test_source": "飞书贪心章节实例走过程（revision 87）",
-      "sourceHash": "501efd5511e999cad92869c1fa4d179939d53929d72d44d4ffbce0dcb093d058"
+      "sourceHash": "1ffcfdaf0b9e8e50f894400c532ba4ca4970dcfcc02a1f45aa94cf501f9af682",
+      "trace_java": "import java.util.*;\n\nclass Solution {\n    public int[][] merge(int[][] intervals) {\n        int[][] res = new int[intervals.length][2]; // 最多产生n段，先分配足够的结果位置\n        int count = 0; // res中已经写好的区间个数\n        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n\n        for (int[] current : intervals) {\n            if (count == 0 || current[0] > res[count - 1][1]) {\n                res[count][0] = current[0]; // 没有重叠，写入一段新的区间\n                res[count][1] = current[1];\n                count++;\n            } else {\n                if (current[1] > res[count - 1][1]) { // 有重叠，只需要延长最后一段的右端\n                    res[count - 1][1] = current[1];\n                }\n            }\n        }\n\n        res = Arrays.copyOf(res, count); // 只保留已经写入的count段，去掉未使用的位置\n        return res;\n    }\n}",
+      "sourceStatus": "同题主解按 Hot100 飞书最新版录制。"
     },
     {
       "id": 738,

@@ -18,20 +18,22 @@ public class LC0148SortList {
 
     static class Solution {
         public ListNode sortList(ListNode head) {
+            //1.递归一部曲
             if (head == null || head.next == null) {
                 return head;
             }
             ListNode slow = head;
-            ListNode fast = head.next;
-            while (fast != null && fast.next != null) {
+            ListNode fast = head;
+            while (fast.next != null && fast.next.next != null) {
                 slow = slow.next;
                 fast = fast.next.next;
             }
             ListNode right = slow.next;
-            slow.next = null; // 分成两条独立的链，递归才会缩小规模
-            ListNode sortedLeft = sortList(head);
-            ListNode sortedRight = sortList(right);
-            return merge(sortedLeft, sortedRight);
+            slow.next = null;
+            //2.后序递归
+            ListNode leftLink = sortList(head);
+            ListNode rightLink = sortList(right);
+            return merge(leftLink, rightLink);
         }
 
         private ListNode merge(ListNode a, ListNode b) {

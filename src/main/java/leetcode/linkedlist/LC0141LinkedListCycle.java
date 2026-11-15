@@ -42,7 +42,7 @@ public class LC0141LinkedListCycle {
             ListNode fast = head;
             while (fast != null && fast.next != null) {
                 slow = slow.next;
-                fast = fast.next.next;
+                fast = fast.next.next;//允许fast.next.next为null
                 if (slow == fast) {
                     return true;
                 }

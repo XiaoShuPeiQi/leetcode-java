@@ -38,11 +38,10 @@ public class LC0076MinimumWindowSubstring {
             int bestLength = Integer.MAX_VALUE;
 
             for (int right = 0; right < s.length(); right++) {
-                char added = s.charAt(right);
-                if (need[added] > 0) { // 加入前仍欠这个字符，才补掉一个缺口
+                if (need[s.charAt(right)] > 0) { // 加入前仍欠这个字符，才补掉一个缺口
                     missing--;
                 }
-                need[added]--;
+                need[s.charAt(right)]--;
 
                 while (missing == 0) {
                     int length = right - left + 1;
@@ -51,9 +50,8 @@ public class LC0076MinimumWindowSubstring {
                         bestLength = length;
                     }
 
-                    char removed = s.charAt(left);
-                    need[removed]++;
-                    if (need[removed] > 0) { // 移走后重新欠字符，窗口变为无效
+                    need[s.charAt(left)]++;
+                    if (need[s.charAt(left)] > 0) { // 移走后重新欠字符，窗口变为无效
                         missing++;
                     }
                     left++;

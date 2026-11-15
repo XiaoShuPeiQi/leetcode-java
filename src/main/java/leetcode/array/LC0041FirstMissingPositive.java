@@ -50,6 +50,8 @@ public class LC0041FirstMissingPositive {
             int res = n + 1; // 1到n都存在时，答案就是n+1
 
             for (int i = 0; i < n; i++) {
+
+                //一定注意这里是while，直至这个位置正确
                 while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {
                     int target = nums[i] - 1; // 值x应该放到下标x-1；重复值已就位时停止
                     int temp = nums[target];

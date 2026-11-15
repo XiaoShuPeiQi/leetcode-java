@@ -29,7 +29,7 @@ for p in meta:
     assert all('returned' in c for c in calls)
     assert source_text.splitlines()[p['displayStart']-1:p['displayStart']-1+len(p['algorithm'].splitlines())]==p['algorithm'].splitlines()
     actual=re.search(r'Actual:\n(.*?)\nResult:',log,re.S)[1].strip();assert actual==p['expected']
-    data={**p,'source':source,'revision':metadata['revision_id'],'javaFile':p['javaFile'],'chapter':'链表','inputObject':p['example'],'testSource':'飞书链表revision 115的实例走过程；707为力扣官方示例，其余为讲解用例。','sourceStatus':'回放已核对的飞书链表revision 115主解；仅增加package、import、static与外层运行适配，算法逻辑不变。','sourceHash':hashlib.sha256(source_text.encode()).hexdigest(),'code':p['algorithm'].splitlines(),'actual':actual,'nodeIds':sorted(ids,key=int),'pool':pool,'steps':steps,'calls':calls}
+    data={**p,'source':source,'revision':metadata['revision_id'],'javaFile':p['javaFile'],'chapter':'链表','inputObject':p['example'],'testSource':'飞书链表revision 115的实例走过程；707为力扣官方示例，其余为讲解用例。','sourceStatus':p.get('sourceStatus','回放已核对的飞书链表revision 115主解；仅增加package、import、static与外层运行适配，算法逻辑不变。'),'sourceHash':hashlib.sha256(source_text.encode()).hexdigest(),'code':p['algorithm'].splitlines(),'actual':actual,'nodeIds':sorted(ids,key=int),'pool':pool,'steps':steps,'calls':calls}
     path=SITE/'problems'/p['slug'];path.mkdir(parents=True,exist_ok=True)
     assert not (path/'index.html').exists() or (path/'trace.js').exists(), 'Unexpected existing page'
     (path/'trace.js').write_text('window.LINKED_TRACE = '+json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')+';\n',encoding='utf-8')

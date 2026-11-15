@@ -9,12 +9,13 @@ const stringify=x=>JSON.stringify(x).replace(/</g,'\\u003c');
 const reports=[];
 for(const p of meta.problems){
  const source=fs.readFileSync(p.java_file,'utf8'),lines=source.split('\n');
- const original=p.source_java.slice(p.source_java.indexOf('class Solution')).replace('class Solution','static class Solution').split('\n').map(l=>l.trim()?'    '+l:'').join('\n');
+ const selected=p.trace_java??p.source_java;
+ const original=selected.slice(selected.indexOf('class Solution')).replace('class Solution','static class Solution').split('\n').map(l=>l.trim()?'    '+l:'').join('\n');
  assert(source.includes(original),p.id+' 必须保持飞书类体');
  const raw=fs.readFileSync('.work/greedy/tmp/trace-'+p.id+'.ndjson','utf8').trim().split('\n').map(JSON.parse);
  const log=fs.readFileSync('.work/greedy/tmp/trace-'+p.id+'.ndjson.stdout','utf8').replace(/\r/g,'');
  assert(log.includes('Result: PASS'));
- assert.deepEqual(raw.at(-1).returnValue,p.expectedValue,p.id+' 真实最终返回与预期不符');
+ assert.deepEqual(raw.at(-1).returnValue,p.trace_java?JSON.parse(p.expectedValue):p.expectedValue,p.id+' 真实最终返回与预期不符');
  const pool=[],lookup=new Map(),intern=value=>{const key=JSON.stringify(value);if(!lookup.has(key)){lookup.set(key,pool.length);pool.push(value);}return lookup.get(key);};
  const calls=[],byFrame=new Map(),steps=[],states={},cameraRefs=new Set();
  for(const e of raw){
@@ -38,7 +39,7 @@ for(const p of meta.problems){
  assert(calls.every(c=>c.returned!==undefined),p.id+' 调用进入返回必须平衡');
  const displayStart=source.slice(0,source.indexOf(original)).split('\n').length;
  const expected=log.match(/Expected:\n([\s\S]*?)\nActual:/)[1].trim(),actual=log.match(/Actual:\n([\s\S]*?)\nResult:/)[1].trim();
- const data={id:p.id,title:p.title,english:p.english,chapter:'贪心',slug:p.slug,input:p.input,inputObject:p.inputObject,source:meta.source_url,revision:meta.revision_id,javaFile:p.java_file,testSource:p.test_source,sourceStatus:'录制代码与2026-10-14读取的飞书Solution类体一致，只增加static与外层运行适配。',sourceHash:crypto.createHash('sha256').update(source).digest('hex'),code:original.split('\n'),displayStart,expected,actual,pool,steps,calls,validation:{java:'PASS',trace:'PASS',enter:calls.length,exit:calls.length}};
+ const data={id:p.id,title:p.title,english:p.english,chapter:'贪心',slug:p.slug,input:p.input,inputObject:p.inputObject,source:meta.source_url,revision:meta.revision_id,javaFile:p.java_file,testSource:p.test_source,sourceStatus:p.sourceStatus??'录制代码与2026-10-14读取的飞书Solution类体一致，只增加static与外层运行适配。',sourceHash:crypto.createHash('sha256').update(source).digest('hex'),code:original.split('\n'),displayStart,expected,actual,pool,steps,calls,validation:{java:'PASS',trace:'PASS',enter:calls.length,exit:calls.length}};
  const dir='docs/problems/'+p.slug;fs.mkdirSync(dir,{recursive:true});
  fs.writeFileSync(dir+'/trace.js','window.GREEDY_TRACE = '+stringify(data)+';\n');
  fs.writeFileSync(dir+'/index.html','<!doctype html>\n<html lang="zh-CN"><head><script src="../../assets/theme.js"></script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+p.id+' · '+p.title+' — 展老师小课堂</title><link rel="stylesheet" href="../../assets/player.css"><link rel="stylesheet" href="../../assets/stack-view.css"><link rel="stylesheet" href="../../assets/greedy-player.css"><link rel="stylesheet" href="../../assets/theme.css"><link rel="stylesheet" href="../../assets/code-style.css"><link rel="stylesheet" href="../../assets/panel-resize.css"></head><body><div id="app"></div><script src="trace.js"></script><script src="../../assets/execution-steps.js"></script><script src="../../assets/stack-view.js"></script><script src="../../assets/greedy-player.js"></script><script src="../../assets/code-style.js"></script><script src="../../assets/panel-resize.js"></script></body></html>\n');

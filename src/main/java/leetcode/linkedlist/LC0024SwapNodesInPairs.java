@@ -43,11 +43,13 @@ public class LC0024SwapNodesInPairs {
             ListNode pre = dummy;
             while (pre.next != null && pre.next.next != null) {
                 ListNode first = pre.next;
-                ListNode second = first.next;
+                ListNode second = pre.next.next;
+
                 pre.next = second;
                 first.next = second.next; // 在second改线前保住后缀
                 second.next = first;
-                pre = first; // 原first变为已交换部分的末尾
+
+                pre = pre.next.next;
             }
             return dummy.next;
         }

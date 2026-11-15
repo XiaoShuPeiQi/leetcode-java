@@ -26,7 +26,6 @@ public class LC0056MergeIntervals {
         public int[][] merge(int[][] intervals) {
             int[][] res = new int[intervals.length][2]; // 最多产生n段，先分配足够的结果位置
             int count = 0; // res中已经写好的区间个数
-            intervals = intervals.clone();
             Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
 
             for (int[] current : intervals) {

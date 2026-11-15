@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "java8": "E:\\myApps\\java\\jdk1.8.0_201",
+  "java8": "C:\\Program Files\\Java\\jdk1.8.0_341",
   "problems": [
     {
       "id": 1,
@@ -96,7 +96,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "6ed983dee49037ae90accee80753297eca4fd35f7be09bb6ddbeac1570243d74"
+      "code_sha256": "033b127031d689f2cc0c5b15725aea245be60182260f9e3b448f0b265f3b08db"
     },
     {
       "id": 53,
@@ -104,7 +104,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "a55ae6261f3f729a838dd62de61278b8e6818e0c6c1bd7e3effec6965d06bd1a"
+      "code_sha256": "1a9f27b545e6b34907c0cd99032dd345e14f17deb6b57036246c9e96212e21a0"
     },
     {
       "id": 56,
@@ -112,7 +112,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "b36c0f11a136b08a4088f42f14cde9bcc0330f114ec05a58a21c6098a9d4965f"
+      "code_sha256": "010910eb74eaa95e364105d3a59dc855a88c5e89ab15278a9fc56f8eb5cfc7f4"
     },
     {
       "id": 189,
@@ -136,7 +136,7 @@
       "compile": "PASS",
       "independentOracle": "PASS",
       "officialSignature": "PASS",
-      "code_sha256": "793bcf843722b2e82d880074705348f68e33729b4ee33dceee7fd9bcbaf286c5"
+      "code_sha256": "485cc04b954fd1b0d0fd249c2e2848c77c0339423d409e027780e7e4876dd23c"
     },
     {
       "id": 73,

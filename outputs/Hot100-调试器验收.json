@@ -125,9 +125,9 @@
     {
       "id": 76,
       "title": "最小覆盖子串",
-      "steps": 179,
+      "steps": 156,
       "calls": 1,
-      "bytes": 100778,
+      "bytes": 86197,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -138,7 +138,7 @@
       "title": "最大子数组和",
       "steps": 40,
       "calls": 1,
-      "bytes": 10535,
+      "bytes": 10639,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -147,9 +147,9 @@
     {
       "id": 56,
       "title": "合并区间",
-      "steps": 37,
+      "steps": 36,
       "calls": 4,
-      "bytes": 11370,
+      "bytes": 11072,
       "java": "PASS",
       "trace": "PASS",
       "enter": 4,
@@ -182,7 +182,7 @@
       "title": "缺失的第一个正数",
       "steps": 38,
       "calls": 1,
-      "bytes": 11043,
+      "bytes": 11120,
       "java": "PASS",
       "trace": "PASS",
       "enter": 1,
@@ -222,5 +222,5 @@
       "exit": 1
     }
   ],
-  "totalEvents": 1169
+  "totalEvents": 1145
 }

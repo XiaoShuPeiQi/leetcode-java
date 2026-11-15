@@ -39,17 +39,17 @@ public class LC0138CopyListWithRandomPointer {
 
     static class Solution {
         public Node copyRandomList(Node head) {
-            Map<Node, Node> copies = new HashMap<>();
+            HashMap<Node, Node> map = new HashMap<>();
             for (Node cur = head; cur != null; cur = cur.next) {
-                copies.put(cur, new Node(cur.val));
+                Node node = new Node(cur.val);
+                map.put(cur, node);
             }
             for (Node cur = head; cur != null; cur = cur.next) {
-                Node copy = copies.get(cur);
-                // 两条引用都翻译到复制链表，空引用查表仍为空
-                copy.next = copies.get(cur.next);
-                copy.random = copies.get(cur.random);
+                Node node = map.get(cur);
+                node.next = map.get(cur.next);
+                node.random = map.get(cur.random);
             }
-            return copies.get(head);
+            return map.get(head);
         }
     }
 }

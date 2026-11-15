@@ -506,13 +506,13 @@
     },
     {
       "id": 76,
-      "summary": "右端还清目标字符欠账后，连续缩左端，寻找最短有效窗口。",
+      "summary": "右端还清目标字符欠账后，连续缩左端，寻找最短有效窗口。右指针负责扩大窗口，直到满足要求；左指针负责缩小窗口，直到再缩就不满足要求。",
       "thinking": [
-        "沿用数组章节的欠账窗口主解：不是要求窗口无重复，而是要求覆盖t的所有字符及次数。",
-        "need[c]>0表示仍欠c，等于0表示恰好够，负数表示多余；missing是尚缺字符的总个数。",
-        "右端加入直到missing=0；每次缩左端之前记录答案，移走必需字符后窗口失效，再继续扩张。"
+        "欠账数组按字母存「目标所需次数 − 窗口已有次数」。另记总共还缺几个字符。",
+        "有欠账就向右找字母。凑齐后，先记录合法窗口，再从左边删一个。删到重新欠账时停止，继续向右找。",
+        "在 CAAB 里找 AAB。读到 B 才凑齐，去掉 C 得到更短的 AAB。再去掉一个 A 就会欠账，所以这一轮最短是 AAB。"
       ],
-      "state": "[left,right]是当前窗口；bestStart、bestLength保存最短有效窗口；missing按字符总数计，含重复次数。",
+      "state": "left 和 right 标记窗口两端，直接读取这两个位置的字符来更新欠账。右端字符加入前若仍欠账，missing 减一。左端字符移出后若重新欠账，missing 加一。bestStart 和 bestLength 保存目前最短的有效窗口。",
       "walk": "s=\"ADOBECODEBANC\", t=\"ABC\"\nright=5读C：ADOBEC首次覆盖，记录长度6\n移走A后失效；right=10读A后再次收缩\nright=12读C后连续移走多余字符，得到BANC，长度4\n再移走B会失效，返回BANC。",
       "pitfall": "更新最短答案要在有效窗口内、移走左字符之前；比较的是总次数，t=\"AABC\"需要两个A。",
       "complexity": "时间O(|s|+|t|)，题目英文字母范围下额外空间O(128)。",
@@ -522,7 +522,7 @@
       },
       "expectedValue": "BANC",
       "call": "minWindow(s, t)",
-      "code": "class Solution {\n    public String minWindow(String s, String t) {\n        String res = \"\"; // 没有找到覆盖窗口时，答案就是空字符串\n        if (t.length() == 0 || s.length() < t.length()) {\n            return res;\n        }\n\n        int[] need = new int[128];\n        for (int i = 0; i < t.length(); i++) {\n            need[t.charAt(i)]++;\n        }\n        int missing = t.length();\n        int left = 0;\n        int bestStart = 0;\n        int bestLength = Integer.MAX_VALUE;\n\n        for (int right = 0; right < s.length(); right++) {\n            char added = s.charAt(right);\n            if (need[added] > 0) { // 加入前仍欠这个字符，才补掉一个缺口\n                missing--;\n            }\n            need[added]--;\n\n            while (missing == 0) {\n                int length = right - left + 1;\n                if (length < bestLength) {\n                    bestStart = left;\n                    bestLength = length;\n                }\n\n                char removed = s.charAt(left);\n                need[removed]++;\n                if (need[removed] > 0) { // 移走后重新欠字符，窗口变为无效\n                    missing++;\n                }\n                left++;\n            }\n        }\n\n        if (bestLength != Integer.MAX_VALUE) {\n            res = s.substring(bestStart, bestStart + bestLength); // substring不包含右端位置\n        }\n        return res;\n    }\n}",
+      "code": "class Solution {\n    public String minWindow(String s, String t) {\n        String res = \"\"; // 没有找到覆盖窗口时，答案就是空字符串\n        if (t.length() == 0 || s.length() < t.length()) {\n            return res;\n        }\n\n        int[] need = new int[128];\n        for (int i = 0; i < t.length(); i++) {\n            need[t.charAt(i)]++;\n        }\n        int missing = t.length();\n        int left = 0;\n        int bestStart = 0;\n        int bestLength = Integer.MAX_VALUE;\n\n        for (int right = 0; right < s.length(); right++) {\n            if (need[s.charAt(right)] > 0) { // 加入前仍欠这个字符，才补掉一个缺口\n                missing--;\n            }\n            need[s.charAt(right)]--;\n\n            while (missing == 0) {\n                int length = right - left + 1;\n                if (length < bestLength) {\n                    bestStart = left;\n                    bestLength = length;\n                }\n\n                need[s.charAt(left)]++;\n                if (need[s.charAt(left)] > 0) { // 移走后重新欠字符，窗口变为无效\n                    missing++;\n                }\n                left++;\n            }\n        }\n\n        if (bestLength != Integer.MAX_VALUE) {\n            res = s.substring(bestStart, bestStart + bestLength); // substring不包含右端位置\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "最小覆盖子串",
       "english": "Minimum Window Substring",
@@ -535,20 +535,20 @@
       "test_source": "总笔记同题实例",
       "javaFile": "src/main/java/leetcode/array/LC0076MinimumWindowSubstring.java",
       "mainClass": "leetcode.array.LC0076MinimumWindowSubstring",
-      "adapted": "    static class Solution {\n        public String minWindow(String s, String t) {\n            String res = \"\"; // 没有找到覆盖窗口时，答案就是空字符串\n            if (t.length() == 0 || s.length() < t.length()) {\n                return res;\n            }\n\n            int[] need = new int[128];\n            for (int i = 0; i < t.length(); i++) {\n                need[t.charAt(i)]++;\n            }\n            int missing = t.length();\n            int left = 0;\n            int bestStart = 0;\n            int bestLength = Integer.MAX_VALUE;\n\n            for (int right = 0; right < s.length(); right++) {\n                char added = s.charAt(right);\n                if (need[added] > 0) { // 加入前仍欠这个字符，才补掉一个缺口\n                    missing--;\n                }\n                need[added]--;\n\n                while (missing == 0) {\n                    int length = right - left + 1;\n                    if (length < bestLength) {\n                        bestStart = left;\n                        bestLength = length;\n                    }\n\n                    char removed = s.charAt(left);\n                    need[removed]++;\n                    if (need[removed] > 0) { // 移走后重新欠字符，窗口变为无效\n                        missing++;\n                    }\n                    left++;\n                }\n            }\n\n            if (bestLength != Integer.MAX_VALUE) {\n                res = s.substring(bestStart, bestStart + bestLength); // substring不包含右端位置\n            }\n            return res;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public String minWindow(String s, String t) {\n            String res = \"\"; // 没有找到覆盖窗口时，答案就是空字符串\n            if (t.length() == 0 || s.length() < t.length()) {\n                return res;\n            }\n\n            int[] need = new int[128];\n            for (int i = 0; i < t.length(); i++) {\n                need[t.charAt(i)]++;\n            }\n            int missing = t.length();\n            int left = 0;\n            int bestStart = 0;\n            int bestLength = Integer.MAX_VALUE;\n\n            for (int right = 0; right < s.length(); right++) {\n                if (need[s.charAt(right)] > 0) { // 加入前仍欠这个字符，才补掉一个缺口\n                    missing--;\n                }\n                need[s.charAt(right)]--;\n\n                while (missing == 0) {\n                    int length = right - left + 1;\n                    if (length < bestLength) {\n                        bestStart = left;\n                        bestLength = length;\n                    }\n\n                    need[s.charAt(left)]++;\n                    if (need[s.charAt(left)] > 0) { // 移走后重新欠字符，窗口变为无效\n                        missing++;\n                    }\n                    left++;\n                }\n            }\n\n            if (bestLength != Integer.MAX_VALUE) {\n                res = s.substring(bestStart, bestStart + bestLength); // substring不包含右端位置\n            }\n            return res;\n        }\n    }",
       "displayStart": 24,
-      "sourceHash": "4fe17a9ffd981a02626e248e2de96ff3fd3b32ada2fda20f538dd282a8047ce9",
+      "sourceHash": "0b455f5415e7e9ab38eef78b60757d88ad8d06490917318f91f459f2d7f99a99",
       "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 53,
       "summary": "负的累计和只会拖累后面的段，更新答案后再丢掉它。",
       "thinking": [
-        "直接沿用贪心章节主解。连续子数组不能跳着选，当前累计和若为负，加到未来段前面只会更差。",
-        "每读一个数，先累加，再用sum更新res；然后sum<0时归零，从后一个数重新起段。",
-        "res从nums[0]初始化，保证全负数组也能返回最大负数，而不是空数组的0。"
+        "输入数组逐个读数。两个累计量分别记当前段和、全程最大段和。",
+        "当前段的和若为负，带上它只会拖累后面的段，下一格从头算。清零前先比较最大值，这样全负时也会留下一个非空答案。",
+        "读 −2、3、−1、4。先记 −2，再从 3 起头。接上 −1 后仍有 2，继续接 4 得到最大和 6。"
       ],
-      "state": "sum是当前保留段的累计和；res是已经遇到的最大非空子数组和。sum置0只用于后续，不把空段记入答案。",
+      "state": "sum 是当前连续段的和，res 是已经遇到的最大非空段和。每轮先加当前数，再用 sum 更新 res，最后才把负的 sum 清零，供下一轮重新起段。",
       "walk": "nums=[-2,1,-3,4,-1,2,1]\n-2：先更新res=-2，再把sum清零\n1：res=1；接-3后sum=-2，清零\n从4重新开始：4→3→5→6\n返回6，对应[4,-1,2,1]。",
       "pitfall": "必须先更新res再把负sum归零；全负数组例如[-3,-2]应返回-2。",
       "complexity": "时间O(n)，额外空间O(1)。",
@@ -565,7 +565,7 @@
       },
       "expectedValue": 6,
       "call": "maxSubArray(nums)",
-      "code": "class Solution {\n    public int maxSubArray(int[] nums) {\n        int res = nums[0]; // 必须选非空子数组，全负数组也能得到正确答案\n        int sum = 0;\n\n        for (int num : nums) {\n            sum += num;\n            if (sum > res) {\n                res = sum;\n            }\n            if (sum < 0) { // 先记录答案，再丢掉会拖累后面元素的负前缀\n                sum = 0;\n            }\n        }\n        return res;\n    }\n}",
+      "code": "class Solution {\n    public int maxSubArray(int[] nums) {\n        int res = nums[0]; // 必须选非空子数组，全负数组也能得到正确答案\n        int sum = 0;\n\n        for (int num : nums) {\n            sum += num;\n            if (sum > res) {//注意顺序，这个先记录答案必须放在第一个\n                res = sum;\n            }\n            if (sum < 0) { // 先记录答案，再丢掉会拖累后面元素的负前缀\n                sum = 0;\n            }\n        }\n        return res;\n    }\n}",
       "compare": "原笔记也给出DP：dp[i]表示以i结尾的最大和，dp[i]=max(nums[i],dp[i-1]+nums[i])；初始化dp[0]=nums[0]，从左向右，最后取全局最大。例4→max(-1,4-1)=3→5→6。与主解的区别是DP允许状态为负，贪心把负前缀直接丢弃。",
       "title": "最大子数组和",
       "english": "Maximum Subarray",
@@ -578,23 +578,23 @@
       "test_source": "总笔记同题实例",
       "javaFile": "src/main/java/leetcode/greedy/LC0053MaximumSubarray.java",
       "mainClass": "leetcode.greedy.LC0053MaximumSubarray",
-      "adapted": "    static class Solution {\n        public int maxSubArray(int[] nums) {\n            int res = nums[0]; // 必须选非空子数组，全负数组也能得到正确答案\n            int sum = 0;\n\n            for (int num : nums) {\n                sum += num;\n                if (sum > res) {\n                    res = sum;\n                }\n                if (sum < 0) { // 先记录答案，再丢掉会拖累后面元素的负前缀\n                    sum = 0;\n                }\n            }\n            return res;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int maxSubArray(int[] nums) {\n            int res = nums[0]; // 必须选非空子数组，全负数组也能得到正确答案\n            int sum = 0;\n\n            for (int num : nums) {\n                sum += num;\n                if (sum > res) {//注意顺序，这个先记录答案必须放在第一个\n                    res = sum;\n                }\n                if (sum < 0) { // 先记录答案，再丢掉会拖累后面元素的负前缀\n                    sum = 0;\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 29,
-      "sourceHash": "b29b80e5e1dafbaa00401f216173bb28a1d27d30af57c18534d350a8497fb5ec",
+      "sourceHash": "a26cb5440f5909535b79c8d925836ff64ed98c6add94cbed8891137440b5365b",
       "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
       "id": 56,
       "summary": "按左端排序后，只需判断当前区间与结果最后一段是否重叠。",
       "thinking": [
-        "沿用贪心章节原主解。区间没排序时，重叠关系不好判断，先按左端升序排列。",
-        "若current[0]大于最后一段右端，说明中间有空隙，新增一段。",
-        "否则重叠，只延长最后一段的右端。res先预留n行，count记录有效段数；循环结束裁剪到count行，再统一返回res。"
+        "区间数组每行存一对起止端点。结果数组存合并后的区间，只需继续维护最后一段。",
+        "直接按左端点排序输入数组。新起点落在当前段内，就把右端延到较远的那个。新起点越过右端，后续起点也不会更早，这一段就能收好。",
+        "[1,4] 包住 [2,3]，接上 [4,6] 后变成 [1,6]。看到 [8,9] 时中间有空隙，另开一段。"
       ],
       "state": "res先分配n行，count表示其中已经写好的区间个数；只有[0,count)有效。current是当前区间，重叠时更新res[count-1]的右端，最后把res裁剪为count行。",
       "walk": "intervals=[[1,3],[2,6],[8,10],[15,18]]\n[1,3]加入结果；[2,6]与它重叠→[1,6]\n8>6，新段[8,10]；15>10，新段[15,18]\n返回[[1,6],[8,10],[15,18]]。",
-      "pitfall": "端点相等也算重叠，只有current[0]>res[count-1][1]才新开段。返回前要裁剪结果，避免带上未使用的[0,0]行；外层克隆后排序，不改变原输入的区间顺序或端点。",
-      "complexity": "时间O(n log n)；克隆、排序与结果需要O(n)空间。",
+      "pitfall": "端点相等也算重叠。直接排序会重排输入数组中的区间，合并后的端点写在 res 中。最后用 Arrays.copyOf 保留前 count 段。",
+      "complexity": "时间 O(n log n)，主要花在排序上。结果缓冲区、裁剪后的结果及对象数组排序合计占用 O(n) 空间。",
       "example": {
         "intervals": [
           [
@@ -630,7 +630,7 @@
         ]
       ],
       "call": "merge(intervals)",
-      "code": "import java.util.*;\n\nclass Solution {\n    public int[][] merge(int[][] intervals) {\n        int[][] res = new int[intervals.length][2]; // 最多产生n段，先分配足够的结果位置\n        int count = 0; // res中已经写好的区间个数\n        intervals = intervals.clone();\n        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n\n        for (int[] current : intervals) {\n            if (count == 0 || current[0] > res[count - 1][1]) {\n                res[count][0] = current[0]; // 没有重叠，写入一段新的区间\n                res[count][1] = current[1];\n                count++;\n            } else {\n                if (current[1] > res[count - 1][1]) { // 有重叠，只需要延长最后一段的右端\n                    res[count - 1][1] = current[1];\n                }\n            }\n        }\n\n        res = Arrays.copyOf(res, count); // 只保留已经写入的count段，去掉未使用的位置\n        return res;\n    }\n}",
+      "code": "import java.util.*;\n\nclass Solution {\n    public int[][] merge(int[][] intervals) {\n        int[][] res = new int[intervals.length][2]; // 最多产生n段，先分配足够的结果位置\n        int count = 0; // res中已经写好的区间个数\n        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n\n        for (int[] current : intervals) {\n            if (count == 0 || current[0] > res[count - 1][1]) {\n                res[count][0] = current[0]; // 没有重叠，写入一段新的区间\n                res[count][1] = current[1];\n                count++;\n            } else {\n                if (current[1] > res[count - 1][1]) { // 有重叠，只需要延长最后一段的右端\n                    res[count - 1][1] = current[1];\n                }\n            }\n        }\n\n        res = Arrays.copyOf(res, count); // 只保留已经写入的count段，去掉未使用的位置\n        return res;\n    }\n}",
       "compare": "",
       "title": "合并区间",
       "english": "Merge Intervals",
@@ -643,9 +643,9 @@
       "test_source": "总笔记同题实例",
       "javaFile": "src/main/java/leetcode/greedy/LC0056MergeIntervals.java",
       "mainClass": "leetcode.greedy.LC0056MergeIntervals",
-      "adapted": "    static class Solution {\n        public int[][] merge(int[][] intervals) {\n            int[][] res = new int[intervals.length][2]; // 最多产生n段，先分配足够的结果位置\n            int count = 0; // res中已经写好的区间个数\n            intervals = intervals.clone();\n            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n\n            for (int[] current : intervals) {\n                if (count == 0 || current[0] > res[count - 1][1]) {\n                    res[count][0] = current[0]; // 没有重叠，写入一段新的区间\n                    res[count][1] = current[1];\n                    count++;\n                } else {\n                    if (current[1] > res[count - 1][1]) { // 有重叠，只需要延长最后一段的右端\n                        res[count - 1][1] = current[1];\n                    }\n                }\n            }\n\n            res = Arrays.copyOf(res, count); // 只保留已经写入的count段，去掉未使用的位置\n            return res;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int[][] merge(int[][] intervals) {\n            int[][] res = new int[intervals.length][2]; // 最多产生n段，先分配足够的结果位置\n            int count = 0; // res中已经写好的区间个数\n            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n\n            for (int[] current : intervals) {\n                if (count == 0 || current[0] > res[count - 1][1]) {\n                    res[count][0] = current[0]; // 没有重叠，写入一段新的区间\n                    res[count][1] = current[1];\n                    count++;\n                } else {\n                    if (current[1] > res[count - 1][1]) { // 有重叠，只需要延长最后一段的右端\n                        res[count - 1][1] = current[1];\n                    }\n                }\n            }\n\n            res = Arrays.copyOf(res, count); // 只保留已经写入的count段，去掉未使用的位置\n            return res;\n        }\n    }",
       "displayStart": 25,
-      "sourceHash": "961d74dbdeb3caab47cfdc7a7c93968481f57dc1fe9d63c38ea49a8610515da1",
+      "sourceHash": "1ffcfdaf0b9e8e50f894400c532ba4ca4970dcfcc02a1f45aa94cf501f9af682",
       "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {
@@ -749,13 +749,13 @@
       "id": 41,
       "summary": "把值x放到下标x-1，第一次错位的位置就是缺失正数。",
       "thinking": [
-        "HashSet容易做，但要求O(1)额外空间。长度n的数组，最小缺失正数一定在[1,n+1]。",
-        "把输入数组本身当成存在性表：合法值x应该放在下标x-1，反复交换直到当前位置无需处理。",
-        "归位后从左向右检查，nums[i]!=i+1时返回i+1；全对就返回n+1。"
+        "把输入数组当存在表。第几格就负责确认数字几有没有出现。",
+        "有 n 格就先查 1 到 n。把范围内的数换去同号格，换回来还要继续检查。同号格已有相同值就停。第一个对不上的编号就是答案，全对则是 n + 1。",
+        "3、4、−1、1 中，把 3 放到第三格、4 放到第四格、换回的 1 放到第一格。第二格依然没有 2，答案是 2。"
       ],
       "state": "i是当前归位位置；target=nums[i]-1是该值应去的位置；只处理[1,n]内且尚未就位的值。 res先设为n+1，扫描到第一个错位位置时更新res并结束检查，最后统一返回。",
       "walk": "nums=[3,4,-1,1]\ni=0：3换到下标2→[-1,4,3,1]\ni=1：4换到下标3→[-1,1,3,4]\n当前1继续换到下标0→[1,-1,3,4]\n检查下标1应为2却是-1，返回2。",
-      "pitfall": "交换后新来的数还需继续处理，所以用while；先检查范围再访问nums[nums[i]-1]；重复值必须停止交换，防止死循环。",
+      "pitfall": "交换后，原位置换进来的数可能还没就位，所以同一下标要用 while 反复检查。只有值在 1 到 n 范围内，且目标格没有同值时才交换。",
       "complexity": "时间O(n)，每次有效交换至少把一个值放到正确位置；额外空间O(1)。",
       "example": {
         "nums": [
@@ -767,7 +767,7 @@
       },
       "expectedValue": 2,
       "call": "firstMissingPositive(nums)",
-      "code": "class Solution {\n    public int firstMissingPositive(int[] nums) {\n        int n = nums.length;\n        int res = n + 1; // 1到n都存在时，答案就是n+1\n\n        for (int i = 0; i < n; i++) {\n            while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {\n                int target = nums[i] - 1; // 值x应该放到下标x-1；重复值已就位时停止\n                int temp = nums[target];\n                nums[target] = nums[i];\n                nums[i] = temp;\n            }\n        }\n\n        for (int i = 0; i < n; i++) {\n            if (nums[i] != i + 1) {\n                res = i + 1;\n                break; // 第一个错位的位置，就是最小缺失正数\n            }\n        }\n        return res;\n    }\n}",
+      "code": "class Solution {\n    public int firstMissingPositive(int[] nums) {\n        int n = nums.length;\n        int res = n + 1; // 1到n都存在时，答案就是n+1\n\n        for (int i = 0; i < n; i++) {\n        \n            //一定注意这里是while，直至这个位置正确\n            while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {\n                int target = nums[i] - 1; // 值x应该放到下标x-1；重复值已就位时停止\n                int temp = nums[target];\n                nums[target] = nums[i];\n                nums[i] = temp;\n            }\n        }\n\n        for (int i = 0; i < n; i++) {\n            if (nums[i] != i + 1) {\n                res = i + 1;\n                break; // 第一个错位的位置，就是最小缺失正数\n            }\n        }\n        return res;\n    }\n}",
       "compare": "",
       "title": "缺失的第一个正数",
       "english": "First Missing Positive",
@@ -780,9 +780,9 @@
       "test_source": "力扣公开示例（已读取题目与Java模板）",
       "javaFile": "src/main/java/leetcode/array/LC0041FirstMissingPositive.java",
       "mainClass": "leetcode.array.LC0041FirstMissingPositive",
-      "adapted": "    static class Solution {\n        public int firstMissingPositive(int[] nums) {\n            int n = nums.length;\n            int res = n + 1; // 1到n都存在时，答案就是n+1\n\n            for (int i = 0; i < n; i++) {\n                while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {\n                    int target = nums[i] - 1; // 值x应该放到下标x-1；重复值已就位时停止\n                    int temp = nums[target];\n                    nums[target] = nums[i];\n                    nums[i] = temp;\n                }\n            }\n\n            for (int i = 0; i < n; i++) {\n                if (nums[i] != i + 1) {\n                    res = i + 1;\n                    break; // 第一个错位的位置，就是最小缺失正数\n                }\n            }\n            return res;\n        }\n    }",
+      "adapted": "    static class Solution {\n        public int firstMissingPositive(int[] nums) {\n            int n = nums.length;\n            int res = n + 1; // 1到n都存在时，答案就是n+1\n\n            for (int i = 0; i < n; i++) {\n\n                //一定注意这里是while，直至这个位置正确\n                while (nums[i] >= 1 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {\n                    int target = nums[i] - 1; // 值x应该放到下标x-1；重复值已就位时停止\n                    int temp = nums[target];\n                    nums[target] = nums[i];\n                    nums[i] = temp;\n                }\n            }\n\n            for (int i = 0; i < n; i++) {\n                if (nums[i] != i + 1) {\n                    res = i + 1;\n                    break; // 第一个错位的位置，就是最小缺失正数\n                }\n            }\n            return res;\n        }\n    }",
       "displayStart": 47,
-      "sourceHash": "11690dcaf29e6a1d2bee9d23ed87855d3c7f27ef39a103b419f327b7b3ab3d7e",
+      "sourceHash": "95940ba6d7bfe6f6900a2b77c1c27528b275cd7c4d8758554b9c066ad2df9aeb",
       "codeStyle": "结果先定义、逐步写入、最后返回；原地修改题注明写回参数。"
     },
     {

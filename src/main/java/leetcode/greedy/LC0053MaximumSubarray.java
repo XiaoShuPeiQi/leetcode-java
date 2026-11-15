@@ -33,7 +33,7 @@ public class LC0053MaximumSubarray {
 
             for (int num : nums) {
                 sum += num;
-                if (sum > res) {
+                if (sum > res) {//注意顺序，这个先记录答案必须放在第一个
                     res = sum;
                 }
                 if (sum < 0) { // 先记录答案，再丢掉会拖累后面元素的负前缀

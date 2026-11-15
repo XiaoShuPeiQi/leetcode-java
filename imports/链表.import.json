@@ -88,7 +88,7 @@
       "english": "Swap Nodes In Pairs",
       "slug": "0024-swap-nodes-in-pairs",
       "mainClass": "leetcode.linkedlist.LC0024SwapNodesInPairs",
-      "algorithm": "    static class Solution {\n        public ListNode swapPairs(ListNode head) {\n            ListNode dummy = new ListNode(0, head);\n            ListNode pre = dummy;\n            while (pre.next != null && pre.next.next != null) {\n                ListNode first = pre.next;\n                ListNode second = first.next;\n                pre.next = second;\n                first.next = second.next; // 在second改线前保住后缀\n                second.next = first;\n                pre = first; // 原first变为已交换部分的末尾\n            }\n            return dummy.next;\n        }\n    }",
+      "algorithm": "    static class Solution {\n        public ListNode swapPairs(ListNode head) {\n            ListNode dummy = new ListNode(0, head);\n            ListNode pre = dummy;\n            while (pre.next != null && pre.next.next != null) {\n                ListNode first = pre.next;\n                ListNode second = pre.next.next;\n\n                pre.next = second;\n                first.next = second.next; // 在second改线前保住后缀\n                second.next = first;\n\n                pre = pre.next.next;\n            }\n            return dummy.next;\n        }\n    }",
       "displayStart": 40,
       "source": "LC0024SwapNodesInPairs.java",
       "expected": "[2, 1, 4, 3, 5]",
@@ -110,7 +110,8 @@
         ]
       },
       "javaFile": "src/main/java/leetcode/linkedlist/LC0024SwapNodesInPairs.java",
-      "sourceHash": "28887f83deba9ae12ce795628c171ecdc6fd91c530d4b14661a42720c81e4d5f"
+      "sourceHash": "585d333e0e1ee5cc4f6dc96b883ccb3357e5dc98030b4d972f4af890044bbcaf",
+      "sourceStatus": "同题主解按 Hot100 飞书最新版录制。"
     },
     {
       "id": 19,
@@ -179,7 +180,7 @@
       "english": "Linked List Cycle",
       "slug": "0141-linked-list-cycle",
       "mainClass": "leetcode.linkedlist.LC0141LinkedListCycle",
-      "algorithm": "    static class Solution {\n        public boolean hasCycle(ListNode head) {\n            ListNode slow = head;\n            ListNode fast = head;\n            while (fast != null && fast.next != null) {\n                slow = slow.next;\n                fast = fast.next.next;\n                if (slow == fast) {\n                    return true;\n                }\n            }\n            return false;\n        }\n    }",
+      "algorithm": "    static class Solution {\n        public boolean hasCycle(ListNode head) {\n            ListNode slow = head;\n            ListNode fast = head;\n            while (fast != null && fast.next != null) {\n                slow = slow.next;\n                fast = fast.next.next;//允许fast.next.next为null\n                if (slow == fast) {\n                    return true;\n                }\n            }\n            return false;\n        }\n    }",
       "displayStart": 39,
       "source": "LC0141LinkedListCycle.java",
       "expected": "true",
@@ -195,7 +196,8 @@
         "expected": true
       },
       "javaFile": "src/main/java/leetcode/linkedlist/LC0141LinkedListCycle.java",
-      "sourceHash": "bd645cee4bd44fd6bcbe37ceba63196e2dc135422c1eab860a730db30ec91b90"
+      "sourceHash": "47abeb343b76bed4f90698d7d5de62120ea7b04819eb6f44ba6be68799ab6ec9",
+      "sourceStatus": "同题主解按 Hot100 飞书最新版录制。"
     },
     {
       "id": 142,

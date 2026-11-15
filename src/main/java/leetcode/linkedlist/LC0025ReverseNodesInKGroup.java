@@ -19,28 +19,24 @@ public class LC0025ReverseNodesInKGroup {
     static class Solution {
         public ListNode reverseKGroup(ListNode head, int k) {
             ListNode dummy = new ListNode(0, head);
-            ListNode before = dummy;
+            ListNode pre = dummy;
             while (true) {
-                ListNode end = before;
+                ListNode end = pre;
                 for (int i = 0; i < k; i++) {
                     end = end.next;
                     if (end == null) {
-                        return dummy.next; // 不足一整组，保留剩余节点
+                        return dummy.next;
                     }
                 }
 
-                ListNode after = end.next;
-                ListNode start = before.next;
-                ListNode cur = start;
-                ListNode prev = after; // 原组首翻转后成为组尾，先连好后缀
-                while (cur != after) {
-                    ListNode next = cur.next;
-                    cur.next = prev;
-                    prev = cur;
-                    cur = next;
+                ListNode first = pre.next;
+                for (int i = 1; i < k; i++) {
+                    ListNode node = first.next;
+                    first.next = node.next;
+                    node.next = pre.next;//注意这里不能直接写first
+                    pre.next = node;
                 }
-                before.next = end;
-                before = start;
+                pre = first;//妙啊，最后first就在队尾了
             }
         }
     }
