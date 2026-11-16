@@ -13,7 +13,12 @@ let position=0,index=stops[0],timer=null,selectedFrame=null,heap={},frames=[];
 const breakpoints=new Set(),renderStack=window.StackView.create($('stack'),data.code);
 const ref=x=>x?.$ref===undefined?null:String(x.$ref);
 function readable(x,seen=new Set()){const id=ref(x);if(id!==null){const node=heap[id];if(!node||seen.has(id))return '#'+id;const next=new Set(seen);next.add(id);return Object.fromEntries([['节点','#'+id],...Object.entries(node).filter(([k])=>k!=='$type').map(([k,v])=>[k,readable(v,next)])]);}if(Array.isArray(x))return x.map(v=>readable(v,seen));return x;}
-function brief(x){if(ref(x)!==null)return '#'+ref(x);const text=JSON.stringify(x);return text?.length>55?text.slice(0,52)+'…':text;}
+function brief(x){
+ if(ref(x)!==null)return '#'+ref(x);
+ const text=JSON.stringify(x);
+ if(Array.isArray(x)&&x.some(Array.isArray))return text;
+ return text?.length>55?text.slice(0,52)+'…':text;
+}
 function variables(vars){$('variables').innerHTML=Object.entries(vars).map(([k,v])=>v===null||typeof v!=='object'?'<div class="variable scalar"><span>'+esc(k)+'</span><b>'+esc(brief(v))+'</b></div>':'<details class="variable"><summary><span>'+esc(k)+'</span><b>'+esc(brief(v))+'</b></summary><pre>'+esc(JSON.stringify(readable(v),null,2))+'</pre></details>').join('')||'<p class="empty">—</p>';}
 function array(name,values,active=-1,cover=-1){if(!Array.isArray(values))return '';return '<div class="state-label">'+esc(name)+'</div><div class="state-array">'+values.map((v,i)=>'<div class="state-cell '+(i===active?'active ':'')+(i<=cover?'covered':'')+'">'+esc(Array.isArray(v)?JSON.stringify(v):v)+'<small>'+i+'</small></div>').join('')+'</div>';}
 // The highlighted Java line is pending execution; snapshots are never recomputed in JS.

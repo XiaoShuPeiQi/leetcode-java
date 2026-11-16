@@ -116,10 +116,15 @@
    svg += '</g>';
   }
   svg += '</svg>';
-  const values = id => '#' + id + ' (' + heap[id]?.val + ')';
+  function formatValue(value) {
+   const id = ref(value);
+   if (id !== null) return '#' + id + ' (' + heap[id]?.val + ')';
+   if (Array.isArray(value)) return '[' + value.map(formatValue).join(', ') + ']';
+   return String(value);
+  }
   const tables = Object.entries(vars).flatMap(([name, value]) => {
-   if (value?.$map) return [name + ' · ' + value.$map.map(([k,v]) => (ref(k) ? values(ref(k)) : k) + ' → ' + (ref(v) ? values(ref(v)) : v)).join('，')];
-   if (Array.isArray(value)) return [name + ' · [' + value.map(v => ref(v) ? values(ref(v)) : v).join(', ') + ']'];
+   if (value?.$map) return [name + ' · ' + value.$map.map(([k,v]) => formatValue(k) + ' → ' + formatValue(v)).join('，')];
+   if (Array.isArray(value)) return [name + ' · ' + formatValue(value)];
    if (typeof value === 'number' || typeof value === 'boolean') return [name + ' = ' + value];
    return [];
   });
