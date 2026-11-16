@@ -1,0 +1,85 @@
+body > .problem-content {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 20px;
+}
+
+.problem-statement,
+.problem-java {
+    padding: 14px 18px;
+    margin: 0 0 16px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--panel);
+    min-width: 0;
+}
+
+.problem-java {
+    margin-top: 16px;
+}
+
+.problem-section-title,
+.problem-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+}
+
+.problem-section-title {
+    justify-content: space-between;
+}
+
+.problem-section-title h2 {
+    font-size: 15px;
+    margin: 0;
+}
+
+.problem-actions {
+    font-size: 12px;
+}
+
+.problem-statement p {
+    line-height: 1.7;
+    margin: 8px 0;
+}
+
+.problem-example {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 4px 12px;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.problem-example dt {
+    color: var(--muted);
+}
+
+.problem-example dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.problem-java pre {
+    max-height: 440px;
+    overflow: auto;
+    margin: 10px 0 0;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--text);
+    font: 13px/1.55 Consolas, monospace;
+    tab-size: 4;
+}
+
+.copy-java {
+    padding: 4px 8px;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.copy-java-inline {
+    margin-left: 6px;
+}
