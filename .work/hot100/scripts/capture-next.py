@@ -9,11 +9,15 @@ sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parents[3]
 JDK = Path(sys.argv[1])
 SECTION = sys.argv[2] if len(sys.argv) > 2 else "21-40"
-TMP = ROOT / (".work/hot100/next-tmp" if SECTION == "21-40" else f".work/hot100/{SECTION}-tmp")
+SCOPE = sys.argv[3] if len(sys.argv) > 3 else SECTION
+FIRST, LAST = map(int, SCOPE.split("-"))
+TMP = ROOT / (".work/hot100/next-tmp" if SCOPE == "21-40" else f".work/hot100/{SCOPE}-tmp")
 TMP.mkdir(parents=True, exist_ok=True)
 BIN = ROOT / "bin"
 BIN.mkdir(exist_ok=True)
-problems = json.loads((ROOT / f"imports/Hot100-{SECTION}.import.json").read_text(encoding="utf8"))["problems"]
+problems = [p for p in json.loads((ROOT / f"imports/Hot100-{SECTION}.import.json").read_text(encoding="utf8"))["problems"]
+            if FIRST <= p["order"] <= LAST]
+assert [p["order"] for p in problems] == list(range(FIRST, LAST + 1))
 
 
 def run(args, cwd=ROOT):
@@ -46,7 +50,8 @@ def capture(p):
     run([JDK / "bin/javac.exe", "--release", "8", "-encoding", "UTF-8", "-d", isolated, solution])
     trace = TMP / f"trace-{id}.ndjson"
     summary = run([JDK / "bin/java.exe", "--add-modules", "jdk.jdi", "-Dfile.encoding=UTF-8",
-                   "-cp", BIN, "LinkedTraceRecorder", p["mainClass"], trace, JDK, p["solutionClass"]])
+                   "-cp", BIN, "LinkedTraceRecorder", p["mainClass"], trace, JDK, p["solutionClass"],
+                   p.get("launchClass", p["mainClass"])])
     print(summary, flush=True)
     return {"id": id, "standalone_release8": "PASS", "java17_jdi": "PASS",
             "events": len(trace.read_text(encoding="utf8").splitlines())}

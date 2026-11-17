@@ -11,9 +11,12 @@ sys.stdout.reconfigure(encoding="utf-8")
 R = Path(__file__).resolve().parents[3]
 D = R / "docs"
 SECTION = sys.argv[1] if len(sys.argv) > 1 else "21-40"
-first, last = map(int, SECTION.split("-"))
-T = R / (".work/hot100/next-tmp" if SECTION == "21-40" else f".work/hot100/{SECTION}-tmp")
+SCOPE = sys.argv[2] if len(sys.argv) > 2 else SECTION
+first, last = map(int, SCOPE.split("-"))
+T = R / (".work/hot100/next-tmp" if SCOPE == "21-40" else f".work/hot100/{SCOPE}-tmp")
 meta = json.loads((R / f"imports/Hot100-{SECTION}.import.json").read_text(encoding="utf8"))
+problems = [p for p in meta["problems"] if first <= p["order"] <= last]
+assert [p["order"] for p in problems] == list(range(first, last + 1))
 checks = {p["id"]: p for p in json.loads((T / "capture.json").read_text(encoding="utf8"))}
 catalog_path = D / "assets/catalog.js"
 
@@ -33,7 +36,7 @@ def write_js(path, name, data):
 catalog = [p for p in read_js(catalog_path)
            if not (p["chapter"] == "Hot100" and first <= p.get("order", 0) <= last)]
 template = (D / "problems/hot100-0001-two-sum/index.html").read_text(encoding="utf8")
-for p in meta["problems"]:
+for p in problems:
     id = p["id"]
     source = (R / p["javaFile"]).read_text(encoding="utf8")
     assert hashlib.sha256(source.encode()).hexdigest() == p["sourceHash"]
@@ -87,6 +90,9 @@ for p in meta["problems"]:
                 code=code, displayStart=start, expected=expected, actual=actual, pool=pool,
                 nodeIds=sorted(node_ids, key=int), steps=steps, calls=calls, stateMeaning=p["state"],
                 transition=p["summary"], validation=checks[id])
+    if "reference" in p:
+        data.update(reference=p["reference"], algorithm=p["algorithm"])
+        data["source"] += "#" + p["headingBlock"]
     dir = D / "problems" / p["page_slug"]
     dir.mkdir(parents=True, exist_ok=True)
     page = re.sub(r"<title>.*?</title>", lambda _: f'<title>{id} · {html.escape(p["title"])} — 展老师小课堂</title>', template)
@@ -106,5 +112,5 @@ home = re.sub(r"Hot100 · 前\d+题", f"Hot100 · 前{len(hot100)}题", (D / "in
 for id in ("problem-count", "all-count"):
     home = re.sub(f'(id="{id}">)\\d+', lambda m: m[1]+str(len(catalog)), home)
 write(D / "index.html", home)
-write(R / f"outputs/Hot100-{SECTION}-capture.json", json.dumps(list(checks.values()), ensure_ascii=False, indent=2)+"\n")
-print("Built 20 debugger pages.", sum(p["events"] for p in checks.values()), "JDI events.")
+write(R / f"outputs/Hot100-{SCOPE}-capture.json", json.dumps(list(checks.values()), ensure_ascii=False, indent=2)+"\n")
+print(f"Built {len(problems)} debugger pages.", sum(p["events"] for p in checks.values()), "JDI events.")

@@ -68,4 +68,46 @@ public class LC0046Permutations {
             }
         }
     }
+
+    // Hot100 课堂使用代码随想录的 Java 实现。
+    public static class Hot100Demo {
+        public static void main(String[] args) {
+            common.TreeSupport.check("Hot100Solution", "nums = [1, 2, 3]",
+                    "[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]", String.valueOf(runSolution()));
+        }
+
+        // 测试来源：飞书 Hot100 原有课堂示例。
+        static Object runSolution() {
+            int[] nums = {1, 2, 3};
+            return new Hot100Solution().permute(nums);
+        }
+    }
+
+    static class Hot100Solution {
+        private List<List<Integer>> result;
+        private final LinkedList<Integer> path = new LinkedList<>();
+
+        public List<List<Integer>> permute(int[] nums) {
+            result = new ArrayList<>();
+            backtracking(nums, new boolean[nums.length]);
+            return result;
+        }
+
+        private void backtracking(int[] nums, boolean[] used) {
+            if (path.size() == nums.length) {
+                result.add(new ArrayList<>(path));
+                return;
+            }
+            for (int i = 0; i < nums.length; i++) {
+                if (used[i]) {
+                    continue;
+                }
+                used[i] = true;
+                path.add(nums[i]);
+                backtracking(nums, used);
+                path.removeLast();
+                used[i] = false;
+            }
+        }
+    }
 }

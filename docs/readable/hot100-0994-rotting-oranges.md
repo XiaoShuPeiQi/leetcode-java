@@ -1,4 +1,4 @@
-# 994 · 腐烂的橘子 — 展老师小课堂
+# Hot100 第 52 题 · 力扣 994 · 腐烂的橘子 — 展老师小课堂
 
 网页：https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0994-rotting-oranges/
 
@@ -18,15 +18,19 @@ Hot100 · 图论 · Rotting Oranges
 
 实际结果：4
 
-测试来源：力扣公开示例
+测试来源：飞书 Hot100 原有课堂示例
+
+## 解法
+
+多源分层 BFS
 
 ## 状态含义
 
-size 锁定本轮扩展数，新橘子一入队就改为 2。
+感染一个邻居时即把它设为 2，减少 `fresh` 并入队。新入队的格子从下一轮开始扩散。
 
 ## 状态变化
 
-让所有烂橘子一同出发，队列每处理一层就过去一分钟。
+所有初始烂橘子同时入队，每处理一层，时间增加一分钟。
 
 ## Java 解法
 
@@ -35,7 +39,6 @@ import java.util.*;
 
 class Solution {
     public int orangesRotting(int[][] grid) {
-        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         Queue<int[]> queue = new ArrayDeque<>();
         int fresh = 0;
         for (int row = 0; row < grid.length; row++) {
@@ -49,25 +52,24 @@ class Solution {
         }
 
         int minutes = 0;
+        int[][] directions = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
         while (!queue.isEmpty() && fresh > 0) {
             int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                int[] cell = queue.poll();
+            minutes++;
+            while (size-- > 0) {
+                int[] current = queue.poll();
                 for (int[] direction : directions) {
-                    int nextRow = cell[0] + direction[0];
-                    int nextCol = cell[1] + direction[1];
-                    if (nextRow < 0 || nextRow >= grid.length
-                            || nextCol < 0 || nextCol >= grid[0].length) {
+                    int row = current[0] + direction[0];
+                    int col = current[1] + direction[1];
+                    if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length
+                            || grid[row][col] != 1) {
                         continue;
                     }
-                    if (grid[nextRow][nextCol] == 1) {
-                        grid[nextRow][nextCol] = 2; // 入队时就标记
-                        fresh--;
-                        queue.offer(new int[]{nextRow, nextCol});
-                    }
+                    grid[row][col] = 2;
+                    fresh--;
+                    queue.offer(new int[]{row, col});
                 }
             }
-            minutes++;
         }
         return fresh == 0 ? minutes : -1;
     }
@@ -76,19 +78,21 @@ class Solution {
 
 ## 来源与版本
 
-学习扩展。按本题条件选择主解。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
+算法流程来自代码随想录的 Java 解法，保留飞书原有课堂示例。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
 
 Java 源码：https://github.com/XiaoShuPeiQi/leetcode-java/blob/main/src/main/java/leetcode/graph/LC0994RottingOranges.java
 
-源码指纹：705e0784791edea87f048a3d4a9a57fa26cab5c389de3d2034cd28bf0f36c8b5
+源码指纹：0a4117f8f69f81f4c491a8be0dd0443c30148fdb5bdabde892566ff273f4eb02
 
-飞书来源笔记：https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf（外部文档可能需要登录，本文仅包含本页已发布的内容。）
+飞书来源笔记：https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcnVddyjnQwDHVeI6BKZX735s（外部文档可能需要登录，本文仅包含本页已发布的内容。）
+
+代码随想录 Java 解法：https://programmercarl.com/hot100/0994.rotting-oranges.html#java
 
 ## 执行回放
 
 本页回放代表性输入的真实 Java 17 / JDI 暂停快照。高亮行尚未执行，执行后的变化出现在下一暂停位置。可单步、后退、重置、播放、拖动进度和选择调用栈帧；网页不运行任意 Java 输入。
 
-原始暂停事件：218 个。
+原始暂停事件：217 个。
 
 完整轨迹 JSON 与交互页面使用同一份数据：code 为代码，displayStart 为起始行号，steps 为按时间排列的全部暂停事件，pool 为共享状态池。事件中的 frames、heap、roots、stack、vars 等整数索引指向 pool；旧回溯格式的 vars 是键索引/值索引对。calls 或 nodes 保存调用树。
 

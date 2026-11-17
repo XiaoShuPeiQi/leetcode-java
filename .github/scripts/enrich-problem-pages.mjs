@@ -39,17 +39,21 @@ function javaSnippet(trace) {
         throw new Error(`Unrecognized solution class in ${trace.javaFile}`);
     }
     // Remove the project wrapper's static modifier for a top-level Java class.
-    code[0] = code[0].replace(/^static /, '').replace(/^class DPSolution\b/, 'class Solution');
+    code[0] = code[0].replace(/^static /, '').replace(/^class (?:DPSolution|Hot100Solution)\b/, 'class Solution');
     return [...imports, ...(imports.length ? [''] : []), ...code].join('\n') + '\n';
 }
 
+function classroomTitle(trace) {
+    const rank = trace.chapter === 'Hot100' && trace.reference ? `Hot100 第 ${trace.order} 题 · 力扣 ` : '';
+    return `${rank}${trace.id} · ${trace.title} — 展老师小课堂`;
+}
+
 function renderProblem(trace, statement, source, java, slug) {
-    const title = escapeHtml(trace.title);
     const gitHubSource = 'https://github.com/XiaoShuPeiQi/leetcode-java/blob/main/' + trace.javaFile;
     return `
 <article class="problem-content" id="problem-content">
     <section class="problem-statement" aria-labelledby="problem-statement-title">
-        <h1 class="problem-fallback-title">${escapeHtml(trace.id)} · ${title} — 展老师小课堂</h1>
+        <h1 class="problem-fallback-title">${escapeHtml(classroomTitle(trace))}</h1>
         <div class="problem-section-title">
             <h2 id="problem-statement-title">题意</h2>
             <div class="problem-actions">
@@ -75,6 +79,7 @@ function renderProblem(trace, statement, source, java, slug) {
         <p>测试来源：${escapeHtml(trace.testSource)}</p>
         <p>源码说明：${escapeHtml(trace.sourceStatus)}</p>
         <p><a href="${escapeHtml(trace.source)}">飞书来源笔记</a>（外部文档可能需要登录，本文仅包含本页已发布的内容。）</p>
+        ${trace.reference ? `<p><a href="${escapeHtml(trace.reference)}">代码随想录的 Java 解法</a></p>` : ''}
         <h3>执行回放</h3><p>${replayHelp}</p>
         <p>本例包含 ${trace.steps.length} 个原始暂停事件。<a href="trace.json">完整执行轨迹 JSON（含全部变量、调用栈及对象状态）</a></p>
         <p>${traceHelp}</p>
@@ -118,7 +123,7 @@ for (const entry of readdirSync(problems, {withFileTypes: true})) {
         .replace('<div id="app"></div>', () => '<div id="app"></div>' + renderProblem(trace, statement, source, java, entry.name))
         .replace('</body>', '<script src="../../assets/problem-content.js"></script></body>'));
     const text = [
-        `# ${id} · ${trace.title} — 展老师小课堂`,
+        `# ${classroomTitle(trace)}`,
         `网页：${base}problems/${entry.name}/`,
         [trace.chapter, trace.group, trace.english].filter(Boolean).join(' · '),
         '## 题意', statement, `官方原题：${source}`,
@@ -132,6 +137,7 @@ for (const entry of readdirSync(problems, {withFileTypes: true})) {
         `Java 源码：https://github.com/XiaoShuPeiQi/leetcode-java/blob/main/${trace.javaFile}`,
         `源码指纹：${trace.sourceHash}`,
         `飞书来源笔记：${trace.source}（外部文档可能需要登录，本文仅包含本页已发布的内容。）`,
+        ...(trace.reference ? [`代码随想录 Java 解法：${trace.reference}`] : []),
         '## 执行回放', replayHelp, `原始暂停事件：${trace.steps.length} 个。`, traceHelp,
         `完整轨迹：${base}problems/${entry.name}/trace.json`,
         '本文包含题意、示例、网页已提供的状态说明、Java 解法和来源；逐步变量及调用栈保存在上面的完整轨迹文件中。'

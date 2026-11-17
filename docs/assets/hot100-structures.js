@@ -62,7 +62,7 @@
    });
    const x = children.length ? (children[0].x + children.at(-1).x) / 2 : 70 + leaf++ * 100;
    const y = 35 + depth * 60;
-   const position = {id, letter, x, y, end:entry.end};
+   const position = {id, letter, x, y, end:entry.isEnd ?? entry.end};
    nodes.push(position);
    children.forEach(child=>edges.push([position,child]));
    return position;

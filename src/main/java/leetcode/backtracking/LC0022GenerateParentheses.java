@@ -16,27 +16,27 @@ public class LC0022GenerateParentheses {
     }
 
     static class Solution {
+        private List<String> result;
+
         public List<String> generateParenthesis(int n) {
-            List<String> result = new ArrayList<>();
-            StringBuilder path = new StringBuilder();
-            backtracking(n, 0, 0, path, result);
+            result = new ArrayList<>();
+            backtracking(n, 0, 0, new StringBuilder());
             return result;
         }
 
-        private void backtracking(int n, int left, int right,
-                StringBuilder path, List<String> result) {
-            if (right == n) {
+        private void backtracking(int n, int left, int right, StringBuilder path) {
+            if (path.length() == 2 * n) {
                 result.add(path.toString());
                 return;
             }
             if (left < n) {
                 path.append('(');
-                backtracking(n, left + 1, right, path, result);
+                backtracking(n, left + 1, right, path);
                 path.deleteCharAt(path.length() - 1);
             }
             if (right < left) {
                 path.append(')');
-                backtracking(n, left, right + 1, path, result);
+                backtracking(n, left, right + 1, path);
                 path.deleteCharAt(path.length() - 1);
             }
         }

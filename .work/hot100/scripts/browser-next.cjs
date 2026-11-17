@@ -6,7 +6,11 @@ const {chromium} = require(path.join(process.env.CODEX_TEST_MODULES, 'playwright
 
 const root = path.resolve(__dirname, '../../..');
 const section = process.argv[2] || '21-40';
-const problems = JSON.parse(fs.readFileSync(path.join(root, 'imports/Hot100-'+section+'.import.json'), 'utf8')).problems;
+const scope = process.argv[3] || section;
+const [first,last] = scope.split('-').map(Number);
+const problems = JSON.parse(fs.readFileSync(path.join(root, 'imports/Hot100-'+section+'.import.json'), 'utf8')).problems
+ .filter(problem => problem.order >= first && problem.order <= last);
+assert.equal(problems.length,last-first+1);
 const catalog = {window:{}};
 require('node:vm').runInNewContext(fs.readFileSync(path.join(root,'docs/assets/catalog.js'),'utf8'),catalog);
 const hot100 = catalog.window.CATALOG.filter(p=>p.chapter==='Hot100');
@@ -75,6 +79,6 @@ const url = rel => base ? base + '/' + rel : pathToFileURL(path.join(root, 'docs
  } finally {
   await browser.close();
  }
- const file = path.join(root, 'outputs', 'Hot100-'+section+(base ? '-online.json' : '-browser.json'));
+ const file = path.join(root, 'outputs', 'Hot100-'+scope+(base ? '-online.json' : '-browser.json'));
  fs.writeFileSync(file, JSON.stringify({base:base||'local', problems:report},null,2)+'\n');
 })().catch(error => {console.error(error); process.exitCode=1;});

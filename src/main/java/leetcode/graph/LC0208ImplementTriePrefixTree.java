@@ -24,47 +24,50 @@ public class LC0208ImplementTriePrefixTree {
     }
 
     static class Trie {
-        private static class Node {
-            Node[] children = new Node[26];
-            boolean end;
+        private static class TrieNode {
+            final TrieNode[] children = new TrieNode[26];
+            boolean isEnd;
         }
 
-        private final Node root = new Node();
+        private final TrieNode root = new TrieNode();
 
         public Trie() {
         }
 
         public void insert(String word) {
-            Node node = root;
-            for (int i = 0; i < word.length(); i++) {
-                int index = word.charAt(i) - 'a';
+            TrieNode node = root;
+            for (char c : word.toCharArray()) {
+                int index = c - 'a';
                 if (node.children[index] == null) {
-                    node.children[index] = new Node();
+                    node.children[index] = new TrieNode();
                 }
                 node = node.children[index];
             }
-            node.end = true;
+            node.isEnd = true;
         }
 
         public boolean search(String word) {
-            Node node = find(word);
-            return node != null && node.end;
+            TrieNode node = root;
+            for (char c : word.toCharArray()) {
+                int index = c - 'a';
+                if (node.children[index] == null) {
+                    return false;
+                }
+                node = node.children[index];
+            }
+            return node.isEnd;
         }
 
         public boolean startsWith(String prefix) {
-            return find(prefix) != null;
-        }
-
-        private Node find(String text) {
-            Node node = root;
-            for (int i = 0; i < text.length(); i++) {
-                int index = text.charAt(i) - 'a';
-                node = node.children[index];
-                if (node == null) {
-                    return null;
+            TrieNode node = root;
+            for (char c : prefix.toCharArray()) {
+                int index = c - 'a';
+                if (node.children[index] == null) {
+                    return false;
                 }
+                node = node.children[index];
             }
-            return node;
+            return true;
         }
     }
 }

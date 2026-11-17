@@ -1,4 +1,4 @@
-# 79 · 单词搜索 — 展老师小课堂
+# Hot100 第 60 题 · 力扣 79 · 单词搜索 — 展老师小课堂
 
 网页：https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0079-word-search/
 
@@ -18,15 +18,19 @@ Hot100 · 回溯 · Word Search
 
 实际结果：true
 
-测试来源：力扣公开示例
+测试来源：飞书 Hot100 原有课堂示例
+
+## 解法
+
+原地标记并还原的网格回溯
 
 ## 状态含义
 
-index 对应当前要匹配的字母。只有当前字母匹配且 index 到最后时才成功。
+`index == word.length()` 代表上一层已经匹配最后一个字符。无论接下来的分支是否成功，都先恢复本层字符，再返回 `found`。
 
 ## 状态变化
 
-按顺序匹配单词，每次只走到相邻且当前路径没用过的格子。
+从每个格子尝试匹配单词，路径上的格子暂时写成 '#'，从递归返回时复原。
 
 ## Java 解法
 
@@ -34,12 +38,15 @@ index 对应当前要匹配的字母。只有当前字母匹配且 index 到最�
 import java.util.*;
 
 class Solution {
+    private int rows;
+    private int cols;
+
     public boolean exist(char[][] board, String word) {
-        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        boolean[][] used = new boolean[board.length][board[0].length];
-        for (int row = 0; row < board.length; row++) {
-            for (int col = 0; col < board[0].length; col++) {
-                if (backtracking(board, word, row, col, 0, used, directions)) {
+        rows = board.length;
+        cols = board[0].length;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (backtracking(board, word, row, col, 0)) {
                     return true;
                 }
             }
@@ -47,29 +54,22 @@ class Solution {
         return false;
     }
 
-    private boolean backtracking(char[][] board, String word, int row, int col,
-            int index, boolean[][] used, int[][] directions) {
-        if (used[row][col] || board[row][col] != word.charAt(index)) {
-            return false;
-        }
-        if (index == word.length() - 1) {
+    private boolean backtracking(char[][] board, String word, int row, int col, int index) {
+        if (index == word.length()) {
             return true;
         }
-        used[row][col] = true;
-        boolean found = false;
-        for (int[] direction : directions) {
-            int nextRow = row + direction[0];
-            int nextCol = col + direction[1];
-            if (nextRow < 0 || nextRow >= board.length
-                    || nextCol < 0 || nextCol >= board[0].length) {
-                continue;
-            }
-            if (backtracking(board, word, nextRow, nextCol, index + 1, used, directions)) {
-                found = true;
-                break;
-            }
+        if (row < 0 || row >= rows || col < 0 || col >= cols
+                || board[row][col] == '#' || board[row][col] != word.charAt(index)) {
+            return false;
         }
-        used[row][col] = false;
+
+        char saved = board[row][col];
+        board[row][col] = '#';
+        boolean found = backtracking(board, word, row + 1, col, index + 1)
+                || backtracking(board, word, row - 1, col, index + 1)
+                || backtracking(board, word, row, col + 1, index + 1)
+                || backtracking(board, word, row, col - 1, index + 1);
+        board[row][col] = saved;
         return found;
     }
 }
@@ -77,19 +77,21 @@ class Solution {
 
 ## 来源与版本
 
-学习扩展。按本题条件选择主解。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
+算法流程来自代码随想录的 Java 解法，保留飞书原有课堂示例。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
 
 Java 源码：https://github.com/XiaoShuPeiQi/leetcode-java/blob/main/src/main/java/leetcode/backtracking/LC0079WordSearch.java
 
-源码指纹：6f1645ae521214f7e85474eef4dec13b20afdc0e4b7353291ca1d634866918ae
+源码指纹：e92a7a7ac30b393a9ab7e44870988134ec041384c8ee04b1709007d6bb0e2c4d
 
-飞书来源笔记：https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf（外部文档可能需要登录，本文仅包含本页已发布的内容。）
+飞书来源笔记：https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcnwLhlvRenAi3AqEiBmYgJYb（外部文档可能需要登录，本文仅包含本页已发布的内容。）
+
+代码随想录 Java 解法：https://programmercarl.com/hot100/0079.word-search.html#java
 
 ## 执行回放
 
 本页回放代表性输入的真实 Java 17 / JDI 暂停快照。高亮行尚未执行，执行后的变化出现在下一暂停位置。可单步、后退、重置、播放、拖动进度和选择调用栈帧；网页不运行任意 Java 输入。
 
-原始暂停事件：153 个。
+原始暂停事件：117 个。
 
 完整轨迹 JSON 与交互页面使用同一份数据：code 为代码，displayStart 为起始行号，steps 为按时间排列的全部暂停事件，pool 为共享状态池。事件中的 frames、heap、roots、stack、vars 等整数索引指向 pool；旧回溯格式的 vars 是键索引/值索引对。calls 或 nodes 保存调用树。
 

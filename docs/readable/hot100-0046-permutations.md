@@ -1,4 +1,4 @@
-# 46 · 全排列 — 展老师小课堂
+# Hot100 第 55 题 · 力扣 46 · 全排列 — 展老师小课堂
 
 网页：https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0046-permutations/
 
@@ -18,15 +18,19 @@ Hot100 · 回溯 · Permutations
 
 实际结果：[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
 
-测试来源：算法学习总笔记与项目已有 main
+测试来源：飞书 Hot100 原有课堂示例
+
+## 解法
+
+回溯、used 数组与链表路径
 
 ## 状态含义
 
-path 保存当前排列前缀。每个下标在同一路径只出现一次，收集时复制 path。
+递归入口处，`path` 的长度等于 `used` 中 true 的数量。路径长度为 n 时收集结果并返回。
 
 ## 状态变化
 
-每层选择一个还没用过的位置，路径满了就收集。
+每层从头选一个尚未使用的下标，填满路径后复制一份排列。
 
 ## Java 解法
 
@@ -34,29 +38,28 @@ path 保存当前排列前缀。每个下标在同一路径只出现一次，收
 import java.util.*;
 
 class Solution {
+    private List<List<Integer>> result;
+    private final LinkedList<Integer> path = new LinkedList<>();
+
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        boolean[] used = new boolean[nums.length];
-        List<Integer> path = new ArrayList<>();
-        backtracking(nums, used, path, result);
+        result = new ArrayList<>();
+        backtracking(nums, new boolean[nums.length]);
         return result;
     }
 
-    private void backtracking(int[] nums, boolean[] used,
-            List<Integer> path, List<List<Integer>> result) {
+    private void backtracking(int[] nums, boolean[] used) {
         if (path.size() == nums.length) {
             result.add(new ArrayList<>(path));
             return;
         }
-        // 每层从 0 选，used 控制路径占用。
         for (int i = 0; i < nums.length; i++) {
             if (used[i]) {
                 continue;
             }
             used[i] = true;
             path.add(nums[i]);
-            backtracking(nums, used, path, result);
-            path.remove(path.size() - 1);
+            backtracking(nums, used);
+            path.removeLast();
             used[i] = false;
         }
     }
@@ -65,19 +68,21 @@ class Solution {
 
 ## 来源与版本
 
-沿用总笔记及仓库中本题的主解。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
+算法流程来自代码随想录的 Java 解法，保留飞书原有课堂示例。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
 
 Java 源码：https://github.com/XiaoShuPeiQi/leetcode-java/blob/main/src/main/java/leetcode/backtracking/LC0046Permutations.java
 
-源码指纹：3b94bdaf5abc8a042e97a3ce9abfab458404d4ee4b7e4b50acc6cd71b9ff84ca
+源码指纹：c4d8e0702a778e9f2a58b4e1a862183db474bb32713bd71d78d8a53271dab8aa
 
-飞书来源笔记：https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf（外部文档可能需要登录，本文仅包含本页已发布的内容。）
+飞书来源笔记：https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcnveJCAIoLpqVBDL7puZgnBh（外部文档可能需要登录，本文仅包含本页已发布的内容。）
+
+代码随想录 Java 解法：https://programmercarl.com/hot100/0046.permutations.html#java
 
 ## 执行回放
 
 本页回放代表性输入的真实 Java 17 / JDI 暂停快照。高亮行尚未执行，执行后的变化出现在下一暂停位置。可单步、后退、重置、播放、拖动进度和选择调用栈帧；网页不运行任意 Java 输入。
 
-原始暂停事件：237 个。
+原始暂停事件：235 个。
 
 完整轨迹 JSON 与交互页面使用同一份数据：code 为代码，displayStart 为起始行号，steps 为按时间排列的全部暂停事件，pool 为共享状态池。事件中的 frames、heap、roots、stack、vars 等整数索引指向 pool；旧回溯格式的 vars 是键索引/值索引对。calls 或 nodes 保存调用树。
 

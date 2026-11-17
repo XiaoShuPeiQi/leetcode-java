@@ -17,7 +17,8 @@ public class LinkedTraceRecorder {
         Path output = Path.of(args[1]);
         LaunchingConnector launcher = Bootstrap.virtualMachineManager().defaultConnector();
         Map<String, Connector.Argument> options = launcher.defaultArguments();
-        options.get("main").setValue(className);
+        String launchClass = args.length > 4 ? args[4] : className;
+        options.get("main").setValue(launchClass);
         options.get("home").setValue(Path.of(args[2]).toAbsolutePath().toString());
         options.get("options").setValue("-Dfile.encoding=UTF-8 -cp bin");
         VirtualMachine vm = launcher.launch(options);
@@ -75,7 +76,7 @@ public class LinkedTraceRecorder {
                         }
                         Map<String, Object> roots = new LinkedHashMap<>();
                         for (StackFrame frame : all) {
-                            if (!frame.location().declaringType().name().equals(className)
+                            if (!frame.location().declaringType().name().equals(launchClass)
                                     || !frame.location().method().name().equals("runSolution")) continue;
                             for (LocalVariable local : frame.visibleVariables()) {
                                 if (!Set.of("actual", "expected", "solution", "trie").contains(local.name()))
@@ -145,6 +146,15 @@ public class LinkedTraceRecorder {
             ArrayReference array = (ArrayReference) field(object, "elementData");
             for (Value item : array.getValues(0, integer(field(object, "size")))) values.add(value(item, depth + 1));
             result = values;
+        } else if (type.equals("java.util.LinkedList")) {
+            List<Object> values = new ArrayList<>();
+            cache.put(id, values);
+            ObjectReference node = (ObjectReference) field(object, "first");
+            while (node != null) {
+                values.add(value(field(node, "item"), depth + 1));
+                node = (ObjectReference) field(node, "next");
+            }
+            result = values;
         } else if (type.equals("java.lang.StringBuilder")) {
             int count = integer(field(object, "count")), coder = integer(field(object, "coder"));
             ArrayReference array = (ArrayReference) field(object, "value");
@@ -183,7 +193,8 @@ public class LinkedTraceRecorder {
             result = value(field(object, "value"), depth + 1);
         } else if (type.equals("common.ListNode") || type.equals("common.TreeNode")
                 || type.startsWith("leetcode.linkedlist.")
-                || type.equals("leetcode.graph.LC0208ImplementTriePrefixTree$Trie$Node")) {
+                || type.equals("leetcode.graph.LC0208ImplementTriePrefixTree$Trie$Node")
+                || type.equals("leetcode.graph.LC0208ImplementTriePrefixTree$Trie$TrieNode")) {
             result = Map.of("$ref", id); cache.put(id, result);
             Map<String, Object> fields = new LinkedHashMap<>();
             fields.put("$type", type); heap.put(Long.toString(id), fields);

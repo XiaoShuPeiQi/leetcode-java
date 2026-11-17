@@ -69,4 +69,43 @@ public class LC0039CombinationSum {
             }
         }
     }
+
+    // Hot100 课堂使用代码随想录的 Java 实现。
+    public static class Hot100Demo {
+        public static void main(String[] args) {
+            common.TreeSupport.check("Hot100Solution", "candidates = [2, 3, 6, 7], target = 7",
+                    "[[2, 2, 3], [7]]", String.valueOf(runSolution()));
+        }
+
+        // 测试来源：飞书 Hot100 原有课堂示例。
+        static Object runSolution() {
+            int[] candidates = {2, 3, 6, 7};
+            int target = 7;
+            return new Hot100Solution().combinationSum(candidates, target);
+        }
+    }
+
+    static class Hot100Solution {
+        private List<List<Integer>> result;
+        private final LinkedList<Integer> path = new LinkedList<>();
+
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            result = new ArrayList<>();
+            Arrays.sort(candidates);
+            backtracking(candidates, target, 0, 0);
+            return result;
+        }
+
+        private void backtracking(int[] nums, int target, int sum, int start) {
+            if (sum == target) {
+                result.add(new ArrayList<>(path));
+                return;
+            }
+            for (int i = start; i < nums.length && sum + nums[i] <= target; i++) {
+                path.add(nums[i]);
+                backtracking(nums, target, sum + nums[i], i);
+                path.removeLast();
+            }
+        }
+    }
 }

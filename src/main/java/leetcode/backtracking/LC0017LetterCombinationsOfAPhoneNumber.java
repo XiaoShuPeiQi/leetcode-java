@@ -68,4 +68,47 @@ public class LC0017LetterCombinationsOfAPhoneNumber {
             }
         }
     }
+
+    // Hot100 课堂使用代码随想录的 Java 实现。
+    public static class Hot100Demo {
+        public static void main(String[] args) {
+            common.TreeSupport.check("Hot100Solution", "digits = 23",
+                    "[ad, ae, af, bd, be, bf, cd, ce, cf]", String.valueOf(runSolution()));
+        }
+
+        // 测试来源：飞书 Hot100 原有课堂示例。
+        static Object runSolution() {
+            String digits = "23";
+            return new Hot100Solution().letterCombinations(digits);
+        }
+    }
+
+    static class Hot100Solution {
+        private List<String> list;
+        private final StringBuilder temp = new StringBuilder();
+
+        public List<String> letterCombinations(String digits) {
+            list = new ArrayList<>();
+            if (digits == null || digits.isEmpty()) {
+                return list;
+            }
+            String[] numString = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+            backtracking(digits, numString, 0);
+            return list;
+        }
+
+        private void backtracking(String digits, String[] numString, int num) {
+            if (num == digits.length()) {
+                list.add(temp.toString());
+                return;
+            }
+
+            String letters = numString[digits.charAt(num) - '0'];
+            for (int i = 0; i < letters.length(); i++) {
+                temp.append(letters.charAt(i));
+                backtracking(digits, numString, num + 1);
+                temp.deleteCharAt(temp.length() - 1);
+            }
+        }
+    }
 }

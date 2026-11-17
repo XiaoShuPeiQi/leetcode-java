@@ -13,16 +13,20 @@ public class LC0079WordSearch {
     // 测试来源：力扣示例与 Hot100 笔记。
     static Object runSolution() {
         char[][] board = {"ABCE".toCharArray(), "SFCS".toCharArray(), "ADEE".toCharArray()};
-        return new Solution().exist(board, "ABCCED");
+        String word = "ABCCED";
+        return new Solution().exist(board, word);
     }
 
     static class Solution {
+        private int rows;
+        private int cols;
+
         public boolean exist(char[][] board, String word) {
-            int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-            boolean[][] used = new boolean[board.length][board[0].length];
-            for (int row = 0; row < board.length; row++) {
-                for (int col = 0; col < board[0].length; col++) {
-                    if (backtracking(board, word, row, col, 0, used, directions)) {
+            rows = board.length;
+            cols = board[0].length;
+            for (int row = 0; row < rows; row++) {
+                for (int col = 0; col < cols; col++) {
+                    if (backtracking(board, word, row, col, 0)) {
                         return true;
                     }
                 }
@@ -30,29 +34,22 @@ public class LC0079WordSearch {
             return false;
         }
 
-        private boolean backtracking(char[][] board, String word, int row, int col,
-                int index, boolean[][] used, int[][] directions) {
-            if (used[row][col] || board[row][col] != word.charAt(index)) {
-                return false;
-            }
-            if (index == word.length() - 1) {
+        private boolean backtracking(char[][] board, String word, int row, int col, int index) {
+            if (index == word.length()) {
                 return true;
             }
-            used[row][col] = true;
-            boolean found = false;
-            for (int[] direction : directions) {
-                int nextRow = row + direction[0];
-                int nextCol = col + direction[1];
-                if (nextRow < 0 || nextRow >= board.length
-                        || nextCol < 0 || nextCol >= board[0].length) {
-                    continue;
-                }
-                if (backtracking(board, word, nextRow, nextCol, index + 1, used, directions)) {
-                    found = true;
-                    break;
-                }
+            if (row < 0 || row >= rows || col < 0 || col >= cols
+                    || board[row][col] == '#' || board[row][col] != word.charAt(index)) {
+                return false;
             }
-            used[row][col] = false;
+
+            char saved = board[row][col];
+            board[row][col] = '#';
+            boolean found = backtracking(board, word, row + 1, col, index + 1)
+                    || backtracking(board, word, row - 1, col, index + 1)
+                    || backtracking(board, word, row, col + 1, index + 1)
+                    || backtracking(board, word, row, col - 1, index + 1);
+            board[row][col] = saved;
             return found;
         }
     }

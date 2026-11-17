@@ -59,4 +59,38 @@ public class LC0078Subsets {
             }
         }
     }
+
+    // Hot100 课堂使用代码随想录的 Java 实现。
+    public static class Hot100Demo {
+        public static void main(String[] args) {
+            common.TreeSupport.check("Hot100Solution", "nums = [1, 2]",
+                    "[[], [1], [1, 2], [2]]", String.valueOf(runSolution()));
+        }
+
+        // 测试来源：飞书 Hot100 原有课堂示例。
+        static Object runSolution() {
+            int[] nums = {1, 2};
+            return new Hot100Solution().subsets(nums);
+        }
+    }
+
+    static class Hot100Solution {
+        private List<List<Integer>> result;
+        private final LinkedList<Integer> path = new LinkedList<>();
+
+        public List<List<Integer>> subsets(int[] nums) {
+            result = new ArrayList<>();
+            backtracking(nums, 0);
+            return result;
+        }
+
+        private void backtracking(int[] nums, int start) {
+            result.add(new ArrayList<>(path));
+            for (int i = start; i < nums.length; i++) {
+                path.add(nums[i]);
+                backtracking(nums, i + 1);
+                path.removeLast();
+            }
+        }
+    }
 }

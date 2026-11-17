@@ -1,4 +1,4 @@
-# 17 · 电话号码的字母组合 — 展老师小课堂
+# Hot100 第 57 题 · 力扣 17 · 电话号码的字母组合 — 展老师小课堂
 
 网页：https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0017-letter-combinations-of-a-phone-number/
 
@@ -18,15 +18,19 @@ Hot100 · 回溯 · Letter Combinations of a Phone Number
 
 实际结果：[ad, ae, af, bd, be, bf, cd, ce, cf]
 
-测试来源：算法学习总笔记与项目已有 main
+测试来源：飞书 Hot100 原有课堂示例
+
+## 解法
+
+按数字位置逐层回溯
 
 ## 状态含义
 
-index 是当前数字位置，path 的长度等于已处理的数字数。
+进入第 `num` 层时，`temp.length() == num`。到达 `digits.length()` 时用 `temp.toString()` 保存结果。
 
 ## 状态变化
 
-每层处理一个数字，从它对应的字母里挑一个。
+每层从当前数字的映射中选一个字母，遍历完所有数字后收集字符串。
 
 ## Java 解法
 
@@ -34,32 +38,30 @@ index 是当前数字位置，path 的长度等于已处理的数字数。
 import java.util.*;
 
 class Solution {
-    private final String[] letters = {
-        "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"
-    };
+    private List<String> list;
+    private final StringBuilder temp = new StringBuilder();
 
     public List<String> letterCombinations(String digits) {
-        List<String> result = new ArrayList<>();
-        if (digits.isEmpty()) {
-            return result;
+        list = new ArrayList<>();
+        if (digits == null || digits.isEmpty()) {
+            return list;
         }
-        StringBuilder path = new StringBuilder();
-        backtracking(digits, 0, path, result);
-        return result;
+        String[] numString = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        backtracking(digits, numString, 0);
+        return list;
     }
 
-    private void backtracking(String digits, int index,
-            StringBuilder path, List<String> result) {
-        if (index == digits.length()) {
-            result.add(path.toString());
+    private void backtracking(String digits, String[] numString, int num) {
+        if (num == digits.length()) {
+            list.add(temp.toString());
             return;
         }
-        // 当前数字对应的字母。
-        String choices = letters[digits.charAt(index) - '0'];
-        for (int i = 0; i < choices.length(); i++) {
-            path.append(choices.charAt(i));
-            backtracking(digits, index + 1, path, result);
-            path.deleteCharAt(path.length() - 1);
+
+        String letters = numString[digits.charAt(num) - '0'];
+        for (int i = 0; i < letters.length(); i++) {
+            temp.append(letters.charAt(i));
+            backtracking(digits, numString, num + 1);
+            temp.deleteCharAt(temp.length() - 1);
         }
     }
 }
@@ -67,13 +69,15 @@ class Solution {
 
 ## 来源与版本
 
-沿用总笔记及仓库中本题的主解。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
+算法流程来自代码随想录的 Java 解法，保留飞书原有课堂示例。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
 
 Java 源码：https://github.com/XiaoShuPeiQi/leetcode-java/blob/main/src/main/java/leetcode/backtracking/LC0017LetterCombinationsOfAPhoneNumber.java
 
-源码指纹：f30bed333f71ae53df738f25c9f98a5edc7955279517c616649dc17657f87544
+源码指纹：5e45d78a96be7bd6a5b757b556102b592193e471794bbc0645742839cba5e651
 
-飞书来源笔记：https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf（外部文档可能需要登录，本文仅包含本页已发布的内容。）
+飞书来源笔记：https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcnJZt5bUxUtIuxQqa58dyt4g（外部文档可能需要登录，本文仅包含本页已发布的内容。）
+
+代码随想录 Java 解法：https://programmercarl.com/hot100/0017.letter-combinations-of-a-phone-number.html#java
 
 ## 执行回放
 
