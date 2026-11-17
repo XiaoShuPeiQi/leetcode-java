@@ -1,6 +1,13 @@
 name: Deploy algorithm debuggers
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'src/main/java/**'
+      - '.github/scripts/**'
+      - '.github/workflows/deploy-pages.yml'
 permissions:
   contents: read
   pages: write
@@ -23,6 +30,8 @@ jobs:
           cp docs/index.html docs/.nojekyll .work/pages/
           cp -R docs/assets docs/problems .work/pages/
           node .github/scripts/enrich-problem-pages.mjs .work/pages
+          node .github/scripts/verify-readable-pages.mjs .work/pages
+          test -z "$(git status --porcelain -- docs/readable)" || { echo 'Regenerate and commit docs/readable with enrich-problem-pages.mjs before deployment.'; exit 1; }
       - uses: actions/upload-pages-artifact@v4
         with:
           path: .work/pages

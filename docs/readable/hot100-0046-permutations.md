@@ -1,0 +1,86 @@
+# 46 · 全排列 — 展老师小课堂
+
+网页：https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0046-permutations/
+
+Hot100 · 回溯 · Permutations
+
+## 题意
+
+给定互不相同的整数，返回使用全部元素排成的所有序列，结果顺序任意。
+
+官方原题：https://leetcode.cn/problems/permutations/
+
+## 课堂示例
+
+输入：nums = [1, 2, 3]
+
+预期结果：[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+
+实际结果：[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+
+测试来源：算法学习总笔记与项目已有 main
+
+## 状态含义
+
+path 保存当前排列前缀。每个下标在同一路径只出现一次，收集时复制 path。
+
+## 状态变化
+
+每层选择一个还没用过的位置，路径满了就收集。
+
+## Java 解法
+
+```java
+import java.util.*;
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        boolean[] used = new boolean[nums.length];
+        List<Integer> path = new ArrayList<>();
+        backtracking(nums, used, path, result);
+        return result;
+    }
+
+    private void backtracking(int[] nums, boolean[] used,
+            List<Integer> path, List<List<Integer>> result) {
+        if (path.size() == nums.length) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        // 每层从 0 选，used 控制路径占用。
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i]) {
+                continue;
+            }
+            used[i] = true;
+            path.add(nums[i]);
+            backtracking(nums, used, path, result);
+            path.remove(path.size() - 1);
+            used[i] = false;
+        }
+    }
+}
+```
+
+## 来源与版本
+
+沿用总笔记及仓库中本题的主解。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
+
+Java 源码：https://github.com/XiaoShuPeiQi/leetcode-java/blob/main/src/main/java/leetcode/backtracking/LC0046Permutations.java
+
+源码指纹：3b94bdaf5abc8a042e97a3ce9abfab458404d4ee4b7e4b50acc6cd71b9ff84ca
+
+飞书来源笔记：https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf（外部文档可能需要登录，本文仅包含本页已发布的内容。）
+
+## 执行回放
+
+本页回放代表性输入的真实 Java 17 / JDI 暂停快照。高亮行尚未执行，执行后的变化出现在下一暂停位置。可单步、后退、重置、播放、拖动进度和选择调用栈帧；网页不运行任意 Java 输入。
+
+原始暂停事件：237 个。
+
+完整轨迹 JSON 与交互页面使用同一份数据：code 为代码，displayStart 为起始行号，steps 为按时间排列的全部暂停事件，pool 为共享状态池。事件中的 frames、heap、roots、stack、vars 等整数索引指向 pool；旧回溯格式的 vars 是键索引/值索引对。calls 或 nodes 保存调用树。
+
+完整轨迹：https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0046-permutations/trace.json
+
+本文包含题意、示例、网页已提供的状态说明、Java 解法和来源；逐步变量及调用栈保存在上面的完整轨迹文件中。

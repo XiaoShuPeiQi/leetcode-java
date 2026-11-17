@@ -5,6 +5,7 @@ body > .problem-content {
 }
 
 .problem-statement,
+.problem-notes,
 .problem-java {
     padding: 14px 18px;
     margin: 0 0 16px;
@@ -39,7 +40,8 @@ body > .problem-content {
     font-size: 12px;
 }
 
-.problem-statement p {
+.problem-statement p,
+.problem-notes p {
     line-height: 1.7;
     margin: 8px 0;
 }
@@ -74,11 +76,16 @@ body > .problem-content {
     tab-size: 4;
 }
 
-.copy-java {
+.copy-java,
+.copy-classroom {
     padding: 4px 8px;
     white-space: nowrap;
     font-size: 12px;
 }
+
+.problem-notes { overflow-wrap: anywhere; }
+.problem-notes h2 { font-size: 17px; }
+.problem-notes h3 { font-size: 14px; }
 
 .copy-java-inline {
     margin-left: 6px;
