@@ -83,6 +83,8 @@ public final class TreeSupport {
     }
 
     private static String display(Object value) {
-        return value instanceof int[] array ? Arrays.toString(array) : String.valueOf(value);
+        if (value instanceof int[] array) return Arrays.toString(array);
+        if (value instanceof double[] array) return Arrays.toString(array);
+        return String.valueOf(value);
     }
 }

@@ -31,4 +31,29 @@ public class LC0121BestTimetoBuyandSellStock {
             return dp[n - 1][1];
         }
     }
+
+    public static class Hot100 {
+        public static void main(String[] args) {
+            common.TreeSupport.check("Hot100Solution", "prices = [7, 1, 5, 3, 6, 4]",
+                    5, runSolution());
+        }
+
+        // 测试来源：飞书 Hot100 第 77 题的实例走过程。
+        static Object runSolution() {
+            int[] prices = {7, 1, 5, 3, 6, 4};
+            return new Hot100Solution().maxProfit(prices);
+        }
+    }
+
+    // Hot100 笔记的贪心解法。
+    static class Hot100Solution {
+        public int maxProfit(int[] prices) {
+            int low = Integer.MAX_VALUE, result = 0;
+            for (int price : prices) {
+                low = Math.min(low, price);
+                result = Math.max(result, price - low);
+            }
+            return result;
+        }
+    }
 }

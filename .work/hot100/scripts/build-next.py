@@ -84,7 +84,7 @@ for p in problems:
     assert bool(node_ids) == (p["group"] in {"链表", "二叉树"} or id == 208)
     assert len(steps) == checks[id]["events"]
     data = dict(id=id, title=p["title"], english=p["english"], chapter="Hot100", order=p["order"],
-                group=p["group"], slug=p["page_slug"], input=p["input"], inputObject={}, source=meta["target_url"],
+                group=p["group"], slug=p["page_slug"], input=p["input"], inputObject=p.get("inputObject", {}), source=meta["target_url"],
                 javaFile=p["javaFile"], testSource=p["test_source"], sourceHash=p["sourceHash"],
                 sourceStatus=p["provenance"]+" 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。",
                 code=code, displayStart=start, expected=expected, actual=actual, pool=pool,
@@ -92,7 +92,10 @@ for p in problems:
                 transition=p["summary"], validation=checks[id])
     if "reference" in p:
         data.update(reference=p["reference"], algorithm=p["algorithm"])
+    if "headingBlock" in p:
         data["source"] += "#" + p["headingBlock"]
+    if p.get("preserveSubmission"):
+        data["submissionCode"] = p["code"]
     dir = D / "problems" / p["page_slug"]
     dir.mkdir(parents=True, exist_ok=True)
     page = re.sub(r"<title>.*?</title>", lambda _: f'<title>{id} · {html.escape(p["title"])} — 展老师小课堂</title>', template)

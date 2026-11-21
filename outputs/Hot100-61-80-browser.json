@@ -1,0 +1,165 @@
+{
+  "base": "local",
+  "problems": [
+    {
+      "id": 131,
+      "visibleStops": 75,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 51,
+      "visibleStops": 481,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 35,
+      "visibleStops": 14,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 74,
+      "visibleStops": 19,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 34,
+      "visibleStops": 48,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 33,
+      "visibleStops": 16,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 153,
+      "visibleStops": 17,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 4,
+      "visibleStops": 39,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 20,
+      "visibleStops": 25,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 155,
+      "visibleStops": 18,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 394,
+      "visibleStops": 65,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 739,
+      "visibleStops": 38,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 84,
+      "visibleStops": 53,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 215,
+      "visibleStops": 200,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 347,
+      "visibleStops": 34,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 295,
+      "visibleStops": 28,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 121,
+      "visibleStops": 22,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 55,
+      "visibleStops": 16,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 45,
+      "visibleStops": 22,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    },
+    {
+      "id": 763,
+      "visibleStops": 24,
+      "stepBack": "PASS",
+      "breakpoint": "PASS",
+      "state": "PASS",
+      "result": "PASS"
+    }
+  ]
+}

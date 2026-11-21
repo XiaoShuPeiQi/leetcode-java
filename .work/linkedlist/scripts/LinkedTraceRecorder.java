@@ -79,8 +79,11 @@ public class LinkedTraceRecorder {
                             if (!frame.location().declaringType().name().equals(launchClass)
                                     || !frame.location().method().name().equals("runSolution")) continue;
                             for (LocalVariable local : frame.visibleVariables()) {
-                                if (!Set.of("actual", "expected", "solution", "trie").contains(local.name()))
-                                    roots.put(local.name(), value(frame.getValue(local), 0));
+                                Value input = frame.getValue(local);
+                                if (Set.of("actual", "expected", "solution", "trie").contains(local.name())
+                                        || input instanceof ObjectReference ref && ref.referenceType().name().equals(filter))
+                                    continue;
+                                roots.put(local.name(), value(input, 0));
                             }
                         }
                         String kind = event instanceof MethodEntryEvent ? "enter"
@@ -141,10 +144,11 @@ public class LinkedTraceRecorder {
             List<Object> values = new ArrayList<>(); cache.put(id, values);
             for (Value item : array.getValues()) values.add(value(item, depth + 1));
             result = values;
-        } else if (type.equals("java.util.ArrayList")) {
+        } else if (type.equals("java.util.ArrayList") || type.equals("java.util.Stack")) {
             List<Object> values = new ArrayList<>(); cache.put(id, values);
             ArrayReference array = (ArrayReference) field(object, "elementData");
-            for (Value item : array.getValues(0, integer(field(object, "size")))) values.add(value(item, depth + 1));
+            String sizeField = type.equals("java.util.Stack") ? "elementCount" : "size";
+            for (Value item : array.getValues(0, integer(field(object, sizeField)))) values.add(value(item, depth + 1));
             result = values;
         } else if (type.equals("java.util.LinkedList")) {
             List<Object> values = new ArrayList<>();
@@ -175,6 +179,11 @@ public class LinkedTraceRecorder {
             int head = integer(field(object, "head")), tail = integer(field(object, "tail"));
             while (head != tail) { values.add(value(array.getValue(head), depth + 1)); head = (head + 1) % array.length(); }
             result = values;
+        } else if (type.equals("java.util.HashMap$Node") || type.equals("java.util.HashMap$TreeNode")) {
+            List<Object> fields = new ArrayList<>(); cache.put(id, fields);
+            fields.add(value(field(object, "key"), depth + 1));
+            fields.add(value(field(object, "value"), depth + 1));
+            result = fields;
         } else if (type.startsWith("java.util.HashMap")) {
             List<Object> entries = new ArrayList<>();
             Map<String, Object> map = new LinkedHashMap<>(); map.put("$map", entries); cache.put(id, map);

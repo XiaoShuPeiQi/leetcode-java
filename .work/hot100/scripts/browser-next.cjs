@@ -62,15 +62,21 @@ const url = rel => base ? base + '/' + rel : pathToFileURL(path.join(root, 'docs
    await seek(max);
    assert.match(await page.locator('#result').textContent(), /PASS/);
    assert.ok((await page.locator('#result').textContent()).includes(p.expected), p.id);
-   if ([240,200,994,79].includes(p.id)) assert.ok(await page.locator('#state .matrix-cell').count() > 0);
+   if ([240,200,994,79,74].includes(p.id)) assert.ok(await page.locator('#state .matrix-cell').count() > 0);
    if (trace.nodeIds.length) assert.ok(await page.locator('#state [data-node]').count() > 0, p.id);
    if (p.id === 138) assert.ok(await page.locator('[data-edge=random]').count() > 0);
    if (p.id === 146) assert.ok(await page.locator('[data-edge=prev]').count() > 0);
    if (p.id === 208) assert.ok(await page.locator('[data-word-end=true]').count() >= 2);
-   if ([240,146,543,105,208,79].includes(p.id)) {
+   if ([240,146,543,105,208,79].includes(p.id) || p.order >= 61) {
     await page.setViewportSize({width:390,height:844});
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth+1), p.id);
     await page.setViewportSize({width:1440,height:1000});
+   }
+   if (base && p.preserveSubmission) {
+    assert.equal((await page.locator('#java-source').textContent()).trimEnd(), p.code.trimEnd());
+    const exported = await page.request.get(new URL('trace.json', page.url()).href);
+    assert.ok(exported.ok());
+    assert.deepEqual(await exported.json(), trace);
    }
    assert.deepEqual(errors, []);
    report.push({id:p.id, visibleStops:max+1, stepBack:'PASS', breakpoint:'PASS', state:'PASS', result:'PASS'});

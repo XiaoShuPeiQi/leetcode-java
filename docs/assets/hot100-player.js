@@ -30,6 +30,23 @@ function previousVars(){
 }
 function pointers(name,vars){
  let keys=['left','right','mid','slow','fast','write','i','j','start','end','target'];
+ if(data.order>=61&&data.order<=80){
+  const byProblem={
+   131:{s:['startIndex','end','left','right']},
+   35:{nums:['left','mid','right']},
+   34:{nums:['left','mid','right','answer']},
+   33:{nums:['left','mid','right']},
+   153:{nums:['left','mid','right']},
+   4:{nums1:['start1'],nums2:['start2']},
+   739:{temperatures:['i','index'],answer:['i','index']},
+   84:{newHeights:['i','mid']},
+   215:{nums:['left','less','scan','greater','right','targetIndex']},
+   55:{nums:['i','cover']},
+   45:{nums:['i','curEnd','nextEnd']},
+   763:{s:['i','start','end']}
+  };
+  keys=byProblem[data.id]?.[name]||[];
+ }
  if(data.id===238)keys=['i'];
  if(data.id===844)keys=name==='s'?['i']:name==='t'?['j']:[];
  if(data.id===76)keys=['left','right'];
@@ -48,15 +65,16 @@ function matrix(name,values,vars,old,label=name){
  const refs=[...source.matchAll(/(\w+)\[(\w+)\]\[(\w+)\]/g)].filter(m=>m[1]===name).map(m=>[vars[m[2]],vars[m[3]]]);
  return '<div class="state-label">'+esc(label)+'</div><div class="matrix-scroll"><table class="matrix"><thead><tr><th>行 / 列</th>'+values[0].map((_,j)=>'<th>'+j+'</th>').join('')+'</tr></thead><tbody>'+values.map((row,i)=>'<tr><th>'+i+'</th>'+row.map((v,j)=>{
   const changed=Array.isArray(old?.[i])&&old[i][j]!==v;
-  const active=refs.some(([row,col])=>row===i&&col===j)||([240,200,994,79].includes(data.id)&&vars.row===i&&vars.col===j)||([200,994].includes(data.id)&&vars.cell?.[0]===i&&vars.cell?.[1]===j);
+  const active=refs.some(([row,col])=>row===i&&col===j)||([240,200,994,79,51,74].includes(data.id)&&vars.row===i&&vars.col===j)||([200,994].includes(data.id)&&vars.cell?.[0]===i&&vars.cell?.[1]===j);
   return '<td data-row="'+i+'" data-col="'+j+'" class="matrix-cell '+(active?'active ':'')+(changed?'changed':'')+'">'+esc(v)+'</td>';
  }).join('')+'</tr>').join('')+'</tbody></table></div>';
 }
 function heightChart(values,vars){
  const max=Math.max(1,...values),width=Math.max(350,values.length*38+20);
- return '<svg class="height-chart" viewBox="0 0 '+width+' 185" role="img" aria-label="柱子高度与左右指针">'+values.map((h,i)=>{
-  const x=15+i*38,y=140-h/max*105,active=i===vars.left||i===vars.right;
-  return '<rect x="'+x+'" y="'+y+'" width="25" height="'+(140-y)+'" fill="'+(active?'var(--accent)':'var(--muted)')+'" opacity=".75"/><text x="'+(x+12)+'" y="'+(y-6)+'" text-anchor="middle">'+h+'</text><text x="'+(x+12)+'" y="158" text-anchor="middle">'+i+'</text>'+(active?'<text x="'+(x+12)+'" y="178" text-anchor="middle">'+(i===vars.left?'left':'right')+'</text>':'');
+ const indices=data.id===84?['i','mid']:['left','right'];
+ return '<svg class="height-chart" viewBox="0 0 '+width+' 185" role="img" aria-label="柱子高度与当前下标">'+values.map((h,i)=>{
+  const x=15+i*38,y=140-h/max*105,labels=indices.filter(key=>vars[key]===i);
+  return '<rect x="'+x+'" y="'+y+'" width="25" height="'+(140-y)+'" fill="'+(labels.length?'var(--accent)':'var(--muted)')+'" opacity=".75"/><text x="'+(x+12)+'" y="'+(y-6)+'" text-anchor="middle">'+h+'</text><text x="'+(x+12)+'" y="158" text-anchor="middle">'+i+'</text>'+(labels.length?'<text x="'+(x+12)+'" y="178" text-anchor="middle">'+labels.join('/')+'</text>':'');
  }).join('')+'</svg>';
 }
 function drawState(step,vars){
@@ -64,8 +82,13 @@ function drawState(step,vars){
  const old=previousVars(),shown=new Set();
  let html='<p class="state-caption array-meaning">'+esc(data.stateMeaning)+'</p><div class="array-legend"><span>下方标签：当前指针</span><span>着色：较上一暂停位置改变</span></div>';
  if([11,42].includes(data.id))html+=heightChart(data.inputObject.height,vars);
+ if(data.id===84)html+=heightChart(vars.newHeights||data.inputObject.heights,vars.newHeights?vars:{});
  function view(name,value,original=false){
-  const label=name+(original?' · 原始输入':' · 当前值');
+  let label=name+(original?' · 原始输入':' · 当前值');
+  if([20,155,739,84].includes(data.id)&&['stack','minStack'].includes(name))label=name+' · 从栈顶到栈底';
+  if(data.id===394&&['numStack','strStack'].includes(name))label=name+' · 从栈底到栈顶';
+  if(data.id===347&&name==='minHeap')label='minHeap · 每行[数值, 频次] · 第 0 行是堆顶';
+  if(data.id===295&&['maxHeap','minHeap'].includes(name))label=name+' · 下标 0 是堆顶';
   if(Array.isArray(value))html+=Array.isArray(value[0])?matrix(name,value,vars,old[name],label):vector(name,value,vars,old[name],label);
   else if(typeof value==='string')html+=vector(name,Array.from(value),vars,undefined,label);
  }
@@ -94,7 +117,7 @@ function render(){const step=data.steps[index],event=playback.events[position];h
  $('line-number').textContent='L'+frame.line+(event.complete?' · 完成':' · 待执行');$('operation').className='operation '+step.kind;$('operation').textContent=event.complete?'执行完成':kinds[step.kind];$('step-title').textContent=step.method+'() · 第 '+step.line+' 行';const ret=step.returnValue<0?undefined:data.pool[step.returnValue];$('explanation').textContent=event.returns.length?event.returns.map(r=>'↩ '+r.method+'() = '+brief(r.value)).join(' · '):'';
  $('frame-title').textContent=frame.method+'()';variables(frame.vars);drawState(step,frame.vars);
  renderStack({frames:event.complete?[]:frames,selectedId:selectedFrame,phase:event.entered?'enter':'line',returns:event.returns,format:brief,onSelect:id=>{selectedFrame=id;render();}});
- const vars=frames.at(-1).vars,result=event.complete?ret:vars.res??vars.result;
+ const vars=frames.at(-1).vars,result=event.complete?ret:vars.res??vars.result??vars.answer;
  $('result').innerHTML=event.complete?'<pre>'+esc(data.actual)+'</pre><div class="pass">✓ PASS</div>':result===undefined?'<p class="empty">—</p>':'<pre>'+esc(JSON.stringify(readable(result),null,2))+'</pre>';$('result-count').textContent=event.complete?'最终返回':'当前状态';
  $('progress').value=position;$('progress-label').textContent=(position+1)+' / '+stops.length;$('percent').textContent=Math.round(position/Math.max(1,stops.length-1)*100)+'%';$('prev').disabled=position===0;$('next').disabled=$('key').disabled=position===stops.length-1;
 }

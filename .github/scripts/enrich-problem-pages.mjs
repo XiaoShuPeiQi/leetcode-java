@@ -30,6 +30,7 @@ function readTrace(file) {
 }
 
 function javaSnippet(trace) {
+    if (trace.submissionCode) return trace.submissionCode.endsWith('\n') ? trace.submissionCode : trace.submissionCode + '\n';
     const javaFile = readFileSync(trace.javaFile, 'utf8');
     const imports = javaFile.match(/^import (?:static )?java\.[^\r\n]+;/gm) ?? [];
     // Older traces include the enclosing project class's unindented closing brace.
@@ -44,7 +45,7 @@ function javaSnippet(trace) {
 }
 
 function classroomTitle(trace) {
-    const rank = trace.chapter === 'Hot100' && trace.reference ? `Hot100 第 ${trace.order} 题 · 力扣 ` : '';
+    const rank = trace.chapter === 'Hot100' && (trace.reference || trace.submissionCode) ? `Hot100 第 ${trace.order} 题 · 力扣 ` : '';
     return `${rank}${trace.id} · ${trace.title} — 展老师小课堂`;
 }
 

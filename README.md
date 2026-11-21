@@ -521,3 +521,13 @@ node .work/hot100/scripts/browser-test.cjs
 20 个调试页回放与笔记一致的 Java 示例。可查看树节点引用、Trie 词尾、网格状态、队列和回溯路径。[Java 编译与 JDI 录制](outputs/Hot100-41-60-capture.json) · [本地浏览器验收](outputs/Hot100-41-60-browser.json) · [飞书回读验收](outputs/Hot100-41-60-feishu.json)
 
 在仓库根目录执行 `py -3.11 .work/hot100/scripts/capture-next.py <JDK17目录> 41-60` 录制，再执行 `py -3.11 .work/hot100/scripts/build-next.py 41-60` 生成网页。
+
+## Hot100 第 61–80 题
+
+从「分割回文串」到「划分字母区间」。每题可逐行回放与飞书同一个示例，观察棋盘、二分边界、栈与堆的状态和返回值。第 77 题的 Hot100 调试页使用最低买价解法，动态规划章节入口仍可运行原解。
+
+[飞书题解](https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcnpTnpXejREaxOe3my9bRNPb) · [Markdown 笔记与逐题调试入口](docs/Hot100第61至80题.md) · [在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=Hot100)
+
+[Java 编译与 JDI 录制](outputs/Hot100-61-80-capture.json) · [本地浏览器验收](outputs/Hot100-61-80-browser.json)
+
+在仓库根目录执行 `py -3.11 .work/hot100/scripts/capture-next.py <JDK17目录> 61-80` 录制，再执行 `py -3.11 .work/hot100/scripts/build-next.py 61-80` 生成网页。
