@@ -6,11 +6,35 @@
 
 ## 题意
 
-判断能否把正整数数组分成两个子集，使两个子集的元素和相等，每个位置恰好分到一边。
+给你一个 **只包含正整数** 的 **非空** 数组 `nums` 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
 
-官方原题：https://leetcode.cn/problems/partition-equal-subset-sum/
+**示例 1：**
 
-## 课堂示例
+```text
+输入：nums = [1,5,11,5]
+输出：true
+解释：数组可以分割成 [1, 5, 5] 和 [11] 。
+```
+
+**示例 2：**
+
+```text
+输入：nums = [1,2,3,5]
+输出：false
+解释：数组不能分割成两个元素和相等的子集。
+```
+
+**提示：**
+
+- `1 <= nums.length <= 200`
+
+- `1 <= nums[i] <= 100`
+
+官方原题：https://leetcode.cn/problems/partition-equal-subset-sum
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0400-0499/0416.Partition%20Equal%20Subset%20Sum/README.md
+
+## 回放用例
 
 输入：nums = [1, 5, 11, 5]
 

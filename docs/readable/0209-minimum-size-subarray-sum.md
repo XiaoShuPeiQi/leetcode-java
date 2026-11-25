@@ -6,11 +6,49 @@
 
 ## 题意
 
-给定正整数数组和正整数 target，找出和至少为 target 的最短非空连续子数组。找不到则返回 0。
+给定一个含有 `n` 个正整数的数组和一个正整数 `target` **。**
 
-官方原题：https://leetcode.cn/problems/minimum-size-subarray-sum/
+找出该数组中满足其总和大于等于 `target` 的长度最小的 **子数组** `[nums_l, nums_(l+1), ..., nums_(r-1), nums_r]` ，并返回其长度**。**如果不存在符合条件的子数组，返回 `0` 。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：target = 7, nums = [2,3,1,2,4,3]
+输出：2
+解释：子数组 [4,3] 是该条件下的长度最小的子数组。
+```
+
+**示例 2：**
+
+```text
+输入：target = 4, nums = [1,4,4]
+输出：1
+```
+
+**示例 3：**
+
+```text
+输入：target = 11, nums = [1,1,1,1,1,1,1,1]
+输出：0
+```
+
+**提示：**
+
+- `1 <= target <= 10^9`
+
+- `1 <= nums.length <= 10^5`
+
+- `1 <= nums[i] <= 10^4`
+
+**进阶：**
+
+- 如果你已经实现 `O(n)` 时间复杂度的解法, 请尝试设计一个 `O(n log(n))` 时间复杂度的解法。
+
+官方原题：https://leetcode.cn/problems/minimum-size-subarray-sum
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0209.Minimum%20Size%20Subarray%20Sum/README.md
+
+## 回放用例
 
 输入：target = 7, nums = [2, 3, 1, 2, 4, 3]
 

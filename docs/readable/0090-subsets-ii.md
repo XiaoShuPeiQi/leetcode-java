@@ -6,11 +6,35 @@
 
 ## 题意
 
-给定可含重复值的数组，返回所有不同的子集，包含空集。选出相同数值及相同次数的下标方案视为同一子集。
+给你一个整数数组 `nums` ，其中可能包含重复元素，请你返回该数组所有可能的 子集（幂集）。
 
-官方原题：https://leetcode.cn/problems/subsets-ii/
+解集 **不能** 包含重复的子集。返回的解集中，子集可以按 **任意顺序** 排列。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：nums = [1,2,2]
+输出：[[],[1],[1,2],[1,2,2],[2],[2,2]]
+```
+
+**示例 2：**
+
+```text
+输入：nums = [0]
+输出：[[],[0]]
+```
+
+**提示：**
+
+- `1 <= nums.length <= 10`
+
+- `-10 <= nums[i] <= 10`
+
+官方原题：https://leetcode.cn/problems/subsets-ii
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0090.Subsets%20II/README.md
+
+## 回放用例
 
 输入：nums = [1, 2, 2]
 

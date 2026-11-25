@@ -6,11 +6,39 @@
 
 ## 题意
 
-返回二叉树所有从根到叶的路径，以 -> 连接每条路径上的节点值。
+给你一个二叉树的根节点 `root`。
 
-官方原题：https://leetcode.cn/problems/binary-tree-paths/
+按 **任意顺序** ，返回所有 **从根节点到叶子节点** 的路径。
 
-## 课堂示例
+**叶子节点** 是指没有子节点的节点。
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0257.Binary%20Tree%20Paths/images/paths-tree.jpg)
+
+```text
+输入：root = [1,2,3,null,5]
+输出：["1->2->5","1->3"]
+```
+
+**示例 2：**
+
+```text
+输入：root = [1]
+输出：["1"]
+```
+
+**提示：**
+
+- 树中节点的数目在范围 `[1, 100]` 内
+
+- `-100 <= Node.val <= 100`
+
+官方原题：https://leetcode.cn/problems/binary-tree-paths
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0257.Binary%20Tree%20Paths/README.md
+
+## 回放用例
 
 输入：root = [4, 2, 6, 1, 3, 5, 7]
 

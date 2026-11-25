@@ -6,11 +6,37 @@
 
 ## 题意
 
-输入由 2 到 9 组成的数字串。按电话键盘映射为每一位各选一个字母，返回所有组合。空输入返回空列表。
+给定一个仅包含数字 `2-9` 的字符串，返回所有它能表示的字母组合。答案可以按 **任意顺序** 返回。
 
-官方原题：https://leetcode.cn/problems/letter-combinations-of-a-phone-number/
+给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0017.Letter%20Combinations%20of%20a%20Phone%20Number/images/1752723054-mfIHZs-image.png)
+
+**示例 1：**
+
+```text
+输入：digits = "23"
+输出：["ad","ae","af","bd","be","bf","cd","ce","cf"]
+```
+
+**示例 2：**
+
+```text
+输入：digits = "2"
+输出：["a","b","c"]
+```
+
+**提示：**
+
+- `1 <= digits.length <= 4`
+
+- `digits[i]` 是范围 `['2', '9']` 的一个数字。
+
+官方原题：https://leetcode.cn/problems/letter-combinations-of-a-phone-number
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0017.Letter%20Combinations%20of%20a%20Phone%20Number/README.md
+
+## 回放用例
 
 输入：digits = 23
 

@@ -6,11 +6,35 @@
 
 ## 题意
 
-判断 s 和 t 是否由完全相同的字符及出现次数组成，允许字符顺序不同。
+给定两个字符串 `s` 和 `t` ，编写一个函数来判断 `t` 是否是 `s` 的 字母异位词。
 
-官方原题：https://leetcode.cn/problems/valid-anagram/
+**示例 1:**
 
-## 课堂示例
+```text
+输入: s = "anagram", t = "nagaram"
+输出: true
+```
+
+**示例 2:**
+
+```text
+输入: s = "rat", t = "car"
+输出: false
+```
+
+**提示:**
+
+- `1 <= s.length, t.length <= 5 * 10^4`
+
+- `s` 和 `t` 仅包含小写字母
+
+**进阶:** 如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？
+
+官方原题：https://leetcode.cn/problems/valid-anagram
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0242.Valid%20Anagram/README.md
+
+## 回放用例
 
 输入：s = "aab", t = "aba"
 

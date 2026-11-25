@@ -6,11 +6,46 @@ Hot100 · 链表 · Sort List
 
 ## 题意
 
-将链表节点按值升序排序，返回新的头节点。
+给你链表的头结点 `head` ，请将其按 **升序** 排列并返回 **排序后的链表** 。
 
-官方原题：https://leetcode.cn/problems/sort-list/
+**示例 1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0148.Sort%20List/images/sort_list_1.jpg)
+
+```text
+输入：head = [4,2,1,3]
+输出：[1,2,3,4]
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0148.Sort%20List/images/sort_list_2.jpg)
+
+```text
+输入：head = [-1,5,3,4,0]
+输出：[-1,0,3,4,5]
+```
+
+**示例 3：**
+
+```text
+输入：head = []
+输出：[]
+```
+
+**提示：**
+
+- 链表中节点的数目在范围 `[0, 5 * 10^4]` 内
+
+- `-10^5 <= Node.val <= 10^5`
+
+**进阶：**你可以在 `O(n log n)` 时间复杂度和常数级空间复杂度下，对链表进行排序吗？
+
+官方原题：https://leetcode.cn/problems/sort-list
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0148.Sort%20List/README.md
+
+## 回放用例
 
 输入：head=[4,2,1,3]
 

@@ -6,11 +6,37 @@ Hot100 · 子串 · Subarray Sum Equals K
 
 ## 题意
 
-统计 nums 中和等于 k 的非空连续子数组个数。下标范围不同的子数组分别计数。
+给你一个整数数组 `nums` 和一个整数 `k` ，请你统计并返回 *该数组中和为 `k` 的子数组的个数* 。
 
-官方原题：https://leetcode.cn/problems/subarray-sum-equals-k/
+子数组是数组中元素的连续非空序列。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：nums = [1,1,1], k = 2
+输出：2
+```
+
+**示例 2：**
+
+```text
+输入：nums = [1,2,3], k = 3
+输出：2
+```
+
+**提示：**
+
+- `1 <= nums.length <= 2 * 10^4`
+
+- `-1000 <= nums[i] <= 1000`
+
+- `-10^7 <= k <= 10^7`
+
+官方原题：https://leetcode.cn/problems/subarray-sum-equals-k
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0560.Subarray%20Sum%20Equals%20K/README.md
+
+## 回放用例
 
 输入：nums=[1,1,1]; k=2
 

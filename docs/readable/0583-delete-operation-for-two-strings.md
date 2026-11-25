@@ -6,11 +6,36 @@
 
 ## 题意
 
-每步可从任一字符串删除一个字符。求让两个字符串完全一致所需的最少删除次数。
+给定两个单词 `word1` 和 `word2` ，返回使得 `word1` 和  `word2` **相同**所需的**最小步数**。
 
-官方原题：https://leetcode.cn/problems/delete-operation-for-two-strings/
+**每步** 可以删除任意一个字符串中的一个字符。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入: word1 = "sea", word2 = "eat"
+输出: 2
+解释: 第一步将 "sea" 变为 "ea" ，第二步将 "eat "变为 "ea"
+```
+
+**示例  2:**
+
+```text
+输入：word1 = "leetcode", word2 = "etco"
+输出：4
+```
+
+**提示：**
+
+- `1 <= word1.length, word2.length <= 500`
+
+- `word1` 和 `word2` 只包含小写英文字母
+
+官方原题：https://leetcode.cn/problems/delete-operation-for-two-strings
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0583.Delete%20Operation%20for%20Two%20Strings/README.md
+
+## 回放用例
 
 输入：word1 = "sea", word2 = "eat"
 

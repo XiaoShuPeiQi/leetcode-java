@@ -6,11 +6,40 @@
 
 ## 题意
 
-在 n×n 棋盘放 n 个皇后，任意两个不能同列、同行或同对角线。返回所有可行棋盘，用 Q 标记皇后，用 . 标记空格。
+按照国际象棋的规则，皇后可以攻击与之处在同一行或同一列或同一斜线上的棋子。
 
-官方原题：https://leetcode.cn/problems/n-queens/
+**n 皇后问题** 研究的是如何将 `n` 个皇后放置在 `n×n` 的棋盘上，并且使皇后彼此之间不能相互攻击。
 
-## 课堂示例
+给你一个整数 `n` ，返回所有不同的 **n 皇后问题** 的解决方案。
+
+每一种解法包含一个不同的 **n 皇后问题** 的棋子放置方案，该方案中 `'Q'` 和 `'.'` 分别代表了皇后和空位。
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0051.N-Queens/images/queens.jpg)
+
+```text
+输入：n = 4
+输出：[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+解释：如上图所示，4 皇后问题存在两个不同的解法。
+```
+
+**示例 2：**
+
+```text
+输入：n = 1
+输出：[["Q"]]
+```
+
+**提示：**
+
+- `1 <= n <= 9`
+
+官方原题：https://leetcode.cn/problems/n-queens
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0051.N-Queens/README.md
+
+## 回放用例
 
 输入：n = 4
 

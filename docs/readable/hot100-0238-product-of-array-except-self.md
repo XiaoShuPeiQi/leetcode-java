@@ -6,11 +6,41 @@ Hot100 · 普通数组 · Product of Array Except Self
 
 ## 题意
 
-构造结果数组，其中第 i 项为原数组除 nums[i] 之外所有元素的乘积。要求 O(n) 时间，不能使用除法。
+给你一个整数数组 `nums`，返回 数组 `answer` ，其中 `answer[i]` 等于 `nums` 中除了 `nums[i]` 之外其余各元素的乘积 。
 
-官方原题：https://leetcode.cn/problems/product-of-array-except-self/
+题目数据 **保证** 数组 `nums`之中任意元素的全部前缀元素和后缀的乘积都在  **32 位** 整数范围内。
 
-## 课堂示例
+请 **不要使用除法，**且在 `O(n)` 时间复杂度内完成此题。
+
+**示例 1:**
+
+```text
+输入: nums = [1,2,3,4]
+输出: [24,12,8,6]
+```
+
+**示例 2:**
+
+```text
+输入: nums = [-1,1,0,-3,3]
+输出: [0,0,9,0,0]
+```
+
+**提示：**
+
+- `2 <= nums.length <= 10^5`
+
+- `-30 <= nums[i] <= 30`
+
+- 输入 **保证** 数组 `answer[i]` 在  **32 位** 整数范围内
+
+**进阶：**你可以在 `O(1)` 的额外空间复杂度内完成这个题目吗？（ 出于对空间复杂度分析的目的，输出数组 **不被视为** 额外空间。）
+
+官方原题：https://leetcode.cn/problems/product-of-array-except-self
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0238.Product%20of%20Array%20Except%20Self/README.md
+
+## 回放用例
 
 输入：nums=[1,2,3,4]
 

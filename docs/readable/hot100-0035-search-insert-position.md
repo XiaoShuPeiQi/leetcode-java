@@ -6,11 +6,46 @@ Hot100 · 二分查找 · Search Insert Position
 
 ## 题意
 
-在无重复的升序数组中查找 target。如果不存在，返回插入后仍保持有序的下标。要求 O(log n) 时间。
+给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
 
-官方原题：https://leetcode.cn/problems/search-insert-position/
+请必须使用时间复杂度为 `O(log n)` 的算法。
 
-## 课堂示例
+**示例 1:**
+
+```text
+输入: nums = [1,3,5,6], target = 5
+输出: 2
+```
+
+**示例 2:**
+
+```text
+输入: nums = [1,3,5,6], target = 2
+输出: 1
+```
+
+**示例 3:**
+
+```text
+输入: nums = [1,3,5,6], target = 7
+输出: 4
+```
+
+**提示:**
+
+- `1 <= nums.length <= 10^4`
+
+- `-10^4 <= nums[i] <= 10^4`
+
+- `nums` 为 **无重复元素** 的 **升序** 排列数组
+
+- `-10^4 <= target <= 10^4`
+
+官方原题：https://leetcode.cn/problems/search-insert-position
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0035.Search%20Insert%20Position/README.md
+
+## 回放用例
 
 输入：nums = [1, 3, 5, 6], target = 2
 

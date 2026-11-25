@@ -6,11 +6,42 @@ Hot100 · 链表 · Swap Nodes in Pairs
 
 ## 题意
 
-交换链表中每对相邻节点的连接位置，从头开始两两分组。末尾落单的节点保留，返回新的头节点。
+给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。
 
-官方原题：https://leetcode.cn/problems/swap-nodes-in-pairs/
+**示例 1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0024.Swap%20Nodes%20in%20Pairs/images/swap_ex1.jpg)
+
+```text
+输入：head = [1,2,3,4]
+输出：[2,1,4,3]
+```
+
+**示例 2：**
+
+```text
+输入：head = []
+输出：[]
+```
+
+**示例 3：**
+
+```text
+输入：head = [1]
+输出：[1]
+```
+
+**提示：**
+
+- 链表中节点的数目在范围 `[0, 100]` 内
+
+- `0 <= Node.val <= 100`
+
+官方原题：https://leetcode.cn/problems/swap-nodes-in-pairs
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0024.Swap%20Nodes%20in%20Pairs/README.md
+
+## 回放用例
 
 输入：head=[1,2,3,4,5]，pre=dummy
 

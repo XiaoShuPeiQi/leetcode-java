@@ -6,11 +6,35 @@
 
 ## 题意
 
-把 n 拆成至少两个正整数的和，求这些整数的乘积最大可以是多少。
+给定一个正整数 `n` ，将其拆分为 `k` 个 **正整数** 的和（ `k >= 2` ），并使这些整数的乘积最大化。
 
-官方原题：https://leetcode.cn/problems/integer-break/
+返回 *你可以获得的最大乘积* 。
 
-## 课堂示例
+**示例 1:**
+
+```text
+输入: n = 2
+输出: 1
+解释: 2 = 1 + 1, 1 × 1 = 1。
+```
+
+**示例 2:**
+
+```text
+输入: n = 10
+输出: 36
+解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。
+```
+
+**提示:**
+
+- `2 <= n <= 58`
+
+官方原题：https://leetcode.cn/problems/integer-break
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0300-0399/0343.Integer%20Break/README.md
+
+## 回放用例
 
 输入：n = 5
 

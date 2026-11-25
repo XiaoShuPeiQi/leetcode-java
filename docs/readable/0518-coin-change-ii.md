@@ -6,11 +6,56 @@
 
 ## 题意
 
-用不限数量的各面额硬币凑出 amount，求不同组合的数量。只改变硬币选择顺序视为同一组合。
+给你一个整数数组 `coins` 表示不同面额的硬币，另给一个整数 `amount` 表示总金额。
 
-官方原题：https://leetcode.cn/problems/coin-change-ii/
+请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 `0` 。
 
-## 课堂示例
+假设每一种面额的硬币有无限个。
+
+题目数据 **保证** **最终** 结果符合 **32 位** 带符号整数。
+
+**示例 1：**
+
+```text
+输入：amount = 5, coins = [1, 2, 5]
+输出：4
+解释：有四种方式可以凑成总金额：
+5=5
+5=2+2+1
+5=2+1+1+1
+5=1+1+1+1+1
+```
+
+**示例 2：**
+
+```text
+输入：amount = 3, coins = [2]
+输出：0
+解释：只用面额 2 的硬币不能凑成总金额 3 。
+```
+
+**示例 3：**
+
+```text
+输入：amount = 10, coins = [10]
+输出：1
+```
+
+**提示：**
+
+- `1 <= coins.length <= 300`
+
+- `1 <= coins[i] <= 5000`
+
+- `coins` 中的所有值 **互不相同**
+
+- `0 <= amount <= 5000`
+
+官方原题：https://leetcode.cn/problems/coin-change-ii
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0518.Coin%20Change%20II/README.md
+
+## 回放用例
 
 输入：amount = 5, coins = [1, 2, 5]
 

@@ -6,11 +6,40 @@ Hot100 · 栈 · Largest Rectangle In Histogram
 
 ## 题意
 
-给定一组宽度都为 1 的相邻柱子的高度，求这些柱子能围出的最大矩形面积。
+给定 *n* 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。
 
-官方原题：https://leetcode.cn/problems/largest-rectangle-in-histogram/
+求在该柱状图中，能够勾勒出来的矩形的最大面积。
 
-## 课堂示例
+**示例 1:**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0084.Largest%20Rectangle%20in%20Histogram/images/histogram.jpg)
+
+```text
+输入：heights = [2,1,5,6,2,3]
+输出：10
+解释：最大的矩形为图中红色区域，面积为 10
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0084.Largest%20Rectangle%20in%20Histogram/images/histogram-1.jpg)
+
+```text
+输入： heights = [2,4]
+输出： 4
+```
+
+**提示：**
+
+- `1 <= heights.length <=10^5`
+
+- `0 <= heights[i] <= 10^4`
+
+官方原题：https://leetcode.cn/problems/largest-rectangle-in-histogram
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0084.Largest%20Rectangle%20in%20Histogram/README.md
+
+## 回放用例
 
 输入：heights = [2, 1, 5, 6, 2, 3]
 

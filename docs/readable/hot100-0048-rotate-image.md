@@ -6,11 +6,41 @@ Hot100 · 矩阵 · Rotate Image
 
 ## 题意
 
-把 n×n 矩阵顺时针旋转 90 度。直接修改输入矩阵，不能另开矩阵存放旋转结果。
+给定一个 *n* × *n* 的二维矩阵 `matrix` 表示一个图像。请你将图像顺时针旋转 90 度。
 
-官方原题：https://leetcode.cn/problems/rotate-image/
+你必须在**[ 原地](<https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95>)** 旋转图像，这意味着你需要直接修改输入的二维矩阵。**请不要** 使用另一个矩阵来旋转图像。
 
-## 课堂示例
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0048.Rotate%20Image/images/mat1.jpg)
+
+```text
+输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+输出：[[7,4,1],[8,5,2],[9,6,3]]
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0048.Rotate%20Image/images/mat2.jpg)
+
+```text
+输入：matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]
+输出：[[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]
+```
+
+**提示：**
+
+- `n == matrix.length == matrix[i].length`
+
+- `1 <= n <= 20`
+
+- `-1000 <= matrix[i][j] <= 1000`
+
+官方原题：https://leetcode.cn/problems/rotate-image
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0048.Rotate%20Image/README.md
+
+## 回放用例
 
 输入：matrix=[[1,2,3],[4,5,6],[7,8,9]]
 

@@ -6,11 +6,58 @@
 
 ## 题意
 
-机器人从 m×n 网格左上角去右下角，每次只向右或向下移动一格。求不同路径总数。
+一个机器人位于一个 `m x n` 网格的左上角 （起始点在下图中标记为 “Start” ）。
 
-官方原题：https://leetcode.cn/problems/unique-paths/
+机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。
 
-## 课堂示例
+问总共有多少条不同的路径？
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0062.Unique%20Paths/images/1697422740-adxmsI-image.png)
+
+```text
+输入：m = 3, n = 7
+输出：28
+```
+
+**示例 2：**
+
+```text
+输入：m = 3, n = 2
+输出：3
+解释：
+从左上角开始，总共有 3 条路径可以到达右下角。
+1. 向右 -> 向下 -> 向下
+2. 向下 -> 向下 -> 向右
+3. 向下 -> 向右 -> 向下
+```
+
+**示例 3：**
+
+```text
+输入：m = 7, n = 3
+输出：28
+```
+
+**示例 4：**
+
+```text
+输入：m = 3, n = 3
+输出：6
+```
+
+**提示：**
+
+- `1 <= m, n <= 100`
+
+- 题目数据保证答案小于等于 `2 * 10^9`
+
+官方原题：https://leetcode.cn/problems/unique-paths
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0062.Unique%20Paths/README.md
+
+## 回放用例
 
 输入：m = 3, n = 3
 

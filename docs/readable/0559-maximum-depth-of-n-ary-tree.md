@@ -6,11 +6,41 @@
 
 ## 题意
 
-求 N 叉树从根节点到最深叶子经过的节点数。空树返回 0。
+给定一个 N 叉树，找到其最大深度。
 
-官方原题：https://leetcode.cn/problems/maximum-depth-of-n-ary-tree/
+最大深度是指从根节点到最远叶子节点的最长路径上的节点总数。
 
-## 课堂示例
+N 叉树输入按层序遍历序列化表示，每组子节点由空值分隔（请参见示例）。
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0559.Maximum%20Depth%20of%20N-ary%20Tree/images/narytreeexample.png)
+
+```text
+输入：root = [1,null,3,2,4,null,5,6]
+输出：3
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0559.Maximum%20Depth%20of%20N-ary%20Tree/images/sample_4_964.png)
+
+```text
+输入：root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
+输出：5
+```
+
+**提示：**
+
+- 树的深度不会超过 `1000` 。
+
+- 树的节点数目位于 `[0, 10^4]` 之间。
+
+官方原题：https://leetcode.cn/problems/maximum-depth-of-n-ary-tree
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0559.Maximum%20Depth%20of%20N-ary%20Tree/README.md
+
+## 回放用例
 
 输入：N 叉树：1 的孩子为 3、2、4；3 的孩子为 5、6
 

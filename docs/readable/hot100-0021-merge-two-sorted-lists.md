@@ -6,11 +6,44 @@ Hot100 · 链表 · Merge Two Sorted Lists
 
 ## 题意
 
-把两个升序链表合并成一个升序链表，返回合并后的头节点。
+将两个升序链表合并为一个新的 **升序** 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 
-官方原题：https://leetcode.cn/problems/merge-two-sorted-lists/
+**示例 1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0021.Merge%20Two%20Sorted%20Lists/images/merge_ex1.jpg)
+
+```text
+输入：l1 = [1,2,4], l2 = [1,3,4]
+输出：[1,1,2,3,4,4]
+```
+
+**示例 2：**
+
+```text
+输入：l1 = [], l2 = []
+输出：[]
+```
+
+**示例 3：**
+
+```text
+输入：l1 = [], l2 = [0]
+输出：[0]
+```
+
+**提示：**
+
+- 两个链表的节点数目范围是 `[0, 50]`
+
+- `-100 <= Node.val <= 100`
+
+- `l1` 和 `l2` 均按 **非递减顺序** 排列
+
+官方原题：https://leetcode.cn/problems/merge-two-sorted-lists
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0021.Merge%20Two%20Sorted%20Lists/README.md
+
+## 回放用例
 
 输入：list1=[1,2,4], list2=[1,3,4]
 

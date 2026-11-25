@@ -6,11 +6,35 @@
 
 ## 题意
 
-从 nums 中找出全部长度至少为 2 的非递减子序列。元素须保持原下标顺序，按值去重。
+给你一个整数数组 `nums` ，找出并返回所有该数组中不同的递增子序列，递增子序列中 **至少有两个元素** 。你可以按 **任意顺序** 返回答案。
 
-官方原题：https://leetcode.cn/problems/non-decreasing-subsequences/
+数组中可能含有重复元素，如出现两个整数相等，也可以视作递增序列的一种特殊情况。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：nums = [4,6,7,7]
+输出：[[4,6],[4,6,7],[4,6,7,7],[4,7],[4,7,7],[6,7],[6,7,7],[7,7]]
+```
+
+**示例 2：**
+
+```text
+输入：nums = [4,4,3,2,1]
+输出：[[4,4]]
+```
+
+**提示：**
+
+- `1 <= nums.length <= 15`
+
+- `-100 <= nums[i] <= 100`
+
+官方原题：https://leetcode.cn/problems/non-decreasing-subsequences
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0400-0499/0491.Non-decreasing%20Subsequences/README.md
+
+## 回放用例
 
 输入：nums = [4, 7, 6, 7]
 

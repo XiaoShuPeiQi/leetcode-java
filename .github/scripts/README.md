@@ -1,6 +1,8 @@
 # 课堂正文发布
 
-题目页面模板保留交互播放器；发布时把题意、实际解法、示例、状态说明、来源与回放说明预先写入 HTML，不依赖浏览器执行 JavaScript。
+发布时把完整题意、原题示例、实际解法、状态说明、来源与回放说明预先写入 HTML。交互播放器使用的输入列在「执行回放」。
+
+`problem-statements.json` 按题号保存题面。同题的章节页与 Hot100 页读取同一份原题。力扣题面取自 [Doocs/leetcode](https://github.com/doocs/leetcode)，卡码网题面取自 [代码随想录](https://github.com/youngyangyang04/leetcode-master) 各题的题目部分。每条记录的 `github` 指向具体提交的原文，`official` 指向原题，`html` 和 `text` 分别用于页面和可复制文本。导入时保留题面、示例、解释、限制和进阶要求，调整网页标签和配图链接以适应课堂页面。Doocs 来源内容沿用上游的 [CC BY-SA 4.0 许可](https://github.com/doocs/leetcode/blob/main/LICENSE)。
 
 - 每页 `problem.txt`：课堂文字与 Java 代码。
 - 每页 `trace.json`：与播放器完全一致的所有原始轨迹数据，包含全部暂停事件和共享状态池。大轨迹不塞入正文，避免正文被截断。

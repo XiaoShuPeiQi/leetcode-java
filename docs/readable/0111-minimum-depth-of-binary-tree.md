@@ -6,11 +6,39 @@
 
 ## 题意
 
-求从二叉树根节点到最近叶子所经过的节点数；叶子没有孩子。空树返回 0。
+给定一个二叉树，找出其最小深度。
 
-官方原题：https://leetcode.cn/problems/minimum-depth-of-binary-tree/
+最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
 
-## 课堂示例
+**说明：**叶子节点是指没有子节点的节点。
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0111.Minimum%20Depth%20of%20Binary%20Tree/images/ex_depth.jpg)
+
+```text
+输入：root = [3,9,20,null,null,15,7]
+输出：2
+```
+
+**示例 2：**
+
+```text
+输入：root = [2,null,3,null,4,null,5,null,6]
+输出：5
+```
+
+**提示：**
+
+- 树中节点数的范围在 `[0, 10^5]` 内
+
+- `-1000 <= Node.val <= 1000`
+
+官方原题：https://leetcode.cn/problems/minimum-depth-of-binary-tree
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0111.Minimum%20Depth%20of%20Binary%20Tree/README.md
+
+## 回放用例
 
 输入：root = [1, null, 2]
 

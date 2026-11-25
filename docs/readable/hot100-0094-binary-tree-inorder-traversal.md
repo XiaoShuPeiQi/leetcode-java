@@ -6,11 +6,44 @@ Hot100 · 二叉树 · Binary Tree Inorder Traversal
 
 ## 题意
 
-给定二叉树，按左子树、当前节点、右子树的顺序遍历，返回节点值列表。
+给定一个二叉树的根节点 `root` ，返回 *它的 **中序** 遍历* 。
 
-官方原题：https://leetcode.cn/problems/binary-tree-inorder-traversal/
+**示例 1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0094.Binary%20Tree%20Inorder%20Traversal/images/inorder_1.jpg)
+
+```text
+输入：root = [1,null,2,3]
+输出：[1,3,2]
+```
+
+**示例 2：**
+
+```text
+输入：root = []
+输出：[]
+```
+
+**示例 3：**
+
+```text
+输入：root = [1]
+输出：[1]
+```
+
+**提示：**
+
+- 树中节点数目在范围 `[0, 100]` 内
+
+- `-100 <= Node.val <= 100`
+
+**进阶:** 递归算法很简单，你可以通过迭代算法完成吗？
+
+官方原题：https://leetcode.cn/problems/binary-tree-inorder-traversal
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0094.Binary%20Tree%20Inorder%20Traversal/README.md
+
+## 回放用例
 
 输入：root = [4, 2, 6, 1, 3, 5, 7]
 

@@ -6,11 +6,37 @@ Hot100 · 双指针 · Move Zeroes
 
 ## 题意
 
-将 nums 中的所有 0 原地移到末尾，保持其余元素的相对顺序。
+给定一个数组 `nums`，编写一个函数将所有 `0` 移动到数组的末尾，同时保持非零元素的相对顺序。
 
-官方原题：https://leetcode.cn/problems/move-zeroes/
+**请注意** ，必须在不复制数组的情况下原地对数组进行操作。
 
-## 课堂示例
+**示例 1:**
+
+```text
+输入: nums = [0,1,0,3,12]
+输出: [1,3,12,0,0]
+```
+
+**示例 2:**
+
+```text
+输入: nums = [0]
+输出: [0]
+```
+
+**提示**:
+
+- `1 <= nums.length <= 10^4`
+
+- `-2^(31) <= nums[i] <= 2^(31) - 1`
+
+**进阶：**你能尽量减少完成的操作次数吗？
+
+官方原题：https://leetcode.cn/problems/move-zeroes
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0283.Move%20Zeroes/README.md
+
+## 回放用例
 
 输入：nums=[0,1,0,3,12]
 

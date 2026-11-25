@@ -6,11 +6,45 @@ Hot100 · 二叉树 · Construct Binary Tree from Preorder and Inorder Traversal
 
 ## 题意
 
-给定同一棵二叉树的前序和中序遍历结果，重建二叉树并返回根节点。节点值互不相同。
+给定两个整数数组 `preorder` 和 `inorder` ，其中 `preorder` 是二叉树的**先序遍历**， `inorder` 是同一棵树的**中序遍历**，请构造二叉树并返回其根节点。
 
-官方原题：https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+**示例 1:**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0105.Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/images/tree.jpg)
+
+```text
+输入: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+输出: [3,9,20,null,null,15,7]
+```
+
+**示例 2:**
+
+```text
+输入: preorder = [-1], inorder = [-1]
+输出: [-1]
+```
+
+**提示:**
+
+- `1 <= preorder.length <= 3000`
+
+- `inorder.length == preorder.length`
+
+- `-3000 <= preorder[i], inorder[i] <= 3000`
+
+- `preorder` 和 `inorder` 均 **无重复** 元素
+
+- `inorder` 均出现在 `preorder`
+
+- `preorder` **保证** 为二叉树的前序遍历序列
+
+- `inorder` **保证** 为二叉树的中序遍历序列
+
+官方原题：https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0105.Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/README.md
+
+## 回放用例
 
 输入：preorder = [4, 2, 1, 3, 6, 5, 7], inorder = [1, 2, 3, 4, 5, 6, 7]
 

@@ -46,6 +46,25 @@ body > .problem-content {
     margin: 8px 0;
 }
 
+.problem-statement-body {
+    margin-top: 12px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.problem-statement-body img {
+    max-width: 100%;
+    height: auto;
+}
+
+.problem-statement-body pre {
+    margin: 8px 0 16px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
 .problem-example {
     display: grid;
     grid-template-columns: max-content minmax(0, 1fr);

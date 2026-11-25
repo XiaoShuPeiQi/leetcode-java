@@ -6,11 +6,37 @@ Hot100 · 堆 · Kth Largest Element In An Array
 
 ## 题意
 
-返回数组按值从大到小排列时第 k 个元素。重复的值各占一个名次。题目要求线性时间。
+给定整数数组 `nums` 和整数 `k`，请返回数组中第 `**k**` 个最大的元素。
 
-官方原题：https://leetcode.cn/problems/kth-largest-element-in-an-array/
+请注意，你需要找的是数组排序后的第 `k` 个最大的元素，而不是第 `k` 个不同的元素。
 
-## 课堂示例
+你必须设计并实现时间复杂度为 `O(n)` 的算法解决此问题。
+
+**示例 1:**
+
+```text
+输入: [3,2,1,5,6,4], k = 2
+输出: 5
+```
+
+**示例 2:**
+
+```text
+输入: [3,2,3,1,2,4,5,5,6], k = 4
+输出: 4
+```
+
+**提示：**
+
+- `1 <= k <= nums.length <= 10^5`
+
+- `-10^4 <= nums[i] <= 10^4`
+
+官方原题：https://leetcode.cn/problems/kth-largest-element-in-an-array
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0215.Kth%20Largest%20Element%20in%20an%20Array/README.md
+
+## 回放用例
 
 输入：nums = [3, 2, 3, 1, 2, 4, 5, 5, 6], k = 4
 

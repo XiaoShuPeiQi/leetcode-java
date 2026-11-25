@@ -6,11 +6,35 @@
 
 ## 题意
 
-从二维数组的左上角出发，先向右，再按顺时针旋转方向一圈圈向内遍历。按访问顺序返回所有元素，空数组返回空结果。
+输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。
+
+**示例 1：**
+
+```text
+输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+输出：[1,2,3,6,9,8,7,4,5]
+```
+
+**示例 2：**
+
+```text
+输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+输出：[1,2,3,4,8,12,11,10,9,5,6,7]
+```
+
+**限制：**
+
+- `0 <= matrix.length <= 100`
+
+- `0 <= matrix[i].length <= 100`
+
+注意：本题与主站 54 题相同：[https://leetcode.cn/problems/spiral-matrix/](<https://leetcode.cn/problems/spiral-matrix/>)
 
 官方原题：https://leetcode.cn/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/
 
-## 课堂示例
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9829.%20%E9%A1%BA%E6%97%B6%E9%92%88%E6%89%93%E5%8D%B0%E7%9F%A9%E9%98%B5/README.md
+
+## 回放用例
 
 输入：array = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 

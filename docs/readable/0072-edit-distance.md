@@ -6,11 +6,51 @@
 
 ## 题意
 
-将 word1 改成 word2，允许插入、删除或替换一个字符，每次计一步。求最少操作数。
+给你两个单词 `word1` 和 `word2`， *请返回将 `word1` 转换成 `word2` 所使用的最少操作数*  。
 
-官方原题：https://leetcode.cn/problems/edit-distance/
+你可以对一个单词进行如下三种操作：
 
-## 课堂示例
+- 插入一个字符
+
+- 删除一个字符
+
+- 替换一个字符
+
+**示例 1：**
+
+```text
+输入：word1 = "horse", word2 = "ros"
+输出：3
+解释：
+horse -> rorse (将 'h' 替换为 'r')
+rorse -> rose (删除 'r')
+rose -> ros (删除 'e')
+```
+
+**示例 2：**
+
+```text
+输入：word1 = "intention", word2 = "execution"
+输出：5
+解释：
+intention -> inention (删除 't')
+inention -> enention (将 'i' 替换为 'e')
+enention -> exention (将 'n' 替换为 'x')
+exention -> exection (将 'n' 替换为 'c')
+exection -> execution (插入 'u')
+```
+
+**提示：**
+
+- `0 <= word1.length, word2.length <= 500`
+
+- `word1` 和 `word2` 由小写英文字母组成
+
+官方原题：https://leetcode.cn/problems/edit-distance
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0072.Edit%20Distance/README.md
+
+## 回放用例
 
 输入：word1 = "horse", word2 = "ros"
 

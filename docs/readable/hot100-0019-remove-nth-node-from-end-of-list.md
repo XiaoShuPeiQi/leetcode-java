@@ -6,11 +6,48 @@ Hot100 · 链表 · Remove Nth Node From End of List
 
 ## 题意
 
-删除单链表中从尾部数第 n 个节点，返回删除后的头节点。
+给你一个链表，删除链表的倒数第 `n` 个结点，并且返回链表的头结点。
 
-官方原题：https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
+**示例 1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0019.Remove%20Nth%20Node%20From%20End%20of%20List/images/remove_ex1.jpg)
+
+```text
+输入：head = [1,2,3,4,5], n = 2
+输出：[1,2,3,5]
+```
+
+**示例 2：**
+
+```text
+输入：head = [1], n = 1
+输出：[]
+```
+
+**示例 3：**
+
+```text
+输入：head = [1,2], n = 1
+输出：[1]
+```
+
+**提示：**
+
+- 链表中结点的数目为 `sz`
+
+- `1 <= sz <= 30`
+
+- `0 <= Node.val <= 100`
+
+- `1 <= n <= sz`
+
+**进阶：**你能尝试使用一趟扫描实现吗？
+
+官方原题：https://leetcode.cn/problems/remove-nth-node-from-end-of-list
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0019.Remove%20Nth%20Node%20From%20End%20of%20List/README.md
+
+## 回放用例
 
 输入：head=[1,2,3,4,5], n=2
 

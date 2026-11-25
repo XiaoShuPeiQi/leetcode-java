@@ -6,11 +6,39 @@
 
 ## 题意
 
-判断二叉树沿根节点的中轴翻转后，节点值和结构是否完全一致。
+给你一个二叉树的根节点 `root` ， 检查它是否轴对称。
 
-官方原题：https://leetcode.cn/problems/symmetric-tree/
+**示例 1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0101.Symmetric%20Tree/images/1698026966-JDYPDU-image.png)
+
+```text
+输入：root = [1,2,2,3,4,4,3]
+输出：true
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0101.Symmetric%20Tree/images/1698027008-nPFLbM-image.png)
+
+```text
+输入：root = [1,2,2,null,3,null,3]
+输出：false
+```
+
+**提示：**
+
+- 树中节点数目在范围 `[1, 1000]` 内
+
+- `-100 <= Node.val <= 100`
+
+**进阶：**你可以运用递归和迭代两种方法解决这个问题吗？
+
+官方原题：https://leetcode.cn/problems/symmetric-tree
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0101.Symmetric%20Tree/README.md
+
+## 回放用例
 
 输入：root = [1, 2, 2, 3, 4, 4, 3]
 

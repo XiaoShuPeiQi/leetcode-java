@@ -6,11 +6,52 @@
 
 ## 题意
 
-每张机票 [from, to] 指定一次航程。由 JFK 出发且每张机票恰用一次，返回行程；多种可行行程取字典序最小的。
+给你一份航线列表 `tickets` ，其中 `tickets[i] = [from_i, to_i]` 表示飞机出发和降落的机场地点。请你对该行程进行重新规划排序。
 
-官方原题：https://leetcode.cn/problems/reconstruct-itinerary/
+所有这些机票都属于一个从 `JFK`（肯尼迪国际机场）出发的先生，所以该行程必须从 `JFK` 开始。如果存在多种有效的行程，请你按字典排序返回最小的行程组合。
 
-## 课堂示例
+- 例如，行程 `["JFK", "LGA"]` 与 `["JFK", "LGB"]` 相比就更小，排序更靠前。
+
+假定所有机票至少存在一种合理的行程。且所有的机票 必须都用一次 且 只能用一次。
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0300-0399/0332.Reconstruct%20Itinerary/images/itinerary1-graph.jpg)
+
+```text
+输入：tickets = [["MUC","LHR"],["JFK","MUC"],["SFO","SJC"],["LHR","SFO"]]
+输出：["JFK","MUC","LHR","SFO","SJC"]
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0300-0399/0332.Reconstruct%20Itinerary/images/itinerary2-graph.jpg)
+
+```text
+输入：tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
+输出：["JFK","ATL","JFK","SFO","ATL","SFO"]
+解释：另一种有效的行程是 ["JFK","SFO","ATL","JFK","ATL","SFO"] ，但是它字典排序更大更靠后。
+```
+
+**提示：**
+
+- `1 <= tickets.length <= 300`
+
+- `tickets[i].length == 2`
+
+- `from_i.length == 3`
+
+- `to_i.length == 3`
+
+- `from_i` 和 `to_i` 由大写英文字母组成
+
+- `from_i != to_i`
+
+官方原题：https://leetcode.cn/problems/reconstruct-itinerary
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0300-0399/0332.Reconstruct%20Itinerary/README.md
+
+## 回放用例
 
 输入：tickets = [[JFK, KUL], [JFK, NRT], [NRT, JFK]]
 

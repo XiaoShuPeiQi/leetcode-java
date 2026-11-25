@@ -6,11 +6,51 @@ Hot100 · 矩阵 · Search a 2D Matrix II
 
 ## 题意
 
-矩阵每行从左到右升序，每列从上到下升序。判断其中是否包含 target。
+编写一个高效的算法来搜索 `*m* x *n*` 矩阵 `matrix` 中的一个目标值 `target` 。该矩阵具有以下特性：
 
-官方原题：https://leetcode.cn/problems/search-a-2d-matrix-ii/
+- 每行的元素从左到右升序排列。
 
-## 课堂示例
+- 每列的元素从上到下升序排列。
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0240.Search%20a%202D%20Matrix%20II/images/searchgrid2.jpg)
+
+```text
+输入：matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 5
+输出：true
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0240.Search%20a%202D%20Matrix%20II/images/searchgrid.jpg)
+
+```text
+输入：matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 20
+输出：false
+```
+
+**提示：**
+
+- `m == matrix.length`
+
+- `n == matrix[i].length`
+
+- `1 <= n, m <= 300`
+
+- `-10^9 <= matrix[i][j] <= 10^9`
+
+- 每行的所有元素从左到右升序排列
+
+- 每列的所有元素从上到下升序排列
+
+- `-10^9 <= target <= 10^9`
+
+官方原题：https://leetcode.cn/problems/search-a-2d-matrix-ii
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0240.Search%20a%202D%20Matrix%20II/README.md
+
+## 回放用例
 
 输入：matrix=[[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target=5
 

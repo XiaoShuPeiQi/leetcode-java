@@ -6,11 +6,43 @@
 
 ## 题意
 
-从整数 1 到 n 中选 k 个不同的数，返回所有组合。同一批数字只算一次。
+给定两个整数 `n` 和 `k`，返回范围 `[1, n]` 中所有可能的 `k` 个数的组合。
 
-官方原题：https://leetcode.cn/problems/combinations/
+你可以按 **任何顺序** 返回答案。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：n = 4, k = 2
+输出：
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]
+```
+
+**示例 2：**
+
+```text
+输入：n = 1, k = 1
+输出：[[1]]
+```
+
+**提示：**
+
+- `1 <= n <= 20`
+
+- `1 <= k <= n`
+
+官方原题：https://leetcode.cn/problems/combinations
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0077.Combinations/README.md
+
+## 回放用例
 
 输入：n = 4, k = 2
 

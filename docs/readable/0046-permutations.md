@@ -6,11 +6,42 @@
 
 ## 题意
 
-给定互不相同的整数，返回使用全部元素排成的所有序列，结果顺序任意。
+给定一个不含重复数字的数组 `nums` ，返回其 *所有可能的全排列* 。你可以 **按任意顺序** 返回答案。
 
-官方原题：https://leetcode.cn/problems/permutations/
+**示例 1：**
 
-## 课堂示例
+```text
+输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+```
+
+**示例 2：**
+
+```text
+输入：nums = [0,1]
+输出：[[0,1],[1,0]]
+```
+
+**示例 3：**
+
+```text
+输入：nums = [1]
+输出：[[1]]
+```
+
+**提示：**
+
+- `1 <= nums.length <= 6`
+
+- `-10 <= nums[i] <= 10`
+
+- `nums` 中的所有整数 **互不相同**
+
+官方原题：https://leetcode.cn/problems/permutations
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0046.Permutations/README.md
+
+## 回放用例
 
 输入：nums = [1, 2, 3]
 

@@ -6,11 +6,48 @@
 
 ## 题意
 
-列出二叉树中所有节点值总和为 targetSum 的根到叶路径。每条路径按从根到叶的顺序记录。
+给你二叉树的根节点 `root` 和一个整数目标和 `targetSum` ，找出所有 **从根节点到叶子节点** 路径总和等于给定目标和的路径。
 
-官方原题：https://leetcode.cn/problems/path-sum-ii/
+**叶子节点** 是指没有子节点的节点。
 
-## 课堂示例
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0113.Path%20Sum%20II/images/pathsumii1.jpg)
+
+```text
+输入：root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
+输出：[[5,4,11,2],[5,8,4,5]]
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0113.Path%20Sum%20II/images/pathsum2.jpg)
+
+```text
+输入：root = [1,2,3], targetSum = 5
+输出：[]
+```
+
+**示例 3：**
+
+```text
+输入：root = [1,2], targetSum = 0
+输出：[]
+```
+
+**提示：**
+
+- 树中节点总数在范围 `[0, 5000]` 内
+
+- `-1000 <= Node.val <= 1000`
+
+- `-1000 <= targetSum <= 1000`
+
+官方原题：https://leetcode.cn/problems/path-sum-ii
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0113.Path%20Sum%20II/README.md
+
+## 回放用例
 
 输入：root = [4, 2, 6, 1, 3, 5, 7], targetSum = 7
 

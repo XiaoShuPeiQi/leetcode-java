@@ -6,11 +6,42 @@
 
 ## 题意
 
-返回二叉树各层的节点值。最深层放在最前面，每层内部依然从左到右。
+给你二叉树的根节点 `root` ，返回其节点值 **自底向上的层序遍历** 。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
 
-官方原题：https://leetcode.cn/problems/binary-tree-level-order-traversal-ii/
+**示例 1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0107.Binary%20Tree%20Level%20Order%20Traversal%20II/images/tree1.jpg)
+
+```text
+输入：root = [3,9,20,null,null,15,7]
+输出：[[15,7],[9,20],[3]]
+```
+
+**示例 2：**
+
+```text
+输入：root = [1]
+输出：[[1]]
+```
+
+**示例 3：**
+
+```text
+输入：root = []
+输出：[]
+```
+
+**提示：**
+
+- 树中节点数目在范围 `[0, 2000]` 内
+
+- `-1000 <= Node.val <= 1000`
+
+官方原题：https://leetcode.cn/problems/binary-tree-level-order-traversal-ii
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0107.Binary%20Tree%20Level%20Order%20Traversal%20II/README.md
+
+## 回放用例
 
 输入：root = [4, 2, 6, 1, 3, 5, 7]
 

@@ -6,11 +6,43 @@
 
 ## 题意
 
-摄像头能监控所在节点、它的父节点及孩子。求覆盖整棵二叉树所需的最少摄像头数。
+给定一个二叉树，我们在树的节点上安装摄像头。
 
-官方原题：https://leetcode.cn/problems/binary-tree-cameras/
+节点上的每个摄影头都可以监视**其父对象、自身及其直接子对象。**
 
-## 课堂示例
+计算监控树的所有节点所需的最小摄像头数量。
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0900-0999/0968.Binary%20Tree%20Cameras/images/bst_cameras_01.png)
+
+```text
+输入：[0,0,null,0,0]
+输出：1
+解释：如图所示，一台摄像头足以监控所有节点。
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0900-0999/0968.Binary%20Tree%20Cameras/images/bst_cameras_02.png)
+
+```text
+输入：[0,0,null,0,null,0,null,null,0]
+输出：2
+解释：需要至少两个摄像头来监视树的所有节点。 上图显示了摄像头放置的有效位置之一。
+```
+
+**提示：**
+
+1. 给定树的节点数的范围是 `[1, 1000]`。
+
+2. 每个节点的值都是 0。
+
+官方原题：https://leetcode.cn/problems/binary-tree-cameras
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0900-0999/0968.Binary%20Tree%20Cameras/README.md
+
+## 回放用例
 
 输入：root = [0, 0, null, 0, 0]
 

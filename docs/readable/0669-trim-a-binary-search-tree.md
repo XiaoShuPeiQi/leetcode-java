@@ -6,11 +6,45 @@
 
 ## 题意
 
-修剪二叉搜索树，使所有剩余节点的值都在闭区间 [low, high] 内。保持剩余节点原有的祖先关系，返回修剪后的根节点。
+给你二叉搜索树的根节点 `root` ，同时给定最小边界`low` 和最大边界 `high`。通过修剪二叉搜索树，使得所有节点的值在`[low, high]`中。修剪树 **不应该** 改变保留在树中的元素的相对结构 (即，如果没有被移除，原有的父代子代关系都应当保留)。 可以证明，存在 **唯一的答案** 。
 
-官方原题：https://leetcode.cn/problems/trim-a-binary-search-tree/
+所以结果应当返回修剪好的二叉搜索树的新的根节点。注意，根节点可能会根据给定的边界发生改变。
 
-## 课堂示例
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0600-0699/0669.Trim%20a%20Binary%20Search%20Tree/images/trim1.jpg)
+
+```text
+输入：root = [1,0,2], low = 1, high = 2
+输出：[1,null,2]
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0600-0699/0669.Trim%20a%20Binary%20Search%20Tree/images/trim2.jpg)
+
+```text
+输入：root = [3,0,4,null,2,null,null,1], low = 1, high = 3
+输出：[3,2,null,1]
+```
+
+**提示：**
+
+- 树中节点数在范围 `[1, 10^4]` 内
+
+- `0 <= Node.val <= 10^4`
+
+- 树中每个节点的值都是 **唯一** 的
+
+- 题目数据保证输入是一棵有效的二叉搜索树
+
+- `0 <= low <= high <= 10^4`
+
+官方原题：https://leetcode.cn/problems/trim-a-binary-search-tree
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0600-0699/0669.Trim%20a%20Binary%20Search%20Tree/README.md
+
+## 回放用例
 
 输入：root = [3, 1, 4, null, 2], low = 2, high = 4
 

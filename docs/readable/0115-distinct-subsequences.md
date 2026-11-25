@@ -6,11 +6,47 @@
 
 ## 题意
 
-从 s 删除若干位置的字符，使剩余字符按原顺序组成 t。求不同的下标选择方案数。
+给你两个字符串 `s` 和 `t` ，统计并返回在 `s` 的 **子序列** 中 `t` 出现的个数。
 
-官方原题：https://leetcode.cn/problems/distinct-subsequences/
+测试用例保证结果在 32 位有符号整数范围内。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：s = "rabbbit", t = "rabbit"
+输出：3
+解释：
+如下所示, 有 3 种可以从 s 中得到 "rabbit" 的方案。
+rabbbit
+rabbbit
+rabbbit
+```
+
+**示例 2：**
+
+```text
+输入：s = "babgbag", t = "bag"
+输出：5
+解释：
+如下所示, 有 5 种可以从 s 中得到 "bag" 的方案。
+babgbag
+babgbag
+babgbag
+babgbag
+babgbag
+```
+
+**提示：**
+
+- `1 <= s.length, t.length <= 1000`
+
+- `s` 和 `t` 由英文字母组成
+
+官方原题：https://leetcode.cn/problems/distinct-subsequences
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0115.Distinct%20Subsequences/README.md
+
+## 回放用例
 
 输入：s = "rabbbit", t = "rabbit"
 

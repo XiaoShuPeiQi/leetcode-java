@@ -6,11 +6,37 @@
 
 ## 题意
 
-求二叉树从根到最远叶子的路径包含多少个节点。空树的深度为 0。
+给定一个二叉树 `root` ，返回其最大深度。
 
-官方原题：https://leetcode.cn/problems/maximum-depth-of-binary-tree/
+二叉树的 **最大深度** 是指从根节点到最远叶子节点的最长路径上的节点数。
 
-## 课堂示例
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0104.Maximum%20Depth%20of%20Binary%20Tree/images/tmp-tree.jpg)
+
+```text
+输入：root = [3,9,20,null,null,15,7]
+输出：3
+```
+
+**示例 2：**
+
+```text
+输入：root = [1,null,2]
+输出：2
+```
+
+**提示：**
+
+- 树中节点的数量在 `[0, 10^4]` 区间内。
+
+- `-100 <= Node.val <= 100`
+
+官方原题：https://leetcode.cn/problems/maximum-depth-of-binary-tree
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0104.Maximum%20Depth%20of%20Binary%20Tree/README.md
+
+## 回放用例
 
 输入：root = [4, 2, 6, 1, 3, 5, 7]
 

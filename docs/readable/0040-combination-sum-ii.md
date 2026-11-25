@@ -6,11 +6,49 @@
 
 ## 题意
 
-从 candidates 中选取若干元素，使总和为 target。每个数组位置最多取一次；按值去重后返回所有组合。
+给定一个候选人编号的集合 `candidates` 和一个目标数 `target` ，找出 `candidates` 中所有可以使数字和为 `target` 的组合。
 
-官方原题：https://leetcode.cn/problems/combination-sum-ii/
+`candidates` 中的每个数字在每个组合中只能使用 **一次** 。
 
-## 课堂示例
+**注意：**解集不能包含重复的组合。
+
+**示例 1:**
+
+```text
+输入: candidates = [10,1,2,7,6,1,5], target = 8,
+输出:
+[
+[1,1,6],
+[1,2,5],
+[1,7],
+[2,6]
+]
+```
+
+**示例 2:**
+
+```text
+输入: candidates = [2,5,2,1,2], target = 5,
+输出:
+[
+[1,2,2],
+[5]
+]
+```
+
+**提示:**
+
+- `1 <= candidates.length <= 100`
+
+- `1 <= candidates[i] <= 50`
+
+- `1 <= target <= 30`
+
+官方原题：https://leetcode.cn/problems/combination-sum-ii
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0040.Combination%20Sum%20II/README.md
+
+## 回放用例
 
 输入：candidates = [1, 1, 2], target = 2
 

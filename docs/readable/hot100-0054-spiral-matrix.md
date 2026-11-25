@@ -6,11 +6,41 @@ Hot100 · 矩阵 · Spiral Matrix
 
 ## 题意
 
-从矩阵左上角出发，先向右，再按顺时针方向逐层向内遍历，返回读到的所有元素。
+给你一个 `m` 行 `n` 列的矩阵 `matrix` ，请按照 **顺时针螺旋顺序** ，返回矩阵中的所有元素。
 
-官方原题：https://leetcode.cn/problems/spiral-matrix/
+**示例 1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0054.Spiral%20Matrix/images/spiral1.jpg)
+
+```text
+输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+输出：[1,2,3,6,9,8,7,4,5]
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0054.Spiral%20Matrix/images/spiral.jpg)
+
+```text
+输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+输出：[1,2,3,4,8,12,11,10,9,5,6,7]
+```
+
+**提示：**
+
+- `m == matrix.length`
+
+- `n == matrix[i].length`
+
+- `1 <= m, n <= 10`
+
+- `-100 <= matrix[i][j] <= 100`
+
+官方原题：https://leetcode.cn/problems/spiral-matrix
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0054.Spiral%20Matrix/README.md
+
+## 回放用例
 
 输入：matrix=[[1,2,3],[4,5,6],[7,8,9]]
 

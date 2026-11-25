@@ -6,11 +6,41 @@
 
 ## 题意
 
-从二叉树最深一层中取最左边的节点，返回它的值。
+给定一个二叉树的 **根节点** `root`。
 
-官方原题：https://leetcode.cn/problems/find-bottom-left-tree-value/
+请找出该二叉树的 **最底层 最左边** 节点的值。
 
-## 课堂示例
+**示例 1:**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0513.Find%20Bottom%20Left%20Tree%20Value/images/tree1.jpg)
+
+```text
+输入：root = [2,1,3]
+输出：1
+解释：最后一行是 [1, 3]，因此最左边的值是 1。
+```
+
+**示例 2:**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0513.Find%20Bottom%20Left%20Tree%20Value/images/tree2.jpg)
+
+```text
+输入：[1,2,3,4,null,5,6,null,null,7]
+输出：7
+解释：最后一层只有节点 7。
+```
+
+**提示:**
+
+- 二叉树的节点个数的范围是 `[1, 10^4]`
+
+- `-2^(31) <= Node.val <= 2^(31) - 1`
+
+官方原题：https://leetcode.cn/problems/find-bottom-left-tree-value
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0513.Find%20Bottom%20Left%20Tree%20Value/README.md
+
+## 回放用例
 
 输入：root = [4, 2, 6, 1, 3, 5, 7]
 

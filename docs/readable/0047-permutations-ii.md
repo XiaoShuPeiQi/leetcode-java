@@ -6,11 +6,36 @@
 
 ## 题意
 
-给定可含重复值的整数数组，返回用全部元素排成的所有不同序列。
+给定一个可包含重复数字的序列 `nums` ，***按任意顺序*** 返回所有不重复的全排列。
 
-官方原题：https://leetcode.cn/problems/permutations-ii/
+**示例 1：**
 
-## 课堂示例
+```text
+输入：nums = [1,1,2]
+输出：
+[[1,1,2],
+ [1,2,1],
+ [2,1,1]]
+```
+
+**示例 2：**
+
+```text
+输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+```
+
+**提示：**
+
+- `1 <= nums.length <= 8`
+
+- `-10 <= nums[i] <= 10`
+
+官方原题：https://leetcode.cn/problems/permutations-ii
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0047.Permutations%20II/README.md
+
+## 回放用例
 
 输入：nums = [1, 1, 2]
 

@@ -6,11 +6,31 @@ Hot100 · 回溯 · Generate Parentheses
 
 ## 题意
 
-用 n 对圆括号生成所有合法的括号字符串。每个前缀的左括号数至少等于右括号数，整个字符串两者数量相等。
+数字 `n` 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 **有效的** 括号组合。
 
-官方原题：https://leetcode.cn/problems/generate-parentheses/
+**示例 1：**
 
-## 课堂示例
+```text
+输入：n = 3
+输出：["((()))","(()())","(())()","()(())","()()()"]
+```
+
+**示例 2：**
+
+```text
+输入：n = 1
+输出：["()"]
+```
+
+**提示：**
+
+- `1 <= n <= 8`
+
+官方原题：https://leetcode.cn/problems/generate-parentheses
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0022.Generate%20Parentheses/README.md
+
+## 回放用例
 
 输入：n=3
 

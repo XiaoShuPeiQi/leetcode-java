@@ -6,11 +6,45 @@ Hot100 · 普通数组 · Maximum Subarray
 
 ## 题意
 
-在非空整数数组中选一段非空连续子数组，返回它能取得的最大和。
+给你一个整数数组 `nums` ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
 
-官方原题：https://leetcode.cn/problems/maximum-subarray/
+**子数组** 是数组中的一个连续部分。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
+输出：6
+解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
+```
+
+**示例 2：**
+
+```text
+输入：nums = [1]
+输出：1
+```
+
+**示例 3：**
+
+```text
+输入：nums = [5,4,-1,7,8]
+输出：23
+```
+
+**提示：**
+
+- `1 <= nums.length <= 10^5`
+
+- `-10^4 <= nums[i] <= 10^4`
+
+**进阶：**如果你已经实现复杂度为 `O(n)` 的解法，尝试使用更为精妙的 **分治法** 求解。
+
+官方原题：https://leetcode.cn/problems/maximum-subarray
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0053.Maximum%20Subarray/README.md
+
+## 回放用例
 
 输入：nums=[-2,1,-3,4,-1,2,1]
 

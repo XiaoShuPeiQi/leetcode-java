@@ -6,11 +6,40 @@ Hot100 · 二叉树 · Diameter of Binary Tree
 
 ## 题意
 
-在二叉树中任取两个节点，求它们之间路径能包含的最大边数。路径可以经过根，也可以完全位于子树。
+给你一棵二叉树的根节点，返回该树的 **直径** 。
 
-官方原题：https://leetcode.cn/problems/diameter-of-binary-tree/
+二叉树的 **直径** 是指树中任意两个节点之间最长路径的 **长度** 。这条路径可能经过也可能不经过根节点 `root` 。
 
-## 课堂示例
+两节点之间路径的 **长度** 由它们之间边数表示。
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0543.Diameter%20of%20Binary%20Tree/images/diamtree.jpg)
+
+```text
+输入：root = [1,2,3,4,5]
+输出：3
+解释：3 ，取路径 [4,2,1,3] 或 [5,2,1,3] 的长度。
+```
+
+**示例 2：**
+
+```text
+输入：root = [1,2]
+输出：1
+```
+
+**提示：**
+
+- 树中节点数目在范围 `[1, 10^4]` 内
+
+- `-100 <= Node.val <= 100`
+
+官方原题：https://leetcode.cn/problems/diameter-of-binary-tree
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0543.Diameter%20of%20Binary%20Tree/README.md
+
+## 回放用例
 
 输入：root=[1,2,3,4,5]
 

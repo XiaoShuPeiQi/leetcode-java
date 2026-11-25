@@ -6,11 +6,44 @@
 
 ## 题意
 
-判断能否用 magazine 中的字符拼出 ransomNote。magazine 的每一个字符位置最多用一次。
+给你两个字符串：`ransomNote` 和 `magazine` ，判断 `ransomNote` 能不能由 `magazine` 里面的字符构成。
 
-官方原题：https://leetcode.cn/problems/ransom-note/
+如果可以，返回 `true` ；否则返回 `false` 。
 
-## 课堂示例
+`magazine` 中的每个字符只能在 `ransomNote` 中使用一次。
+
+**示例 1：**
+
+```text
+输入：ransomNote = "a", magazine = "b"
+输出：false
+```
+
+**示例 2：**
+
+```text
+输入：ransomNote = "aa", magazine = "ab"
+输出：false
+```
+
+**示例 3：**
+
+```text
+输入：ransomNote = "aa", magazine = "aab"
+输出：true
+```
+
+**提示：**
+
+- `1 <= ransomNote.length, magazine.length <= 10^5`
+
+- `ransomNote` 和 `magazine` 由小写英文字母组成
+
+官方原题：https://leetcode.cn/problems/ransom-note
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0300-0399/0383.Ransom%20Note/README.md
+
+## 回放用例
 
 输入：ransomNote = "aa", magazine = "aab"
 

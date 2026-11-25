@@ -6,11 +6,48 @@ Hot100 · 二分查找 · Find First And Last Position Of Element In Sorted Arra
 
 ## 题意
 
-在非递减数组 nums 中找出 target 的首个与末个下标；找不到时返回 [-1, -1]。要求 O(log n) 时间。
+给你一个按照非递减顺序排列的整数数组 `nums`，和一个目标值 `target`。请你找出给定目标值在数组中的开始位置和结束位置。
 
-官方原题：https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/
+如果数组中不存在目标值 `target`，返回 `[-1, -1]`。
 
-## 课堂示例
+你必须设计并实现时间复杂度为 `O(log n)` 的算法解决此问题。
+
+**示例 1：**
+
+```text
+输入：nums = [5,7,7,8,8,10], target = 8
+输出：[3,4]
+```
+
+**示例 2：**
+
+```text
+输入：nums = [5,7,7,8,8,10], target = 6
+输出：[-1,-1]
+```
+
+**示例 3：**
+
+```text
+输入：nums = [], target = 0
+输出：[-1,-1]
+```
+
+**提示：**
+
+- `0 <= nums.length <= 10^5`
+
+- `-10^9 <= nums[i] <= 10^9`
+
+- `nums` 是一个非递减数组
+
+- `-10^9 <= target <= 10^9`
+
+官方原题：https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0034.Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array/README.md
+
+## 回放用例
 
 输入：nums = [5, 7, 7, 8, 8, 10], target = 8
 

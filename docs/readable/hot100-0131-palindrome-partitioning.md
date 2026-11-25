@@ -6,11 +6,33 @@ Hot100 · 回溯 · Palindrome Partitioning
 
 ## 题意
 
-在字符串 s 中切若干刀，使切出来的每段都是回文串。返回所有可行的切分。
+给你一个字符串 `s`，请你将 `s` 分割成一些 子串，使每个子串都是 **回文串** 。返回 `s` 所有可能的分割方案。
 
-官方原题：https://leetcode.cn/problems/palindrome-partitioning/
+**示例 1：**
 
-## 课堂示例
+```text
+输入：s = "aab"
+输出：[["a","a","b"],["aa","b"]]
+```
+
+**示例 2：**
+
+```text
+输入：s = "a"
+输出：[["a"]]
+```
+
+**提示：**
+
+- `1 <= s.length <= 16`
+
+- `s` 仅由小写英文字母组成
+
+官方原题：https://leetcode.cn/problems/palindrome-partitioning
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0131.Palindrome%20Partitioning/README.md
+
+## 回放用例
 
 输入：s = "aab"
 

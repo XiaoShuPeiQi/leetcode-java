@@ -6,11 +6,57 @@
 
 ## 题意
 
-判断给定单链表从 head 沿 next 走下去，是否会再次到达已经访问过的节点。
+给你一个链表的头节点 `head` ，判断链表中是否有环。
 
-官方原题：https://leetcode.cn/problems/linked-list-cycle/
+如果链表中有某个节点，可以通过连续跟踪 `next` 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 `pos` 来表示链表尾连接到链表中的位置（索引从 0 开始）。**注意：`pos` 不作为参数进行传递** 。仅仅是为了标识链表的实际情况。
 
-## 课堂示例
+*如果链表中存在环* ，则返回 `true` 。 否则，返回 `false` 。
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0141.Linked%20List%20Cycle/images/circularlinkedlist.png)
+
+```text
+输入：head = [3,2,0,-4], pos = 1
+输出：true
+解释：链表中有一个环，其尾部连接到第二个节点。
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0141.Linked%20List%20Cycle/images/circularlinkedlist_test2.png)
+
+```text
+输入：head = [1,2], pos = 0
+输出：true
+解释：链表中有一个环，其尾部连接到第一个节点。
+```
+
+**示例 3：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0141.Linked%20List%20Cycle/images/circularlinkedlist_test3.png)
+
+```text
+输入：head = [1], pos = -1
+输出：false
+解释：链表中没有环。
+```
+
+**提示：**
+
+- 链表中节点的数目范围是 `[0, 10^4]`
+
+- `-10^5 <= Node.val <= 10^5`
+
+- `pos` 为 `-1` 或者链表中的一个 **有效索引** 。
+
+**进阶：**你能用 `O(1)`（即，常量）内存解决此问题吗？
+
+官方原题：https://leetcode.cn/problems/linked-list-cycle
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0141.Linked%20List%20Cycle/README.md
+
+## 回放用例
 
 输入：head=[3,2,0,-4], pos=1（尾部-4.next指回节点2）
 

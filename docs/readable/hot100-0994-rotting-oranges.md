@@ -6,11 +6,58 @@ Hot100 · 图论 · Rotting Oranges
 
 ## 题意
 
-格子取值 0、1、2 分别表示空、鲜橘子和烂橘子。每分钟烂橘子会感染上下左右相邻的鲜橘子。求鲜橘子全部腐烂的最短时间，无法全部感染时返回 -1。
+在给定的 `m x n` 网格 `grid` 中，每个单元格可以有以下三个值之一：
 
-官方原题：https://leetcode.cn/problems/rotting-oranges/
+- 值 `0` 代表空单元格；
 
-## 课堂示例
+- 值 `1` 代表新鲜橘子；
+
+- 值 `2` 代表腐烂的橘子。
+
+每分钟，腐烂的橘子 **周围 4 个方向上相邻** 的新鲜橘子都会腐烂。
+
+返回 *直到单元格中没有新鲜橘子为止所必须经过的最小分钟数。如果不可能，返回 `-1`* 。
+
+**示例 1：**
+
+**![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0900-0999/0994.Rotting%20Oranges/images/oranges.png)**
+
+```text
+输入：grid = [[2,1,1],[1,1,0],[0,1,1]]
+输出：4
+```
+
+**示例 2：**
+
+```text
+输入：grid = [[2,1,1],[0,1,1],[1,0,1]]
+输出：-1
+解释：左下角的橘子（第 2 行， 第 0 列）永远不会腐烂，因为腐烂只会发生在 4 个方向上。
+```
+
+**示例 3：**
+
+```text
+输入：grid = [[0,2]]
+输出：0
+解释：因为 0 分钟时已经没有新鲜橘子了，所以答案就是 0 。
+```
+
+**提示：**
+
+- `m == grid.length`
+
+- `n == grid[i].length`
+
+- `1 <= m, n <= 10`
+
+- `grid[i][j]` 仅为 `0`、`1` 或 `2`
+
+官方原题：https://leetcode.cn/problems/rotting-oranges
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0900-0999/0994.Rotting%20Oranges/README.md
+
+## 回放用例
 
 输入：grid=[[2,1,1],[1,1,0],[0,1,1]]
 

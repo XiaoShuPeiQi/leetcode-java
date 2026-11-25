@@ -6,11 +6,53 @@
 
 ## 题意
 
-给定二叉树，按左子树、右子树、当前节点的顺序遍历，返回节点值列表。
+给你一棵二叉树的根节点 `root` ，返回其节点值的 **后序遍历** 。
 
-官方原题：https://leetcode.cn/problems/binary-tree-postorder-traversal/
+**示例 1：**
 
-## 课堂示例
+**输入：**root = [1,null,2,3]
+
+**输出：**[3,2,1]
+
+**解释：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0145.Binary%20Tree%20Postorder%20Traversal/images/screenshot-2024-08-29-202743.png)
+
+**示例 2：**
+
+**输入：**root = [1,2,3,4,5,null,8,null,null,6,7,9]
+
+**输出：**[4,6,7,5,2,9,8,3,1]
+
+**解释：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0145.Binary%20Tree%20Postorder%20Traversal/images/tree_2.png)
+
+**示例 3：**
+
+**输入：**root = []
+
+**输出：**[]
+
+**示例 4：**
+
+**输入：**root = [1]
+
+**输出：**[1]
+
+**提示：**
+
+- 树中节点的数目在范围 `[0, 100]` 内
+
+- `-100 <= Node.val <= 100`
+
+**进阶：**递归算法很简单，你可以通过迭代算法完成吗？
+
+官方原题：https://leetcode.cn/problems/binary-tree-postorder-traversal
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0145.Binary%20Tree%20Postorder%20Traversal/README.md
+
+## 回放用例
 
 输入：root = [4, 2, 6, 1, 3, 5, 7]
 

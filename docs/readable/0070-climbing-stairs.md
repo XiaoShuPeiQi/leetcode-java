@@ -6,11 +6,40 @@
 
 ## 题意
 
-走到 n 级台阶的顶端，每次可上一级或两级。求不同走法的数量。
+假设你正在爬楼梯。需要 `n` 阶你才能到达楼顶。
 
-官方原题：https://leetcode.cn/problems/climbing-stairs/
+每次你可以爬 `1` 或 `2` 个台阶。你有多少种不同的方法可以爬到楼顶呢？
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：n = 2
+输出：2
+解释：有两种方法可以爬到楼顶。
+1. 1 阶 + 1 阶
+2. 2 阶
+```
+
+**示例 2：**
+
+```text
+输入：n = 3
+输出：3
+解释：有三种方法可以爬到楼顶。
+1. 1 阶 + 1 阶 + 1 阶
+2. 1 阶 + 2 阶
+3. 2 阶 + 1 阶
+```
+
+**提示：**
+
+- `1 <= n <= 45`
+
+官方原题：https://leetcode.cn/problems/climbing-stairs
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0070.Climbing%20Stairs/README.md
+
+## 回放用例
 
 输入：n = 4
 

@@ -6,11 +6,45 @@
 
 ## 题意
 
-给定同一棵二叉树的中序和后序遍历结果，重建二叉树并返回根节点。节点值互不相同。
+给定两个整数数组 `inorder` 和 `postorder` ，其中 `inorder` 是二叉树的中序遍历， `postorder` 是同一棵树的后序遍历，请你构造并返回这颗 *二叉树* 。
 
-官方原题：https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
+**示例 1:**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0106.Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/images/tree.jpg)
+
+```text
+输入：inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
+输出：[3,9,20,null,null,15,7]
+```
+
+**示例 2:**
+
+```text
+输入：inorder = [-1], postorder = [-1]
+输出：[-1]
+```
+
+**提示:**
+
+- `1 <= inorder.length <= 3000`
+
+- `postorder.length == inorder.length`
+
+- `-3000 <= inorder[i], postorder[i] <= 3000`
+
+- `inorder` 和 `postorder` 都由 **不同** 的值组成
+
+- `postorder` 中每一个值都在 `inorder` 中
+
+- `inorder` **保证**是树的中序遍历
+
+- `postorder` **保证**是树的后序遍历
+
+官方原题：https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0106.Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal/README.md
+
+## 回放用例
 
 输入：inorder = [1, 2, 3, 4, 5, 6, 7], postorder = [1, 3, 2, 5, 7, 6, 4]
 

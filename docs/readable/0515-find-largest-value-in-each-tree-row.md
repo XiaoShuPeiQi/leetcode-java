@@ -6,11 +6,35 @@
 
 ## 题意
 
-对二叉树逐层取节点值的最大值，按深度顺序返回。
+给定一棵二叉树的根节点 `root` ，请找出该二叉树中每一层的最大值。
 
-官方原题：https://leetcode.cn/problems/find-largest-value-in-each-tree-row/
+**示例1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0515.Find%20Largest%20Value%20in%20Each%20Tree%20Row/images/largest_e1.jpg)
+
+```text
+输入: root = [1,3,2,5,3,null,9]
+输出: [1,3,9]
+```
+
+**示例2：**
+
+```text
+输入: root = [1,2,3]
+输出: [1,3]
+```
+
+**提示：**
+
+- 二叉树的节点个数的范围是 `[0,10^4]`
+
+- `-2^(31) <= Node.val <= 2^(31) - 1`
+
+官方原题：https://leetcode.cn/problems/find-largest-value-in-each-tree-row
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0515.Find%20Largest%20Value%20in%20Each%20Tree%20Row/README.md
+
+## 回放用例
 
 输入：root = [4, 2, 6, 1, 3, 5, 7]
 

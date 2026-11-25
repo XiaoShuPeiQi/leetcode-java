@@ -6,11 +6,43 @@ Hot100 · 哈希 · Longest Consecutive Sequence
 
 ## 题意
 
-在无序整数数组中求最长的连续整数序列的长度。序列里的值彼此相差 1，它们在原数组中可以不挨着。要求 O(n) 时间。
+给定一个未排序的整数数组 `nums` ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
 
-官方原题：https://leetcode.cn/problems/longest-consecutive-sequence/
+请你设计并实现时间复杂度为 `O(n)` 的算法解决此问题。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：nums = [100,4,200,1,3,2]
+输出：4
+解释：最长数字连续序列是 [1, 2, 3, 4]。它的长度为 4。
+```
+
+**示例 2：**
+
+```text
+输入：nums = [0,3,7,2,5,8,4,6,0,1]
+输出：9
+```
+
+**示例 3：**
+
+```text
+输入：nums = [1,0,1,2]
+输出：3
+```
+
+**提示：**
+
+- `0 <= nums.length <= 10^5`
+
+- `-10^9 <= nums[i] <= 10^9`
+
+官方原题：https://leetcode.cn/problems/longest-consecutive-sequence
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0128.Longest%20Consecutive%20Sequence/README.md
+
+## 回放用例
 
 输入：nums=[100,4,200,1,3,2]
 

@@ -6,11 +6,48 @@
 
 ## 题意
 
-求完全二叉树的节点总数。除最后一层外各层都满，最后一层的节点从左向右排列。
+给你一棵 **完全二叉树** 的根节点 `root` ，求出该树的节点个数。
 
-官方原题：https://leetcode.cn/problems/count-complete-tree-nodes/
+[完全二叉树](<https://baike.baidu.com/item/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/7773232?fr=aladdin>) 的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 `h` 层（从第 0 层开始），则该层包含 `1~ 2^h` 个节点。
 
-## 课堂示例
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0222.Count%20Complete%20Tree%20Nodes/images/complete.jpg)
+
+```text
+输入：root = [1,2,3,4,5,6]
+输出：6
+```
+
+**示例 2：**
+
+```text
+输入：root = []
+输出：0
+```
+
+**示例 3：**
+
+```text
+输入：root = [1]
+输出：1
+```
+
+**提示：**
+
+- 树中节点的数目范围是`[0, 5 * 10^4]`
+
+- `0 <= Node.val <= 5 * 10^4`
+
+- 题目数据保证输入的树是 **完全二叉树**
+
+**进阶：**遍历树来统计节点是一种时间复杂度为 `O(n)` 的简单解决方案。你可以设计一个更快的算法吗？
+
+官方原题：https://leetcode.cn/problems/count-complete-tree-nodes
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0222.Count%20Complete%20Tree%20Nodes/README.md
+
+## 回放用例
 
 输入：root = [1, 2, 3, 4, 5, 6]
 

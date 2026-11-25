@@ -6,11 +6,45 @@ Hot100 · 二分查找 · Median Of Two Sorted Arrays
 
 ## 题意
 
-给定两个各自按非递减顺序排列的数组，求合并后有序序列的中位数。时间复杂度要求为 O(log(m+n))。
+给定两个大小分别为 `m` 和 `n` 的正序（从小到大）数组 `nums1` 和 `nums2`。请你找出并返回这两个正序数组的 **中位数** 。
 
-官方原题：https://leetcode.cn/problems/median-of-two-sorted-arrays/
+算法的时间复杂度应该为 `O(log (m+n))` 。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：nums1 = [1,3], nums2 = [2]
+输出：2.00000
+解释：合并数组 = [1,2,3] ，中位数 2
+```
+
+**示例 2：**
+
+```text
+输入：nums1 = [1,2], nums2 = [3,4]
+输出：2.50000
+解释：合并数组 = [1,2,3,4] ，中位数 (2 + 3) / 2 = 2.5
+```
+
+**提示：**
+
+- `nums1.length == m`
+
+- `nums2.length == n`
+
+- `0 <= m <= 1000`
+
+- `0 <= n <= 1000`
+
+- `1 <= m + n <= 2000`
+
+- `-10^6 <= nums1[i], nums2[i] <= 10^6`
+
+官方原题：https://leetcode.cn/problems/median-of-two-sorted-arrays
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0004.Median%20of%20Two%20Sorted%20Arrays/README.md
+
+## 回放用例
 
 输入：nums1 = [1, 3], nums2 = [2, 4]
 

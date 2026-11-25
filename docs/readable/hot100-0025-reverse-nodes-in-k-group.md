@@ -6,11 +6,45 @@ Hot100 · 链表 · Reverse Nodes in k-Group
 
 ## 题意
 
-将链表从头起每 k 个节点分为一组，翻转每个完整组的链接。最后不足 k 个节点时保持其顺序，返回新的头节点。
+给你链表的头节点 `head` ，每 `k` 个节点一组进行翻转，请你返回修改后的链表。
 
-官方原题：https://leetcode.cn/problems/reverse-nodes-in-k-group/
+`k` 是一个正整数，它的值小于或等于链表的长度。如果节点总数不是 `k` 的整数倍，那么请将最后剩余的节点保持原有顺序。
 
-## 课堂示例
+你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0025.Reverse%20Nodes%20in%20k-Group/images/reverse_ex1.jpg)
+
+```text
+输入：head = [1,2,3,4,5], k = 2
+输出：[2,1,4,3,5]
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0025.Reverse%20Nodes%20in%20k-Group/images/reverse_ex2.jpg)
+
+```text
+输入：head = [1,2,3,4,5], k = 3
+输出：[3,2,1,4,5]
+```
+
+**提示：**
+
+- 链表中的节点数目为 `n`
+
+- `1 <= k <= n <= 5000`
+
+- `0 <= Node.val <= 1000`
+
+**进阶：**你可以设计一个只用 `O(1)` 额外内存空间的算法解决此问题吗？
+
+官方原题：https://leetcode.cn/problems/reverse-nodes-in-k-group
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0025.Reverse%20Nodes%20in%20k-Group/README.md
+
+## 回放用例
 
 输入：head=[1,2,3,4,5], k=2
 

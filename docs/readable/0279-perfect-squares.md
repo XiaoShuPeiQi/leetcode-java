@@ -6,11 +6,35 @@
 
 ## 题意
 
-将正整数 n 表示成若干个完全平方数之和，同一个平方数可以重复使用。求所需项数的最小值。
+给你一个整数 `n` ，返回 *和为 `n` 的完全平方数的最少数量* 。
 
-官方原题：https://leetcode.cn/problems/perfect-squares/
+**完全平方数** 是一个整数，其值等于另一个整数的平方；换句话说，其值等于一个整数自乘的积。例如，`1`、`4`、`9` 和 `16` 都是完全平方数，而 `3` 和 `11` 不是。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：n = 12
+输出：3
+解释：12 = 4 + 4 + 4
+```
+
+**示例 2：**
+
+```text
+输入：n = 13
+输出：2
+解释：13 = 4 + 9
+```
+
+**提示：**
+
+- `1 <= n <= 10^4`
+
+官方原题：https://leetcode.cn/problems/perfect-squares
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0279.Perfect%20Squares/README.md
+
+## 回放用例
 
 输入：n = 12
 

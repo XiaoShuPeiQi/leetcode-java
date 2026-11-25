@@ -6,11 +6,37 @@
 
 ## 题意
 
-从 s 中依原顺序选取部分字符，使得到的序列正读反读相同。求最大长度。
+给你一个字符串 `s` ，找出其中最长的回文子序列，并返回该序列的长度。
 
-官方原题：https://leetcode.cn/problems/longest-palindromic-subsequence/
+子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：s = "bbbab"
+输出：4
+解释：一个可能的最长回文子序列为 "bbbb" 。
+```
+
+**示例 2：**
+
+```text
+输入：s = "cbbd"
+输出：2
+解释：一个可能的最长回文子序列为 "bb" 。
+```
+
+**提示：**
+
+- `1 <= s.length <= 1000`
+
+- `s` 仅由小写英文字母组成
+
+官方原题：https://leetcode.cn/problems/longest-palindromic-subsequence
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0500-0599/0516.Longest%20Palindromic%20Subsequence/README.md
+
+## 回放用例
 
 输入：s = "bbbab"
 

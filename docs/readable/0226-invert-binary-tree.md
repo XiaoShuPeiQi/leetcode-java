@@ -6,11 +6,44 @@
 
 ## 题意
 
-交换二叉树每个节点的左右子树，返回翻转后的根节点。
+给你一棵二叉树的根节点 `root` ，翻转这棵二叉树，并返回其根节点。
 
-官方原题：https://leetcode.cn/problems/invert-binary-tree/
+**示例 1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0226.Invert%20Binary%20Tree/images/invert1-tree.jpg)
+
+```text
+输入：root = [4,2,7,1,3,6,9]
+输出：[4,7,2,9,6,3,1]
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0226.Invert%20Binary%20Tree/images/invert2-tree.jpg)
+
+```text
+输入：root = [2,1,3]
+输出：[2,3,1]
+```
+
+**示例 3：**
+
+```text
+输入：root = []
+输出：[]
+```
+
+**提示：**
+
+- 树中节点数目范围在 `[0, 100]` 内
+
+- `-100 <= Node.val <= 100`
+
+官方原题：https://leetcode.cn/problems/invert-binary-tree
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0226.Invert%20Binary%20Tree/README.md
+
+## 回放用例
 
 输入：root = [4, 2, 6, 1, 3, 5, 7]
 

@@ -6,11 +6,33 @@
 
 ## 题意
 
-构造 n×n 矩阵。从左上角开始，先向右，再按顺时针螺旋路径依次填入 1 到 n²。
+给你一个正整数 `n` ，生成一个包含 `1` 到 `n^2` 所有元素，且元素按顺时针顺序螺旋排列的 `n x n` 正方形矩阵 `matrix` 。
 
-官方原题：https://leetcode.cn/problems/spiral-matrix-ii/
+**示例 1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0059.Spiral%20Matrix%20II/images/spiraln.jpg)
+
+```text
+输入：n = 3
+输出：[[1,2,3],[8,9,4],[7,6,5]]
+```
+
+**示例 2：**
+
+```text
+输入：n = 1
+输出：[[1]]
+```
+
+**提示：**
+
+- `1 <= n <= 20`
+
+官方原题：https://leetcode.cn/problems/spiral-matrix-ii
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0059.Spiral%20Matrix%20II/README.md
+
+## 回放用例
 
 输入：n = 3
 

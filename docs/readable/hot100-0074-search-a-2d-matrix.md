@@ -6,11 +6,49 @@ Hot100 · 二分查找 · Search A 2D Matrix
 
 ## 题意
 
-矩阵每行按非递减顺序排列，且每行的首元素大于前一行的末元素。判断目标值是否出现在矩阵中。
+给你一个满足下述两条属性的 `m x n` 整数矩阵：
 
-官方原题：https://leetcode.cn/problems/search-a-2d-matrix/
+- 每行中的整数从左到右按非严格递增顺序排列。
 
-## 课堂示例
+- 每行的第一个整数大于前一行的最后一个整数。
+
+给你一个整数 `target` ，如果 `target` 在矩阵中，返回 `true` ；否则，返回 `false` 。
+
+你必须编写一个时间复杂度为 `O(log(m * n))` 的解决方案。
+
+**示例 1：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0074.Search%20a%202D%20Matrix/images/mat.jpg)
+
+```text
+输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+输出：true
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0074.Search%20a%202D%20Matrix/images/mat2.jpg)
+
+```text
+输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+输出：false
+```
+
+**提示：**
+
+- `m == matrix.length`
+
+- `n == matrix[i].length`
+
+- `1 <= m, n <= 100`
+
+- `-10^4 <= matrix[i][j], target <= 10^4`
+
+官方原题：https://leetcode.cn/problems/search-a-2d-matrix
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0000-0099/0074.Search%20a%202D%20Matrix/README.md
+
+## 回放用例
 
 输入：matrix = [[1, 3, 5], [7, 9, 11]], target = 9
 

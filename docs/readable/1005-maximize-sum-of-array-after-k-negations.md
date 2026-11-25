@@ -6,11 +6,51 @@
 
 ## 题意
 
-恰好做 k 次操作，每次选择一个下标并把它的值取反，同一下标可重复选择。求操作后数组和的最大值。
+给你一个整数数组 `nums` 和一个整数 `k` ，按以下方法修改该数组：
 
-官方原题：https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/
+- 选择某个下标 `i` 并将 `nums[i]` 替换为 `-nums[i]` 。
 
-## 课堂示例
+重复这个过程恰好 `k` 次。可以多次选择同一个下标 `i` 。
+
+以这种方式修改数组后，返回数组 **可能的最大和** 。
+
+**示例 1：**
+
+```text
+输入：nums = [4,2,3], k = 1
+输出：5
+解释：选择下标 1 ，nums 变为 [4,-2,3] 。
+```
+
+**示例 2：**
+
+```text
+输入：nums = [3,-1,0,2], k = 3
+输出：6
+解释：选择下标 (1, 2, 2) ，nums 变为 [3,1,0,2] 。
+```
+
+**示例 3：**
+
+```text
+输入：nums = [2,-3,-1,5,-4], k = 2
+输出：13
+解释：选择下标 (1, 4) ，nums 变为 [2,3,-1,5,4] 。
+```
+
+**提示：**
+
+- `1 <= nums.length <= 10^4`
+
+- `-100 <= nums[i] <= 100`
+
+- `1 <= k <= 10^4`
+
+官方原题：https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/1000-1099/1005.Maximize%20Sum%20Of%20Array%20After%20K%20Negations/README.md
+
+## 回放用例
 
 输入：nums = [-4, -2, 3], k = 3
 

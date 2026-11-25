@@ -6,11 +6,44 @@
 
 ## 题意
 
-判断二叉树是否高度平衡，即所有节点的左右子树高度差都不超过 1。
+给定一个二叉树，判断它是否是 平衡二叉树
 
-官方原题：https://leetcode.cn/problems/balanced-binary-tree/
+**示例 1：**
 
-## 课堂示例
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0110.Balanced%20Binary%20Tree/images/balance_1.jpg)
+
+```text
+输入：root = [3,9,20,null,null,15,7]
+输出：true
+```
+
+**示例 2：**
+
+![题目配图](https://raw.githubusercontent.com/doocs/leetcode/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0110.Balanced%20Binary%20Tree/images/balance_2.jpg)
+
+```text
+输入：root = [1,2,2,3,3,null,null,4,4]
+输出：false
+```
+
+**示例 3：**
+
+```text
+输入：root = []
+输出：true
+```
+
+**提示：**
+
+- 树中的节点数在范围 `[0, 5000]` 内
+
+- `-10^4 <= Node.val <= 10^4`
+
+官方原题：https://leetcode.cn/problems/balanced-binary-tree
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0100-0199/0110.Balanced%20Binary%20Tree/README.md
+
+## 回放用例
 
 输入：root = [1, 2, 3, 4, null, null, null, 5]
 

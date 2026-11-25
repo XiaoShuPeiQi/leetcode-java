@@ -6,11 +6,41 @@
 
 ## 题意
 
-将非递减整数数组的每项取平方，返回按非递减顺序排列的平方值。
+给你一个按 **非递减顺序** 排序的整数数组 `nums`，返回 **每个数字的平方** 组成的新数组，要求也按 **非递减顺序** 排序。
 
-官方原题：https://leetcode.cn/problems/squares-of-a-sorted-array/
+**示例 1：**
 
-## 课堂示例
+```text
+输入：nums = [-4,-1,0,3,10]
+输出：[0,1,9,16,100]
+解释：平方后，数组变为 [16,1,0,9,100]
+排序后，数组变为 [0,1,9,16,100]
+```
+
+**示例 2：**
+
+```text
+输入：nums = [-7,-3,2,3,11]
+输出：[4,9,9,49,121]
+```
+
+**提示：**
+
+- `1 <= nums.length <= 10^4`
+
+- `-10^4 <= nums[i] <= 10^4`
+
+- `nums` 已按 **非递减顺序** 排序
+
+**进阶：**
+
+- 请你设计时间复杂度为 `O(n)` 的算法解决本问题
+
+官方原题：https://leetcode.cn/problems/squares-of-a-sorted-array
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0900-0999/0977.Squares%20of%20a%20Sorted%20Array/README.md
+
+## 回放用例
 
 输入：nums = [-4, -1, 0, 3, 10]
 

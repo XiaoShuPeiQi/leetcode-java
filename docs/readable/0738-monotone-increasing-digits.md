@@ -6,11 +6,40 @@
 
 ## 题意
 
-求不超过 n 的最大非负整数，使其数字从左到右非递减。
+当且仅当每个相邻位数上的数字 `x` 和 `y` 满足 `x <= y` 时，我们称这个整数是**单调递增**的。
 
-官方原题：https://leetcode.cn/problems/monotone-increasing-digits/
+给定一个整数 `n` ，返回 *小于或等于 `n` 的最大数字，且数字呈 **单调递增*** 。
 
-## 课堂示例
+**示例 1:**
+
+```text
+输入: n = 10
+输出: 9
+```
+
+**示例 2:**
+
+```text
+输入: n = 1234
+输出: 1234
+```
+
+**示例 3:**
+
+```text
+输入: n = 332
+输出: 299
+```
+
+**提示:**
+
+- `0 <= n <= 10^9`
+
+官方原题：https://leetcode.cn/problems/monotone-increasing-digits
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0700-0799/0738.Monotone%20Increasing%20Digits/README.md
+
+## 回放用例
 
 输入：n = 332
 

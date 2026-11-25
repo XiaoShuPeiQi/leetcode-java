@@ -6,11 +6,39 @@
 
 ## 题意
 
-统计 s 中所有非空回文子串的个数。内容相同但下标区间不同的子串分别计数。
+给你一个字符串 `s` ，请你统计并返回这个字符串中 **回文子串** 的数目。
 
-官方原题：https://leetcode.cn/problems/palindromic-substrings/
+**回文字符串** 是正着读和倒过来读一样的字符串。
 
-## 课堂示例
+**子字符串** 是字符串中的由连续字符组成的一个序列。
+
+**示例 1：**
+
+```text
+输入：s = "abc"
+输出：3
+解释：三个回文子串: "a", "b", "c"
+```
+
+**示例 2：**
+
+```text
+输入：s = "aaa"
+输出：6
+解释：6个回文子串: "a", "a", "a", "aa", "aa", "aaa"
+```
+
+**提示：**
+
+- `1 <= s.length <= 1000`
+
+- `s` 由小写英文字母组成
+
+官方原题：https://leetcode.cn/problems/palindromic-substrings
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0600-0699/0647.Palindromic%20Substrings/README.md
+
+## 回放用例
 
 输入：s = "aaa"
 

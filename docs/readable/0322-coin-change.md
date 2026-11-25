@@ -6,11 +6,47 @@
 
 ## 题意
 
-给定不同面额的硬币且每种数量不限，凑出 amount 所需的最少硬币数是多少？凑不出时返回 -1。
+给你一个整数数组 `coins` ，表示不同面额的硬币；以及一个整数 `amount`，表示总金额。
 
-官方原题：https://leetcode.cn/problems/coin-change/
+计算并返回可以凑成总金额所需的 **最少** 的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1 。
 
-## 课堂示例
+你可以认为每种硬币的数量是无限的。
+
+**示例 1：**
+
+```text
+输入：coins = [1, 2, 5], amount = 11
+输出：3
+解释：11 = 5 + 5 + 1
+```
+
+**示例 2：**
+
+```text
+输入：coins = [2], amount = 3
+输出：-1
+```
+
+**示例 3：**
+
+```text
+输入：coins = [1], amount = 0
+输出：0
+```
+
+**提示：**
+
+- `1 <= coins.length <= 12`
+
+- `1 <= coins[i] <= 2^(31) - 1`
+
+- `0 <= amount <= 10^4`
+
+官方原题：https://leetcode.cn/problems/coin-change
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0300-0399/0322.Coin%20Change/README.md
+
+## 回放用例
 
 输入：coins = [1, 2, 5], amount = 11
 

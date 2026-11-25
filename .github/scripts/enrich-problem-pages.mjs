@@ -10,15 +10,7 @@ mkdirSync(mirrorDirectory, {recursive: true});
 const replayHelp = '本页回放代表性输入的真实 Java 17 / JDI 暂停快照。高亮行尚未执行，执行后的变化出现在下一暂停位置。可单步、后退、重置、播放、拖动进度和选择调用栈帧；网页不运行任意 Java 输入。';
 const traceHelp = '完整轨迹 JSON 与交互页面使用同一份数据：code 为代码，displayStart 为起始行号，steps 为按时间排列的全部暂停事件，pool 为共享状态池。事件中的 frames、heap、roots、stack、vars 等整数索引指向 pool；旧回溯格式的 vars 是键索引/值索引对。calls 或 nodes 保存调用树。';
 
-const statements = new Map(
-    readFileSync(new URL('problem-statements.tsv', import.meta.url), 'utf8')
-        .trim().split(/\r?\n/).map(line => line.split('\t'))
-);
-const sourceOverrides = {
-    K44: 'https://kamacoder.com/problempage.php?pid=1044',
-    K58: 'https://kamacoder.com/problempage.php?pid=1070',
-    LCR146: 'https://leetcode.cn/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/'
-};
+const statements = JSON.parse(readFileSync(new URL('problem-statements.json', import.meta.url), 'utf8'));
 const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
 })[char]);
@@ -49,7 +41,7 @@ function classroomTitle(trace) {
     return `${rank}${trace.id} · ${trace.title} — 展老师小课堂`;
 }
 
-function renderProblem(trace, statement, source, java, slug) {
+function renderProblem(trace, statement, java, slug) {
     const gitHubSource = 'https://github.com/XiaoShuPeiQi/leetcode-java/blob/main/' + trace.javaFile;
     return `
 <article class="problem-content" id="problem-content">
@@ -58,17 +50,16 @@ function renderProblem(trace, statement, source, java, slug) {
         <div class="problem-section-title">
             <h2 id="problem-statement-title">题意</h2>
             <div class="problem-actions">
-                <a href="${escapeHtml(source)}">官方原题 ↗</a>
+                <a href="${escapeHtml(statement.official)}">官方原题 ↗</a>
+                <a href="${escapeHtml(statement.github)}">GitHub 题面来源 ↗</a>
                 <a href="problem.txt">完整课堂文本</a>
                 <a href="https://github.com/XiaoShuPeiQi/leetcode-java/blob/main/docs/readable/${slug}.md">GitHub 文字版</a>
                 <button type="button" class="copy-classroom" aria-live="polite" hidden>复制课堂内容</button>
             </div>
         </div>
-        <p>${escapeHtml(statement)}</p>
-        <dl class="problem-example">
-            <dt>课堂示例输入</dt><dd><code>${escapeHtml(trace.input)}</code></dd>
-            <dt>预期结果</dt><dd><code>${escapeHtml(trace.expected)}</code></dd>
-        </dl>
+        <div class="problem-statement-body">
+            ${statement.html}
+        </div>
     </section>
     <section class="problem-notes" aria-labelledby="classroom-notes-title">
         <h2 id="classroom-notes-title">课堂说明</h2>
@@ -76,12 +67,16 @@ function renderProblem(trace, statement, source, java, slug) {
         ${trace.algorithm ? `<p>解法：${escapeHtml(trace.algorithm)}</p>` : ''}
         ${trace.stateMeaning ? `<h3>状态含义</h3><p>${escapeHtml(trace.stateMeaning)}</p>` : ''}
         ${trace.transition ? `<h3>状态变化</h3><p>${escapeHtml(trace.transition)}</p>` : ''}
-        <p>实际结果：<code>${escapeHtml(trace.actual)}</code>；预期结果：<code>${escapeHtml(trace.expected)}</code>。</p>
-        <p>测试来源：${escapeHtml(trace.testSource)}</p>
         <p>源码说明：${escapeHtml(trace.sourceStatus)}</p>
         <p><a href="${escapeHtml(trace.source)}">飞书来源笔记</a>（外部文档可能需要登录，本文仅包含本页已发布的内容。）</p>
         ${trace.reference ? `<p><a href="${escapeHtml(trace.reference)}">代码随想录的 Java 解法</a></p>` : ''}
         <h3>执行回放</h3><p>${replayHelp}</p>
+        <dl class="problem-example">
+            <dt>回放输入</dt><dd><code>${escapeHtml(trace.input)}</code></dd>
+            <dt>预期结果</dt><dd><code>${escapeHtml(trace.expected)}</code></dd>
+            <dt>实际结果</dt><dd><code>${escapeHtml(trace.actual)}</code></dd>
+            <dt>测试来源</dt><dd>${escapeHtml(trace.testSource)}</dd>
+        </dl>
         <p>本例包含 ${trace.steps.length} 个原始暂停事件。<a href="trace.json">完整执行轨迹 JSON（含全部变量、调用栈及对象状态）</a></p>
         <p>${traceHelp}</p>
     </section>
@@ -109,26 +104,25 @@ for (const entry of readdirSync(problems, {withFileTypes: true})) {
     const page = join(directory, 'index.html');
     const trace = readTrace(join(directory, 'trace.js'));
     const id = String(trace.id);
-    const statement = statements.get(id);
-    if (!statement) throw new Error(`Missing statement for ${entry.name} (problem ${id})`);
-    const slug = entry.name.match(/^(?:hot100-|dp-)?\d+-(.+)$/)?.[1];
-    const source = sourceOverrides[id] ?? `https://leetcode.cn/problems/${slug}/`;
-    if (!sourceOverrides[id] && !slug) throw new Error(`Missing source URL for ${entry.name}`);
+    const statement = statements[id];
+    if (!statement?.html || !statement.text || !statement.official || !statement.github) {
+        throw new Error(`Missing complete statement for ${entry.name} (problem ${id})`);
+    }
     const java = javaSnippet(trace);
     const html = readFileSync(page, 'utf8');
     if (!html.includes('<div id="app"></div>')) {
         throw new Error(`Expected app mount in ${page}. Enrich a fresh copy of the source pages.`);
     }
     writeFileSync(page, html
-        .replace('</head>', () => `<meta name="description" content="${escapeHtml(statement)}"><meta name="robots" content="index,follow,max-snippet:-1"><link rel="canonical" href="${base}problems/${entry.name}/"><link rel="alternate" type="text/plain" href="problem.txt" title="完整课堂文本"><link rel="stylesheet" href="../../assets/problem-content.css"></head>`)
-        .replace('<div id="app"></div>', () => '<div id="app"></div>' + renderProblem(trace, statement, source, java, entry.name))
+        .replace('</head>', () => `<meta name="description" content="${escapeHtml(trace.title)}的完整题意、原题示例和 Java 执行回放"><meta name="robots" content="index,follow,max-snippet:-1"><link rel="canonical" href="${base}problems/${entry.name}/"><link rel="alternate" type="text/plain" href="problem.txt" title="完整课堂文本"><link rel="stylesheet" href="../../assets/problem-content.css"></head>`)
+        .replace('<div id="app"></div>', () => '<div id="app"></div>' + renderProblem(trace, statement, java, entry.name))
         .replace('</body>', '<script src="../../assets/problem-content.js"></script></body>'));
     const text = [
         `# ${classroomTitle(trace)}`,
         `网页：${base}problems/${entry.name}/`,
         [trace.chapter, trace.group, trace.english].filter(Boolean).join(' · '),
-        '## 题意', statement, `官方原题：${source}`,
-        '## 课堂示例', `输入：${trace.input}`, `预期结果：${trace.expected}`, `实际结果：${trace.actual}`,
+        '## 题意', statement.text, `官方原题：${statement.official}`, `GitHub 题面来源：${statement.github}`,
+        '## 回放用例', `输入：${trace.input}`, `预期结果：${trace.expected}`, `实际结果：${trace.actual}`,
         `测试来源：${trace.testSource}`,
         ...(trace.algorithm ? ['## 解法', trace.algorithm] : []),
         ...(trace.stateMeaning ? ['## 状态含义', trace.stateMeaning] : []),

@@ -6,11 +6,47 @@ Hot100 · 图论 · Course Schedule
 
 ## 题意
 
-共有 numCourses 门课，每个先修条件 [a, b] 表示学 a 之前必须学 b。判断能否安排一个修完全部课程的顺序。
+你这个学期必须选修 `numCourses` 门课程，记为 `0` 到 `numCourses - 1` 。
 
-官方原题：https://leetcode.cn/problems/course-schedule/
+在选修某些课程之前需要一些先修课程。 先修课程按数组 `prerequisites` 给出，其中 `prerequisites[i] = [a_i, b_i]` ，表示如果要学习课程 `a_i` 则 **必须** 先学习课程  `b_i`_ 。
 
-## 课堂示例
+- 例如，先修课程对 `[0, 1]` 表示：想要学习课程 `0` ，你需要先完成课程 `1` 。
+
+请你判断是否可能完成所有课程的学习？如果可以，返回 `true` ；否则，返回 `false` 。
+
+**示例 1：**
+
+```text
+输入：numCourses = 2, prerequisites = [[1,0]]
+输出：true
+解释：总共有 2 门课程。学习课程 1 之前，你需要完成课程 0 。这是可能的。
+```
+
+**示例 2：**
+
+```text
+输入：numCourses = 2, prerequisites = [[1,0],[0,1]]
+输出：false
+解释：总共有 2 门课程。学习课程 1 之前，你需要先完成​课程 0 ；并且学习课程 0 之前，你还应先完成课程 1 。这是不可能的。
+```
+
+**提示：**
+
+- `1 <= numCourses <= 2000`
+
+- `0 <= prerequisites.length <= 5000`
+
+- `prerequisites[i].length == 2`
+
+- `0 <= a_i, b_i < numCourses`
+
+- `prerequisites[i]` 中的所有课程对 **互不相同**
+
+官方原题：https://leetcode.cn/problems/course-schedule
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0207.Course%20Schedule/README.md
+
+## 回放用例
 
 输入：numCourses=4, prerequisites=[[1,0],[2,0],[3,1],[3,2]]
 

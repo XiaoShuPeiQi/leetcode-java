@@ -6,11 +6,46 @@ Hot100 · 子串 · Sliding Window Maximum
 
 ## 题意
 
-长度为 k 的窗口从数组最左端开始，每次向右移动一格。返回每个窗口的最大值。
+给你一个整数数组 `nums`，有一个大小为 `k` 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 `k` 个数字。滑动窗口每次只向右移动一位。
 
-官方原题：https://leetcode.cn/problems/sliding-window-maximum/
+返回 *滑动窗口中的最大值* 。
 
-## 课堂示例
+**示例 1：**
+
+```text
+输入：nums = [1,3,-1,-3,5,3,6,7], k = 3
+输出：[3,3,5,5,6,7]
+解释：
+滑动窗口的位置                最大值
+---------------               -----
+[1  3  -1] -3  5  3  6  7       3
+ 1 [3  -1  -3] 5  3  6  7       3
+ 1  3 [-1  -3  5] 3  6  7       5
+ 1  3  -1 [-3  5  3] 6  7       5
+ 1  3  -1  -3 [5  3  6] 7       6
+ 1  3  -1  -3  5 [3  6  7]      7
+```
+
+**示例 2：**
+
+```text
+输入：nums = [1], k = 1
+输出：[1]
+```
+
+**提示：**
+
+- `1 <= nums.length <= 10^5`
+
+- `-10^4 <= nums[i] <= 10^4`
+
+- `1 <= k <= nums.length`
+
+官方原题：https://leetcode.cn/problems/sliding-window-maximum
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0200-0299/0239.Sliding%20Window%20Maximum/README.md
+
+## 回放用例
 
 输入：nums=[1,3,-1,-3,5,3,6,7]; k=3
 

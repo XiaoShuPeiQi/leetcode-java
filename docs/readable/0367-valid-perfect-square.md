@@ -6,11 +6,37 @@
 
 ## 题意
 
-判断正整数 num 能否写成某个整数的平方，不使用内置平方根函数。
+给你一个正整数 `num` 。如果 `num` 是一个完全平方数，则返回 `true` ，否则返回 `false` 。
 
-官方原题：https://leetcode.cn/problems/valid-perfect-square/
+**完全平方数** 是一个可以写成某个整数的平方的整数。换句话说，它可以写成某个整数和自身的乘积。
 
-## 课堂示例
+不能使用任何内置的库函数，如  `sqrt` 。
+
+**示例 1：**
+
+```text
+输入：num = 16
+输出：true
+解释：返回 true ，因为 4 * 4 = 16 且 4 是一个整数。
+```
+
+**示例 2：**
+
+```text
+输入：num = 14
+输出：false
+解释：返回 false ，因为 3.742 * 3.742 = 14 但 3.742 不是一个整数。
+```
+
+**提示：**
+
+- `1 <= num <= 2^(31) - 1`
+
+官方原题：https://leetcode.cn/problems/valid-perfect-square
+
+GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01f90c1568415732b3dd8bd/solution/0300-0399/0367.Valid%20Perfect%20Square/README.md
+
+## 回放用例
 
 输入：num = 16
 
