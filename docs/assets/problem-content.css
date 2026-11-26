@@ -19,6 +19,14 @@ body > .problem-content {
     margin-top: 16px;
 }
 
+.problem-statement + .lesson-input {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 0 10px;
+    overflow-wrap: anywhere;
+}
+
 .problem-section-title,
 .problem-actions {
     display: flex;

@@ -8,8 +8,11 @@
     const lesson = main?.querySelector('.lesson');
     const buttons = [...article.querySelectorAll('.copy-java')];
     if (lesson) {
+        const statement = article.querySelector('.problem-statement');
+        const input = lesson.querySelector('.lesson-input');
         article.querySelector('.problem-fallback-title').hidden = true;
-        lesson.after(article.querySelector('.problem-statement'));
+        lesson.after(statement);
+        if (input) statement.after(input);
         main.append(article);
         const codeTitle = document.getElementById('code')?.previousElementSibling;
         if (codeTitle?.classList.contains('panel-title')) {
