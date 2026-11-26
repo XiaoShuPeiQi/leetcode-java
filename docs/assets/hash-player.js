@@ -15,7 +15,13 @@ const ref=x=>x?.$ref===undefined?null:String(x.$ref);
 function readable(x,seen=new Set()){const id=ref(x);if(id!==null){const node=heap[id];if(!node||seen.has(id))return '#'+id;const next=new Set(seen);next.add(id);return Object.fromEntries([['节点','#'+id],...Object.entries(node).filter(([k])=>k!=='$type').map(([k,v])=>[k,readable(v,next)])]);}if(Array.isArray(x))return x.map(v=>readable(v,seen));return x;}
 function brief(x){if(ref(x)!==null)return '#'+ref(x);const text=JSON.stringify(x);return text?.length>55?text.slice(0,52)+'…':text;}
 function variables(vars){$('variables').innerHTML=Object.entries(vars).map(([k,v])=>v===null||typeof v!=='object'?'<div class="variable scalar"><span>'+esc(k)+'</span><b>'+esc(brief(v))+'</b></div>':'<details class="variable"><summary><span>'+esc(k)+'</span><b>'+esc(brief(v))+'</b></summary><pre>'+esc(JSON.stringify(readable(v),null,2))+'</pre></details>').join('')||'<p class="empty">—</p>';}
-function array(name,values,active=-1,cover=-1){if(!Array.isArray(values))return '';return '<div class="state-label">'+esc(name)+'</div><div class="state-array">'+values.map((v,i)=>'<div class="state-cell '+(i===active?'active ':'')+(i<=cover?'covered':'')+'">'+esc(Array.isArray(v)?JSON.stringify(v):v)+'<small>'+i+'</small></div>').join('')+'</div>';}
+function array(name,values,active=-1){
+ const slots=values.map((value,index)=>`<div class="state-slot">
+  <span class="state-index" title="下标">${index}</span>
+  <div class="state-cell ${index===active?'active':''}">${esc(Array.isArray(value)?JSON.stringify(value):value)}</div>
+ </div>`);
+ return `<div class="state-label">${esc(name)}</div><div class="state-array">${slots.join('')}</div>`;
+}
 
 function drawState(step,vars){
  const all={...data.inputObject,...vars};let out='';
@@ -24,18 +30,25 @@ function drawState(step,vars){
   if(key==='nums'&&[15,18].includes(data.id)){
    out+='<div class="state-label">nums · 当前排序与指针</div><div class="state-array">'+all[key].map((v,i)=>{
     const labels=['k','i','left','right'].filter(k=>vars[k]===i);
-    return '<div class="state-cell '+(labels.length?'active':'')+'">'+esc(v)+'<small>'+i+(labels.length?' · '+labels.join('/'):'')+'</small></div>';
+    return `<div class="state-slot">
+     <span class="state-index" title="下标">${i}</span>
+     <div class="state-cell ${labels.length?'active':''}">${esc(v)}</div>
+     ${labels.length?`<span class="pointer-name">${esc(labels.join(' / '))}</span>`:''}
+    </div>`;
    }).join('')+'</div>';
   }else out+=array(key,all[key],vars.i??-1);
  }
  if(Array.isArray(vars.count)){
   const cells=vars.count.map((v,i)=>({key:String.fromCharCode(97+i),value:v}));
-  out+='<h3>count · 各字母计数</h3><div class="hash-grid">'+cells.map(c=>'<div class="hash-cell '+(c.value!==0?'hash-filled':'')+'"><b>'+c.key+'</b><span>'+c.value+'</span></div>').join('')+'</div>';
+  out+='<h3>count · 各字母计数</h3><div class="state-array">'+cells.map(c=>`<div class="state-slot"><span class="state-key">${esc(c.key)}</span><div class="state-cell hash-cell ${c.value!==0?'hash-filled':''}">${esc(c.value)}</div></div>`).join('')+'</div>';
  }
  for(const key of ['seen','map','count','result']){
   const entries=vars[key]?.$map;if(!entries)continue;
   const isSet=key==='seen'||key==='result';
-  out+='<h3>'+esc(key)+(isSet?' · 已记录数值':' · 键 → 值')+'</h3><div class="hash-grid">'+entries.map(([k,v])=>'<div class="hash-cell hash-filled"><b>'+esc(k)+'</b>'+(isSet?'':'<span>'+esc(v)+'</span>')+'</div>').join('')+'</div>'+(entries.length?'':'<p class="empty">空表</p>');
+  const cells=entries.map(([k,v])=>isSet
+   ? `<div class="state-cell hash-cell hash-filled">${esc(k)}</div>`
+   : `<div class="state-slot"><span class="state-key">${esc(k)}</span><div class="state-cell hash-cell hash-filled">${esc(v)}</div></div>`);
+  out+='<h3>'+esc(key)+(isSet?' · 已记录数值':' · 键 → 值')+'</h3><div class="state-array">'+cells.join('')+'</div>'+(entries.length?'':'<p class="empty">空表</p>');
  }
  if(data.id===202){const root=data.pool[step.frames][0];out+='<p class="state-caption">本轮状态 n='+esc(root.vars.n??data.inputObject.n)+'；getNext逐位计算平方和。</p>';}
  if([15,18].includes(data.id)){

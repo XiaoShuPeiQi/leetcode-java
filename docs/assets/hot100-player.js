@@ -20,7 +20,6 @@ function brief(x){
  return text?.length>55?text.slice(0,52)+'…':text;
 }
 function variables(vars){$('variables').innerHTML=Object.entries(vars).map(([k,v])=>v===null||typeof v!=='object'?'<div class="variable scalar"><span>'+esc(k)+'</span><b>'+esc(brief(v))+'</b></div>':'<details class="variable"><summary><span>'+esc(k)+'</span><b>'+esc(brief(v))+'</b></summary><pre>'+esc(JSON.stringify(readable(v),null,2))+'</pre></details>').join('')||'<p class="empty">—</p>';}
-function array(name,values,active=-1,cover=-1){if(!Array.isArray(values))return '';return '<div class="state-label">'+esc(name)+'</div><div class="state-array">'+values.map((v,i)=>'<div class="state-cell '+(i===active?'active ':'')+(i<=cover?'covered':'')+'">'+esc(Array.isArray(v)?JSON.stringify(v):v)+'<small>'+i+'</small></div>').join('')+'</div>';}
 // The highlighted Java line is pending execution; snapshots are never recomputed in JS.
 
 function previousVars(){
@@ -56,7 +55,11 @@ function vector(name,values,vars,old,label=name){
  const pts=pointers(name,vars);
  return '<div class="state-label">'+esc(label)+'</div><div class="state-array">'+values.map((v,i)=>{
   const names=pts.filter(([,value])=>value===i).map(([key])=>key),changed=Array.isArray(old)&&old[i]!==undefined&&old[i]!==v;
-  return '<div class="state-cell '+(names.length?'pointer ':'')+(changed?'changed':'')+'">'+esc(v)+'<small>'+i+'</small>'+(names.length?'<span class="pointer-name">'+esc(names.join(' / '))+'</span>':'')+'</div>';
+  return `<div class="state-slot">
+   <span class="state-index" title="下标">${i}</span>
+   <div class="state-cell ${names.length?'pointer ':''}${changed?'changed':''}">${esc(v)}</div>
+   ${names.length?`<span class="pointer-name">${esc(names.join(' / '))}</span>`:''}
+  </div>`;
  }).join('')+'</div>'+(values.length?'':'<p class="empty">空数组</p>');
 }
 function matrix(name,values,vars,old,label=name){
@@ -80,7 +83,7 @@ function heightChart(values,vars){
 function drawState(step,vars){
  if(window.Hot100Structures?.draw($('state'), data, heap, vars, data.pool[step.roots]))return;
  const old=previousVars(),shown=new Set();
- let html='<p class="state-caption array-meaning">'+esc(data.stateMeaning)+'</p><div class="array-legend"><span>下方标签：当前指针</span><span>着色：较上一暂停位置改变</span></div>';
+ let html='<p class="state-caption array-meaning">'+esc(data.stateMeaning)+'</p><div class="array-legend"><span>格上方：下标</span><span>格下方：当前指针</span><span>着色：较上一暂停位置改变</span></div>';
  if([11,42].includes(data.id))html+=heightChart(data.inputObject.height,vars);
  if(data.id===84)html+=heightChart(vars.newHeights||data.inputObject.heights,vars.newHeights?vars:{});
  function view(name,value,original=false){
@@ -101,9 +104,9 @@ function drawState(step,vars){
   if(shown.has(name))continue;
   if((name==='need'||(data.id===438&&name==='window'))&&Array.isArray(value)){
    const chars=[...new Set(Array.from(data.inputObject.t||data.inputObject.p||''))];
-   html+='<div class="state-label">'+esc(data.id===438?name+' · 字母频次':'need · 目标字符欠账（负数表示多余）')+'</div><div class="state-array">'+chars.map(c=>'<div class="state-cell">'+esc(c)+'<small>'+value[c.charCodeAt(0)-(data.id===438?97:0)]+'</small></div>').join('')+'</div>';
+   html+='<div class="state-label">'+esc(data.id===438?name+' · 字母频次':'need · 目标字符欠账（负数表示多余）')+'</div><div class="state-array">'+chars.map(c=>`<div class="state-slot"><span class="state-key">${esc(c)}</span><div class="state-cell">${esc(value[c.charCodeAt(0)-(data.id===438?97:0)])}</div></div>`).join('')+'</div>';
   }else if(value?.$map){
-   html+='<div class="state-label">'+esc(name)+' · 键 → 值</div><div class="state-array">'+value.$map.map(([k,v])=>'<div class="state-cell">'+esc(k)+'<small>→ '+esc(JSON.stringify(v))+'</small></div>').join('')+'</div>';
+   html+='<div class="state-label">'+esc(name)+' · 键 → 值</div><div class="state-array">'+value.$map.map(([k,v])=>`<div class="state-slot"><span class="state-key">${esc(k)}</span><div class="state-cell">${esc(JSON.stringify(v))}</div></div>`).join('')+'</div>';
   }else if(Array.isArray(value)||typeof value==='string')view(name,value);
  }
  const scalars=Object.entries(vars).filter(([,v])=>typeof v==='number'||typeof v==='boolean');
