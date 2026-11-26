@@ -29,7 +29,7 @@ const url = rel => base ? base + '/' + rel : pathToFileURL(path.join(root, 'docs
   assert.equal(await page.locator('.card').count(), hot100.length);
   assert.deepEqual((await page.locator('.card h3').allTextContents()).slice(problems[0].order-1,problems.at(-1).order),problems.map(p=>p.title));
   for (const p of problems) {
-   await page.goto(url('problems/' + p.page_slug + '/index.html'));
+   await page.goto(url('problems/' + p.page_slug + '/index.html'), {waitUntil:'domcontentloaded'});
    await page.locator('.code-line.current').waitFor();
    const traceFile=fs.readFileSync(path.join(root,'docs/problems',p.page_slug,'trace.js'),'utf8');
    const trace=JSON.parse(traceFile.slice(traceFile.indexOf('=')+1).trim().replace(/;$/,''));
@@ -62,6 +62,9 @@ const url = rel => base ? base + '/' + rel : pathToFileURL(path.join(root, 'docs
    await seek(max);
    assert.match(await page.locator('#result').textContent(), /PASS/);
    assert.ok((await page.locator('#result').textContent()).includes(p.expected), p.id);
+   if (p.inPlace) assert.equal(await page.locator('#result-count').textContent(), '原数组写回');
+   if (p.id === 118) assert.equal(await page.locator('#state .matrix tbody tr').last().locator('td').count(), 5);
+   if (p.id === 32) assert.ok((await page.locator('#state').textContent()).includes('stack · 从栈顶到栈底'));
    if ([240,200,994,79,74].includes(p.id)) assert.ok(await page.locator('#state .matrix-cell').count() > 0);
    if (trace.nodeIds.length) assert.ok(await page.locator('#state [data-node]').count() > 0, p.id);
    if (p.id === 138) assert.ok(await page.locator('[data-edge=random]').count() > 0);

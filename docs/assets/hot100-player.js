@@ -46,6 +46,15 @@ function pointers(name,vars){
   };
   keys=byProblem[data.id]?.[name]||[];
  }
+ if(data.order>=81){
+  const byProblem={
+   70:{dp:['i']},118:{row:['j']},198:{dp:['i']},279:{dp:['i']},322:{dp:['i']},139:{dp:['i']},
+   300:{nums:['i','j'],dp:['i','j']},152:{nums:['i']},416:{dp:['j']},32:{s:['i']},
+   5:{s:['i','left','right']},75:{nums:['left','i','right','j']},
+   31:{nums:['pivot','next','left','right','i','j']},287:{nums:['slow','fast']}
+  };
+  keys=byProblem[data.id]?.[name]||[];
+ }
  if(data.id===238)keys=['i'];
  if(data.id===844)keys=name==='s'?['i']:name==='t'?['j']:[];
  if(data.id===76)keys=['left','right'];
@@ -66,8 +75,10 @@ function matrix(name,values,vars,old,label=name){
  if(!values.length)return '<p class="state-caption">'+esc(label)+' = []</p>';
  const source=data.code[frames.find(f=>f.id===selectedFrame).line-data.displayStart]||'';
  const refs=[...source.matchAll(/(\w+)\[(\w+)\]\[(\w+)\]/g)].filter(m=>m[1]===name).map(m=>[vars[m[2]],vars[m[3]]]);
- return '<div class="state-label">'+esc(label)+'</div><div class="matrix-scroll"><table class="matrix"><thead><tr><th>行 / 列</th>'+values[0].map((_,j)=>'<th>'+j+'</th>').join('')+'</tr></thead><tbody>'+values.map((row,i)=>'<tr><th>'+i+'</th>'+row.map((v,j)=>{
-  const changed=Array.isArray(old?.[i])&&old[i][j]!==v;
+ const columns=Math.max(...values.map(row=>row.length));
+ const headings=Array.from({length:columns},(_,j)=>'<th scope="col">'+j+'</th>').join('');
+ return '<div class="state-label">'+esc(label)+'</div><div class="matrix-scroll"><table class="matrix"><thead><tr><th>行 / 列</th>'+headings+'</tr></thead><tbody>'+values.map((row,i)=>'<tr><th scope="row">'+i+'</th>'+row.map((v,j)=>{
+  const changed=Array.isArray(old)&&(old[i]?.[j]!==v);
   const active=refs.some(([row,col])=>row===i&&col===j)||([240,200,994,79,51,74].includes(data.id)&&vars.row===i&&vars.col===j)||([200,994].includes(data.id)&&vars.cell?.[0]===i&&vars.cell?.[1]===j);
   return '<td data-row="'+i+'" data-col="'+j+'" class="matrix-cell '+(active?'active ':'')+(changed?'changed':'')+'">'+esc(v)+'</td>';
  }).join('')+'</tr>').join('')+'</tbody></table></div>';
@@ -88,7 +99,7 @@ function drawState(step,vars){
  if(data.id===84)html+=heightChart(vars.newHeights||data.inputObject.heights,vars.newHeights?vars:{});
  function view(name,value,original=false){
   let label=name+(original?' · 原始输入':' · 当前值');
-  if([20,155,739,84].includes(data.id)&&['stack','minStack'].includes(name))label=name+' · 从栈顶到栈底';
+  if([20,155,739,84,32].includes(data.id)&&['stack','minStack'].includes(name))label=name+' · 从栈顶到栈底';
   if(data.id===394&&['numStack','strStack'].includes(name))label=name+' · 从栈顶到栈底';
   if(data.id===215&&name==='heap')label='heap · 小根堆内部顺序';
   if(data.id===347&&name==='minHeap')label='minHeap · 每行[数值, 频次] · 第 0 行是堆顶';
@@ -118,11 +129,11 @@ function drawState(step,vars){
 
 function render(){const step=data.steps[index],event=playback.events[position];heap=data.pool[step.heap];frames=data.pool[step.frames];if(!frames.some(f=>f.id===selectedFrame))selectedFrame=frames.at(-1).id;const frame=frames.find(f=>f.id===selectedFrame);
  document.querySelector('.code-line.current')?.classList.remove('current');const row=document.querySelector('[data-line="'+frame.line+'"]');if(row){row.classList.add('current');const panel=$('code');if(row.offsetTop<panel.scrollTop||row.offsetTop+row.offsetHeight>panel.scrollTop+panel.clientHeight)panel.scrollTop=row.offsetTop-panel.clientHeight/2;}
- $('line-number').textContent='L'+frame.line+(event.complete?' · 完成':' · 待执行');$('operation').className='operation '+step.kind;$('operation').textContent=event.complete?'执行完成':kinds[step.kind];$('step-title').textContent=step.method+'() · 第 '+step.line+' 行';const ret=step.returnValue<0?undefined:data.pool[step.returnValue];$('explanation').textContent=event.returns.length?event.returns.map(r=>'↩ '+r.method+'() = '+brief(r.value)).join(' · '):'';
+ $('line-number').textContent='L'+frame.line+(event.complete?' · 完成':' · 待执行');$('operation').className='operation '+step.kind;$('operation').textContent=event.complete?'执行完成':kinds[step.kind];$('step-title').textContent=step.method+'() · 第 '+step.line+' 行';const ret=step.returnValue<0?undefined:data.pool[step.returnValue];$('explanation').textContent=event.returns.map(r=>'↩ '+r.method+'()'+(data.inPlace&&r.value===null?'':' = '+brief(r.value))).join(' · ');
  $('frame-title').textContent=frame.method+'()';variables(frame.vars);drawState(step,frame.vars);
  renderStack({frames:event.complete?[]:frames,selectedId:selectedFrame,phase:event.entered?'enter':'line',returns:event.returns,format:brief,onSelect:id=>{selectedFrame=id;render();}});
  const vars=frames.at(-1).vars,result=event.complete?ret:vars.res??vars.result??vars.answer;
- $('result').innerHTML=event.complete?'<pre>'+esc(data.actual)+'</pre><div class="pass">✓ PASS</div>':result===undefined?'<p class="empty">—</p>':'<pre>'+esc(JSON.stringify(readable(result),null,2))+'</pre>';$('result-count').textContent=event.complete?'最终返回':'当前状态';
+ $('result').innerHTML=event.complete?'<pre>'+esc(data.actual)+'</pre><div class="pass">✓ PASS</div>':result===undefined?'<p class="empty">—</p>':'<pre>'+esc(JSON.stringify(readable(result),null,2))+'</pre>';$('result-count').textContent=event.complete?(data.inPlace?'原数组写回':'最终返回'):'当前状态';
  $('progress').value=position;$('progress-label').textContent=(position+1)+' / '+stops.length;$('percent').textContent=Math.round(position/Math.max(1,stops.length-1)*100)+'%';$('prev').disabled=position===0;$('next').disabled=$('key').disabled=position===stops.length-1;
 }
 function pause(){clearInterval(timer);timer=null;$('play').textContent='▶ 播放';}

@@ -144,6 +144,11 @@ public class LinkedTraceRecorder {
             List<Object> values = new ArrayList<>(); cache.put(id, values);
             for (Value item : array.getValues()) values.add(value(item, depth + 1));
             result = values;
+        } else if (type.equals("java.util.Arrays$ArrayList")) {
+            List<Object> values = new ArrayList<>(); cache.put(id, values);
+            ArrayReference array = (ArrayReference) field(object, "a");
+            for (Value item : array.getValues()) values.add(value(item, depth + 1));
+            result = values;
         } else if (type.equals("java.util.ArrayList") || type.equals("java.util.Stack")) {
             List<Object> values = new ArrayList<>(); cache.put(id, values);
             ArrayReference array = (ArrayReference) field(object, "elementData");

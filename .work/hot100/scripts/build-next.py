@@ -75,7 +75,7 @@ for p in problems:
         statement = source_lines[line-1]
         kind = ("enter" if phase == "enter" else "return" if phase == "exit" or "return " in statement
                 else "condition" if re.search(r"\b(if|while)\b", statement) else "loop" if "for (" in statement
-                else "modify" if re.search(r"\+\+|--|\s=\s|\.(?:add|put|offer|poll)\(", statement) else "statement")
+                else "modify" if re.search(r"\+\+|--|\s[+\-^|]?=\s|\.(?:add|put|offer|poll|push|pop)\(", statement) else "statement")
         node_ids.update(k for k, v in event["heap"].items() if "val" in v or "children" in v)
         steps.append(dict(line=line, kind=kind, phase=phase, method=event["method"],
                           frames=intern(stack), heap=intern(event["heap"]), roots=intern(event["roots"]),
@@ -98,6 +98,8 @@ for p in problems:
         data["source"] += "#" + p["headingBlock"]
     if p.get("preserveSubmission"):
         data["submissionCode"] = p["code"]
+    if p.get("inPlace"):
+        data["inPlace"] = True
     dir = D / "problems" / p["page_slug"]
     dir.mkdir(parents=True, exist_ok=True)
     page = re.sub(r"<title>.*?</title>", lambda _: f'<title>{id} · {html.escape(p["title"])} — 展老师小课堂</title>', template)

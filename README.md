@@ -531,3 +531,36 @@ node .work/hot100/scripts/browser-test.cjs
 [Java 编译与 JDI 录制](outputs/Hot100-61-80-capture.json) · [本地浏览器验收](outputs/Hot100-61-80-browser.json)
 
 在仓库根目录执行 `py -3.11 .work/hot100/scripts/capture-next.py <JDK17目录> 61-80` 录制，再执行 `py -3.11 .work/hot100/scripts/build-next.py 61-80` 生成网页。
+
+## Hot100 第 81–100 题
+
+[飞书题解](https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcnoAPmBZQRTMTW7BhpRkz0Jd) · [Markdown 笔记](docs/Hot100第81至100题.md) · [Hot100 在线调试目录](https://xiaoshupeiqi.github.io/leetcode-java/?chapter=Hot100)
+
+10 题誊写算法学习总笔记的主解与推演，复用已有 Java 入口。其余 10 题依据代码随想录整理并新增入口。每题使用与笔记相同的输入录制 Java 17 调试轨迹。
+
+[Java 编译与 JDI 录制](outputs/Hot100-81-100-capture.json) · [本地浏览器验收](outputs/Hot100-81-100-browser.json) · [飞书回读](outputs/Hot100-81-100-feishu.json)
+
+| 顺序 | 题号 | Java | 在线调试器 |
+|---|---|---|---|
+| 81 | 70 | [爬楼梯](src/main/java/leetcode/dp/LC0070ClimbingStairs.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0070-climbing-stairs/) |
+| 82 | 118 | [杨辉三角](src/main/java/leetcode/dp/LC0118PascalsTriangle.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0118-pascals-triangle/) |
+| 83 | 198 | [打家劫舍](src/main/java/leetcode/dp/LC0198HouseRobber.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0198-house-robber/) |
+| 84 | 279 | [完全平方数](src/main/java/leetcode/dp/LC0279PerfectSquares.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0279-perfect-squares/) |
+| 85 | 322 | [零钱兑换](src/main/java/leetcode/dp/LC0322CoinChange.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0322-coin-change/) |
+| 86 | 139 | [单词拆分](src/main/java/leetcode/dp/LC0139WordBreak.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0139-word-break/) |
+| 87 | 300 | [最长递增子序列](src/main/java/leetcode/dp/LC0300LongestIncreasingSubsequence.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0300-longest-increasing-subsequence/) |
+| 88 | 152 | [乘积最大子数组](src/main/java/leetcode/dp/LC0152MaximumProductSubarray.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0152-maximum-product-subarray/) |
+| 89 | 416 | [分割等和子集](src/main/java/leetcode/dp/LC0416PartitionEqualSubsetSum.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0416-partition-equal-subset-sum/) |
+| 90 | 32 | [最长有效括号](src/main/java/leetcode/stackqueue/LC0032LongestValidParentheses.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0032-longest-valid-parentheses/) |
+| 91 | 62 | [不同路径](src/main/java/leetcode/dp/LC0062UniquePaths.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0062-unique-paths/) |
+| 92 | 64 | [最小路径和](src/main/java/leetcode/dp/LC0064MinimumPathSum.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0064-minimum-path-sum/) |
+| 93 | 5 | [最长回文子串](src/main/java/leetcode/dp/LC0005LongestPalindromicSubstring.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0005-longest-palindromic-substring/) |
+| 94 | 1143 | [最长公共子序列](src/main/java/leetcode/dp/LC1143LongestCommonSubsequence.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-1143-longest-common-subsequence/) |
+| 95 | 72 | [编辑距离](src/main/java/leetcode/dp/LC0072EditDistance.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0072-edit-distance/) |
+| 96 | 136 | [只出现一次的数字](src/main/java/leetcode/array/LC0136SingleNumber.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0136-single-number/) |
+| 97 | 169 | [多数元素](src/main/java/leetcode/array/LC0169MajorityElement.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0169-majority-element/) |
+| 98 | 75 | [颜色分类](src/main/java/leetcode/array/LC0075SortColors.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0075-sort-colors/) |
+| 99 | 31 | [下一个排列](src/main/java/leetcode/array/LC0031NextPermutation.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0031-next-permutation/) |
+| 100 | 287 | [寻找重复数](src/main/java/leetcode/array/LC0287FindTheDuplicateNumber.java) | [打开](https://xiaoshupeiqi.github.io/leetcode-java/problems/hot100-0287-find-the-duplicate-number/) |
+
+在仓库根目录用 `py -3.11 .work/hot100/scripts/capture-next.py <JDK17目录> 81-100` 录制，再用 `py -3.11 .work/hot100/scripts/build-next.py 81-100` 生成调试页。
