@@ -28,6 +28,7 @@ function previousVars(){
  return old.find(f=>f.id===selectedFrame)?.vars||{};
 }
 function pointers(name,vars){
+ if(data.id===215&&name==='heap')return [['堆顶',0]];
  let keys=['left','right','mid','slow','fast','write','i','j','start','end','target'];
  if(data.order>=61&&data.order<=80){
   const byProblem={
@@ -39,7 +40,6 @@ function pointers(name,vars){
    4:{nums1:['start1'],nums2:['start2']},
    739:{temperatures:['i','index'],answer:['i','index']},
    84:{newHeights:['i','mid']},
-   215:{nums:['left','less','scan','greater','right','targetIndex']},
    55:{nums:['i','cover']},
    45:{nums:['i','curEnd','nextEnd']},
    763:{s:['i','start','end']}
@@ -90,6 +90,7 @@ function drawState(step,vars){
   let label=name+(original?' · 原始输入':' · 当前值');
   if([20,155,739,84].includes(data.id)&&['stack','minStack'].includes(name))label=name+' · 从栈顶到栈底';
   if(data.id===394&&['numStack','strStack'].includes(name))label=name+' · 从栈顶到栈底';
+  if(data.id===215&&name==='heap')label='heap · 小根堆内部顺序';
   if(data.id===347&&name==='minHeap')label='minHeap · 每行[数值, 频次] · 第 0 行是堆顶';
   if(data.id===295&&['maxHeap','minHeap'].includes(name))label=name+' · 下标 0 是堆顶';
   if(Array.isArray(value))html+=Array.isArray(value[0])?matrix(name,value,vars,old[name],label):vector(name,value,vars,old[name],label);

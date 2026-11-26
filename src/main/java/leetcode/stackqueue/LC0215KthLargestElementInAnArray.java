@@ -1,5 +1,6 @@
 package leetcode.stackqueue;
 
+import java.util.PriorityQueue;
 import java.util.concurrent.ThreadLocalRandom;
 import common.TreeSupport;
 
@@ -17,6 +18,23 @@ public class LC0215KthLargestElementInAnArray {
     }
 
     static class Solution {
+        public int findKthLargest(int[] nums, int k) {
+            PriorityQueue<Integer> heap = new PriorityQueue<>();
+
+            for (int num : nums) {
+                heap.offer(num);
+
+                if (heap.size() > k) {
+                    heap.poll();
+                }
+            }
+
+            return heap.peek();
+        }
+    }
+
+    // 原随机三路快速选择实现。
+    static class SolutionQuickselect {
         public int findKthLargest(int[] nums, int k) {
             int targetIndex = nums.length - k;
             int left = 0;

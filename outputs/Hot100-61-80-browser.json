@@ -107,7 +107,7 @@
     },
     {
       "id": 215,
-      "visibleStops": 200,
+      "visibleStops": 36,
       "stepBack": "PASS",
       "breakpoint": "PASS",
       "state": "PASS",

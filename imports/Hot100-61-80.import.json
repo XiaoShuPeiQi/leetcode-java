@@ -448,10 +448,10 @@
       "mainClass": "leetcode.stackqueue.LC0215KthLargestElementInAnArray",
       "launchClass": "leetcode.stackqueue.LC0215KthLargestElementInAnArray",
       "solutionClass": "Solution",
-      "sourceHash": "8236e9bbc6af8e03177876938c8fedfad6636d7c54a2f46ef74dda33a14c79f6",
-      "displayStart": 19,
-      "code": "import java.util.concurrent.ThreadLocalRandom;\n\nclass Solution {\n    public int findKthLargest(int[] nums, int k) {\n        int targetIndex = nums.length - k;\n        int left = 0;\n        int right = nums.length - 1;\n\n        while (left < right) {\n            int pivotIndex = ThreadLocalRandom.current().nextInt(left, right + 1);\n            int pivot = nums[pivotIndex];\n            int less = left;\n            int scan = left;\n            int greater = right;\n\n            // 把候选区间分成小于、等于、大于 pivot 的三段。\n            while (scan <= greater) {\n                if (nums[scan] < pivot) {\n                    swap(nums, less, scan);\n                    less++;\n                    scan++;\n                } else if (nums[scan] > pivot) {\n                    swap(nums, scan, greater);\n                    greater--; // 换到 scan 的数还需要检查。\n                } else {\n                    scan++;\n                }\n            }\n\n            if (targetIndex < less) {\n                right = less - 1;\n            } else if (targetIndex > greater) {\n                left = greater + 1;\n            } else {\n                return pivot;\n            }\n        }\n\n        return nums[left];\n    }\n\n    private void swap(int[] nums, int first, int second) {\n        int saved = nums[first];\n        nums[first] = nums[second];\n        nums[second] = saved;\n    }\n}",
-      "adapted": "    static class Solution {\n        public int findKthLargest(int[] nums, int k) {\n            int targetIndex = nums.length - k;\n            int left = 0;\n            int right = nums.length - 1;\n\n            while (left < right) {\n                int pivotIndex = ThreadLocalRandom.current().nextInt(left, right + 1);\n                int pivot = nums[pivotIndex];\n                int less = left;\n                int scan = left;\n                int greater = right;\n\n                // 把候选区间分成小于、等于、大于 pivot 的三段。\n                while (scan <= greater) {\n                    if (nums[scan] < pivot) {\n                        swap(nums, less, scan);\n                        less++;\n                        scan++;\n                    } else if (nums[scan] > pivot) {\n                        swap(nums, scan, greater);\n                        greater--; // 换到 scan 的数还需要检查。\n                    } else {\n                        scan++;\n                    }\n                }\n\n                if (targetIndex < less) {\n                    right = less - 1;\n                } else if (targetIndex > greater) {\n                    left = greater + 1;\n                } else {\n                    return pivot;\n                }\n            }\n\n            return nums[left];\n        }\n\n        private void swap(int[] nums, int first, int second) {\n            int saved = nums[first];\n            nums[first] = nums[second];\n            nums[second] = saved;\n        }\n    }",
+      "sourceHash": "a65bdca9babd994703600cb22bd961ff6781600bb065f64770504b7bef300672",
+      "displayStart": 20,
+      "code": "import java.util.PriorityQueue;\n\nclass Solution {\n    public int findKthLargest(int[] nums, int k) {\n        PriorityQueue<Integer> heap = new PriorityQueue<>();\n\n        for (int num : nums) {\n            heap.offer(num);\n\n            if (heap.size() > k) {\n                heap.poll();\n            }\n        }\n\n        return heap.peek();\n    }\n}",
+      "adapted": "    static class Solution {\n        public int findKthLargest(int[] nums, int k) {\n            PriorityQueue<Integer> heap = new PriorityQueue<>();\n\n            for (int num : nums) {\n                heap.offer(num);\n\n                if (heap.size() > k) {\n                    heap.poll();\n                }\n            }\n\n            return heap.peek();\n        }\n    }",
       "preserveSubmission": true,
       "input": "nums = [3, 2, 3, 1, 2, 4, 5, 5, 6], k = 4",
       "inputObject": {
@@ -469,12 +469,11 @@
       },
       "expected": "4",
       "headingBlock": "doxcnjeIfT1DyWnn52GOBLFMhmc",
-      "provenance": "代码随想录 · 快速选择法的 Java 三路分区实现。",
+      "provenance": "小根堆 Java 实现由用户提供。",
       "test_source": "飞书 Hot100 第 74 题「实例走过程」",
-      "summary": "把第 K 大换成升序下标 n - k，每轮把候选区间按基准值分三段，然后只到目标所在的一段继续找。",
-      "state": "分区期间，[left, less) 已确认小于基准，[less, scan) 等于基准，[scan, greater] 还没检查，(greater, right] 已确认大于基准。分区结束时等于段为 [less, greater]。",
-      "reference": "https://programmercarl.com/hot100/0215.kth-largest-element-in-an-array.html",
-      "algorithm": "随机三路快速选择"
+      "summary": "用 offer 把当前的 num 加进堆。大小超过 k 时用 poll 移除最小值。扫完后用 peek 读取堆顶。",
+      "state": "每轮结束时，heap 保留已扫描元素中最大的 min(k, 已扫描个数) 个值。堆顶是堆内最小值，重复的值各占一个名次。",
+      "algorithm": "保留前 k 大元素的小根堆。时间 O(n log(k + 1))，辅助空间 O(k)。力扣中文题面的时间要求是 O(n)，这个小根堆写法用于练习维护前 k 大的元素。"
     },
     {
       "id": 347,

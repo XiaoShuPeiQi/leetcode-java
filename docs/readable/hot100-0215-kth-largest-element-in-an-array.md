@@ -48,85 +48,53 @@ GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01
 
 ## 解法
 
-随机三路快速选择
+保留前 k 大元素的小根堆。时间 O(n log(k + 1))，辅助空间 O(k)。力扣中文题面的时间要求是 O(n)，这个小根堆写法用于练习维护前 k 大的元素。
 
 ## 状态含义
 
-分区期间，[left, less) 已确认小于基准，[less, scan) 等于基准，[scan, greater] 还没检查，(greater, right] 已确认大于基准。分区结束时等于段为 [less, greater]。
+每轮结束时，heap 保留已扫描元素中最大的 min(k, 已扫描个数) 个值。堆顶是堆内最小值，重复的值各占一个名次。
 
 ## 状态变化
 
-把第 K 大换成升序下标 n - k，每轮把候选区间按基准值分三段，然后只到目标所在的一段继续找。
+用 offer 把当前的 num 加进堆。大小超过 k 时用 poll 移除最小值。扫完后用 peek 读取堆顶。
 
 ## Java 解法
 
 ```java
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.PriorityQueue;
 
 class Solution {
     public int findKthLargest(int[] nums, int k) {
-        int targetIndex = nums.length - k;
-        int left = 0;
-        int right = nums.length - 1;
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
 
-        while (left < right) {
-            int pivotIndex = ThreadLocalRandom.current().nextInt(left, right + 1);
-            int pivot = nums[pivotIndex];
-            int less = left;
-            int scan = left;
-            int greater = right;
+        for (int num : nums) {
+            heap.offer(num);
 
-            // 把候选区间分成小于、等于、大于 pivot 的三段。
-            while (scan <= greater) {
-                if (nums[scan] < pivot) {
-                    swap(nums, less, scan);
-                    less++;
-                    scan++;
-                } else if (nums[scan] > pivot) {
-                    swap(nums, scan, greater);
-                    greater--; // 换到 scan 的数还需要检查。
-                } else {
-                    scan++;
-                }
-            }
-
-            if (targetIndex < less) {
-                right = less - 1;
-            } else if (targetIndex > greater) {
-                left = greater + 1;
-            } else {
-                return pivot;
+            if (heap.size() > k) {
+                heap.poll();
             }
         }
 
-        return nums[left];
-    }
-
-    private void swap(int[] nums, int first, int second) {
-        int saved = nums[first];
-        nums[first] = nums[second];
-        nums[second] = saved;
+        return heap.peek();
     }
 }
 ```
 
 ## 来源与版本
 
-代码随想录 · 快速选择法的 Java 三路分区实现。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
+小根堆 Java 实现由用户提供。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
 
 Java 源码：https://github.com/XiaoShuPeiQi/leetcode-java/blob/main/src/main/java/leetcode/stackqueue/LC0215KthLargestElementInAnArray.java
 
-源码指纹：8236e9bbc6af8e03177876938c8fedfad6636d7c54a2f46ef74dda33a14c79f6
+源码指纹：a65bdca9babd994703600cb22bd961ff6781600bb065f64770504b7bef300672
 
 飞书来源笔记：https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcnjeIfT1DyWnn52GOBLFMhmc（外部文档可能需要登录，本文仅包含本页已发布的内容。）
-
-代码随想录 Java 解法：https://programmercarl.com/hot100/0215.kth-largest-element-in-an-array.html
 
 ## 执行回放
 
 本页回放代表性输入的真实 Java 17 / JDI 暂停快照。高亮行尚未执行，执行后的变化出现在下一暂停位置。可单步、后退、重置、播放、拖动进度和选择调用栈帧；网页不运行任意 Java 输入。
 
-原始暂停事件：253 个。
+原始暂停事件：37 个。
 
 完整轨迹 JSON 与交互页面使用同一份数据：code 为代码，displayStart 为起始行号，steps 为按时间排列的全部暂停事件，pool 为共享状态池。事件中的 frames、heap、roots、stack、vars 等整数索引指向 pool；旧回溯格式的 vars 是键索引/值索引对。calls 或 nodes 保存调用树。
 

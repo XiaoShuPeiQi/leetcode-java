@@ -75,7 +75,7 @@ for p in problems:
         statement = source_lines[line-1]
         kind = ("enter" if phase == "enter" else "return" if phase == "exit" or "return " in statement
                 else "condition" if re.search(r"\b(if|while)\b", statement) else "loop" if "for (" in statement
-                else "modify" if re.search(r"\+\+|--|\s=\s|\.add\(|\.put\(", statement) else "statement")
+                else "modify" if re.search(r"\+\+|--|\s=\s|\.(?:add|put|offer|poll)\(", statement) else "statement")
         node_ids.update(k for k, v in event["heap"].items() if "val" in v or "children" in v)
         steps.append(dict(line=line, kind=kind, phase=phase, method=event["method"],
                           frames=intern(stack), heap=intern(event["heap"]), roots=intern(event["roots"]),
@@ -91,7 +91,9 @@ for p in problems:
                 nodeIds=sorted(node_ids, key=int), steps=steps, calls=calls, stateMeaning=p["state"],
                 transition=p["summary"], validation=checks[id])
     if "reference" in p:
-        data.update(reference=p["reference"], algorithm=p["algorithm"])
+        data["reference"] = p["reference"]
+    if "algorithm" in p:
+        data["algorithm"] = p["algorithm"]
     if "headingBlock" in p:
         data["source"] += "#" + p["headingBlock"]
     if p.get("preserveSubmission"):
