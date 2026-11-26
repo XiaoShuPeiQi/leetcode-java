@@ -83,12 +83,13 @@ GitHub 题面来源：https://github.com/doocs/leetcode/blob/7bc7a924fbb7a00df01
 ## Java 解法
 
 ```java
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 class Solution {
     public String decodeString(String s) {
-        Stack<Integer> numStack = new Stack<>();    // 数字栈
-        Stack<String> strStack = new Stack<>();     // 字符串栈
+        Deque<Integer> numStack = new ArrayDeque<>();    // 数字栈
+        Deque<String> strStack = new ArrayDeque<>();     // 字符串栈
         StringBuilder curStr = new StringBuilder(); // 当前累积的字符串
         int num = 0;                                // 当前数字
 
@@ -126,11 +127,11 @@ class Solution {
 
 ## 来源与版本
 
-代码随想录 · Java（补齐 import）。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
+源自代码随想录 Java 解法，飞书笔记将两个栈统一为 Deque 和 ArrayDeque。 由 Java 17 / JDI 录制，调用栈、节点身份及字段均来自实际暂停快照。
 
 Java 源码：https://github.com/XiaoShuPeiQi/leetcode-java/blob/main/src/main/java/leetcode/stackqueue/LC0394DecodeString.java
 
-源码指纹：cd261dfa432085d7fe089dbc0420279a0e39457a51a76a8c991d976783aa5c17
+源码指纹：eb07c69b6a3859e241debe9d9f9e154e94893f795c7ac020ef9cf084463ea4e0
 
 飞书来源笔记：https://acn581cm6pdd.feishu.cn/wiki/G5bqwOe1eicQRekOAjMcPpwlnWf#doxcnaBJgYOjCkYPxcxNTnncOyf（外部文档可能需要登录，本文仅包含本页已发布的内容。）
 

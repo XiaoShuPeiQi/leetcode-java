@@ -86,7 +86,7 @@ function drawState(step,vars){
  function view(name,value,original=false){
   let label=name+(original?' · 原始输入':' · 当前值');
   if([20,155,739,84].includes(data.id)&&['stack','minStack'].includes(name))label=name+' · 从栈顶到栈底';
-  if(data.id===394&&['numStack','strStack'].includes(name))label=name+' · 从栈底到栈顶';
+  if(data.id===394&&['numStack','strStack'].includes(name))label=name+' · 从栈顶到栈底';
   if(data.id===347&&name==='minHeap')label='minHeap · 每行[数值, 频次] · 第 0 行是堆顶';
   if(data.id===295&&['maxHeap','minHeap'].includes(name))label=name+' · 下标 0 是堆顶';
   if(Array.isArray(value))html+=Array.isArray(value[0])?matrix(name,value,vars,old[name],label):vector(name,value,vars,old[name],label);

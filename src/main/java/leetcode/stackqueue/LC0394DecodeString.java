@@ -1,6 +1,7 @@
 package leetcode.stackqueue;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import common.TreeSupport;
 
 public class LC0394DecodeString {
@@ -17,8 +18,8 @@ public class LC0394DecodeString {
 
     static class Solution {
         public String decodeString(String s) {
-            Stack<Integer> numStack = new Stack<>();    // 数字栈
-            Stack<String> strStack = new Stack<>();     // 字符串栈
+            Deque<Integer> numStack = new ArrayDeque<>();    // 数字栈
+            Deque<String> strStack = new ArrayDeque<>();     // 字符串栈
             StringBuilder curStr = new StringBuilder(); // 当前累积的字符串
             int num = 0;                                // 当前数字
 
